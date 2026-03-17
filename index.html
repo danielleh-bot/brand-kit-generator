@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taboola Brand Kit Generator — Designer Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="topbar-brand">
+        <div class="topbar-logo">T</div>
+        <div>
+            <div class="topbar-title">Brand Kit Generator</div>
+            <div class="topbar-subtitle">Taboola Design Experiments Tool</div>
+        </div>
+    </div>
+    <div class="topbar-actions">
+        <button class="btn btn-ghost" onclick="resetTool()">Reset</button>
+        <a href="index.html" class="btn btn-ghost">t-online Example</a>
+        <a href="analysis-before-after.html" class="btn btn-ghost">Analysis Example</a>
+    </div>
+</div>
+
+<!-- STEPPER -->
+<div class="stepper" id="stepper">
+    <div class="step active" data-step="1" onclick="goToStep(1)">
+        <div class="step-num">1</div>
+        <div class="step-info">
+            <div class="step-label">Crawl Publisher</div>
+            <div class="step-desc">Analyze website brand</div>
+        </div>
+    </div>
+    <div class="step-arrow">&rarr;</div>
+    <div class="step" data-step="2" onclick="goToStep(2)">
+        <div class="step-num">2</div>
+        <div class="step-info">
+            <div class="step-label">Brand Kit JSON</div>
+            <div class="step-desc">Review &amp; edit tokens</div>
+        </div>
+    </div>
+    <div class="step-arrow">&rarr;</div>
+    <div class="step" data-step="3" onclick="goToStep(3)">
+        <div class="step-num">3</div>
+        <div class="step-info">
+            <div class="step-label">Feed Prototype</div>
+            <div class="step-desc">Generate native feed</div>
+        </div>
+    </div>
+    <div class="step-arrow">&rarr;</div>
+    <div class="step" data-step="4" onclick="goToStep(4)">
+        <div class="step-num">4</div>
+        <div class="step-info">
+            <div class="step-label">Analysis Report</div>
+            <div class="step-desc">Before vs after</div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <!-- ======================== STEP 1: CRAWL PUBLISHER ======================== -->
+    <div class="step-content active" id="step1">
+        <div class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Crawl Publisher Website</h2>
+                    <p>Enter a publisher homepage or article URL to automatically extract brand design tokens</p>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="form-label">Publisher Website URL</label>
+                    <input type="url" class="form-input" id="publisherUrl" placeholder="https://www.example-publisher.com" />
+                    <div class="form-hint">Enter the publisher's homepage URL. The crawler will analyze colors, typography, spacing, and layout patterns.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Article Page URL (for prototype)</label>
+                    <input type="url" class="form-input" id="articleUrl" placeholder="https://www.example-publisher.com/news/article-title" />
+                    <div class="form-hint">Enter a specific article URL. This will be used to generate a realistic feed prototype based on the actual article page layout.</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Publisher Name</label>
+                    <input type="text" class="form-input" id="publisherName" placeholder="e.g., The Guardian, Le Monde, Bild" />
+                </div>
+                <div style="display:flex;gap:12px;align-items:center;">
+                    <button class="btn btn-primary btn-large" id="crawlBtn" onclick="startCrawl()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>
+                        Start Crawl
+                    </button>
+                    <span style="font-size:13px;color:var(--text-muted);">Typically takes 15–30 seconds</span>
+                </div>
+
+                <div id="crawlStatus" class="hidden">
+                    <div class="status-bar running" id="crawlStatusBar">
+                        <div class="spinner"></div>
+                        <span id="crawlStatusText">Initializing crawler...</span>
+                    </div>
+                    <div class="progress-log" id="crawlLog"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel hidden" id="crawlResults">
+            <div class="panel-header">
+                <div>
+                    <h2>Crawl Results Summary</h2>
+                    <p>Tokens extracted from publisher website analysis</p>
+                </div>
+                <button class="btn btn-primary" onclick="goToStep(2)">Review Brand Kit &rarr;</button>
+            </div>
+            <div class="panel-body">
+                <div class="stat-cards" id="crawlStats"></div>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="font-size:14px;margin-bottom:12px;color:var(--text-muted);">Colors Detected</h3>
+                        <div class="swatch-grid" id="colorSwatches"></div>
+                    </div>
+                    <div>
+                        <h3 style="font-size:14px;margin-bottom:12px;color:var(--text-muted);">Fonts Detected</h3>
+                        <div class="font-preview-list" id="fontPreviews"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================== STEP 2: BRAND KIT JSON ======================== -->
+    <div class="step-content" id="step2">
+        <div class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Brand Kit JSON</h2>
+                    <p>Review, edit, and download the generated brand kit token file</p>
+                </div>
+                <div style="display:flex;gap:12px;">
+                    <button class="btn btn-secondary" onclick="copyJson()">Copy JSON</button>
+                    <button class="btn btn-success" onclick="downloadJson()">Download .json</button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab(this, 'jsonFormatted')">Formatted</div>
+                    <div class="tab" onclick="switchTab(this, 'jsonEditor')">Edit Raw</div>
+                    <div class="tab" onclick="switchTab(this, 'jsonVisual')">Visual Preview</div>
+                </div>
+                <div id="jsonFormatted" class="tab-content">
+                    <div class="json-viewer" id="jsonDisplay"></div>
+                </div>
+                <div id="jsonEditor" class="tab-content hidden">
+                    <textarea class="form-input" id="jsonEditArea" style="min-height:500px;font-family:'SF Mono','Fira Code',monospace;font-size:13px;line-height:1.7;"></textarea>
+                    <div style="margin-top:12px;display:flex;gap:12px;">
+                        <button class="btn btn-primary" onclick="applyJsonEdits()">Apply Changes</button>
+                        <button class="btn btn-secondary" onclick="formatJsonEditor()">Format</button>
+                    </div>
+                </div>
+                <div id="jsonVisual" class="tab-content hidden">
+                    <div id="visualPreview"></div>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+            <button class="btn btn-secondary" onclick="goToStep(1)">&larr; Back to Crawl</button>
+            <button class="btn btn-primary btn-large" onclick="goToStep(3)">Generate Feed Prototype &rarr;</button>
+        </div>
+    </div>
+
+    <!-- ======================== STEP 3: FEED PROTOTYPE ======================== -->
+    <div class="step-content" id="step3">
+        <div class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Native Feed Prototype</h2>
+                    <p>Preview the Taboola feed styled with the publisher's brand kit tokens</p>
+                </div>
+                <div style="display:flex;gap:12px;">
+                    <button class="btn btn-secondary" onclick="downloadPrototype()">Download HTML</button>
+                    <button class="btn btn-secondary" onclick="openPrototypeNewTab()">Open in New Tab</button>
+                </div>
+            </div>
+            <div class="panel-body" style="padding:0;">
+                <div class="preview-frame-container">
+                    <div class="preview-frame-toolbar">
+                        <div class="preview-dot r"></div>
+                        <div class="preview-dot y"></div>
+                        <div class="preview-dot g"></div>
+                        <div class="preview-url-bar" id="prototypeUrlBar">publisher-feed-prototype.html</div>
+                    </div>
+                    <iframe class="preview-iframe" id="prototypeFrame" sandbox="allow-same-origin"></iframe>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+            <button class="btn btn-secondary" onclick="goToStep(2)">&larr; Back to Brand Kit</button>
+            <button class="btn btn-primary btn-large" onclick="generateAnalysis(); goToStep(4);">Generate Analysis Report &rarr;</button>
+        </div>
+    </div>
+
+    <!-- ======================== STEP 4: ANALYSIS REPORT ======================== -->
+    <div class="step-content" id="step4">
+        <div class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Before vs After Analysis Report</h2>
+                    <p>Comprehensive comparison of manual configuration vs. brand kit automation</p>
+                </div>
+                <div style="display:flex;gap:12px;">
+                    <button class="btn btn-secondary" onclick="downloadAnalysis()">Download Report HTML</button>
+                    <button class="btn btn-secondary" onclick="openAnalysisNewTab()">Open in New Tab</button>
+                </div>
+            </div>
+            <div class="panel-body" style="padding:0;">
+                <div class="preview-frame-container">
+                    <div class="preview-frame-toolbar">
+                        <div class="preview-dot r"></div>
+                        <div class="preview-dot y"></div>
+                        <div class="preview-dot g"></div>
+                        <div class="preview-url-bar" id="analysisUrlBar">analysis-before-after.html</div>
+                    </div>
+                    <iframe class="preview-iframe" id="analysisFrame" style="min-height:900px;" sandbox="allow-same-origin"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-header">
+                <div>
+                    <h2>Download All Artifacts</h2>
+                    <p>Export the complete brand kit, prototype, and analysis for this publisher</p>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="download-group">
+                    <button class="btn btn-success" onclick="downloadJson()">Brand Kit JSON</button>
+                    <button class="btn btn-success" onclick="downloadPrototype()">Feed Prototype HTML</button>
+                    <button class="btn btn-success" onclick="downloadAnalysis()">Analysis Report HTML</button>
+                    <button class="btn btn-primary" onclick="downloadAll()">Download All (.zip)</button>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:flex-start;">
+            <button class="btn btn-secondary" onclick="goToStep(3)">&larr; Back to Prototype</button>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts loaded in dependency order -->
+<script src="js/utils.js"></script>
+<script src="js/extractors.js"></script>
+<script src="js/crawl.js"></script>
+<script src="js/brand-kit.js"></script>
+<script src="js/prototype.js"></script>
+<script src="js/analysis.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
