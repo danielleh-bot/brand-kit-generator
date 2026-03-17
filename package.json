@@ -1,0 +1,13 @@
+{
+  "name": "brand-kit-generator",
+  "version": "1.0.0",
+  "description": "Taboola Brand Kit Generator — automatically extract publisher brand design tokens from any website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . --cors"
+  },
+  "keywords": ["brand-kit", "design-tokens", "web-crawler", "taboola"],
+  "license": "UNLICENSED",
+  "private": true
+}
