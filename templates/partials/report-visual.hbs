@@ -1,0 +1,51 @@
+<!-- Before / After Visual Comparison -->
+<div style="margin-bottom: 32px;">
+  <div class="section-title"><h2>Visual Comparison</h2></div>
+  <div class="grid-2">
+    <!-- Before: Generic Taboola -->
+    <div class="card" style="border-top: 3px solid #666;">
+      <h3 style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em;">Before — Generic Taboola</h3>
+      <div style="background: #fff; border-radius: 8px; padding: 16px; color: #333;">
+        <div style="border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 12px;">
+          <span style="font-family: Arial, sans-serif; font-size: 12px; color: #888; text-transform: uppercase;">Sponsored Stories</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <div style="background: #e5e7eb; aspect-ratio: 4/3; border-radius: 6px; margin-bottom: 8px;"></div>
+            <div style="font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; color: #333; line-height: 1.3;">Generic headline style with default Arial font</div>
+            <div style="font-size: 11px; color: #888; margin-top: 4px;">source | Learn More</div>
+          </div>
+          <div>
+            <div style="background: #e5e7eb; aspect-ratio: 4/3; border-radius: 6px; margin-bottom: 8px;"></div>
+            <div style="font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; color: #333; line-height: 1.3;">Standard Taboola card with default styling</div>
+            <div style="font-size: 11px; color: #888; margin-top: 4px;">source | Shop Now</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- After: Publisher-Branded -->
+    <div class="card" style="border-top: 3px solid var(--accent);">
+      <h3 style="font-size: 14px; color: var(--accent); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em;">After — {{brandKit.brand.name}} Branded</h3>
+      <div style="background: {{default brandKit.colors.backgrounds.base.hex '#fff'}}; border-radius: 8px; padding: 16px; color: {{default brandKit.colors.text.primary.hex '#1a1a1a'}};">
+        <div style="border-bottom: 3px solid {{default brandKit.colors.primary.hex '#1a73e8'}}; padding-bottom: 8px; margin-bottom: 12px;">
+          <span style="font-size: 12px; color: {{default brandKit.colors.text.secondary.hex '#555'}}; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">
+            <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:{{default brandKit.colors.primary.hex '#1a73e8'}};margin-right:6px;"></span>
+            Sponsored Stories
+          </span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <div style="background: {{default brandKit.colors.backgrounds.section.hex '#f0f0f0'}}; aspect-ratio: 4/3; border-radius: {{default brandKit.photo_style.thumbnail_format.border_radius '0px'}}; margin-bottom: 8px;"></div>
+            <div style="font-size: 13px; font-weight: 700; color: {{default brandKit.colors.text.primary.hex '#1a1a1a'}}; line-height: 1.3;">Publisher-branded headline with custom font</div>
+            <div style="font-size: 11px; color: {{default brandKit.colors.text.tertiary.hex '#888'}}; margin-top: 4px;">source | <span style="color: {{default brandKit.colors.primary.hex '#1a73e8'}};">Learn More</span></div>
+          </div>
+          <div>
+            <div style="background: {{default brandKit.colors.backgrounds.section.hex '#f0f0f0'}}; aspect-ratio: 4/3; border-radius: {{default brandKit.photo_style.thumbnail_format.border_radius '0px'}}; margin-bottom: 8px;"></div>
+            <div style="font-size: 13px; font-weight: 700; color: {{default brandKit.colors.text.primary.hex '#1a1a1a'}}; line-height: 1.3;">Native-feeling card matching site design</div>
+            <div style="font-size: 11px; color: {{default brandKit.colors.text.tertiary.hex '#888'}}; margin-top: 4px;">source | <span style="color: {{default brandKit.colors.primary.hex '#1a73e8'}};">Shop Now</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

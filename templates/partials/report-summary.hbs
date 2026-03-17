@@ -1,0 +1,14 @@
+<!-- Executive Summary -->
+<div class="card" style="border-left: 4px solid var(--accent);">
+  <h2 style="margin-bottom: 12px;">Executive Summary</h2>
+  <p style="color: var(--text-muted); margin-bottom: 20px;">
+    The Brand Kit Generator automatically extracted <strong style="color: var(--text-bright);">{{analysis.stats.totalProperties}}</strong> design properties from {{brandKit.brand.name}}'s live website.
+    <strong style="color: var(--accent);">{{analysis.stats.matchedByKit}}</strong> properties differ from Taboola defaults, representing a <strong style="color: var(--accent);">{{analysis.stats.coveragePercent}}%</strong> customization opportunity.
+  </p>
+  <div class="grid-4">
+    {{> components-stat-card title="Total Properties" value=analysis.stats.totalProperties color="#6366f1"}}
+    {{> components-stat-card title="Drift Detected" value=analysis.stats.driftCount color="#f59e0b"}}
+    {{> components-stat-card title="New Discoveries" value=analysis.stats.missingCount color="#3b82f6"}}
+    {{> components-stat-card title="Exact Matches" value=analysis.stats.exactCount color="#10b981"}}
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<!-- Advantages Grid -->
+<div style="margin-bottom: 32px;">
+  <div class="section-title"><h2>Key Advantages</h2></div>
+  <div class="grid-3">
+    {{#each analysis.advantages}}
+      <div class="card" style="text-align: center; padding: 28px 20px;">
+        <div style="font-size: 32px; margin-bottom: 12px;">{{icon}}</div>
+        <h3 style="font-size: 15px; margin-bottom: 8px;">{{title}}</h3>
+        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">{{desc}}</p>
+      </div>
+    {{/each}}
+  </div>
+</div>

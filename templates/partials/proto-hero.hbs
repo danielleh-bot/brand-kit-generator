@@ -1,0 +1,10 @@
+<!-- Hero Image Section -->
+{{#if content.heroImage}}
+<div style="max-width: 1200px; margin: 0 auto; padding: 24px 16px 0;">
+  <img src="{{content.heroImage.src}}" alt="{{content.heroImage.caption}}"
+       style="width: 100%; max-height: 500px; object-fit: cover; border-radius: {{default brandKit.photo_style.thumbnail_format.border_radius '0px'}};">
+  {{#if content.heroImage.caption}}
+    <p style="font-size: 12px; color: var(--brand-text-tertiary); margin-top: 6px;">{{content.heroImage.caption}}</p>
+  {{/if}}
+</div>
+{{/if}}

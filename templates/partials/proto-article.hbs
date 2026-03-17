@@ -1,0 +1,40 @@
+<!-- Article Content Section -->
+<article style="max-width: 760px; margin: 0 auto; padding: 32px 16px;">
+  {{#if content.categories}}
+    <div style="margin-bottom: 12px;">
+      {{#each content.categories}}
+        <span class="brand-accent" style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">{{this}}</span>
+        {{#unless @last}} <span style="color: var(--brand-text-tertiary); margin: 0 6px;">|</span> {{/unless}}
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <h1 class="headline-font" style="font-size: 36px; font-weight: 700; line-height: 1.2; margin: 0 0 16px;">
+    {{default content.headline 'Sample Article Headline for Prototype'}}
+  </h1>
+
+  {{#if content.deck}}
+    <p style="font-size: 20px; color: var(--brand-text-secondary); line-height: 1.5; margin: 0 0 20px;">{{content.deck}}</p>
+  {{/if}}
+
+  <div style="display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; margin-bottom: 24px;">
+    {{#if content.byline}}
+      <span style="font-weight: 600; font-size: 14px;">{{content.byline}}</span>
+    {{/if}}
+    {{#if content.date}}
+      <span style="color: var(--brand-text-tertiary); font-size: 13px;">{{content.date}}</span>
+    {{/if}}
+  </div>
+
+  <div class="body-font" style="font-size: 18px; line-height: 1.8; color: var(--brand-text);">
+    {{#each content.paragraphs}}
+      {{#if (lt @index 5)}}
+        <p style="margin: 0 0 20px;">{{this}}</p>
+      {{/if}}
+    {{/each}}
+    {{#unless content.paragraphs}}
+      <p style="margin: 0 0 20px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+      <p style="margin: 0 0 20px;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+    {{/unless}}
+  </div>
+</article>

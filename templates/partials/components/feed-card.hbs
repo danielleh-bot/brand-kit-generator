@@ -1,0 +1,26 @@
+<!-- Feed Card Component -->
+<div class="feed-card" style="border-radius: {{default ../../brandKit.photo_style.thumbnail_format.border_radius '6px'}}; overflow: hidden; cursor: pointer;">
+  <div style="position: relative;">
+    <img src="{{thumbnail}}" alt="{{headline}}" loading="lazy"
+         style="border-radius: {{default ../../brandKit.photo_style.thumbnail_format.border_radius '6px'}} {{default ../../brandKit.photo_style.thumbnail_format.border_radius '6px'}} 0 0;">
+    {{#unless isNative}}
+      <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
+    {{/unless}}
+    {{#if isNative}}
+      {{#if category}}
+        <span style="position: absolute; top: 8px; left: 8px; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--brand-primary); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;">{{category}}</span>
+      {{/if}}
+    {{/if}}
+  </div>
+  <div style="padding: {{#if (eq size 'tiny')}}8px 4px{{else}}12px 4px{{/if}};">
+    <div class="feed-card-headline" style="font-size: {{#if (eq size 'large')}}16px{{else if (eq size 'tiny')}}13px{{else}}14px{{/if}}; margin-bottom: 6px;">
+      {{headline}}
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span class="feed-card-source">{{source}}</span>
+      {{#if cta}}
+        <span class="feed-card-cta">{{cta}}</span>
+      {{/if}}
+    </div>
+  </div>
+</div>

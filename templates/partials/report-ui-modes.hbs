@@ -1,0 +1,58 @@
+<!-- UI Mode Replacement Section -->
+<div style="margin-bottom: 32px;">
+  <div class="section-title"><h2>UI Mode Replacement</h2></div>
+  <div class="card">
+    <p style="color: var(--text-muted); margin-bottom: 16px;">
+      The Brand Kit Generator replaces manual per-publisher configuration with automated token extraction.
+      Instead of browsing DevTools and sampling values by hand, the crawler programmatically reads <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 12px;">getComputedStyle()</code> on live DOM elements.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Manual Mode</th>
+          <th>Brand Kit Mode</th>
+          <th>Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight: 500; color: var(--text-bright);">Typography</td>
+          <td style="color: var(--text-muted);">Inspect each element, copy font-family</td>
+          <td style="color: var(--success);">10-role type scale with weights & sizes</td>
+          <td><span style="color: var(--success); font-weight: 600;">Full</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 500; color: var(--text-bright);">Colors</td>
+          <td style="color: var(--text-muted);">Eyedropper on 3-4 elements</td>
+          <td style="color: var(--success);">Full palette: primary, text (3), bg (4), accents</td>
+          <td><span style="color: var(--success); font-weight: 600;">Full</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 500; color: var(--text-bright);">Brand Voice</td>
+          <td style="color: var(--text-muted);">Not captured</td>
+          <td style="color: var(--info);">Language, headline patterns, content labels</td>
+          <td><span style="color: var(--info); font-weight: 600;">New</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 500; color: var(--text-bright);">Photo Style</td>
+          <td style="color: var(--text-muted);">Not captured</td>
+          <td style="color: var(--info);">Aspect ratio, border radius, video indicators</td>
+          <td><span style="color: var(--info); font-weight: 600;">New</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 500; color: var(--text-bright);">Layout Patterns</td>
+          <td style="color: var(--text-muted);">Approximate grid guessing</td>
+          <td style="color: var(--success);">Header layers, grid detection, card patterns</td>
+          <td><span style="color: var(--success); font-weight: 600;">Full</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 500; color: var(--text-bright);">Icons & Graphics</td>
+          <td style="color: var(--text-muted);">Not captured</td>
+          <td style="color: var(--info);">SVG count, social icons, badge inventory</td>
+          <td><span style="color: var(--info); font-weight: 600;">New</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
