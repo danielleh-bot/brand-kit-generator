@@ -1,13 +1,22 @@
 {
   "name": "brand-kit-generator",
-  "version": "1.0.0",
-  "description": "Taboola Brand Kit Generator — automatically extract publisher brand design tokens from any website",
-  "main": "index.html",
+  "version": "2.0.0",
+  "description": "Taboola Brand Kit Generator — automatically extract publisher brand design tokens from any website via Puppeteer crawler",
+  "main": "generate.js",
+  "bin": {
+    "brand-kit": "./generate.js"
+  },
   "scripts": {
     "start": "npx serve .",
-    "dev": "npx serve . --cors"
+    "dev": "npx serve . --cors",
+    "generate": "node generate.js"
   },
-  "keywords": ["brand-kit", "design-tokens", "web-crawler", "taboola"],
+  "keywords": ["brand-kit", "design-tokens", "web-crawler", "taboola", "puppeteer"],
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "commander": "^12.0.0",
+    "handlebars": "^4.7.8",
+    "puppeteer-core": "^22.0.0"
+  }
 }

@@ -1,0 +1,34 @@
+<!-- Publisher Navigation Bar -->
+<nav style="background: var(--brand-bg-dark); color: #fff; padding: 0;">
+  <!-- Top utility bar -->
+  <div style="background: rgba(0,0,0,0.2); padding: 4px 0; font-size: 12px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center;">
+      <span style="opacity: 0.7;">{{brandKit.brand_voice.language}}</span>
+      <span style="opacity: 0.7;">{{brandKit.brand.name}}</span>
+    </div>
+  </div>
+  <!-- Main nav -->
+  <div style="max-width: 1200px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 32px;">
+    <a href="#" class="headline-font" style="font-size: 24px; font-weight: 700; color: #fff; text-decoration: none;">
+      {{#if brandKit.logos.primary.text}}
+        {{brandKit.logos.primary.text}}
+      {{else}}
+        {{brandKit.brand.name}}
+      {{/if}}
+    </a>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      {{#each navigation.navLinks}}
+        {{#if (lt @index 8)}}
+          <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px; text-decoration: none; font-weight: 500;">{{this.text}}</a>
+        {{/if}}
+      {{/each}}
+      {{#unless navigation.navLinks}}
+        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">News</a>
+        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Sports</a>
+        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Business</a>
+        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Opinion</a>
+        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Tech</a>
+      {{/unless}}
+    </div>
+  </div>
+</nav>

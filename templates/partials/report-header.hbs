@@ -1,0 +1,16 @@
+<!-- Report Header -->
+<div style="margin-bottom: 40px;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+    <h1 style="font-size: 32px;">Brand Kit Analysis</h1>
+    <span style="background: var(--accent); color: #fff; font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">AUTOMATED</span>
+  </div>
+  <p style="font-size: 18px; color: var(--text-muted); margin-bottom: 20px;">
+    {{brandKit.brand.name}} — Design Token Extraction Report
+  </p>
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted);">
+    <span>Publisher: <strong class="accent-text">{{brandKit.brand.name}}</strong></span>
+    <span>Domain: <strong>{{brandKit.brand.website}}</strong></span>
+    <span>Generated: <strong>{{brandKit.metadata.analysis_date}}</strong></span>
+    <span>Properties: <strong>{{analysis.stats.totalProperties}}</strong></span>
+  </div>
+</div>

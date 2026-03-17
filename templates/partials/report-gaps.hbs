@@ -1,0 +1,23 @@
+<!-- Gap Analysis -->
+{{#if analysis.gaps.length}}
+<div style="margin-bottom: 32px;">
+  <div class="section-title"><h2>Gap Analysis</h2></div>
+  {{#each analysis.gaps}}
+    <div class="card" style="border-left: 4px solid {{#if (eq severity 'high')}}#ef4444{{else if (eq severity 'medium')}}#f59e0b{{else}}#3b82f6{{/if}};">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 600;
+          background: {{#if (eq severity 'high')}}#fef2f2; color: #dc2626{{else if (eq severity 'medium')}}#fffbeb; color: #d97706{{else}}#eff6ff; color: #2563eb{{/if}};">
+          {{#if (eq severity 'high')}}HIGH{{else if (eq severity 'medium')}}MEDIUM{{else}}INFO{{/if}}
+        </span>
+        <h3 style="font-size: 16px;">{{category}}</h3>
+      </div>
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">{{description}}</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        {{#each properties}}
+          <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">{{this}}</span>
+        {{/each}}
+      </div>
+    </div>
+  {{/each}}
+</div>
+{{/if}}

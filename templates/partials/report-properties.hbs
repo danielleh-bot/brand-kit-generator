@@ -1,0 +1,34 @@
+<!-- Property Table -->
+<div style="margin-bottom: 32px;">
+  <div class="section-title"><h2>Property Comparison</h2></div>
+  <div class="card" style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 22%;">Property</th>
+          <th style="width: 25%;">Before (Default)</th>
+          <th style="width: 25%;">After (Brand Kit)</th>
+          <th style="width: 15%;">Source</th>
+          <th style="width: 13%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each analysis.propertyTable}}
+          <tr>
+            <td style="font-weight: 500; color: var(--text-bright);">{{property}}</td>
+            <td class="mono">
+              {{#if (isColor before)}}{{colorSwatch before}}{{/if}}
+              {{before}}
+            </td>
+            <td class="mono">
+              {{#if (isColor after)}}{{colorSwatch after}}{{/if}}
+              <span style="color: {{#if (eq status 'drift')}}var(--warning){{else if (eq status 'missing')}}var(--info){{else}}var(--success){{/if}};">{{after}}</span>
+            </td>
+            <td style="color: var(--text-muted); font-size: 12px;">{{source}}</td>
+            <td>{{{statusTag status}}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

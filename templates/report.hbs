@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{brandKit.brand.name}} — Brand Kit Analysis Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: {{default brandKit.colors.primary.hex '#6366f1'}};
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #334155;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-bright: #f8fafc;
+      --border: #334155;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+    h1, h2, h3 { color: var(--text-bright); }
+    h2 { font-size: 22px; margin-bottom: 16px; }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 10px 12px; background: rgba(255,255,255,0.05); color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+    td { padding: 10px 12px; border-top: 1px solid var(--border); }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent);
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 24px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .accent-text { color: var(--accent); }
+    .mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {{> report-header}}
+    {{> report-summary}}
+    {{> report-visual}}
+    {{> report-properties}}
+    {{> report-workflow}}
+    {{> report-ui-modes}}
+    {{> report-advantages}}
+    {{> report-gaps}}
+    {{> report-conclusion}}
+  </div>
+</body>
+</html>
