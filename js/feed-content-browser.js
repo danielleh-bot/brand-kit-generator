@@ -1,5 +1,6 @@
 // ============================================================
 //  FEED CONTENT GENERATOR (Browser-compatible)
+//  Uses real extracted cards + images when available
 // ============================================================
 
 const SPONSORED_POOL = [
@@ -25,18 +26,96 @@ const SPONSORED_POOL = [
   { source: 'DoorDash', headline: 'Your Favorite Restaurants, Delivered', cta: 'Order Now', category: 'Food' },
 ];
 
-const THUMBNAIL_PLACEHOLDERS = Array.from({length: 16}, (_, i) => `https://picsum.photos/seed/sp${i+1}/400/300`);
+// Localized sponsored labels per language
+const SPONSORED_LABELS = {
+  en: 'Sponsored',
+  he: 'ממומן',
+  ar: 'إعلان ممول',
+  de: 'Gesponsert',
+  fr: 'Sponsorisé',
+  es: 'Patrocinado',
+  it: 'Sponsorizzato',
+  pt: 'Patrocinado',
+  ru: 'Реклама',
+  ja: 'スポンサー',
+  ko: '스폰서',
+  zh: '赞助',
+  nl: 'Gesponsord',
+  tr: 'Sponsorlu',
+  pl: 'Sponsorowane',
+};
+
+// Localized "More From" labels
+const MORE_FROM_LABELS = {
+  en: 'More From',
+  he: 'עוד מ',
+  ar: 'المزيد من',
+  de: 'Mehr von',
+  fr: 'Plus de',
+  es: 'Más de',
+  it: 'Altro da',
+  pt: 'Mais de',
+  ru: 'Ещё от',
+  ja: 'もっと見る',
+  ko: '더 보기',
+  zh: '更多来自',
+  nl: 'Meer van',
+  tr: 'Daha fazla',
+  pl: 'Więcej z',
+};
+
+// Localized "Trending on" labels
+const TRENDING_LABELS = {
+  en: 'Trending on',
+  he: 'פופולרי ב',
+  ar: 'الرائج على',
+  de: 'Beliebt auf',
+  fr: 'Tendances sur',
+  es: 'Tendencia en',
+  it: 'Di tendenza su',
+  pt: 'Em alta no',
+  ru: 'Популярное на',
+  ja: 'トレンド',
+  ko: '인기',
+  zh: '热门',
+  nl: 'Trending op',
+  tr: 'Trend olan',
+  pl: 'Popularne na',
+};
 
 function _pickRandom(arr, n) {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, n);
 }
 
-function _generateNativeCards(brandKit, navigation) {
+function _getLocalizedLabel(labelMap, lang) {
+  if (!lang) return labelMap.en;
+  const base = lang.toLowerCase().split('-')[0];
+  return labelMap[base] || labelMap.en;
+}
+
+/**
+ * Build native cards from real extracted homepage cards.
+ * Falls back to generic headlines if no real cards available.
+ */
+function _generateNativeCards(brandKit, navigation, extractedCards, extractedImages) {
   const publisherName = (brandKit.brand && brandKit.brand.name) || 'Publisher';
   const navLinks = (navigation && navigation.navLinks) || [];
   const categories = navLinks.slice(0, 8).map(l => l.text || l.label).filter(Boolean);
 
+  // If we have real extracted cards, use them
+  if (extractedCards && extractedCards.length >= 3) {
+    return extractedCards.slice(0, 12).map((card, i) => ({
+      headline: card.headline,
+      source: publisherName,
+      thumbnail: card.image || (extractedImages && extractedImages[i]) || '',
+      category: card.category || categories[i % categories.length] || '',
+      link: card.link || '#',
+      isNative: true,
+    }));
+  }
+
+  // Fallback: generic headlines with publisher nav categories
   const nativeHeadlines = [
     { headline: 'Breaking: Major Policy Shift Expected This Week', category: categories[0] || 'News' },
     { headline: 'Markets Rally as Earnings Season Exceeds Expectations', category: categories[1] || 'Business' },
@@ -50,21 +129,28 @@ function _generateNativeCards(brandKit, navigation) {
     { headline: 'Local Business Boom: Small Shops See Record Growth', category: categories[3] || 'Business' },
   ];
 
+  // Use real images from page if available
   return nativeHeadlines.map((item, i) => ({
     ...item,
     source: publisherName,
-    thumbnail: `https://picsum.photos/seed/nat${i + 1}/400/300`,
+    thumbnail: (extractedImages && extractedImages[i]) || '',
     isNative: true,
   }));
 }
 
-function generateFeedContent(brandKit, navigation) {
+function generateFeedContent(brandKit, navigation, extractedCards, extractedImages) {
+  // Use real page images for sponsored card thumbnails too
+  const availableImages = (extractedImages && extractedImages.length > 0) ? extractedImages : [];
+
   const sponsored = _pickRandom(SPONSORED_POOL, 12).map((card, i) => ({
     ...card,
-    thumbnail: THUMBNAIL_PLACEHOLDERS[i % THUMBNAIL_PLACEHOLDERS.length],
+    thumbnail: availableImages[i % Math.max(availableImages.length, 1)] || '',
   }));
 
-  const native = _generateNativeCards(brandKit, navigation);
+  const native = _generateNativeCards(brandKit, navigation, extractedCards, extractedImages);
+
+  // Get localized labels
+  const lang = brandKit.brand_voice?.language || brandKit.brand?.language || 'en';
 
   return {
     sponsoredLarge: sponsored.slice(0, 2),
@@ -73,5 +159,9 @@ function generateFeedContent(brandKit, navigation) {
     sponsoredMixed: sponsored.slice(5, 7),
     trendingNative: native.slice(3, 7),
     sponsoredFinal: sponsored.slice(7, 9),
+    // Localized labels
+    sponsoredLabel: _getLocalizedLabel(SPONSORED_LABELS, lang),
+    moreFromLabel: _getLocalizedLabel(MORE_FROM_LABELS, lang),
+    trendingLabel: _getLocalizedLabel(TRENDING_LABELS, lang),
   };
 }

@@ -335,9 +335,28 @@ async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
     const langAttr = doc.documentElement.getAttribute('lang');
     if (langAttr) brand['brand_voice.language'] = langAttr;
 
+    // EXTRACT HOMEPAGE CARDS (real headlines + images from publisher)
+    addLog('Extracting homepage article cards...', 'info');
+    homepageCards = extractHomepageCards(doc, pubUrl);
+    addLog(`Found ${homepageCards.length} article cards with images`, 'success');
+
+    // EXTRACT PAGE IMAGES (for sponsored card thumbnails)
+    addLog('Extracting page images...', 'info');
+    pageImages = extractPageImages(doc, pubUrl);
+    addLog(`Found ${pageImages.length} content images`, 'success');
+
+    // DETECT PAGE DIRECTION
+    pageDirection = extractPageDirection(doc);
+    if (pageDirection === 'rtl') {
+        addLog('Detected RTL layout (right-to-left language)', 'info');
+    }
+
     // BUILD NESTED BRAND KIT
     addLog('Assembling rich nested brand kit JSON...', 'info');
     brandKit = restructureBrandKit(colors, fonts, layout, brand, pubName, pubUrl, artUrl);
+
+    // Add direction to brand kit
+    brandKit.layout_patterns.direction = pageDirection;
 
     // Build navigation from doc
     navigationData = extractNavigationFromDoc(doc, pubUrl);
