@@ -24,6 +24,189 @@ function addLog(msg, type = '') {
     log.scrollTop = log.scrollHeight;
 }
 
+/**
+ * Convert flat dot-notation extractor output into the rich nested brand kit JSON
+ * that matches the CLI's schema (brand, logos, colors, fonts, brand_voice, etc.)
+ */
+function restructureBrandKit(flatColors, flatFonts, flatLayout, flatBrand, pubName, pubUrl, artUrl) {
+    const domain = new URL(pubUrl).hostname.replace('www.', '');
+
+    // Helper to safely get flat values
+    const g = (key) => {
+        if (flatColors[key] !== undefined) return flatColors[key];
+        if (flatFonts[key] !== undefined) return flatFonts[key];
+        if (flatLayout[key] !== undefined) return flatLayout[key];
+        if (flatBrand[key] !== undefined) return flatBrand[key];
+        return undefined;
+    };
+
+    const primaryHex = g('colors.primary.hex') || g('brand.theme_color') || '#2196F3';
+    const secondaryHex = g('colors.secondary.hex');
+    const textPrimHex = g('colors.text.primary.hex') || '#1A1A2E';
+    const textSecHex = g('colors.text.secondary.hex') || '#4A4A5A';
+    const textTertHex = g('colors.text.tertiary.hex') || '#8A8A9A';
+    const bgPageHex = g('colors.backgrounds.page.hex') || '#FFFFFF';
+    const bgSectionHex = g('colors.backgrounds.section.hex') || '#F7F9FC';
+    const bgSecondaryHex = g('colors.backgrounds.secondary.hex') || '#EBEFF7';
+    const borderHex = g('colors.borders.primary.hex') || '#E0E0E0';
+
+    const primaryFamily = g('fonts.primary.family') || 'sans-serif';
+    const primaryFallbacks = g('fonts.primary.fallbacks') || ['sans-serif'];
+    const secondaryFamily = g('fonts.secondary.family');
+    const secondaryStyle = g('fonts.secondary.style');
+
+    const typeScale = {};
+    const scaleKeys = ['headline_large', 'article_title_card', 'section_headings', 'body_text', 'meta_text'];
+    for (const sk of scaleKeys) {
+        const val = g(`fonts.type_scale.${sk}`);
+        if (val) {
+            // Map flat key names to CLI schema names
+            const mappedName = {
+                'headline_large': 'article_title_hero',
+                'article_title_card': 'article_title_card',
+                'section_headings': 'section_headings',
+                'body_text': 'article_body',
+                'meta_text': 'meta_text'
+            }[sk] || sk;
+            typeScale[mappedName] = {
+                family: primaryFamily,
+                size: val.size,
+                weight: val.weight,
+                lineHeight: val.line_height || val.lineHeight
+            };
+        }
+    }
+
+    // Build content labels from brand signals
+    const contentLabels = {};
+    const labelPatterns = ['opinion', 'meinung', 'kommentar', 'editorial', 'analysis', 'live', 'breaking', 'eilmeldung', 'video', 'gallery'];
+    for (const label of labelPatterns) {
+        if (g(`brand_voice.content_labels.${label}`)) {
+            contentLabels[label] = true;
+        }
+    }
+
+    // Detect language from doc if available
+    const lang = g('brand_voice.language') || 'en';
+
+    return {
+        brand: {
+            name: pubName,
+            tagline: g('brand.site_name') || pubName,
+            website: `https://${domain}`,
+            description: `Brand kit for ${pubName}`,
+            language: lang
+        },
+        logos: {
+            primary: {
+                type: 'text',
+                text: g('brand.site_name') || pubName
+            },
+            favicon_url: g('logos.favicon.url') || null,
+            variants: []
+        },
+        colors: {
+            primary: {
+                name: 'Brand Primary',
+                hex: primaryHex,
+                rgb: hexToRgbString(primaryHex),
+                usage: ['links', 'buttons', 'accent elements']
+            },
+            secondary: secondaryHex ? {
+                name: 'Brand Secondary',
+                hex: secondaryHex,
+                rgb: hexToRgbString(secondaryHex),
+                usage: ['secondary accents']
+            } : null,
+            text: {
+                primary: { hex: textPrimHex, usage: 'Headlines, body text' },
+                secondary: { hex: textSecHex, usage: 'Subheadings, metadata' },
+                tertiary: { hex: textTertHex, usage: 'Captions, timestamps' }
+            },
+            backgrounds: {
+                base: { hex: bgPageHex, usage: 'Page background' },
+                section: { hex: bgSectionHex, usage: 'Section backgrounds, card fills' },
+                secondary: { hex: bgSecondaryHex, usage: 'Hover states, secondary fills' },
+                dark: { hex: '#1a1a1a', usage: 'Footer, dark sections' }
+            },
+            borders: {
+                primary: { hex: borderHex }
+            },
+            accents: {}
+        },
+        fonts: {
+            primary: {
+                family: primaryFamily,
+                fallbacks: Array.isArray(primaryFallbacks) ? primaryFallbacks.join(', ') : primaryFallbacks,
+                weights: { regular: 400, bold: 700 },
+                usage: 'Headlines, navigation'
+            },
+            secondary: secondaryFamily ? {
+                family: secondaryFamily,
+                weight: 400,
+                style: secondaryStyle || 'normal',
+                usage: 'Body text, opinion content'
+            } : null,
+            type_scale: typeScale
+        },
+        brand_voice: {
+            language: lang,
+            headline_style: {
+                capitalization: 'sentence_case',
+                avg_word_count: 8
+            },
+            content_labels: contentLabels,
+            content_distinction: {}
+        },
+        photo_style: {
+            thumbnail_format: {
+                aspect_ratio: g('photo_style.thumbnail_format.aspect_ratio') || '16:9',
+                border_radius: g('photo_style.thumbnail_format.border_radius') || '0px'
+            },
+            video_thumbnails: {
+                indicator: g('photo_style.video_thumbnails.has_video_content') ? 'play_button' : 'none',
+                indicator_color: primaryHex
+            },
+            author_photos: { shape: 'circle', size: '40px' }
+        },
+        graphics: {
+            style: 'minimal',
+            elements: []
+        },
+        icons: {
+            style: 'line',
+            count_detected: 0,
+            social_media_icons: {}
+        },
+        layout_patterns: {
+            grid: g('layout.grid.gap') ? { gap: g('layout.grid.gap') } : {},
+            container: { max_width: g('layout.container.max_width') || '1200px' },
+            card: { border_radius: g('layout.card.border_radius') || '0px' },
+            spacing: {
+                xs: g('layout.spacing.xs') || '4px',
+                sm: g('layout.spacing.sm') || '8px',
+                md: g('layout.spacing.md') || '16px',
+                lg: g('layout.spacing.lg') || '24px',
+                xl: g('layout.spacing.xl') || '48px'
+            }
+        },
+        metadata: {
+            analysis_date: new Date().toISOString().split('T')[0],
+            source_url: pubUrl,
+            article_url: artUrl || null,
+            analysis_method: 'browser-cors-proxy',
+            tool_version: '2.0.0'
+        }
+    };
+}
+
+/** Convert hex to "r,g,b" string */
+function hexToRgbString(hex) {
+    if (!hex || !hex.startsWith('#')) return '0,0,0';
+    const h = hex.replace('#', '');
+    return `${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)}`;
+}
+
 async function startCrawl() {
     const pubUrl = document.getElementById('publisherUrl').value.trim();
     const artUrl = document.getElementById('articleUrl').value.trim();
@@ -55,7 +238,6 @@ async function startCrawl() {
         }
 
         if (!homeHtml) {
-            // Fallback: Let user paste HTML
             addLog('Could not fetch URL directly (CORS). Switching to manual mode.', 'warn');
             addLog('A dialog will open — paste the page source HTML.', 'warn');
             statusText.textContent = 'Waiting for manual HTML input...';
@@ -82,8 +264,9 @@ async function startCrawl() {
             await analyzePage(homeHtml, artHtml, pubUrl, artUrl, pubName);
         }
 
+        const tokenCount = countNestedKeys(brandKit);
         statusBar.className = 'status-bar success';
-        statusText.textContent = 'Crawl complete! Brand kit generated with ' + Object.keys(brandKit).length + ' tokens.';
+        statusText.textContent = `Crawl complete! Brand kit generated with ${tokenCount} tokens.`;
         document.getElementById('crawlResults').classList.remove('hidden');
         renderCrawlResults();
         addLog('Brand kit generation complete!', 'success');
@@ -95,6 +278,20 @@ async function startCrawl() {
     }
 
     document.getElementById('crawlBtn').disabled = false;
+}
+
+/** Count leaf keys in a nested object */
+function countNestedKeys(obj, prefix) {
+    if (!obj) return 0;
+    let count = 0;
+    for (const [key, val] of Object.entries(obj)) {
+        if (val && typeof val === 'object' && !Array.isArray(val)) {
+            count += countNestedKeys(val);
+        } else {
+            count++;
+        }
+    }
+    return count;
 }
 
 async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
@@ -134,35 +331,77 @@ async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
     const brand = extractBrandSignals(doc, html, pubUrl);
     addLog(`Found ${Object.keys(brand).length} brand signal tokens`, 'success');
 
-    // BUILD BRAND KIT
-    addLog('Assembling brand kit JSON...', 'info');
-    const domain = new URL(pubUrl).hostname.replace('www.','');
+    // Detect language
+    const langAttr = doc.documentElement.getAttribute('lang');
+    if (langAttr) brand['brand_voice.language'] = langAttr;
 
-    brandKit = {
-        "meta.publisher": pubName,
-        "meta.domain": domain,
-        "meta.crawled_url": pubUrl,
-        "meta.article_url": artUrl || null,
-        "meta.generated_at": new Date().toISOString(),
-        "meta.tool_version": "1.0.0",
-        ...colors,
-        ...fonts,
-        ...layout,
-        ...brand
-    };
+    // BUILD NESTED BRAND KIT
+    addLog('Assembling rich nested brand kit JSON...', 'info');
+    brandKit = restructureBrandKit(colors, fonts, layout, brand, pubName, pubUrl, artUrl);
 
-    addLog('Brand kit assembled with ' + Object.keys(brandKit).length + ' tokens', 'success');
+    // Build navigation from doc
+    navigationData = extractNavigationFromDoc(doc, pubUrl);
+
+    addLog('Brand kit assembled with ' + countNestedKeys(brandKit) + ' tokens', 'success');
+}
+
+/**
+ * Extract navigation links from the HTML document (for browser-based tool)
+ */
+function extractNavigationFromDoc(doc, pubUrl) {
+    const navLinks = [];
+    const nav = doc.querySelector('nav') || doc.querySelector('header');
+    if (nav) {
+        nav.querySelectorAll('a').forEach(a => {
+            const text = a.textContent.trim();
+            if (text && text.length < 30 && text.length > 1) {
+                navLinks.push({ text, href: a.getAttribute('href') || '#' });
+            }
+        });
+    }
+
+    const footerLinks = [];
+    const footer = doc.querySelector('footer');
+    if (footer) {
+        const groups = footer.querySelectorAll('ul, div > div');
+        groups.forEach(group => {
+            const links = [];
+            group.querySelectorAll('a').forEach(a => {
+                const text = a.textContent.trim();
+                if (text && text.length < 40) links.push({ text });
+            });
+            if (links.length > 0) {
+                footerLinks.push({ group: links[0].text, links: links.slice(1) });
+            }
+        });
+    }
+
+    const socialLinks = [];
+    const socialPlatforms = ['facebook', 'twitter', 'instagram', 'youtube', 'linkedin', 'tiktok'];
+    doc.querySelectorAll('a[href]').forEach(a => {
+        const href = (a.getAttribute('href') || '').toLowerCase();
+        for (const platform of socialPlatforms) {
+            if (href.includes(platform)) {
+                socialLinks.push({ platform, url: a.getAttribute('href') });
+                break;
+            }
+        }
+    });
+
+    return { navLinks: navLinks.slice(0, 12), footerLinks: footerLinks.slice(0, 6), socialLinks: [...new Map(socialLinks.map(s => [s.platform, s])).values()] };
 }
 
 // ============================================================
 //  CRAWL RESULTS DISPLAY
 // ============================================================
 function renderCrawlResults() {
-    // Stats
-    const colorCount = Object.keys(brandKit).filter(k => k.startsWith('colors.')).length;
-    const fontCount = Object.keys(brandKit).filter(k => k.startsWith('fonts.')).length;
-    const layoutCount = Object.keys(brandKit).filter(k => k.startsWith('layout.') || k.startsWith('photo_style.')).length;
-    const totalCount = Object.keys(brandKit).length;
+    const kit = brandKit;
+
+    // Count tokens per category
+    const colorCount = countNestedKeys(kit.colors);
+    const fontCount = countNestedKeys(kit.fonts);
+    const layoutCount = countNestedKeys(kit.layout_patterns) + countNestedKeys(kit.photo_style);
+    const totalCount = countNestedKeys(kit);
 
     document.getElementById('crawlStats').innerHTML = `
         <div class="stat-card"><div class="stat-value accent">${totalCount}</div><div class="stat-label">Total Tokens</div></div>
@@ -171,41 +410,58 @@ function renderCrawlResults() {
         <div class="stat-card"><div class="stat-value green">${layoutCount}</div><div class="stat-label">Layout Tokens</div></div>
     `;
 
-    // Color swatches
+    // Color swatches from nested structure
     const swatchContainer = document.getElementById('colorSwatches');
     swatchContainer.innerHTML = '';
-    Object.entries(brandKit).forEach(([key, val]) => {
-        if (key.startsWith('colors.') && typeof val === 'string' && val.startsWith('#')) {
-            const name = key.replace('colors.', '').replace(/\./g, ' ');
+    const colorEntries = [
+        ['Primary', kit.colors.primary?.hex],
+        ['Secondary', kit.colors.secondary?.hex],
+        ['Text Primary', kit.colors.text?.primary?.hex],
+        ['Text Secondary', kit.colors.text?.secondary?.hex],
+        ['Text Tertiary', kit.colors.text?.tertiary?.hex],
+        ['Background Base', kit.colors.backgrounds?.base?.hex],
+        ['Background Section', kit.colors.backgrounds?.section?.hex],
+        ['Background Secondary', kit.colors.backgrounds?.secondary?.hex],
+        ['Background Dark', kit.colors.backgrounds?.dark?.hex],
+        ['Border Primary', kit.colors.borders?.primary?.hex],
+    ];
+    for (const [name, hex] of colorEntries) {
+        if (hex) {
             swatchContainer.innerHTML += `
                 <div class="swatch">
-                    <div class="swatch-color" style="background:${val}"></div>
+                    <div class="swatch-color" style="background:${hex}"></div>
                     <div class="swatch-info">
                         <div class="swatch-name">${name}</div>
-                        <div class="swatch-hex">${val}</div>
+                        <div class="swatch-hex">${hex}</div>
                     </div>
                 </div>
             `;
         }
-    });
+    }
 
     // Font previews
     const fontContainer = document.getElementById('fontPreviews');
     fontContainer.innerHTML = '';
-    const primaryFont = brandKit["fonts.primary.family"] || 'sans-serif';
-    const secondaryFont = brandKit["fonts.secondary.family"];
+    const primaryFont = kit.fonts.primary?.family || 'sans-serif';
+    const secondaryFont = kit.fonts.secondary?.family;
+
+    // Resolve to Google Fonts
+    const resolved = resolveGoogleFont(primaryFont);
+    const displayFont = resolved ? resolved.google : primaryFont;
 
     fontContainer.innerHTML = `
         <div class="font-preview-item">
-            <div class="font-preview-sample" style="font-family:'${primaryFont}',sans-serif;">The quick brown fox jumps</div>
-            <div class="font-preview-meta"><strong>${primaryFont}</strong><br>Primary Font</div>
+            <div class="font-preview-sample" style="font-family:'${displayFont}','${primaryFont}',sans-serif;">The quick brown fox jumps</div>
+            <div class="font-preview-meta"><strong>${primaryFont}</strong>${resolved ? ` → ${resolved.google}` : ''}<br>Primary Font</div>
         </div>
     `;
     if (secondaryFont) {
+        const resolved2 = resolveGoogleFont(secondaryFont);
+        const displayFont2 = resolved2 ? resolved2.google : secondaryFont;
         fontContainer.innerHTML += `
             <div class="font-preview-item">
-                <div class="font-preview-sample" style="font-family:'${secondaryFont}',serif;font-style:italic;">The quick brown fox jumps</div>
-                <div class="font-preview-meta"><strong>${secondaryFont}</strong><br>Secondary Font</div>
+                <div class="font-preview-sample" style="font-family:'${displayFont2}','${secondaryFont}',serif;font-style:italic;">The quick brown fox jumps</div>
+                <div class="font-preview-meta"><strong>${secondaryFont}</strong>${resolved2 ? ` → ${resolved2.google}` : ''}<br>Secondary Font</div>
             </div>
         `;
     }

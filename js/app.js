@@ -4,6 +4,7 @@
 let currentStep = 1;
 let brandKit = null;
 let articleData = null;
+let navigationData = null;
 let prototypeHtml = '';
 let analysisHtml = '';
 
@@ -30,6 +31,7 @@ function resetTool() {
     if (!confirm('Reset all data and start over?')) return;
     brandKit = null;
     articleData = null;
+    navigationData = null;
     prototypeHtml = '';
     analysisHtml = '';
     document.getElementById('publisherUrl').value = '';
