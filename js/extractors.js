@@ -1,14 +1,14 @@
 // ============================================================
 //  EXTRACTORS
 // ============================================================
-function extractColors(doc) {
+function extractColors(doc, externalCSS) {
     const colorMap = {};
     const colorCounts = {};
 
-    // Get all computed styles from inline styles + style tags
+    // Get all computed styles from inline styles + style tags + external CSS
     const styleText = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
     const inlineStyles = Array.from(doc.querySelectorAll('[style]')).map(el => el.getAttribute('style')).join(';');
-    const allCSS = styleText + inlineStyles;
+    const allCSS = styleText + inlineStyles + '\n' + (externalCSS || '');
 
     // Extract hex colors
     const hexRegex = /#([0-9a-fA-F]{3,8})\b/g;
@@ -56,10 +56,22 @@ function extractColors(doc) {
     }
     const uniqueGrays = [...new Set(allGrays)].sort((a,b) => luminance(a) - luminance(b));
 
-    // Assign tokens
-    if (brandColors.length > 0) colorMap["colors.primary.hex"] = brandColors[0][0];
-    if (brandColors.length > 1) colorMap["colors.secondary.hex"] = brandColors[1][0];
-    if (brandColors.length > 2) colorMap["colors.tertiary.hex"] = brandColors[2][0];
+    // Check meta theme-color — highest confidence signal for primary brand color
+    const themeColor = doc.querySelector('meta[name="theme-color"]');
+    const tileColor = doc.querySelector('meta[name="msapplication-TileColor"]');
+    const metaPrimary = themeColor ? normalizeHex(themeColor.content) : (tileColor ? normalizeHex(tileColor.content) : null);
+
+    // Assign tokens — prefer theme-color meta if available
+    if (metaPrimary && !isGrayscale(metaPrimary)) {
+        colorMap["colors.primary.hex"] = metaPrimary;
+        // Use frequency-based colors as secondary/tertiary
+        if (brandColors.length > 0) colorMap["colors.secondary.hex"] = brandColors[0][0];
+        if (brandColors.length > 1) colorMap["colors.tertiary.hex"] = brandColors[1][0];
+    } else {
+        if (brandColors.length > 0) colorMap["colors.primary.hex"] = brandColors[0][0];
+        if (brandColors.length > 1) colorMap["colors.secondary.hex"] = brandColors[1][0];
+        if (brandColors.length > 2) colorMap["colors.tertiary.hex"] = brandColors[2][0];
+    }
 
     // Text hierarchy
     if (uniqueGrays.length >= 1) colorMap["colors.text.primary.hex"] = uniqueGrays[0] || '#1A1A2E';
@@ -96,9 +108,9 @@ function extractColors(doc) {
     return colorMap;
 }
 
-function extractFonts(doc, html) {
+function extractFonts(doc, html, externalCSS) {
     const fontMap = {};
-    const allCSS = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
+    const allCSS = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n') + '\n' + (externalCSS || '');
 
     // Extract Google Fonts from link tags
     const googleFonts = [];
@@ -118,6 +130,15 @@ function extractFonts(doc, html) {
         }
     });
 
+    // Extract @font-face family names from CSS
+    const fontFaceRegex = /@font-face\s*\{[^}]*font-family\s*:\s*['"]?([^'";},]+)/g;
+    const fontFaceFamilies = [];
+    let ffMatch;
+    while ((ffMatch = fontFaceRegex.exec(allCSS)) !== null) {
+        const name = ffMatch[1].trim().replace(/['"]/g, '');
+        if (name && !fontFaceFamilies.includes(name)) fontFaceFamilies.push(name);
+    }
+
     // Extract font-family declarations
     const ffRegex = /font-family\s*:\s*['"]?([^'";},]+)/g;
     const fontFamilies = {};
@@ -129,8 +150,9 @@ function extractFonts(doc, html) {
         }
     }
 
-    const allFonts = [...new Set([...googleFonts, ...Object.keys(fontFamilies)])];
-    const primaryFonts = allFonts.filter(f => !['sans-serif','serif','monospace','Arial','Helvetica','Times New Roman','Georgia','Verdana','system-ui'].includes(f));
+    const allFonts = [...new Set([...googleFonts, ...fontFaceFamilies, ...Object.keys(fontFamilies)])];
+    const genericFonts = ['sans-serif','serif','monospace','Arial','Helvetica','Times New Roman','Georgia','Verdana','system-ui','cursive','fantasy','-apple-system','BlinkMacSystemFont','Segoe UI'];
+    const primaryFonts = allFonts.filter(f => !genericFonts.includes(f));
     const fallbacks = allFonts.filter(f => ['Arial','Helvetica','sans-serif','serif','Georgia','Verdana'].includes(f));
 
     if (primaryFonts.length > 0) {
@@ -173,9 +195,9 @@ function extractFonts(doc, html) {
     return fontMap;
 }
 
-function extractLayout(doc) {
+function extractLayout(doc, externalCSS) {
     const layoutMap = {};
-    const allCSS = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
+    const allCSS = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n') + '\n' + (externalCSS || '');
 
     const brRegex = /border-radius\s*:\s*(\d+(?:\.\d+)?)(px|%)/g;
     const radii = [];
@@ -232,16 +254,43 @@ function extractLayout(doc) {
 //  ARTICLE DATA EXTRACTION (cleaned — filters scripts, JSON, etc.)
 // ============================================================
 function _isJunkText(text) {
-    // Filter out script content, JSON, code, tracking pixels, etc.
-    if (text.includes('window.') || text.includes('document.') || text.includes('function(')) return true;
-    if (text.includes('{') && text.includes('}') && text.includes('"')) return true;
+    // Filter out script content, JSON, code, tracking pixels, widget configs, etc.
+    if (text.includes('window.') || text.includes('document.') || text.includes('function(') || text.includes('function (')) return true;
     if (text.includes('var ') || text.includes('const ') || text.includes('let ')) return true;
     if (text.includes('.push(') || text.includes('.init(') || text.includes('addEventListener')) return true;
+    if (text.includes('SiteWidgets') || text.includes('dataLayer') || text.includes('gtag(') || text.includes('fbq(')) return true;
+    if (text.includes('categorySubChannel') || text.includes('showComments') || text.includes('isSpotim')) return true;
+    if (text.includes('articleId') || text.includes('articleID') || text.includes('"author"')) return true;
+    if (text.includes('createElement') || text.includes('appendChild') || text.includes('innerHTML')) return true;
+    if (text.includes('google_ad') || text.includes('googletag') || text.includes('adsbygoogle')) return true;
+    // JSON-like key:value patterns — "key":"value" or "key":value
+    if (/"[\w]+":\s*["{\[\dtfn]/.test(text)) return true;
+    // Starts with [ or {
+    if (/^\s*[\[\{]/.test(text)) return true;
+    // Contains { } with " — likely JSON config
+    if (text.includes('{') && text.includes('}') && text.includes('"') && text.indexOf('{') < text.indexOf('}')) return true;
+    // Too many code-like characters (semicolons, equals, braces, parens)
+    if (/[;=(){}]/.test(text) && text.split(/[;=(){}]/).length > 3) return true;
+    // URL with query params — tracking/analytics
     if (text.includes('http://') && text.includes('&')) return true;
-    if (/^\s*[\[\{]/.test(text)) return true; // starts with [ or {
-    if (/[;=(){}]/.test(text) && text.split(/[;=(){}]/).length > 3) return true; // too many code-like chars
-    if (text.split(' ').length < 3 && text.length < 60) return true; // too short to be a paragraph
+    if (text.includes('https://') && text.includes('&') && text.includes('=') && text.split(' ').length < 5) return true;
+    // Too short to be a real paragraph
+    if (text.split(' ').length < 3 && text.length < 60) return true;
     return false;
+}
+
+/** Clean a text string by stripping any embedded JS/JSON fragments */
+function _cleanTextContent(text) {
+    if (!text) return '';
+    // Remove inline script fragments that got concatenated with real text
+    // Pattern: real text followed by window.Something... or {" json stuff
+    text = text.replace(/window\.\w[\w.]*\([^)]*\)[;,]?/g, '');
+    text = text.replace(/\{[^}]*"[\w]+":[^}]*\}/g, '');
+    text = text.replace(/\[\{[^\]]*\}\]/g, '');
+    // Remove tracking/widget initialization code
+    text = text.replace(/(?:var|let|const)\s+\w+\s*=\s*[^;]+;/g, '');
+    text = text.replace(/\w+\.\w+\.\w+\([^)]*\);?/g, '');
+    return text.trim();
 }
 
 function extractArticleData(doc, url) {
@@ -260,12 +309,17 @@ function extractArticleData(doc, url) {
     // Title — prefer og:title, then h1
     const ogTitle = doc.querySelector('meta[property="og:title"]');
     const h1 = doc.querySelector('h1');
-    data.title = ogTitle ? ogTitle.content : (h1 ? h1.textContent.trim() : '');
+    data.title = ogTitle ? ogTitle.content : (h1 ? _cleanTextContent(h1.textContent.trim()) : '');
+    // Clean title if it contains junk
+    if (data.title && _isJunkText(data.title)) {
+        data.title = h1 ? _cleanTextContent(h1.textContent.trim()) : '';
+    }
 
     // Description / lead
     const ogDesc = doc.querySelector('meta[property="og:description"]');
     const metaDesc = doc.querySelector('meta[name="description"]');
     data.lead = ogDesc ? ogDesc.content : (metaDesc ? metaDesc.content : '');
+    if (data.lead) data.lead = _cleanTextContent(data.lead);
 
     // Image
     const ogImg = doc.querySelector('meta[property="og:image"]');
@@ -296,11 +350,21 @@ function extractArticleData(doc, url) {
     if (article) {
         // Clone so we don't modify the original doc
         const clone = article.cloneNode(true);
-        // Remove all non-content elements
-        clone.querySelectorAll('script, style, noscript, iframe, svg, nav, header, footer, form, [class*="comment"], [class*="share"], [class*="social"], [class*="ad-"], [class*="widget"], [class*="related"]').forEach(el => el.remove());
+        // Remove all non-content elements — expanded list
+        clone.querySelectorAll(
+            'script, style, noscript, iframe, svg, nav, header, footer, form, ' +
+            '[type="application/ld+json"], [type="application/json"], [type="text/javascript"], ' +
+            '[class*="comment"], [class*="share"], [class*="social"], [class*="ad-"], [class*="advert"], ' +
+            '[class*="widget"], [class*="related"], [class*="taboola"], [class*="outbrain"], ' +
+            '[class*="recommend"], [class*="promo"], [class*="newsletter"], [class*="signup"], ' +
+            '[id*="taboola"], [id*="outbrain"], [id*="google_ads"], [data-widget-type]'
+        ).forEach(el => el.remove());
 
         clone.querySelectorAll('p').forEach(p => {
-            const text = p.textContent.trim();
+            let text = p.textContent.trim();
+            if (text.length <= 40) return;
+            // Try cleaning embedded JS/JSON fragments
+            text = _cleanTextContent(text);
             if (text.length > 40 && !_isJunkText(text)) {
                 data.paragraphs.push(text);
             }
@@ -467,15 +531,23 @@ function _extractCardFromLink(a, img, baseUrl, seenTitles, seenImages) {
 }
 
 function _resolveImgSrc(img, baseUrl) {
-    // Try multiple source attributes
+    // Try multiple source attributes — expanded for common lazy-load libraries
     const src = img.getAttribute('src') ||
                 img.getAttribute('data-src') ||
                 img.getAttribute('data-lazy-src') ||
                 img.getAttribute('data-original') ||
+                img.getAttribute('data-original-src') ||
+                img.getAttribute('data-hi-res-src') ||
+                img.getAttribute('data-img-url') ||
+                img.getAttribute('data-baseurl') ||
+                img.getAttribute('data-image') ||
+                img.getAttribute('data-full-src') ||
+                img.getAttribute('data-lazy') ||
+                img.getAttribute('data-url') ||
                 img.getAttribute('content');
 
     // Also check srcset for higher res
-    const srcset = img.getAttribute('srcset') || img.getAttribute('data-srcset');
+    const srcset = img.getAttribute('srcset') || img.getAttribute('data-srcset') || img.getAttribute('data-lazy-srcset');
     let bestSrc = src;
 
     if (srcset) {
@@ -483,15 +555,31 @@ function _resolveImgSrc(img, baseUrl) {
         const parts = srcset.split(',').map(s => s.trim().split(/\s+/));
         if (parts.length > 0) {
             const largest = parts[parts.length - 1][0];
-            if (largest && largest.startsWith('http')) bestSrc = largest;
+            if (largest && (largest.startsWith('http') || largest.startsWith('/') || largest.startsWith('//'))) bestSrc = largest;
+        }
+    }
+
+    // Check parent <picture> element for <source> tags
+    if (!bestSrc) {
+        const picture = img.closest('picture');
+        if (picture) {
+            const source = picture.querySelector('source[srcset], source[data-srcset]');
+            if (source) {
+                const ss = source.getAttribute('srcset') || source.getAttribute('data-srcset') || '';
+                const parts = ss.split(',').map(s => s.trim().split(/\s+/));
+                if (parts.length > 0 && parts[0][0]) bestSrc = parts[0][0];
+            }
         }
     }
 
     if (!bestSrc) return null;
 
+    // Handle protocol-relative URLs
+    if (bestSrc.startsWith('//')) bestSrc = 'https:' + bestSrc;
+
     // Skip base64 data URIs, tracking pixels, and tiny placeholder images
     if (bestSrc.startsWith('data:')) return null;
-    if (bestSrc.includes('1x1') || bestSrc.includes('pixel') || bestSrc.includes('blank')) return null;
+    if (bestSrc.includes('1x1') || bestSrc.includes('pixel') || bestSrc.includes('blank.gif') || bestSrc.includes('spacer')) return null;
     if (bestSrc.includes('.svg') && bestSrc.length < 100) return null; // small SVG icons
 
     return _resolveUrl(bestSrc, baseUrl);
@@ -556,6 +644,183 @@ function extractPageImages(doc, baseUrl) {
     });
 
     return images;
+}
+
+// ============================================================
+//  HEADER STYLE EXTRACTION
+//  Detects light vs dark header, logo image, accent bar
+// ============================================================
+function extractHeaderStyle(doc, externalCSS) {
+    const result = {
+        style: 'dark', // default assumption
+        background: null,
+        logoUrl: null,
+        logoSvg: null,
+        accentBarColor: null,
+        hasSearch: false
+    };
+
+    const allCSS = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n') + '\n' + (externalCSS || '');
+
+    const header = doc.querySelector('header') || doc.querySelector('nav') || doc.querySelector('[role="banner"]');
+    if (!header) return result;
+
+    // Detect header background from inline style
+    const headerStyle = header.getAttribute('style') || '';
+    const bgMatch = headerStyle.match(/background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,8}|rgb[a]?\([^)]+\)|white|black|transparent)/i);
+    if (bgMatch) {
+        const bg = bgMatch[1].toLowerCase();
+        if (bg === 'white' || bg === '#fff' || bg === '#ffffff' || bg === 'transparent') {
+            result.style = 'light';
+            result.background = '#ffffff';
+        } else if (bg.startsWith('#') || bg.startsWith('rgb')) {
+            const hex = bg.startsWith('#') ? normalizeHex(bg) : null;
+            if (hex && isLightColor(hex)) {
+                result.style = 'light';
+                result.background = hex;
+            } else if (hex) {
+                result.background = hex;
+            }
+        }
+    }
+
+    // Also check CSS for header/nav background rules
+    const headerBgRegex = /(?:header|nav|\.header|\.nav-bar|\.main-nav|\.top-bar|#header)[^{]*\{[^}]*background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,8}|rgb[a]?\([^)]+\)|white)/gi;
+    let cssMatch;
+    while ((cssMatch = headerBgRegex.exec(allCSS)) !== null) {
+        const val = cssMatch[1].toLowerCase();
+        if (val === 'white' || val === '#fff' || val === '#ffffff') {
+            result.style = 'light';
+            result.background = '#ffffff';
+        } else {
+            const hex = val.startsWith('#') ? normalizeHex(val) : null;
+            if (hex && isLightColor(hex)) {
+                result.style = 'light';
+                result.background = hex;
+            }
+        }
+    }
+
+    // If header background-color is not explicitly dark, check text color as heuristic
+    // Many light headers don't explicitly set bg — they inherit white from body
+    const headerText = header.textContent.trim();
+    const headerLinks = header.querySelectorAll('a');
+    if (!result.background && headerLinks.length > 0) {
+        // Check if the header has a class suggesting light theme
+        const headerClass = (header.className || '').toLowerCase();
+        if (headerClass.includes('white') || headerClass.includes('light') || headerClass.includes('transparent')) {
+            result.style = 'light';
+            result.background = '#ffffff';
+        }
+    }
+
+    // Extract logo image
+    const logoSelectors = [
+        'header img[class*="logo"]', 'header a[class*="logo"] img', 'header [class*="logo"] img',
+        'nav img[class*="logo"]', 'nav a[class*="logo"] img',
+        'header img:first-of-type', 'nav img:first-of-type',
+        '[class*="brand"] img', '[class*="masthead"] img'
+    ];
+    for (const sel of logoSelectors) {
+        const logoImg = doc.querySelector(sel);
+        if (logoImg) {
+            const src = logoImg.getAttribute('src') || logoImg.getAttribute('data-src');
+            if (src && !src.startsWith('data:') && !src.includes('pixel') && !src.includes('1x1')) {
+                try {
+                    result.logoUrl = src.startsWith('//') ? 'https:' + src : src;
+                } catch(e) {}
+                break;
+            }
+        }
+    }
+
+    // Extract logo SVG
+    if (!result.logoUrl) {
+        const logoSvg = header.querySelector('[class*="logo"] svg, a:first-child svg');
+        if (logoSvg) {
+            const svgHtml = logoSvg.outerHTML;
+            if (svgHtml && svgHtml.length < 5000) {
+                result.logoSvg = svgHtml;
+            }
+        }
+    }
+
+    // Detect accent bar
+    const firstChildren = Array.from(header.children).slice(0, 5);
+    for (const child of firstChildren) {
+        const childStyle = child.getAttribute('style') || '';
+        const heightMatch = childStyle.match(/height\s*:\s*(\d+)px/);
+        if (heightMatch && parseInt(heightMatch[1]) <= 6) {
+            const bgMatch2 = childStyle.match(/background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,8})/);
+            if (bgMatch2) result.accentBarColor = normalizeHex(bgMatch2[1]);
+        }
+    }
+
+    // Detect search
+    result.hasSearch = !!header.querySelector('input[type="search"], [class*="search"], [aria-label*="search"], button[class*="search"]');
+
+    return result;
+}
+
+// ============================================================
+//  EXISTING FEED / TABOOLA WIDGET DETECTION
+// ============================================================
+function extractExistingFeed(doc) {
+    const result = {
+        detected: false,
+        layout: null, // 'grid' | 'list' | 'mixed'
+        columns: null,
+        sectionLabels: [],
+        cardStyle: null // 'vertical' | 'horizontal'
+    };
+
+    // Look for Taboola widgets
+    const taboolaSelectors = [
+        '[id*="taboola"]', '[class*="taboola"]', '.trc_related_container',
+        '[data-mode]', '[id*="trc"]', '[class*="trc"]',
+        '[id*="outbrain"]', '[class*="outbrain"]',
+        '[class*="recommendation"]', '[class*="recirculation"]'
+    ];
+
+    for (const sel of taboolaSelectors) {
+        const widget = doc.querySelector(sel);
+        if (widget) {
+            result.detected = true;
+
+            // Detect grid columns from the widget's children
+            const items = widget.querySelectorAll('[class*="item"], [class*="card"], a');
+            if (items.length >= 2) {
+                // Check if items have thumbnails on side (list) vs stacked (grid)
+                const firstItem = items[0];
+                const img = firstItem.querySelector('img');
+                const text = firstItem.querySelector('[class*="title"], [class*="headline"], span, div');
+                if (img && text) {
+                    // If image and text are siblings in a row layout, it's a list
+                    const parentStyle = firstItem.getAttribute('style') || '';
+                    if (parentStyle.includes('flex') && (parentStyle.includes('row') || !parentStyle.includes('column'))) {
+                        result.cardStyle = 'horizontal';
+                        result.layout = 'list';
+                    } else {
+                        result.cardStyle = 'vertical';
+                        result.layout = 'grid';
+                    }
+                }
+            }
+
+            // Extract section labels
+            const labels = widget.querySelectorAll('[class*="label"], [class*="title"], h2, h3, [class*="header"]');
+            labels.forEach(l => {
+                const text = l.textContent.trim();
+                if (text.length > 2 && text.length < 60) {
+                    result.sectionLabels.push(text);
+                }
+            });
+
+            break;
+        }
+    }
+
+    return result;
 }
 
 function extractBrandSignals(doc, html, pubUrl) {
