@@ -46,6 +46,30 @@ const FONT_MAP = {
   'Montserrat':            { google: 'Montserrat',        weights: '400;500;600;700' },
   'Playfair Display':      { google: 'Playfair Display',  weights: '400;500;600;700' },
   'Arimo':                 { google: 'Arimo',             weights: '400;500;700' },
+
+  // Hebrew / RTL fonts
+  'Yedioth':               { google: 'Heebo',             weights: '400;500;700;800' },
+  'YediothSans':           { google: 'Heebo',             weights: '400;500;700;800' },
+  'yedioth':               { google: 'Heebo',             weights: '400;500;700;800' },
+  'NarkissBlock':          { google: 'Frank Ruhl Libre',  weights: '400;500;700' },
+  'Narkiss Block':         { google: 'Frank Ruhl Libre',  weights: '400;500;700' },
+  'Arial Hebrew':          { google: 'Heebo',             weights: '400;500;700' },
+  'Heebo':                 { google: 'Heebo',             weights: '400;500;700;800' },
+  'Rubik':                 { google: 'Rubik',             weights: '400;500;600;700' },
+  'Assistant':             { google: 'Assistant',          weights: '400;600;700' },
+  'David Libre':           { google: 'David Libre',       weights: '400;500;700' },
+  'Secular One':           { google: 'Secular One',       weights: '400' },
+  'Alef':                  { google: 'Alef',              weights: '400;700' },
+  'Varela Round':          { google: 'Varela Round',      weights: '400' },
+  'Open Sans Hebrew':      { google: 'Open Sans',         weights: '400;600;700' },
+  'Suez One':              { google: 'Suez One',          weights: '400' },
+
+  // Arabic fonts
+  'Cairo':                 { google: 'Cairo',             weights: '400;600;700' },
+  'Tajawal':               { google: 'Tajawal',           weights: '400;500;700' },
+  'Amiri':                 { google: 'Amiri',             weights: '400;700' },
+  'Noto Sans Arabic':      { google: 'Noto Sans Arabic',  weights: '400;500;700' },
+  'Noto Kufi Arabic':      { google: 'Noto Kufi Arabic',  weights: '400;500;700' },
 };
 
 function resolveGoogleFont(fontFamily) {
@@ -111,8 +135,25 @@ function buildGoogleFontsUrl(brandKit) {
   }
 
   if (params.length === 0) {
-    params.push('family=Inter:wght@400;500;600;700');
+    // Pick a sensible default based on language
+    const lang = brandKit.brand_voice?.language || brandKit.brand?.language || 'en';
+    const baseLang = lang.toLowerCase().split('-')[0];
+    if (baseLang === 'he') {
+      params.push('family=Heebo:wght@400;500;700;800');
+    } else if (baseLang === 'ar') {
+      params.push('family=Cairo:wght@400;600;700');
+    } else {
+      params.push('family=Inter:wght@400;500;600;700');
+    }
   }
 
-  return `https://fonts.googleapis.com/css2?${params.join('&')}&display=swap`;
+  // Detect language and add appropriate subset
+  const lang = brandKit.brand_voice?.language || brandKit.brand?.language || 'en';
+  const baseLang = lang.toLowerCase().split('-')[0];
+  let subset = '';
+  if (baseLang === 'he') subset = '&subset=hebrew';
+  else if (baseLang === 'ar') subset = '&subset=arabic';
+  else if (['ru', 'uk', 'bg'].includes(baseLang)) subset = '&subset=cyrillic';
+
+  return `https://fonts.googleapis.com/css2?${params.join('&')}&display=swap${subset}`;
 }
