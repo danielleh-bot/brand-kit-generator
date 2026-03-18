@@ -1,6 +1,6 @@
 {
   "name": "brand-kit-generator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Taboola Brand Kit Generator — automatically extract publisher brand design tokens from any website",
   "main": "index.html",
   "scripts": {

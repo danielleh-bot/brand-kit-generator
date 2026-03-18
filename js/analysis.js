@@ -1,44 +1,50 @@
 // ============================================================
-//  STEP 4: ANALYSIS REPORT GENERATOR
+//  STEP 4: ANALYSIS REPORT GENERATOR (updated for nested brand kit)
 // ============================================================
 function generateAnalysis() {
     if (!brandKit) return;
 
-    const pub = brandKit["meta.publisher"] || 'Publisher';
-    const domain = brandKit["meta.domain"] || 'publisher.com';
-    const primary = brandKit["colors.primary.hex"] || '#2196F3';
-    const textPrimary = brandKit["colors.text.primary.hex"] || '#1A1A2E';
-    const textSecondary = brandKit["colors.text.secondary.hex"] || '#4A4A5A';
-    const textTertiary = brandKit["colors.text.tertiary.hex"] || '#8A8A9A';
-    const bgSection = brandKit["colors.backgrounds.section.hex"] || '#F7F9FC';
-    const fontPrimary = brandKit["fonts.primary.family"] || 'sans-serif';
-    const fontSecondary = brandKit["fonts.secondary.family"] || fontPrimary;
-    const borderRadius = brandKit["layout.card.border_radius"] || '0px';
-    const totalTokens = Object.keys(brandKit).filter(k => !k.startsWith('meta.')).length;
+    const pub = kit('brand.name', 'Publisher');
+    const domain = kit('metadata.source_url', 'publisher.com').replace(/https?:\/\/(www\.)?/, '').split('/')[0];
+    const primary = kit('colors.primary.hex', '#2196F3');
+    const textPrimary = kit('colors.text.primary.hex', '#1A1A2E');
+    const textSecondary = kit('colors.text.secondary.hex', '#4A4A5A');
+    const textTertiary = kit('colors.text.tertiary.hex', '#8A8A9A');
+    const bgSection = kit('colors.backgrounds.section.hex', '#F7F9FC');
+    const bgDark = kit('colors.backgrounds.dark.hex', '#171B26');
+    const fontPrimary = kit('fonts.primary.family', 'sans-serif');
+    const fontSecondary = kit('fonts.secondary.family', fontPrimary);
+    const borderRadius = kit('layout.card.border_radius', '0px');
+    const totalTokens = kit('metadata.total_tokens', countTokens(brandKit));
 
-    // Count different token categories
-    const colorTokens = Object.keys(brandKit).filter(k => k.startsWith('colors.')).length;
-    const fontTokens = Object.keys(brandKit).filter(k => k.startsWith('fonts.')).length;
-    const layoutTokens = Object.keys(brandKit).filter(k => k.startsWith('layout.') || k.startsWith('photo_style.')).length;
-    const brandTokens = Object.keys(brandKit).filter(k => k.startsWith('brand') || k.startsWith('logo')).length;
+    // Count token categories
+    const colorTokens = countTokens(brandKit.colors || {});
+    const fontTokens = countTokens(brandKit.fonts || {});
+    const layoutTokens = countTokens(brandKit.layout || {}) + countTokens(brandKit.layout_patterns || {});
+    const brandTokens = countTokens(brandKit.brand || {}) + countTokens(brandKit.brand_voice || {}) + countTokens(brandKit.logos || {});
+    const iconTokens = countTokens(brandKit.icons || {});
+    const graphicsTokens = countTokens(brandKit.graphics || {});
 
-    // Build property comparison table rows
+    // Build enhanced property comparison table (18 rows)
     const manualProps = [
-        { prop: 'fontFamily', manual: 'Arial', kit: brandKit["fonts.primary.family"] || 'N/A', kitKey: 'fonts.primary.family', status: brandKit["fonts.primary.family"] ? (brandKit["fonts.primary.family"] === 'Arial' ? 'match' : 'drift') : 'missing' },
-        { prop: 'titleColor', manual: '#333333', kit: textPrimary, kitKey: 'colors.text.primary.hex', status: 'drift' },
-        { prop: 'titleFontSize', manual: '14', kit: brandKit["fonts.type_scale.article_title_card"]?.size || '22px', kitKey: 'fonts.type_scale.article_title_card.size', status: 'drift' },
-        { prop: 'descColor', manual: '#999999', kit: textSecondary, kitKey: 'colors.text.secondary.hex', status: 'drift' },
-        { prop: 'borderColor', manual: '#E0E0E0', kit: brandKit["colors.borders.primary.hex"] || 'N/A', kitKey: 'colors.borders.primary.hex', status: 'drift' },
-        { prop: 'accentColor', manual: '#2196F3', kit: primary, kitKey: 'colors.primary.hex', status: primary === '#2196F3' ? 'match' : 'drift' },
-        { prop: 'borderRadius', manual: '4', kit: borderRadius, kitKey: 'layout.card.border_radius', status: 'drift' },
-        { prop: 'backgroundSection', manual: 'Not set', kit: bgSection, kitKey: 'colors.backgrounds.section.hex', status: 'missing' },
-        { prop: 'secondaryFont', manual: 'Not set', kit: fontSecondary, kitKey: 'fonts.secondary.family', status: 'missing' },
-        { prop: 'typeScale', manual: 'Not set', kit: 'Full scale defined', kitKey: 'fonts.type_scale.*', status: 'missing' },
-        { prop: 'thumbnailAspectRatio', manual: 'Default 4:3', kit: brandKit["photo_style.thumbnail_format.aspect_ratio"] || '16:9', kitKey: 'photo_style.thumbnail_format.aspect_ratio', status: 'drift' },
-        { prop: 'videoIndicatorColor', manual: 'Default blue', kit: primary, kitKey: 'colors.primary.hex', status: 'drift' },
-        { prop: 'sectionHeadingStyle', manual: 'Not set', kit: 'Brand-matched', kitKey: 'fonts.type_scale.section_headings', status: 'missing' },
-        { prop: 'contentLabels', manual: 'Not set', kit: 'Auto-detected', kitKey: 'brand_voice.content_labels', status: 'missing' },
-        { prop: 'spacingScale', manual: 'Default', kit: 'Publisher-matched', kitKey: 'layout.spacing.*', status: 'missing' },
+        { prop: 'font-family (headline)', manual: 'Arial', kit: fontPrimary, status: fontPrimary === 'Arial' ? 'match' : 'drift' },
+        { prop: 'font-family (body)', manual: 'Arial', kit: kit('fonts.primary.family', 'N/A'), status: 'drift' },
+        { prop: 'font-family (editorial)', manual: 'Not set', kit: fontSecondary !== fontPrimary ? fontSecondary : 'N/A', status: fontSecondary !== fontPrimary ? 'missing' : 'match' },
+        { prop: 'headline-color', manual: '#333333', kit: textPrimary, status: 'drift' },
+        { prop: 'headline-font-size', manual: '14px', kit: kit('fonts.type_scale.article_title_card.size', '22px'), status: 'drift' },
+        { prop: 'headline-font-weight', manual: '700', kit: String(kit('fonts.type_scale.article_title_card.weight', 700)), status: 'match' },
+        { prop: 'headline-text-transform', manual: 'none', kit: kit('fonts.type_scale.buttons.text_transform', 'none'), status: kit('fonts.type_scale.buttons.text_transform', 'none') === 'none' ? 'match' : 'drift' },
+        { prop: 'body-text-color', manual: '#999999', kit: textSecondary, status: 'drift' },
+        { prop: 'image-border-radius', manual: '4px', kit: borderRadius, status: borderRadius === '4px' ? 'match' : 'drift' },
+        { prop: 'accent-rule-color', manual: 'Not set', kit: primary, status: 'missing' },
+        { prop: 'CTA-color', manual: '#2196F3', kit: primary, status: primary === '#2196F3' ? 'match' : 'drift' },
+        { prop: 'source-label-color', manual: '#888888', kit: textTertiary, status: 'drift' },
+        { prop: 'separator-color', manual: '#E0E0E0', kit: kit('colors.borders.primary.hex', '#E0E0E0'), status: 'drift' },
+        { prop: 'sponsored-badge-style', manual: 'Default gray', kit: `${primary} bg, white text`, status: 'drift' },
+        { prop: 'branding-letter-spacing', manual: '0', kit: kit('fonts.type_scale.buttons.letter_spacing', 'normal'), status: 'missing' },
+        { prop: 'hover-decoration', manual: 'none', kit: 'underline', status: 'drift' },
+        { prop: 'category-label', manual: 'Not set', kit: 'Auto-detected', status: 'missing' },
+        { prop: 'background-color', manual: 'Not set', kit: bgSection, status: 'missing' },
     ];
 
     const driftCount = manualProps.filter(p => p.status === 'drift').length;
@@ -70,6 +76,24 @@ function generateAnalysis() {
         { category: 'Video Player Customization', percentage: '~20%', kitEquiv: 'photo_style.video_thumbnails', automated: false },
     ];
 
+    // Build brand kit section summary for the report
+    const sectionSummary = Object.keys(brandKit).map(key => {
+        const val = brandKit[key];
+        const tokens = (typeof val === 'object' && val !== null) ? countTokens(val) : 1;
+        return { section: key, tokens };
+    });
+
+    // Build the brand voice summary
+    const voiceTraits = kit('brand_voice.personality_traits', []).join(', ');
+    const headlineCase = kit('brand_voice.headline_style.case', 'Sentence case');
+    const language = kit('brand_voice.language', 'en');
+    const contentLabels = Object.keys(kit('brand_voice.content_labels', {})).filter(k => brandKit.brand_voice?.content_labels?.[k]);
+
+    // Icons summary
+    const iconCount = kit('icons.count_detected', 0);
+    const iconTypes = kit('icons.icon_inventory', []).map(i => i.name).join(', ');
+    const socialPlatforms = kit('icons.social_media_icons.platforms', []).join(', ');
+
     analysisHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +115,7 @@ function generateAnalysis() {
         .report-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 12px; margin-bottom: 16px; }
         .report-title { font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
         .report-subtitle { font-size: 18px; color: var(--text-muted); margin-bottom: 24px; }
-        .report-meta { display: flex; gap: 24px; font-size: 13px; color: var(--text-muted); }
+        .report-meta { display: flex; gap: 24px; font-size: 13px; color: var(--text-muted); flex-wrap: wrap; }
         .report-meta strong { color: var(--text); }
 
         .section { max-width: 1400px; margin: 0 auto; padding: 48px 40px; }
@@ -144,22 +168,61 @@ function generateAnalysis() {
 
         .divider { height: 1px; background: var(--border); margin: 0; }
         code { font-family: 'SF Mono', 'Fira Code', monospace; }
+
+        .brand-section-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 24px 0; }
+        .brand-section-card { background: var(--surface); border: 1px solid var(--border); padding: 16px; }
+        .brand-section-card h4 { font-size: 14px; color: var(--accent); margin-bottom: 4px; }
+        .brand-section-card .count { font-size: 24px; font-weight: 800; color: var(--text); }
+        .brand-section-card .desc { font-size: 12px; color: var(--text-muted); }
     </style>
 </head>
 <body>
     <div class="report-header">
         <div class="report-header-inner">
-            <div class="report-badge">Analysis Report</div>
+            <div class="report-badge">Analysis Report v2.0</div>
             <h1 class="report-title">Taboola Feed: Before vs After — ${pub}</h1>
             <p class="report-subtitle">Comparing manual custom properties/UI modes vs. automated web-crawler-generated brand kit JSON for native feed styling</p>
             <div class="report-meta">
                 <span><strong>Publisher:</strong> ${pub}</span>
                 <span><strong>Domain:</strong> ${domain}</span>
+                <span><strong>Language:</strong> ${language}</span>
                 <span><strong>Generated:</strong> ${new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}</span>
                 <span><strong>Tokens:</strong> ${totalTokens}</span>
+                <span><strong>Sections:</strong> ${Object.keys(brandKit).length}</span>
             </div>
         </div>
     </div>
+
+    <!-- Brand Kit Structure Overview -->
+    <div class="section">
+        <div class="section-label">Brand Kit Structure</div>
+        <h2 class="section-title">Rich Nested Brand Kit — ${Object.keys(brandKit).length} Sections, ${totalTokens} Tokens</h2>
+        <p class="section-desc">The crawler produces a deeply structured brand kit JSON covering colors, typography, brand voice, icons, graphics, layout patterns, navigation, and metadata — far richer than flat custom properties.</p>
+
+        <div class="brand-section-grid">
+            ${sectionSummary.map(s => `
+                <div class="brand-section-card">
+                    <h4>${s.section}</h4>
+                    <div class="count">${s.tokens}</div>
+                    <div class="desc">tokens</div>
+                </div>
+            `).join('')}
+        </div>
+
+        ${voiceTraits ? `<div style="background:var(--surface);border:1px solid var(--border);padding:20px;margin:16px 0;font-size:14px;">
+            <strong style="color:var(--accent);">Brand Voice:</strong> <span style="color:var(--text-muted);">${voiceTraits}</span>
+            ${headlineCase ? ` &bull; <strong>Headlines:</strong> <span style="color:var(--text-muted);">${headlineCase}</span>` : ''}
+            ${contentLabels.length > 0 ? ` &bull; <strong>Content Labels:</strong> <span style="color:var(--text-muted);">${contentLabels.join(', ')}</span>` : ''}
+        </div>` : ''}
+
+        ${iconCount > 0 ? `<div style="background:var(--surface);border:1px solid var(--border);padding:20px;margin:16px 0;font-size:14px;">
+            <strong style="color:var(--accent);">Icons:</strong> <span style="color:var(--text-muted);">${iconCount} detected</span>
+            ${iconTypes ? ` &bull; <strong>Types:</strong> <span style="color:var(--text-muted);">${iconTypes}</span>` : ''}
+            ${socialPlatforms ? ` &bull; <strong>Social:</strong> <span style="color:var(--text-muted);">${socialPlatforms}</span>` : ''}
+        </div>` : ''}
+    </div>
+
+    <div class="divider"></div>
 
     <!-- Executive Summary -->
     <div class="section">
@@ -171,7 +234,7 @@ function generateAnalysis() {
             <div class="stat-box"><div class="stat-val red">${manualProps.length}+</div><div class="stat-lbl">Manual properties to configure per publisher</div></div>
             <div class="stat-box"><div class="stat-val red">4–6 hrs</div><div class="stat-lbl">Average setup time for custom styling</div></div>
             <div class="stat-box"><div class="stat-val green">&lt;5 min</div><div class="stat-lbl">Crawler-based brand kit generation time</div></div>
-            <div class="stat-box"><div class="stat-val green">100%</div><div class="stat-lbl">Token coverage from automated crawl</div></div>
+            <div class="stat-box"><div class="stat-val green">${totalTokens}</div><div class="stat-lbl">Tokens auto-extracted by crawler</div></div>
         </div>
     </div>
 
@@ -219,10 +282,10 @@ function generateAnalysis() {
                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                                 ${[1,2,3,4].map(i => `
                                     <div>
-                                        <div style="aspect-ratio:16/9;background:${bgSection};margin-bottom:8px;border-radius:${borderRadius};display:flex;align-items:center;justify-content:center;">
+                                        <div style="aspect-ratio:${kit('photo_style.thumbnail_format.aspect_ratio', '16:9').replace(':', '/')};background:${bgSection};margin-bottom:8px;border-radius:${borderRadius};display:flex;align-items:center;justify-content:center;">
                                             <svg width="32" height="32" fill="none" stroke="${textTertiary}" stroke-width="1.5" opacity="0.4"><rect x="6" y="6" width="20" height="20" rx="3"/><circle cx="13" cy="13" r="3"/><path d="M6 22l6-6 4 4 6-6 4 4"/></svg>
                                         </div>
-                                        <div style="font-size:${typeof brandKit["fonts.type_scale.article_title_card"] === 'object' ? brandKit["fonts.type_scale.article_title_card"].size : '16px'};font-weight:700;color:${textPrimary};line-height:1.2;margin-bottom:6px;">${pub}-styled headline with correct brand tokens</div>
+                                        <div style="font-size:${kit('fonts.type_scale.article_title_card.size', '16px')};font-weight:700;color:${textPrimary};line-height:1.2;margin-bottom:6px;">${pub}-styled headline with correct brand tokens</div>
                                         <div style="font-size:12px;color:${textTertiary};">${pub}</div>
                                     </div>
                                 `).join('')}
@@ -230,7 +293,7 @@ function generateAnalysis() {
                         </div>
                     </div>
                     <div style="margin-top:16px;font-size:13px;color:var(--text-muted);">
-                        <strong style="color:var(--green);">Fixed:</strong> Correct font (${fontPrimary}), exact text colors, publisher-matched border radius (${borderRadius}), brand accent color (${primary}), correct 16:9 thumbnails, native section headings with brand motif
+                        <strong style="color:var(--green);">Fixed:</strong> Correct font (${fontPrimary}), exact text colors, publisher-matched border radius (${borderRadius}), brand accent color (${primary}), correct ${kit('photo_style.thumbnail_format.aspect_ratio', '16:9')} thumbnails, native section headings with brand motif
                     </div>
                 </div>
             </div>
@@ -261,15 +324,16 @@ function generateAnalysis() {
 
     <div class="divider"></div>
 
-    <!-- Token Mapping -->
+    <!-- Token Mapping / JSON Preview -->
     <div class="section">
         <div class="section-label">Token Mapping</div>
         <h2 class="section-title">How Brand Kit JSON Replaces Manual Config</h2>
-        <p class="section-desc">The brand kit JSON uses a hierarchical dot-notation schema that maps directly to feed card CSS properties — eliminating the need for manual property-by-property configuration.</p>
+        <p class="section-desc">The brand kit JSON uses a hierarchical nested schema that maps directly to feed card CSS properties — eliminating the need for manual property-by-property configuration. Below is a subset showing the colors and fonts sections.</p>
 
-        <div style="background:#0B0D13;border:1px solid var(--border);padding:24px;font-family:'SF Mono','Fira Code',monospace;font-size:13px;line-height:1.7;overflow-x:auto;white-space:pre;">${syntaxHighlightJson(JSON.stringify(
-            Object.fromEntries(Object.entries(brandKit).filter(([k]) => !k.startsWith('meta.')).slice(0,18)),
-        null, 2))}</div>
+        <div style="background:#0B0D13;border:1px solid var(--border);padding:24px;font-family:'SF Mono','Fira Code',monospace;font-size:13px;line-height:1.7;overflow-x:auto;white-space:pre;max-height:500px;overflow-y:auto;">${syntaxHighlightJson(JSON.stringify({
+            colors: brandKit.colors,
+            fonts: { primary: brandKit.fonts?.primary, secondary: brandKit.fonts?.secondary, type_scale: { article_title_card: brandKit.fonts?.type_scale?.article_title_card, article_body: brandKit.fonts?.type_scale?.article_body } }
+        }, null, 2))}</div>
     </div>
 
     <div class="divider"></div>
@@ -283,22 +347,28 @@ function generateAnalysis() {
         <div class="workflow-grid">
             <div class="workflow-panel">
                 <h3><span style="color:var(--red);">&#9679;</span> Manual Configuration (Current)</h3>
-                <div class="workflow-step"><div class="step-num-wf red">1</div><div class="step-text"><strong>Open publisher website</strong> in browser, take screenshots for reference</div></div>
+                <div class="workflow-step"><div class="step-num-wf red">1</div><div class="step-text"><strong>Open ${pub} website</strong> in browser, take screenshots for reference</div></div>
                 <div class="workflow-step"><div class="step-num-wf red">2</div><div class="step-text"><strong>Eyedrop colors</strong> from screenshots, manually note hex values (error-prone — often picks nearby but wrong shade)</div></div>
-                <div class="workflow-step"><div class="step-num-wf red">3</div><div class="step-text"><strong>Identify fonts</strong> using browser dev tools or font-matching services</div></div>
-                <div class="workflow-step"><div class="step-num-wf red">4</div><div class="step-text"><strong>Configure 15+ custom properties</strong> individually in Backstage UI</div></div>
-                <div class="workflow-step"><div class="step-num-wf red">5</div><div class="step-text"><strong>Select or create a UI mode</strong> from hundreds of existing options, or request a new one</div></div>
+                <div class="workflow-step"><div class="step-num-wf red">3</div><div class="step-text"><strong>Identify fonts</strong> — guesses Arial instead of ${fontPrimary}</div></div>
+                <div class="workflow-step"><div class="step-num-wf red">4</div><div class="step-text"><strong>Configure ${manualProps.length}+ custom properties</strong> individually in Backstage UI</div></div>
+                <div class="workflow-step"><div class="step-num-wf red">5</div><div class="step-text"><strong>Select or create a UI mode</strong> from hundreds of existing options</div></div>
                 <div class="workflow-step"><div class="step-num-wf red">6</div><div class="step-text"><strong>QA and iterate:</strong> preview feed, compare to publisher, adjust values, repeat until "close enough"</div></div>
+                <div class="workflow-step"><div class="step-num-wf red">7</div><div class="step-text"><strong>${pub} redesigns</strong> → repeat entire process</div></div>
+                <div class="workflow-step"><div class="step-num-wf red">8</div><div class="step-text"><strong>Brand elements missed:</strong> accent rules, text transforms, icon styles, editorial distinction</div></div>
                 <div style="background:rgba(238,63,84,0.08);border:1px solid rgba(238,63,84,0.2);padding:12px 16px;border-radius:6px;margin-top:16px;font-size:13px;color:var(--text-muted);">
                     <strong style="color:var(--red);">Total time: 4–6 hours</strong> per publisher. Must repeat when publisher redesigns. Values drift over time without detection.
                 </div>
             </div>
             <div class="workflow-panel">
                 <h3><span style="color:var(--green);">&#9679;</span> Crawler Brand Kit (New)</h3>
-                <div class="workflow-step"><div class="step-num-wf green">1</div><div class="step-text"><strong>Enter publisher URL</strong> into brand kit generator tool</div></div>
-                <div class="workflow-step"><div class="step-num-wf green">2</div><div class="step-text"><strong>Crawler auto-analyzes:</strong> fetches page, parses CSS, extracts all design tokens (colors, fonts, spacing, layouts)</div></div>
-                <div class="workflow-step"><div class="step-num-wf green">3</div><div class="step-text"><strong>Brand kit JSON generated:</strong> ${totalTokens}+ tokens mapped to feed card CSS properties. Zero manual configuration needed.</div></div>
-                <div class="workflow-step"><div class="step-num-wf green">4</div><div class="step-text"><strong>Review &amp; deploy:</strong> preview prototype, make optional tweaks, and deploy. Re-crawl on any redesign.</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">1</div><div class="step-text"><strong>Enter ${pub} URL</strong> into brand kit generator tool</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">2</div><div class="step-text"><strong>Crawler auto-analyzes:</strong> fetches page, parses CSS, extracts all design tokens</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">3</div><div class="step-text"><strong>Visual analysis</strong> captures accent rules, icon inventory, brand voice patterns</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">4</div><div class="step-text"><strong>Brand kit JSON generated:</strong> ${totalTokens}+ tokens across ${Object.keys(brandKit).length} sections</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">5</div><div class="step-text"><strong>Feed tokens auto-mapped</strong> from JSON — zero manual configuration</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">6</div><div class="step-text"><strong>Auto re-crawl</strong> on publisher redesign — zero manual work</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">7</div><div class="step-text"><strong>Rich brand semantics:</strong> logo, categories, badge styles, editorial voice</div></div>
+                <div class="workflow-step"><div class="step-num-wf green">8</div><div class="step-text"><strong>Drift detection alerts</strong> on token changes — automatic</div></div>
                 <div style="background:rgba(13,128,51,0.08);border:1px solid rgba(13,128,51,0.2);padding:12px 16px;border-radius:6px;margin-top:16px;font-size:13px;color:var(--text-muted);">
                     <strong style="color:var(--green);">Total time: &lt;5 minutes</strong> per publisher. Auto-syncs when publisher redesigns. Zero drift by design.
                 </div>
@@ -312,7 +382,7 @@ function generateAnalysis() {
     <div class="section">
         <div class="section-label">Custom UI Mode Replacement</div>
         <h2 class="section-title">Replacing 70% of Custom UI Modes at Scale</h2>
-        <p class="section-desc">Custom UI modes are per-publisher visual overrides that account managers manually create and maintain in Backstage. The brand kit approach automates the vast majority of these overrides — eliminating the need for manual configuration entirely.</p>
+        <p class="section-desc">Custom UI modes are per-publisher visual overrides that account managers manually create and maintain in Backstage. The brand kit approach automates the vast majority of these overrides.</p>
 
         <div class="ui-mode-highlight">
             <div class="ui-mode-big">~70%</div>
@@ -321,7 +391,7 @@ function generateAnalysis() {
 
         <div class="ui-mode-section">
             <h3 style="font-size:20px;margin-bottom:16px;">What Custom UI Modes Do Today</h3>
-            <p style="color:var(--text-muted);margin-bottom:20px;">Custom UI modes are configuration bundles in Backstage that override Taboola's default feed appearance for a specific publisher. Each mode specifies per-publisher visual overrides including:</p>
+            <p style="color:var(--text-muted);margin-bottom:20px;">Custom UI modes are configuration bundles in Backstage that override Taboola's default feed appearance for a specific publisher.</p>
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;">
                 ${['Font family & weight overrides', 'Title & description color values', 'Brand/accent color mapping', 'Card border radius & shadows', 'Thumbnail aspect ratios', 'Background & border colors', 'Spacing & padding values', 'Label/badge treatments', 'Section heading styles'].map(item => `
                     <div style="background:var(--surface);border:1px solid var(--border);padding:12px 16px;font-size:13px;display:flex;align-items:center;gap:8px;">
@@ -349,10 +419,10 @@ function generateAnalysis() {
 
             <h3 style="font-size:20px;margin:32px 0 16px;">Operational Impact</h3>
             <div class="stat-grid">
-                <div class="stat-box"><div class="stat-val accent">70%</div><div class="stat-lbl">UI modes fully replaceable by brand kit automation</div></div>
+                <div class="stat-box"><div class="stat-val accent">70%</div><div class="stat-lbl">UI modes fully replaceable by brand kit</div></div>
                 <div class="stat-box"><div class="stat-val green">50x</div><div class="stat-lbl">Faster setup (minutes vs hours)</div></div>
                 <div class="stat-box"><div class="stat-val green">0</div><div class="stat-lbl">Manual color/font eyedropping needed</div></div>
-                <div class="stat-box"><div class="stat-val red">0%</div><div class="stat-lbl">Brand drift (auto-synced with publisher)</div></div>
+                <div class="stat-box"><div class="stat-val red">0%</div><div class="stat-lbl">Brand drift (auto-synced)</div></div>
             </div>
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
@@ -392,11 +462,11 @@ function generateAnalysis() {
 
         <div class="advantages">
             <div class="adv-card"><div class="adv-icon">&#127919;</div><h3>Pixel-Perfect Accuracy</h3><p>Colors, fonts, and spacing extracted directly from the publisher's CSS — not eyedropped from screenshots. Zero approximation.</p></div>
-            <div class="adv-card"><div class="adv-icon">&#128218;</div><h3>Semantic Richness</h3><p>Captures brand motifs, content labels, type scale hierarchies, and visual patterns that custom properties can never express.</p></div>
+            <div class="adv-card"><div class="adv-icon">&#128218;</div><h3>Semantic Richness</h3><p>Captures brand voice, content labels, type scale hierarchies, icon inventories, and ${totalTokens}+ tokens that custom properties can never express.</p></div>
             <div class="adv-card"><div class="adv-icon">&#9889;</div><h3>Setup in Minutes, Not Hours</h3><p>From URL input to fully-styled feed in under 5 minutes. No Backstage configuration, no UI mode selection, no QA iteration.</p></div>
-            <div class="adv-card"><div class="adv-icon">&#128260;</div><h3>Auto-Sync on Redesign</h3><p>When a publisher redesigns, re-crawl the site and the brand kit updates automatically. No manual drift detection or correction needed.</p></div>
+            <div class="adv-card"><div class="adv-icon">&#128260;</div><h3>Auto-Sync on Redesign</h3><p>When ${pub} redesigns, re-crawl the site and the brand kit updates automatically. No manual drift detection or correction needed.</p></div>
             <div class="adv-card"><div class="adv-icon">&#128200;</div><h3>Scales to 3,500+ Publishers</h3><p>Automated crawling works identically for every publisher. No per-publisher human effort required for styling configuration.</p></div>
-            <div class="adv-card"><div class="adv-icon">&#128161;</div><h3>Replaces 70% of UI Modes</h3><p>The majority of custom UI modes exist solely for branding overrides. Brand kit automation eliminates the need to create, maintain, and manage these modes entirely.</p></div>
+            <div class="adv-card"><div class="adv-icon">&#128161;</div><h3>Replaces 70% of UI Modes</h3><p>The majority of custom UI modes exist solely for branding overrides. Brand kit automation eliminates these modes entirely.</p></div>
         </div>
     </div>
 
@@ -411,19 +481,19 @@ function generateAnalysis() {
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0;">
             <div style="background:var(--surface);border:1px solid var(--border);padding:24px;">
                 <h3 style="font-size:16px;color:var(--red);margin-bottom:12px;">Typography Mismatch</h3>
-                <p style="font-size:14px;color:var(--text-muted);">Feed uses Arial (generic fallback) instead of ${fontPrimary}. Title sizes don't match publisher's type scale. Line heights are default, not publisher-tuned. ${fontSecondary !== fontPrimary ? `Missing secondary font (${fontSecondary}) for opinion/editorial content.` : ''}</p>
+                <p style="font-size:14px;color:var(--text-muted);">Feed uses Arial (generic fallback) instead of ${fontPrimary}. Title sizes don't match publisher's ${Object.keys(kit('fonts.type_scale', {})).length}-category type scale. ${fontSecondary !== fontPrimary ? `Missing secondary font (${fontSecondary}) for opinion/editorial content.` : ''}</p>
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);padding:24px;">
                 <h3 style="font-size:16px;color:var(--red);margin-bottom:12px;">Color Drift</h3>
-                <p style="font-size:14px;color:var(--text-muted);">Text colors use generic #333/#999 instead of publisher-specific values (${textPrimary}/${textSecondary}). Brand accent color ${primary} is either missing or incorrectly set. Background tones don't match publisher's palette.</p>
+                <p style="font-size:14px;color:var(--text-muted);">Text colors use generic #333/#999 instead of publisher-specific values (${textPrimary}/${textSecondary}). Brand accent color ${primary} is either missing or incorrectly set. ${kit('colors.accents', null) ? `Missing accent colors: ${Object.keys(brandKit.colors?.accents || {}).map(k => brandKit.colors.accents[k].name).join(', ')}.` : ''}</p>
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);padding:24px;">
                 <h3 style="font-size:16px;color:var(--red);margin-bottom:12px;">Layout Inconsistency</h3>
-                <p style="font-size:14px;color:var(--text-muted);">Card border radius (4px default) doesn't match publisher's design system (${borderRadius}). Thumbnail aspect ratios, grid gaps, and spacing values are all Taboola defaults rather than publisher-native.</p>
+                <p style="font-size:14px;color:var(--text-muted);">Card border radius (4px default) doesn't match publisher's design system (${borderRadius}). Thumbnail aspect ratios, grid gaps (${kit('layout.grid.gap', '24px')}), and spacing values are all Taboola defaults rather than publisher-native.</p>
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);padding:24px;">
                 <h3 style="font-size:16px;color:var(--red);margin-bottom:12px;">Missing Brand Signals</h3>
-                <p style="font-size:14px;color:var(--text-muted);">No brand motifs (section heading styles, accent dots, divider patterns). No content type labels matching publisher's editorial style. Feed looks like a generic Taboola widget, not a native ${pub} experience.</p>
+                <p style="font-size:14px;color:var(--text-muted);">No brand motifs (section heading styles, accent dots). No content type labels matching publisher's editorial style. ${iconCount > 0 ? `${iconCount} icons detected but feed uses generic icons.` : ''} Feed looks like a generic Taboola widget, not a native ${pub} experience.</p>
             </div>
         </div>
     </div>
@@ -439,30 +509,30 @@ function generateAnalysis() {
         <div class="stat-grid">
             <div class="stat-box"><div class="stat-val red">${driftCount} of ${manualProps.length}</div><div class="stat-lbl">Properties with drift in manual config</div></div>
             <div class="stat-box"><div class="stat-val red">${missingCount} of ${manualProps.length}</div><div class="stat-lbl">Brand features entirely missing</div></div>
-            <div class="stat-box"><div class="stat-val green">${totalTokens} of ${totalTokens}</div><div class="stat-lbl">Tokens matched by brand kit JSON</div></div>
+            <div class="stat-box"><div class="stat-val green">${totalTokens}</div><div class="stat-lbl">Tokens matched by brand kit JSON</div></div>
             <div class="stat-box"><div class="stat-val green">50x</div><div class="stat-lbl">Faster setup (minutes vs. hours)</div></div>
         </div>
 
         <div style="background:var(--surface);border:2px solid var(--accent);padding:32px;margin-top:32px;">
             <h3 style="font-size:20px;margin-bottom:12px;">The Bottom Line</h3>
-            <p style="font-size:16px;color:var(--text-muted);line-height:1.7;">For ${pub}, the brand kit approach produces a measurably more accurate, more native, and more maintainable feed — while simultaneously eliminating ~70% of the custom UI modes that account managers currently spend hours creating and maintaining. This is not incremental improvement. It's a fundamentally different paradigm: from manual approximation to automated precision, from per-publisher human effort to scalable automation across 3,500+ publishers.</p>
+            <p style="font-size:16px;color:var(--text-muted);line-height:1.7;">For ${pub}, the brand kit approach produces a measurably more accurate, more native, and more maintainable feed — with ${totalTokens} tokens across ${Object.keys(brandKit).length} sections including brand voice, icon inventory, layout patterns, and content labels. This eliminates ~70% of custom UI modes while simultaneously providing richer brand representation than manual configuration could ever achieve. It's a fundamentally different paradigm: from manual approximation to automated precision, from per-publisher human effort to scalable automation across 3,500+ publishers.</p>
         </div>
     </div>
 
     <div style="padding:40px;text-align:center;font-size:13px;color:var(--text-muted);border-top:1px solid var(--border);">
-        Generated by Taboola Brand Kit Generator Tool &bull; ${new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}
+        Generated by Taboola Brand Kit Generator Tool v2.0 &bull; ${new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}
     </div>
 </body>
 </html>`;
 
     const frame = document.getElementById('analysisFrame');
     frame.srcdoc = analysisHtml;
-    document.getElementById('analysisUrlBar').textContent = `${(brandKit["meta.publisher"]||'publisher').toLowerCase().replace(/\s+/g,'-')}-analysis-before-after.html`;
+    document.getElementById('analysisUrlBar').textContent = `${pub.toLowerCase().replace(/\s+/g,'-')}-analysis-before-after.html`;
 }
 
 function downloadAnalysis() {
     if (!analysisHtml) generateAnalysis();
-    const name = (brandKit["meta.publisher"] || 'publisher').toLowerCase().replace(/\s+/g, '-');
+    const name = kit('brand.name', 'publisher').toLowerCase().replace(/\s+/g, '-');
     downloadFile(`${name}-analysis-before-after.html`, analysisHtml, 'text/html');
 }
 

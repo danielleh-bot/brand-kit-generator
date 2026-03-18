@@ -47,6 +47,88 @@ function mode(arr) {
 }
 
 // ============================================================
+//  EXTENDED UTILITY FUNCTIONS
+// ============================================================
+function hexToRgbString(hex) {
+    if (!hex || hex.length < 7) return null;
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+function isDarkColor(hex) {
+    if (!hex) return false;
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    return (r + g + b) / 3 < 80;
+}
+
+function colorName(hex) {
+    if (!hex) return 'Unknown';
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    const lum = (r + g + b) / 3;
+    const isGray = Math.abs(r-g) < 20 && Math.abs(g-b) < 20;
+
+    if (isGray) {
+        if (lum < 30) return 'Near Black';
+        if (lum < 80) return 'Dark Gray';
+        if (lum < 140) return 'Medium Gray';
+        if (lum < 200) return 'Light Gray';
+        if (lum < 245) return 'Off-White';
+        return 'White';
+    }
+    // Determine dominant hue
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0;
+    if (max !== min) {
+        const d = max - min;
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
+        else if (max === g) h = ((b - r) / d + 2) * 60;
+        else h = ((r - g) / d + 4) * 60;
+    }
+    const saturation = max === 0 ? 0 : (max - min) / max;
+    if (saturation < 0.15) {
+        if (lum < 80) return 'Dark Gray';
+        if (lum < 180) return 'Medium Gray';
+        return 'Light Gray';
+    }
+    const lightPrefix = lum > 180 ? 'Light ' : lum < 80 ? 'Dark ' : '';
+    if (h < 15 || h >= 345) return lightPrefix + 'Red';
+    if (h < 45) return lightPrefix + 'Orange';
+    if (h < 70) return lightPrefix + 'Yellow';
+    if (h < 160) return lightPrefix + 'Green';
+    if (h < 200) return lightPrefix + 'Cyan';
+    if (h < 260) return lightPrefix + 'Blue';
+    if (h < 290) return lightPrefix + 'Purple';
+    if (h < 345) return lightPrefix + 'Magenta';
+    return lightPrefix + 'Red';
+}
+
+function getNestedValue(obj, path) {
+    return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : null, obj);
+}
+
+function setNestedValue(obj, path, value) {
+    const keys = path.split('.');
+    let current = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]] || typeof current[keys[i]] !== 'object') {
+            current[keys[i]] = {};
+        }
+        current = current[keys[i]];
+    }
+    current[keys[keys.length - 1]] = value;
+}
+
+function buildColorEntry(hex, usageHint) {
+    if (!hex) return null;
+    return {
+        name: colorName(hex),
+        hex: hex,
+        rgb: hexToRgbString(hex),
+        usage: usageHint || ''
+    };
+}
+
+// ============================================================
 //  DOWNLOAD UTILITIES
 // ============================================================
 function downloadFile(filename, content, type) {

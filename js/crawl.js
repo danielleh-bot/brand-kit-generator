@@ -1,5 +1,5 @@
 // ============================================================
-//  STEP 1: CRAWL
+//  STEP 1: CRAWL — Assembles rich nested brand kit JSON
 // ============================================================
 const CORS_PROXIES = [
     url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
@@ -55,7 +55,6 @@ async function startCrawl() {
         }
 
         if (!homeHtml) {
-            // Fallback: Let user paste HTML
             addLog('Could not fetch URL directly (CORS). Switching to manual mode.', 'warn');
             addLog('A dialog will open — paste the page source HTML.', 'warn');
             statusText.textContent = 'Waiting for manual HTML input...';
@@ -82,8 +81,10 @@ async function startCrawl() {
             await analyzePage(homeHtml, artHtml, pubUrl, artUrl, pubName);
         }
 
+        // Count tokens for status display
+        const tokenCount = countTokens(brandKit);
         statusBar.className = 'status-bar success';
-        statusText.textContent = 'Crawl complete! Brand kit generated with ' + Object.keys(brandKit).length + ' tokens.';
+        statusText.textContent = `Crawl complete! Brand kit generated with ${tokenCount} tokens across ${Object.keys(brandKit).length} sections.`;
         document.getElementById('crawlResults').classList.remove('hidden');
         renderCrawlResults();
         addLog('Brand kit generation complete!', 'success');
@@ -97,6 +98,18 @@ async function startCrawl() {
     document.getElementById('crawlBtn').disabled = false;
 }
 
+// Count total leaf values in nested object
+function countTokens(obj) {
+    let count = 0;
+    for (const key of Object.keys(obj)) {
+        const val = obj[key];
+        if (val === null || val === undefined) continue;
+        if (typeof val === 'object' && !Array.isArray(val)) count += countTokens(val);
+        else count++;
+    }
+    return count;
+}
+
 async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
     addLog('Parsing DOM structure...', 'info');
     const parser = new DOMParser();
@@ -107,62 +120,156 @@ async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
         artDoc = parser.parseFromString(artHtml, 'text/html');
     }
 
-    // EXTRACT COLORS
-    addLog('Extracting color palette...', 'info');
+    const domain = new URL(pubUrl).hostname.replace('www.', '');
+
+    // ---- EXTRACT ALL SIGNALS ----
+
+    // Colors
+    addLog('Extracting color palette with usage analysis...', 'info');
     const colors = extractColors(doc);
-    addLog(`Found ${Object.keys(colors).length} color tokens`, 'success');
+    addLog(`Found ${Object.keys(colors).length} color categories with accent detection`, 'success');
 
-    // EXTRACT FONTS
-    addLog('Analyzing typography...', 'info');
+    // Fonts
+    addLog('Analyzing typography and type scale...', 'info');
     const fonts = extractFonts(doc, html);
-    addLog(`Found ${Object.keys(fonts).length} font tokens`, 'success');
+    addLog(`Found fonts: ${fonts.primary.family}${fonts.secondary ? ', ' + fonts.secondary.family : ''} with ${Object.keys(fonts.type_scale).length}-category type scale`, 'success');
 
-    // EXTRACT LAYOUT
-    addLog('Analyzing layout patterns...', 'info');
+    // Layout
+    addLog('Analyzing layout patterns, header/footer structure...', 'info');
     const layout = extractLayout(doc);
-    addLog(`Found ${Object.keys(layout).length} layout tokens`, 'success');
+    addLog(`Layout: ${layout.layout_patterns.grid}, ${layout.layout_patterns.header.layers.length} header layers`, 'success');
 
-    // EXTRACT ARTICLE DATA
+    // Brand signals
+    addLog('Detecting brand signals (logos, motifs, labels)...', 'info');
+    const brand = extractBrandSignals(doc, html, pubUrl);
+    addLog(`Brand signals: ${brand.siteName || pubName}, language: ${brand.language}, ${Object.keys(brand.contentLabels || {}).length} content labels`, 'success');
+
+    // Brand voice
+    addLog('Analyzing brand voice and editorial patterns...', 'info');
+    const voice = extractBrandVoice(doc, html);
+    addLog(`Voice: ${voice.personality_traits?.join(', ') || 'Standard'}, ${voice.headline_style?.case || 'standard case'}`, 'success');
+
+    // Icons
+    addLog('Inventorying icon set and social links...', 'info');
+    const icons = extractIcons(doc);
+    addLog(`Icons: ${icons.count_detected} detected, ${icons.icon_inventory.length} types identified, ${icons.social_media_icons?.platforms?.length || 0} social platforms`, 'success');
+
+    // Graphics
+    addLog('Detecting graphic elements and visual patterns...', 'info');
+    const graphics = extractGraphics(doc, html);
+    addLog(`Graphics: ${graphics.elements.length} visual elements detected`, 'success');
+
+    // Navigation
+    addLog('Extracting navigation structure...', 'info');
+    const navigation = extractNavigation(doc);
+    addLog(`Navigation: ${navigation.nav_links.length} nav links, ${navigation.footer_links.length} footer sections, ${navigation.social_links.length} social links`, 'success');
+
+    // Article data
     if (artDoc) {
         addLog('Extracting article content...', 'info');
         articleData = extractArticleData(artDoc, artUrl);
-        addLog('Article content extracted: "' + (articleData.title || 'Untitled').substring(0, 60) + '..."', 'success');
+        addLog('Article: "' + (articleData.title || 'Untitled').substring(0, 60) + '..."', 'success');
     }
 
-    // EXTRACT BRAND SIGNALS
-    addLog('Detecting brand signals (logos, motifs, labels)...', 'info');
-    const brand = extractBrandSignals(doc, html, pubUrl);
-    addLog(`Found ${Object.keys(brand).length} brand signal tokens`, 'success');
+    // ---- ASSEMBLE NESTED BRAND KIT ----
+    addLog('Assembling rich brand kit JSON...', 'info');
 
-    // BUILD BRAND KIT
-    addLog('Assembling brand kit JSON...', 'info');
-    const domain = new URL(pubUrl).hostname.replace('www.','');
+    // Apply theme-color override to primary if available
+    if (brand.themeColor) {
+        const tc = normalizeHex(brand.themeColor);
+        if (tc && !isGrayscale(tc) && !isNearBlackOrWhite(tc)) {
+            colors.primary = {
+                name: colorName(tc),
+                hex: tc,
+                rgb: hexToRgbString(tc),
+                usage: colors.primary.usage
+            };
+        }
+    }
+
+    // Set video content flag from brand signals
+    if (brand.hasVideoContent) {
+        layout.photo_style.video_thumbnails.has_video_content = true;
+    }
 
     brandKit = {
-        "meta.publisher": pubName,
-        "meta.domain": domain,
-        "meta.crawled_url": pubUrl,
-        "meta.article_url": artUrl || null,
-        "meta.generated_at": new Date().toISOString(),
-        "meta.tool_version": "1.0.0",
-        ...colors,
-        ...fonts,
-        ...layout,
-        ...brand
+        brand: {
+            name: pubName,
+            website: pubUrl,
+            owner: brand.owner || null,
+            description: brand.description || `News and information portal at ${domain}.`,
+            language: brand.language || 'en'
+        },
+        logos: {
+            primary: {
+                type: brand.logoSvg ? 'svg' : (brand.logoUrl ? 'image' : 'text'),
+                url: brand.logoUrl || null,
+                svg: brand.logoSvg || null,
+                description: `${pubName} logo`
+            },
+            favicon: {
+                url: brand.faviconUrl || null
+            }
+        },
+        colors: colors,
+        fonts: fonts,
+        brand_voice: {
+            personality_traits: voice.personality_traits || ['Authoritative', 'Direct', 'Accessible'],
+            tone: voice.content_distinction ? 'Serious journalism with an approachable touch' : 'Professional and informative',
+            headline_style: voice.headline_style || {
+                format: 'Concise, factual',
+                case: 'Sentence case'
+            },
+            content_distinction: voice.content_distinction || null,
+            content_labels: brand.contentLabels || {},
+            language: voice.language || brand.language || 'en'
+        },
+        photo_style: {
+            news_photography: {
+                style: 'Editorial/press agency',
+                characteristics: ['Candid, in-action shots', 'Tight cropping for impact', 'Large scale for hero stories']
+            },
+            thumbnail_format: layout.photo_style.thumbnail_format,
+            video_thumbnails: {
+                has_video_content: layout.photo_style.video_thumbnails.has_video_content,
+                indicator_color: colors.primary.hex
+            }
+        },
+        graphics: graphics,
+        icons: icons,
+        layout_patterns: layout.layout_patterns,
+        layout: {
+            card: layout.card,
+            container: layout.container,
+            grid: layout.grid,
+            spacing: layout.spacing
+        },
+        navigation: navigation,
+        metadata: {
+            analysis_date: new Date().toISOString().split('T')[0],
+            source_url: pubUrl,
+            article_url: artUrl || null,
+            analysis_method: 'Automated web crawling with CSS extraction and visual analysis',
+            tool_version: '2.0.0',
+            total_tokens: 0 // will be set below
+        }
     };
 
-    addLog('Brand kit assembled with ' + Object.keys(brandKit).length + ' tokens', 'success');
+    // Count and set total tokens
+    brandKit.metadata.total_tokens = countTokens(brandKit);
+
+    addLog(`Brand kit assembled: ${brandKit.metadata.total_tokens} tokens across ${Object.keys(brandKit).length} top-level sections`, 'success');
 }
 
 // ============================================================
-//  CRAWL RESULTS DISPLAY
+//  CRAWL RESULTS DISPLAY (updated for nested structure)
 // ============================================================
 function renderCrawlResults() {
-    // Stats
-    const colorCount = Object.keys(brandKit).filter(k => k.startsWith('colors.')).length;
-    const fontCount = Object.keys(brandKit).filter(k => k.startsWith('fonts.')).length;
-    const layoutCount = Object.keys(brandKit).filter(k => k.startsWith('layout.') || k.startsWith('photo_style.')).length;
-    const totalCount = Object.keys(brandKit).length;
+    const colorCount = countTokens(brandKit.colors || {});
+    const fontCount = countTokens(brandKit.fonts || {});
+    const layoutCount = countTokens(brandKit.layout || {}) + countTokens(brandKit.layout_patterns || {});
+    const brandCount = countTokens(brandKit.brand || {}) + countTokens(brandKit.brand_voice || {}) + countTokens(brandKit.logos || {});
+    const totalCount = brandKit.metadata?.total_tokens || countTokens(brandKit);
 
     document.getElementById('crawlStats').innerHTML = `
         <div class="stat-card"><div class="stat-value accent">${totalCount}</div><div class="stat-label">Total Tokens</div></div>
@@ -174,38 +281,55 @@ function renderCrawlResults() {
     // Color swatches
     const swatchContainer = document.getElementById('colorSwatches');
     swatchContainer.innerHTML = '';
-    Object.entries(brandKit).forEach(([key, val]) => {
-        if (key.startsWith('colors.') && typeof val === 'string' && val.startsWith('#')) {
-            const name = key.replace('colors.', '').replace(/\./g, ' ');
-            swatchContainer.innerHTML += `
-                <div class="swatch">
-                    <div class="swatch-color" style="background:${val}"></div>
-                    <div class="swatch-info">
-                        <div class="swatch-name">${name}</div>
-                        <div class="swatch-hex">${val}</div>
-                    </div>
+
+    function renderSwatch(label, entry) {
+        if (!entry || !entry.hex) return;
+        swatchContainer.innerHTML += `
+            <div class="swatch">
+                <div class="swatch-color" style="background:${entry.hex}"></div>
+                <div class="swatch-info">
+                    <div class="swatch-name">${label}</div>
+                    <div class="swatch-hex">${entry.hex}</div>
                 </div>
-            `;
+            </div>
+        `;
+    }
+
+    const c = brandKit.colors;
+    if (c) {
+        renderSwatch('Primary', c.primary);
+        if (c.secondary) renderSwatch('Secondary', c.secondary);
+        if (c.tertiary) renderSwatch('Tertiary', c.tertiary);
+        if (c.text?.primary) renderSwatch('Text Primary', c.text.primary);
+        if (c.text?.secondary) renderSwatch('Text Secondary', c.text.secondary);
+        if (c.text?.tertiary) renderSwatch('Text Tertiary', c.text.tertiary);
+        if (c.backgrounds?.base) renderSwatch('BG Base', c.backgrounds.base);
+        if (c.backgrounds?.section) renderSwatch('BG Section', c.backgrounds.section);
+        if (c.backgrounds?.dark) renderSwatch('BG Dark', c.backgrounds.dark);
+        if (c.accents) {
+            for (const [key, val] of Object.entries(c.accents)) {
+                renderSwatch(val.name || key, val);
+            }
         }
-    });
+    }
 
     // Font previews
     const fontContainer = document.getElementById('fontPreviews');
     fontContainer.innerHTML = '';
-    const primaryFont = brandKit["fonts.primary.family"] || 'sans-serif';
-    const secondaryFont = brandKit["fonts.secondary.family"];
-
-    fontContainer.innerHTML = `
-        <div class="font-preview-item">
-            <div class="font-preview-sample" style="font-family:'${primaryFont}',sans-serif;">The quick brown fox jumps</div>
-            <div class="font-preview-meta"><strong>${primaryFont}</strong><br>Primary Font</div>
-        </div>
-    `;
-    if (secondaryFont) {
+    const f = brandKit.fonts;
+    if (f?.primary) {
         fontContainer.innerHTML += `
             <div class="font-preview-item">
-                <div class="font-preview-sample" style="font-family:'${secondaryFont}',serif;font-style:italic;">The quick brown fox jumps</div>
-                <div class="font-preview-meta"><strong>${secondaryFont}</strong><br>Secondary Font</div>
+                <div class="font-preview-sample" style="font-family:'${f.primary.family}',sans-serif;">The quick brown fox jumps</div>
+                <div class="font-preview-meta"><strong>${f.primary.family}</strong><br>Primary Font — ${f.primary.usage || 'Headlines and body'}</div>
+            </div>
+        `;
+    }
+    if (f?.secondary) {
+        fontContainer.innerHTML += `
+            <div class="font-preview-item">
+                <div class="font-preview-sample" style="font-family:'${f.secondary.family}',serif;${f.secondary.style === 'italic' ? 'font-style:italic;' : ''}"">The quick brown fox jumps</div>
+                <div class="font-preview-meta"><strong>${f.secondary.family}</strong><br>Secondary Font — ${f.secondary.usage || 'Editorial content'}</div>
             </div>
         `;
     }
