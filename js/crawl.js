@@ -28,7 +28,7 @@ function addLog(msg, type = '') {
  * Convert flat dot-notation extractor output into the rich nested brand kit JSON
  * that matches the CLI's schema (brand, logos, colors, fonts, brand_voice, etc.)
  */
-function restructureBrandKit(flatColors, flatFonts, flatLayout, flatBrand, pubName, pubUrl, artUrl) {
+function restructureBrandKit(flatColors, flatFonts, flatLayout, flatBrand, pubName, pubUrl, artUrl, headerStyle, feedPatterns) {
     const domain = new URL(pubUrl).hostname.replace('www.', '');
 
     // Helper to safely get flat values
@@ -98,7 +98,15 @@ function restructureBrandKit(flatColors, flatFonts, flatLayout, flatBrand, pubNa
             language: lang
         },
         logos: {
-            primary: {
+            primary: (headerStyle && headerStyle.logoUrl) ? {
+                type: 'image',
+                url: headerStyle.logoUrl,
+                text: g('brand.site_name') || pubName
+            } : (headerStyle && headerStyle.logoSvg) ? {
+                type: 'svg',
+                svg: headerStyle.logoSvg,
+                text: g('brand.site_name') || pubName
+            } : {
                 type: 'text',
                 text: g('brand.site_name') || pubName
             },
@@ -182,6 +190,19 @@ function restructureBrandKit(flatColors, flatFonts, flatLayout, flatBrand, pubNa
             grid: g('layout.grid.gap') ? { gap: g('layout.grid.gap') } : {},
             container: { max_width: g('layout.container.max_width') || '1200px' },
             card: { border_radius: g('layout.card.border_radius') || '0px' },
+            header: {
+                style: (headerStyle && headerStyle.style) || 'dark',
+                background: (headerStyle && headerStyle.background) || null,
+                accent_bar_color: (headerStyle && headerStyle.accentBarColor) || null,
+                has_search: (headerStyle && headerStyle.hasSearch) || false
+            },
+            feed: {
+                detected: (feedPatterns && feedPatterns.detected) || false,
+                layout: (feedPatterns && feedPatterns.layout) || null,
+                columns: (feedPatterns && feedPatterns.columns) || null,
+                card_style: (feedPatterns && feedPatterns.cardStyle) || null,
+                section_labels: (feedPatterns && feedPatterns.sectionLabels) || []
+            },
             spacing: {
                 xs: g('layout.spacing.xs') || '4px',
                 sm: g('layout.spacing.sm') || '8px',
@@ -294,6 +315,38 @@ function countNestedKeys(obj, prefix) {
     return count;
 }
 
+/**
+ * Fetch external CSS files referenced by <link rel="stylesheet"> tags.
+ * Tries CORS proxy for each, limited to first 5 stylesheets for performance.
+ */
+async function fetchExternalCSS(doc, baseUrl) {
+    const links = Array.from(doc.querySelectorAll('link[rel="stylesheet"][href]'));
+    const cssTexts = [];
+    const maxSheets = 5;
+
+    for (const link of links.slice(0, maxSheets)) {
+        const href = link.getAttribute('href');
+        if (!href) continue;
+        let fullUrl;
+        try {
+            fullUrl = new URL(href, baseUrl).href;
+        } catch(e) { continue; }
+
+        try {
+            addLog(`Fetching external CSS: ${fullUrl.substring(0, 80)}...`, 'info');
+            const cssText = await fetchWithProxy(fullUrl);
+            if (cssText && cssText.length > 0 && !cssText.includes('<!DOCTYPE')) {
+                cssTexts.push(cssText);
+                addLog(`Fetched CSS (${cssText.length} chars)`, 'success');
+            }
+        } catch(e) {
+            addLog(`Could not fetch CSS: ${fullUrl.substring(0, 60)}`, 'warn');
+        }
+    }
+
+    return cssTexts.join('\n');
+}
+
 async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
     addLog('Parsing DOM structure...', 'info');
     const parser = new DOMParser();
@@ -304,19 +357,28 @@ async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
         artDoc = parser.parseFromString(artHtml, 'text/html');
     }
 
+    // FETCH EXTERNAL CSS for better extraction
+    addLog('Fetching external stylesheets...', 'info');
+    const externalCSS = await fetchExternalCSS(doc, pubUrl);
+    if (externalCSS.length > 0) {
+        addLog(`Loaded ${externalCSS.length} chars of external CSS`, 'success');
+    } else {
+        addLog('No external CSS fetched (CORS restricted or none found)', 'warn');
+    }
+
     // EXTRACT COLORS
     addLog('Extracting color palette...', 'info');
-    const colors = extractColors(doc);
+    const colors = extractColors(doc, externalCSS);
     addLog(`Found ${Object.keys(colors).length} color tokens`, 'success');
 
     // EXTRACT FONTS
     addLog('Analyzing typography...', 'info');
-    const fonts = extractFonts(doc, html);
+    const fonts = extractFonts(doc, html, externalCSS);
     addLog(`Found ${Object.keys(fonts).length} font tokens`, 'success');
 
     // EXTRACT LAYOUT
     addLog('Analyzing layout patterns...', 'info');
-    const layout = extractLayout(doc);
+    const layout = extractLayout(doc, externalCSS);
     addLog(`Found ${Object.keys(layout).length} layout tokens`, 'success');
 
     // EXTRACT ARTICLE DATA
@@ -351,9 +413,21 @@ async function analyzePage(html, artHtml, pubUrl, artUrl, pubName) {
         addLog('Detected RTL layout (right-to-left language)', 'info');
     }
 
+    // EXTRACT HEADER STYLE
+    addLog('Analyzing header style...', 'info');
+    const headerStyle = extractHeaderStyle(doc, externalCSS);
+    addLog(`Header style: ${headerStyle.style} | Logo: ${headerStyle.logoUrl ? 'image' : (headerStyle.logoSvg ? 'SVG' : 'text')}`, 'success');
+
+    // DETECT EXISTING FEED PATTERNS
+    addLog('Detecting existing feed/widget patterns...', 'info');
+    const feedPatterns = extractExistingFeed(doc);
+    if (feedPatterns.detected) {
+        addLog(`Found existing feed widget (${feedPatterns.layout || 'unknown'} layout)`, 'success');
+    }
+
     // BUILD NESTED BRAND KIT
     addLog('Assembling rich nested brand kit JSON...', 'info');
-    brandKit = restructureBrandKit(colors, fonts, layout, brand, pubName, pubUrl, artUrl);
+    brandKit = restructureBrandKit(colors, fonts, layout, brand, pubName, pubUrl, artUrl, headerStyle, feedPatterns);
 
     // Add direction to brand kit
     brandKit.layout_patterns.direction = pageDirection;
