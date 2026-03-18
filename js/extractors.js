@@ -32,7 +32,6 @@ function extractColors(doc) {
     // Extract CSS custom properties
     const varRegex = /--[\w-]+\s*:\s*(#[0-9a-fA-F]{3,8}|rgb[a]?\([^)]+\))/g;
     while ((match = varRegex.exec(allCSS)) !== null) {
-        // These are weighted more heavily
         const val = match[1];
         let hex;
         if (val.startsWith('#')) hex = normalizeHex(val);
@@ -112,7 +111,6 @@ function extractFonts(doc, html) {
                 googleFonts.push(name);
             });
         }
-        // CSS2 format
         const css2Matches = href.matchAll(/family=([^:&]+)/g);
         for (const m of css2Matches) {
             const name = decodeURIComponent(m[1].replace(/\+/g, ' '));
@@ -131,7 +129,6 @@ function extractFonts(doc, html) {
         }
     }
 
-    // Combine and rank
     const allFonts = [...new Set([...googleFonts, ...Object.keys(fontFamilies)])];
     const primaryFonts = allFonts.filter(f => !['sans-serif','serif','monospace','Arial','Helvetica','Times New Roman','Georgia','Verdana','system-ui'].includes(f));
     const fallbacks = allFonts.filter(f => ['Arial','Helvetica','sans-serif','serif','Georgia','Verdana'].includes(f));
@@ -142,7 +139,6 @@ function extractFonts(doc, html) {
     }
     if (primaryFonts.length > 1) {
         fontMap["fonts.secondary.family"] = primaryFonts[1];
-        // Detect if it's a serif font
         const isSerif = /serif/i.test(primaryFonts[1]) || /Georgia|Times|Merriweather|Playfair|Lora/i.test(primaryFonts[1]);
         if (isSerif) fontMap["fonts.secondary.style"] = "italic";
     }
@@ -181,7 +177,6 @@ function extractLayout(doc) {
     const layoutMap = {};
     const allCSS = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
 
-    // Border radius
     const brRegex = /border-radius\s*:\s*(\d+(?:\.\d+)?)(px|%)/g;
     const radii = [];
     let match;
@@ -192,7 +187,6 @@ function extractLayout(doc) {
     layoutMap["photo_style.thumbnail_format.border_radius"] = commonRadius + 'px';
     layoutMap["layout.card.border_radius"] = commonRadius + 'px';
 
-    // Max width
     const mwRegex = /max-width\s*:\s*(\d+)px/g;
     const widths = [];
     while ((match = mwRegex.exec(allCSS)) !== null) {
@@ -201,17 +195,13 @@ function extractLayout(doc) {
     }
     if (widths.length > 0) layoutMap["layout.container.max_width"] = mode(widths) + 'px';
 
-    // Grid gaps
     const gapRegex = /gap\s*:\s*(\d+)px/g;
     const gaps = [];
     while ((match = gapRegex.exec(allCSS)) !== null) {
         gaps.push(parseInt(match[1]));
     }
-    if (gaps.length > 0) {
-        layoutMap["layout.grid.gap"] = mode(gaps) + 'px';
-    }
+    if (gaps.length > 0) layoutMap["layout.grid.gap"] = mode(gaps) + 'px';
 
-    // Aspect ratio
     const arRegex = /aspect-ratio\s*:\s*(\d+)\s*\/\s*(\d+)/g;
     while ((match = arRegex.exec(allCSS)) !== null) {
         layoutMap["photo_style.thumbnail_format.aspect_ratio"] = match[1] + ':' + match[2];
@@ -221,7 +211,6 @@ function extractLayout(doc) {
         layoutMap["photo_style.thumbnail_format.aspect_ratio"] = "16:9";
     }
 
-    // Spacing scale
     const padRegex = /padding\s*:\s*(\d+)px/g;
     const pads = [];
     while ((match = padRegex.exec(allCSS)) !== null) {
@@ -239,6 +228,22 @@ function extractLayout(doc) {
     return layoutMap;
 }
 
+// ============================================================
+//  ARTICLE DATA EXTRACTION (cleaned — filters scripts, JSON, etc.)
+// ============================================================
+function _isJunkText(text) {
+    // Filter out script content, JSON, code, tracking pixels, etc.
+    if (text.includes('window.') || text.includes('document.') || text.includes('function(')) return true;
+    if (text.includes('{') && text.includes('}') && text.includes('"')) return true;
+    if (text.includes('var ') || text.includes('const ') || text.includes('let ')) return true;
+    if (text.includes('.push(') || text.includes('.init(') || text.includes('addEventListener')) return true;
+    if (text.includes('http://') && text.includes('&')) return true;
+    if (/^\s*[\[\{]/.test(text)) return true; // starts with [ or {
+    if (/[;=(){}]/.test(text) && text.split(/[;=(){}]/).length > 3) return true; // too many code-like chars
+    if (text.split(' ').length < 3 && text.length < 60) return true; // too short to be a paragraph
+    return false;
+}
+
 function extractArticleData(doc, url) {
     const data = {
         url: url,
@@ -252,10 +257,10 @@ function extractArticleData(doc, url) {
         siteName: ''
     };
 
-    // Title
+    // Title — prefer og:title, then h1
     const ogTitle = doc.querySelector('meta[property="og:title"]');
     const h1 = doc.querySelector('h1');
-    data.title = ogTitle ? ogTitle.content : (h1 ? h1.textContent.trim() : 'Untitled Article');
+    data.title = ogTitle ? ogTitle.content : (h1 ? h1.textContent.trim() : '');
 
     // Description / lead
     const ogDesc = doc.querySelector('meta[property="og:description"]');
@@ -273,29 +278,284 @@ function extractArticleData(doc, url) {
     // Author
     const authorMeta = doc.querySelector('meta[name="author"]');
     const authorEl = doc.querySelector('[class*="author"], [rel="author"]');
-    data.author = authorMeta ? authorMeta.content : (authorEl ? authorEl.textContent.trim() : 'Staff Writer');
+    data.author = authorMeta ? authorMeta.content : (authorEl ? authorEl.textContent.trim() : '');
+    // Clean author — strip if it looks like code
+    if (data.author && _isJunkText(data.author)) data.author = '';
 
-    // Date
+    // Date — use locale-appropriate formatting
+    const lang = doc.documentElement.getAttribute('lang') || 'en';
     const dateMeta = doc.querySelector('meta[property="article:published_time"], time[datetime]');
     if (dateMeta) {
         const d = dateMeta.content || dateMeta.getAttribute('datetime');
-        try { data.date = new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }); } catch(e) {}
+        try { data.date = new Date(d).toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' }); } catch(e) {}
     }
-    if (!data.date) data.date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    if (!data.date) data.date = new Date().toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' });
 
-    // Paragraphs from article body
+    // Paragraphs — FIRST remove all script/style/noscript elements from the article clone
     const article = doc.querySelector('article') || doc.querySelector('[class*="article-body"], [class*="story-body"], [class*="content-body"]') || doc.body;
     if (article) {
-        article.querySelectorAll('p').forEach(p => {
+        // Clone so we don't modify the original doc
+        const clone = article.cloneNode(true);
+        // Remove all non-content elements
+        clone.querySelectorAll('script, style, noscript, iframe, svg, nav, header, footer, form, [class*="comment"], [class*="share"], [class*="social"], [class*="ad-"], [class*="widget"], [class*="related"]').forEach(el => el.remove());
+
+        clone.querySelectorAll('p').forEach(p => {
             const text = p.textContent.trim();
-            if (text.length > 40) data.paragraphs.push(text);
+            if (text.length > 40 && !_isJunkText(text)) {
+                data.paragraphs.push(text);
+            }
         });
     }
-    if (data.paragraphs.length === 0) {
-        data.paragraphs = [data.lead || 'Article content would appear here in the full prototype.'];
+    if (data.paragraphs.length === 0 && data.lead) {
+        data.paragraphs = [data.lead];
     }
 
     return data;
+}
+
+// ============================================================
+//  RTL / LANGUAGE DETECTION
+// ============================================================
+function extractPageDirection(doc) {
+    // Check <html dir="rtl">
+    const dirAttr = doc.documentElement.getAttribute('dir');
+    if (dirAttr && dirAttr.toLowerCase() === 'rtl') return 'rtl';
+
+    // Check lang attribute for RTL languages
+    const lang = (doc.documentElement.getAttribute('lang') || '').toLowerCase();
+    const rtlLangs = ['ar', 'he', 'fa', 'ur', 'yi', 'iw']; // iw = old code for Hebrew
+    if (rtlLangs.some(l => lang.startsWith(l))) return 'rtl';
+
+    // Check body dir
+    if (doc.body) {
+        const bodyDir = doc.body.getAttribute('dir');
+        if (bodyDir && bodyDir.toLowerCase() === 'rtl') return 'rtl';
+    }
+
+    return 'ltr';
+}
+
+// ============================================================
+//  HOMEPAGE ARTICLE CARDS EXTRACTION
+//  Extracts real headlines + images from the publisher's homepage
+//  for use as native feed cards in the prototype
+// ============================================================
+function extractHomepageCards(doc, baseUrl) {
+    const cards = [];
+    const seenTitles = new Set();
+    const seenImages = new Set();
+
+    // Strategy 1: Look for common article card patterns
+    // Most news sites use <a> elements containing both an <img> and a heading/text
+    const cardSelectors = [
+        'article', '[class*="card"]', '[class*="item"]', '[class*="story"]',
+        '[class*="teaser"]', '[class*="promo"]', '[class*="feed"]',
+        '[class*="slot"]', '[class*="strip"]', '[data-type="article"]'
+    ];
+
+    for (const sel of cardSelectors) {
+        doc.querySelectorAll(sel).forEach(el => {
+            if (cards.length >= 30) return;
+            const card = _extractCardFromElement(el, baseUrl, seenTitles, seenImages);
+            if (card) cards.push(card);
+        });
+    }
+
+    // Strategy 2: Find <a> elements with both image and text
+    if (cards.length < 10) {
+        doc.querySelectorAll('a[href]').forEach(a => {
+            if (cards.length >= 30) return;
+            const img = a.querySelector('img[src]');
+            if (!img) return;
+            const card = _extractCardFromLink(a, img, baseUrl, seenTitles, seenImages);
+            if (card) cards.push(card);
+        });
+    }
+
+    // Strategy 3: Scan for og:image-like patterns and headline <h2>/<h3> near images
+    if (cards.length < 5) {
+        doc.querySelectorAll('h2, h3').forEach(heading => {
+            if (cards.length >= 30) return;
+            const parent = heading.closest('a, article, [class*="card"], [class*="item"], div');
+            if (!parent) return;
+            const img = parent.querySelector('img[src]') || _findNearbyImage(heading, baseUrl);
+            const title = heading.textContent.trim();
+            if (title.length > 10 && title.length < 200 && !_isJunkText(title) && !seenTitles.has(title)) {
+                seenTitles.add(title);
+                const imgSrc = img ? _resolveImgSrc(img, baseUrl) : null;
+                if (imgSrc && !seenImages.has(imgSrc)) {
+                    seenImages.add(imgSrc);
+                    const link = parent.closest('a');
+                    cards.push({
+                        headline: title,
+                        image: imgSrc,
+                        link: link ? _resolveUrl(link.getAttribute('href'), baseUrl) : '#',
+                        category: _detectCategory(heading, parent),
+                        source: null
+                    });
+                }
+            }
+        });
+    }
+
+    return cards;
+}
+
+function _extractCardFromElement(el, baseUrl, seenTitles, seenImages) {
+    // Find headline text
+    const heading = el.querySelector('h1, h2, h3, h4, [class*="title"], [class*="headline"]');
+    const title = heading ? heading.textContent.trim() : '';
+    if (!title || title.length < 10 || title.length > 300 || _isJunkText(title)) return null;
+    if (seenTitles.has(title)) return null;
+
+    // Find image
+    const img = el.querySelector('img[src], img[data-src], img[data-lazy-src], picture img, source[srcset]');
+    const imgSrc = img ? _resolveImgSrc(img, baseUrl) : null;
+    if (!imgSrc || seenImages.has(imgSrc)) return null;
+
+    // Filter tiny images (icons, buttons)
+    const imgWidth = img ? (parseInt(img.getAttribute('width')) || 0) : 0;
+    if (imgWidth > 0 && imgWidth < 100) return null;
+
+    seenTitles.add(title);
+    seenImages.add(imgSrc);
+
+    const link = el.querySelector('a[href]') || el.closest('a[href]');
+    return {
+        headline: title,
+        image: imgSrc,
+        link: link ? _resolveUrl(link.getAttribute('href'), baseUrl) : '#',
+        category: _detectCategory(heading, el),
+        source: null
+    };
+}
+
+function _extractCardFromLink(a, img, baseUrl, seenTitles, seenImages) {
+    // Get text content (headline) — from a heading inside or the link text
+    const heading = a.querySelector('h2, h3, h4, [class*="title"], [class*="headline"]');
+    let title = heading ? heading.textContent.trim() : '';
+    if (!title) {
+        // Get all text nodes that aren't in the img
+        const textNodes = [];
+        a.querySelectorAll('span, div, p, strong, b').forEach(el => {
+            if (!el.querySelector('img') && el.textContent.trim().length > 10) {
+                textNodes.push(el.textContent.trim());
+            }
+        });
+        title = textNodes[0] || '';
+    }
+
+    if (!title || title.length < 10 || title.length > 300 || _isJunkText(title)) return null;
+    if (seenTitles.has(title)) return null;
+
+    const imgSrc = _resolveImgSrc(img, baseUrl);
+    if (!imgSrc || seenImages.has(imgSrc)) return null;
+
+    const imgWidth = parseInt(img.getAttribute('width')) || 0;
+    if (imgWidth > 0 && imgWidth < 100) return null;
+
+    seenTitles.add(title);
+    seenImages.add(imgSrc);
+
+    return {
+        headline: title,
+        image: imgSrc,
+        link: _resolveUrl(a.getAttribute('href'), baseUrl),
+        category: _detectCategory(heading || a, a),
+        source: null
+    };
+}
+
+function _resolveImgSrc(img, baseUrl) {
+    // Try multiple source attributes
+    const src = img.getAttribute('src') ||
+                img.getAttribute('data-src') ||
+                img.getAttribute('data-lazy-src') ||
+                img.getAttribute('data-original') ||
+                img.getAttribute('content');
+
+    // Also check srcset for higher res
+    const srcset = img.getAttribute('srcset') || img.getAttribute('data-srcset');
+    let bestSrc = src;
+
+    if (srcset) {
+        // Pick the largest image from srcset
+        const parts = srcset.split(',').map(s => s.trim().split(/\s+/));
+        if (parts.length > 0) {
+            const largest = parts[parts.length - 1][0];
+            if (largest && largest.startsWith('http')) bestSrc = largest;
+        }
+    }
+
+    if (!bestSrc) return null;
+
+    // Skip base64 data URIs, tracking pixels, and tiny placeholder images
+    if (bestSrc.startsWith('data:')) return null;
+    if (bestSrc.includes('1x1') || bestSrc.includes('pixel') || bestSrc.includes('blank')) return null;
+    if (bestSrc.includes('.svg') && bestSrc.length < 100) return null; // small SVG icons
+
+    return _resolveUrl(bestSrc, baseUrl);
+}
+
+function _resolveUrl(url, baseUrl) {
+    if (!url) return '#';
+    try {
+        return new URL(url, baseUrl).href;
+    } catch(e) {
+        return url;
+    }
+}
+
+function _findNearbyImage(heading, baseUrl) {
+    // Look for an image in sibling or parent elements
+    const parent = heading.parentElement;
+    if (!parent) return null;
+    const img = parent.querySelector('img[src]');
+    if (img) return img;
+    // Check previous sibling
+    const prev = parent.previousElementSibling;
+    if (prev) return prev.querySelector('img[src]');
+    return null;
+}
+
+function _detectCategory(heading, container) {
+    if (!container) return '';
+    // Look for category labels near the card
+    const catEl = container.querySelector('[class*="category"], [class*="kicker"], [class*="label"], [class*="tag"], [class*="section"], [class*="channel"]');
+    if (catEl) {
+        const catText = catEl.textContent.trim();
+        if (catText.length > 0 && catText.length < 30) return catText;
+    }
+    return '';
+}
+
+// ============================================================
+//  EXTRACT ALL IMAGES FROM PAGE (for sponsored card thumbnails)
+// ============================================================
+function extractPageImages(doc, baseUrl) {
+    const images = [];
+    const seen = new Set();
+
+    doc.querySelectorAll('img[src], img[data-src]').forEach(img => {
+        const src = _resolveImgSrc(img, baseUrl);
+        if (!src || seen.has(src)) return;
+
+        // Filter small images
+        const w = parseInt(img.getAttribute('width')) || 0;
+        const h = parseInt(img.getAttribute('height')) || 0;
+        if ((w > 0 && w < 80) || (h > 0 && h < 80)) return;
+
+        // Filter icons and logos
+        const alt = (img.getAttribute('alt') || '').toLowerCase();
+        const cls = (img.getAttribute('class') || '').toLowerCase();
+        if (cls.includes('logo') || cls.includes('icon') || cls.includes('avatar')) return;
+        if (alt.includes('logo') || alt.includes('icon')) return;
+
+        seen.add(src);
+        images.push(src);
+    });
+
+    return images;
 }
 
 function extractBrandSignals(doc, html, pubUrl) {
@@ -322,11 +582,10 @@ function extractBrandSignals(doc, html, pubUrl) {
     const themeColor = doc.querySelector('meta[name="theme-color"]');
     if (themeColor) {
         signals["brand.theme_color"] = themeColor.content;
-        // This is a strong primary color signal
         if (!signals["colors.primary.hex"]) signals["colors.primary.hex"] = themeColor.content;
     }
 
-    // Detect content labels (opinion, live, breaking, etc.)
+    // Detect content labels
     const labelPatterns = ['opinion', 'meinung', 'kommentar', 'editorial', 'analysis', 'live', 'breaking', 'eilmeldung', 'video', 'gallery'];
     const textContent = doc.body ? doc.body.textContent.toLowerCase() : html.toLowerCase();
     labelPatterns.forEach(label => {
@@ -339,6 +598,13 @@ function extractBrandSignals(doc, html, pubUrl) {
     if (html.includes('video') || html.includes('player')) {
         signals["photo_style.video_thumbnails.has_video_content"] = true;
     }
+
+    // RTL detection
+    signals["layout.direction"] = extractPageDirection(doc);
+
+    // Language
+    const lang = doc.documentElement.getAttribute('lang');
+    if (lang) signals["brand_voice.language"] = lang;
 
     return signals;
 }

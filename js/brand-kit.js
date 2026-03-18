@@ -25,19 +25,29 @@ function renderVisualPreview() {
     const container = document.getElementById('visualPreview');
     if (!brandKit) return;
 
-    const primary = brandKit["colors.primary.hex"] || '#6C5CE7';
-    const textPrimary = brandKit["colors.text.primary.hex"] || '#1A1A2E';
-    const textSecondary = brandKit["colors.text.secondary.hex"] || '#4A4A5A';
-    const bgSection = brandKit["colors.backgrounds.section.hex"] || '#F7F9FC';
-    const fontPrimary = brandKit["fonts.primary.family"] || 'sans-serif';
-    const borderRadius = brandKit["layout.card.border_radius"] || '0px';
-    const pubName = brandKit["meta.publisher"] || 'Publisher';
+    const kit = brandKit;
+    const primary = kit.colors?.primary?.hex || '#6C5CE7';
+    const textPrimary = kit.colors?.text?.primary?.hex || '#1A1A2E';
+    const textSecondary = kit.colors?.text?.secondary?.hex || '#4A4A5A';
+    const textTertiary = kit.colors?.text?.tertiary?.hex || '#8A8A9A';
+    const bgSection = kit.colors?.backgrounds?.section?.hex || '#F7F9FC';
+    const borderRadius = kit.photo_style?.thumbnail_format?.border_radius || kit.layout_patterns?.card?.border_radius || '0px';
+    const pubName = kit.brand?.name || 'Publisher';
+
+    // Resolve fonts
+    const primaryFamily = kit.fonts?.primary?.family || 'sans-serif';
+    const resolved = resolveGoogleFont ? resolveGoogleFont(primaryFamily) : null;
+    const displayFont = resolved ? resolved.google : primaryFamily;
+
+    // Load Google Font for preview
+    const fontsUrl = (typeof buildGoogleFontsUrl === 'function') ? buildGoogleFontsUrl(kit) : null;
 
     container.innerHTML = `
+        ${fontsUrl ? `<link href="${fontsUrl}" rel="stylesheet">` : ''}
         <h3 style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">Token Preview — How these tokens look applied to a feed card</h3>
         <div style="background:white;border-radius:12px;padding:32px;border:1px solid var(--border);">
-            <div style="font-family:'${fontPrimary}',sans-serif;color:${textPrimary};">
-                <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:20px;">
+            <div style="font-family:'${displayFont}','${primaryFamily}',sans-serif;color:${textPrimary};">
+                <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
                     <span style="font-size:28px;font-weight:700;">Recommended for you</span>
                     <span style="color:${primary};font-size:28px;font-weight:700;">.</span>
                 </div>
@@ -49,7 +59,7 @@ function renderVisualPreview() {
                                 <svg width="48" height="48" fill="none" stroke="${textSecondary}" stroke-width="1.5" opacity="0.3"><rect x="8" y="8" width="32" height="32" rx="4"/><circle cx="18" cy="18" r="4"/><path d="M8 32l10-10 6 6 8-8 8 8"/></svg>
                             </div>
                             <div style="font-size:14px;font-weight:700;line-height:1.3;color:${textPrimary};margin-bottom:6px;">Sample headline for ${pubName} article #${i}</div>
-                            <div style="font-size:12px;color:${textSecondary};">${pubName}</div>
+                            <div style="font-size:12px;color:${textTertiary};">${pubName}</div>
                         </div>
                     `).join('')}
                 </div>
@@ -71,7 +81,7 @@ function copyJson() {
 }
 
 function downloadJson() {
-    const name = (brandKit["meta.publisher"] || 'publisher').toLowerCase().replace(/\s+/g, '-');
+    const name = (brandKit.brand?.name || 'publisher').toLowerCase().replace(/\s+/g, '-');
     downloadFile(`${name}-brand-kit.json`, JSON.stringify(brandKit, null, 2), 'application/json');
 }
 
