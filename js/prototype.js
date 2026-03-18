@@ -73,31 +73,41 @@ function generatePrototype() {
         ? `<img src="${_escAttr(heroSrc)}" referrerpolicy="no-referrer" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" onerror="this.style.display='none'" />`
         : '';
 
-    // SVG placeholder icon for missing images
-    const placeholderSvg = `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="10" width="36" height="28" rx="3" stroke="${textTertiary}" stroke-width="1.5" fill="none" opacity="0.4"/><circle cx="17" cy="21" r="3.5" stroke="${textTertiary}" stroke-width="1.5" fill="none" opacity="0.4"/><path d="M6 32 l10-8 6 5 8-10 12 13" stroke="${textTertiary}" stroke-width="1.5" fill="none" opacity="0.4"/></svg>`;
+    // CSS gradient fallback for images — NEVER shows broken icons
+    // Uses brand colors to create visually appealing placeholder that works without network
+    const gradientColors = [
+        [primary, bgDark],
+        [textSecondary, primary],
+        [bgDark, textSecondary],
+        [primary, textPrimary],
+        [textSecondary, bgDark],
+    ];
+    const gradientFallback = (idx, aspectRatio, radiusTop) => {
+        const [c1, c2] = gradientColors[idx % gradientColors.length];
+        const angle = 135 + (idx * 30) % 180;
+        return `<div style="width:100%;aspect-ratio:${aspectRatio};background:linear-gradient(${angle}deg, ${c1} 0%, ${c2} 100%);display:flex;align-items:center;justify-content:center;${radiusTop ? 'border-radius:' + borderRadius + ' ' + borderRadius + ' 0 0;' : 'border-radius:' + borderRadius + ';'}"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="2"/><path d="M3 16l4-4 3 3 4-5 7 6"/></svg></div>`;
+    };
 
-    // Image helper for feed cards — shows real image or styled placeholder
+    // Image helper for feed cards — real image with CSS gradient fallback
     const cardImage = (card, size, idx) => {
         const src = card.thumbnail || card.image || '';
-        // Deterministic fallback from picsum so cards always have a visible image
-        const fallbackSrc = `https://picsum.photos/seed/bk${idx || 0}/400/300`;
+        const fallbackHtml = gradientFallback(idx || 0, '4/3', true).replace(/'/g, "\\'").replace(/"/g, '\\"');
         if (src) {
-            return `<img src="${_escAttr(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:${borderRadius} ${borderRadius} 0 0;background:${bgSection};" onerror="this.onerror=null;this.src='${fallbackSrc}';" />`;
+            return `<img src="${_escAttr(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:${borderRadius} ${borderRadius} 0 0;background:${bgSection};" onerror="this.onerror=null;this.parentElement.innerHTML='${fallbackHtml}';" />`;
         }
-        // No image — use picsum fallback
-        return `<img src="${fallbackSrc}" alt="" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:${borderRadius} ${borderRadius} 0 0;background:${bgSection};" onerror="this.onerror=null;this.parentElement.innerHTML='<div style=\\'width:100%;aspect-ratio:4/3;background:${bgSection};display:flex;align-items:center;justify-content:center;border-radius:${borderRadius} ${borderRadius} 0 0;\\'>${placeholderSvg}</div>';" />`;
+        return gradientFallback(idx || 0, '4/3', true);
     };
 
     // Feed card generator
     const feedCard = (card, size, idx) => {
         const fontSize = size === 'tiny' ? '13px' : (size === 'small' ? '14px' : '16px');
-        const padding = size === 'tiny' ? '8px 4px' : '12px 4px';
+        const padding = size === 'tiny' ? '8px 10px' : '12px 14px';
         const badge = card.isNative
             ? (card.category ? `<span style="position:absolute;top:8px;${startSide}:8px;font-size:10px;padding:2px 6px;border-radius:3px;background:${primary};color:#fff;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;">${_escHtml(card.category)}</span>` : '')
             : `<span style="position:absolute;top:8px;${startSide}:8px;font-size:10px;padding:2px 6px;border-radius:3px;background:rgba(0,0,0,0.6);color:#fff;text-transform:uppercase;letter-spacing:0.04em;font-weight:600;">${_escHtml(feedContent.sponsoredLabel)}</span>`;
 
         return `
-            <div style="border-radius:${borderRadius};overflow:hidden;cursor:pointer;transition:box-shadow 0.2s;background:${bgPage};" onmouseover="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="border-radius:${borderRadius};overflow:hidden;cursor:pointer;transition:box-shadow 0.2s;background:${bgPage};box-shadow:0 1px 4px rgba(0,0,0,0.08);border:1px solid ${borderColor};" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.12)'" onmouseout="this.style.boxShadow='0 1px 4px rgba(0,0,0,0.08)'">
                 <div style="position:relative;">
                     ${cardImage(card, size, idx)}
                     ${badge}
@@ -105,7 +115,10 @@ function generatePrototype() {
                 <div style="padding:${padding};text-align:${startSide};">
                     <div style="font-family:'${fontPrimary}',sans-serif;font-size:${fontSize};font-weight:700;color:${textPrimary};line-height:1.3;margin-bottom:6px;">${_escHtml(card.headline)}</div>
                     <div style="display:flex;justify-content:space-between;align-items:center;${isRTL ? 'flex-direction:row-reverse;' : ''}">
-                        <span style="font-size:12px;color:${textTertiary};text-transform:uppercase;letter-spacing:0.02em;">${_escHtml(card.source)}</span>
+                        <span style="font-size:12px;color:${textTertiary};">
+                            <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${primary};${isRTL ? 'margin-left' : 'margin-right'}:4px;vertical-align:middle;"></span>
+                            ${_escHtml(card.source)}
+                        </span>
                         ${card.cta ? `<span style="font-size:12px;color:${primary};font-weight:600;">${_escHtml(card.cta)}</span>` : ''}
                     </div>
                 </div>
@@ -146,18 +159,47 @@ function generatePrototype() {
     // Build list feed card (horizontal layout, image on side) for dense sections
     const listCard = (card, idx) => {
         const src = card.thumbnail || card.image || '';
-        const fallbackSrc = `https://picsum.photos/seed/bkl${idx || 0}/120/80`;
+        const listGradientFallback = (() => {
+            const [c1, c2] = gradientColors[(idx || 0) % gradientColors.length];
+            const angle = 135 + ((idx || 0) * 30) % 180;
+            return `<div style="width:120px;height:80px;flex-shrink:0;border-radius:${borderRadius};background:linear-gradient(${angle}deg, ${c1} 0%, ${c2} 100%);display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="2"/><path d="M3 16l4-4 3 3 4-5 7 6"/></svg></div>`;
+        })();
+        const fallbackEscaped = listGradientFallback.replace(/'/g, "\\'").replace(/"/g, '\\"');
         const imgHtml = src
-            ? `<img src="${_escAttr(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:120px;height:80px;object-fit:cover;border-radius:${borderRadius};flex-shrink:0;background:${bgSection};" onerror="this.onerror=null;this.src='${fallbackSrc}';" />`
-            : `<img src="${fallbackSrc}" alt="" loading="lazy" style="width:120px;height:80px;object-fit:cover;border-radius:${borderRadius};flex-shrink:0;background:${bgSection};" />`;
+            ? `<img src="${_escAttr(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:120px;height:80px;object-fit:cover;border-radius:${borderRadius};flex-shrink:0;background:${bgSection};" onerror="this.onerror=null;this.parentElement.innerHTML='${fallbackEscaped}';" />`
+            : listGradientFallback;
         const badge = card.isNative ? '' : `<span style="font-size:10px;color:${textTertiary};text-transform:uppercase;letter-spacing:0.03em;">${_escHtml(feedContent.sponsoredLabel)}</span>`;
         return `
             <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid ${borderColor};cursor:pointer;align-items:center;${isRTL ? 'flex-direction:row-reverse;' : ''}" onmouseover="this.style.background='${bgSection}'" onmouseout="this.style.background='transparent'">
-                ${imgHtml}
+                <div style="flex-shrink:0;">${imgHtml}</div>
                 <div style="flex:1;text-align:${startSide};">
                     ${badge}
                     <div style="font-family:'${fontPrimary}',sans-serif;font-size:14px;font-weight:700;color:${textPrimary};line-height:1.3;margin:2px 0 4px;">${_escHtml(card.headline)}</div>
                     <div style="font-size:12px;color:${textTertiary};">${_escHtml(card.source)}${card.cta ? ` · <span style="color:${primary};">${_escHtml(card.cta)}</span>` : ''}</div>
+                </div>
+            </div>
+        `;
+    };
+
+    // Numbered trending card — rank number + thumbnail + headline
+    const trendingCard = (card, rank, idx) => {
+        const src = card.thumbnail || card.image || '';
+        const trendGradient = (() => {
+            const [c1, c2] = gradientColors[(idx || 0) % gradientColors.length];
+            const angle = 135 + ((idx || 0) * 30) % 180;
+            return `<div style="width:80px;height:80px;flex-shrink:0;border-radius:${borderRadius};background:linear-gradient(${angle}deg, ${c1} 0%, ${c2} 100%);"></div>`;
+        })();
+        const trendFallbackEsc = trendGradient.replace(/'/g, "\\'").replace(/"/g, '\\"');
+        const imgHtml = src
+            ? `<img src="${_escAttr(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:80px;height:80px;object-fit:cover;border-radius:${borderRadius};flex-shrink:0;background:${bgSection};" onerror="this.onerror=null;this.parentElement.innerHTML='${trendFallbackEsc}';" />`
+            : trendGradient;
+        return `
+            <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid ${borderColor};cursor:pointer;align-items:center;${isRTL ? 'flex-direction:row-reverse;' : ''}" onmouseover="this.style.background='${bgSection}'" onmouseout="this.style.background='transparent'">
+                <span style="font-family:'${fontPrimary}',sans-serif;font-size:32px;font-weight:800;color:${primary};min-width:36px;text-align:center;opacity:0.7;">${rank}</span>
+                <div style="flex-shrink:0;">${imgHtml}</div>
+                <div style="flex:1;text-align:${startSide};">
+                    <div style="font-family:'${fontPrimary}',sans-serif;font-size:14px;font-weight:700;color:${textPrimary};line-height:1.3;margin-bottom:4px;">${_escHtml(card.headline)}</div>
+                    <div style="font-size:12px;color:${textTertiary};">${_escHtml(card.source)}</div>
                 </div>
             </div>
         `;
@@ -254,15 +296,40 @@ function generatePrototype() {
     <article style="max-width:760px;margin:0 auto;padding:32px 16px;text-align:${startSide};">
         ${art.kicker ? `<div style="color:${primary};font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.05em;margin-bottom:12px;">${_escHtml(art.kicker)}</div>` : ''}
         <h1 style="font-family:var(--font-headline);font-size:${headlineScale.size};font-weight:${headlineScale.weight};line-height:1.2;margin:0 0 16px;">${_escHtml(art.title)}</h1>
-        ${art.lead ? `<p style="font-size:20px;color:${textSecondary};line-height:1.5;margin:0 0 20px;">${_escHtml(art.lead)}</p>` : ''}
-        <div style="display:flex;align-items:center;gap:12px;padding:16px 0;border-top:1px solid ${borderColor};border-bottom:1px solid ${borderColor};margin-bottom:24px;${isRTL ? 'flex-direction:row-reverse;' : ''}">
+        ${art.lead ? `<p style="font-size:20px;color:${textSecondary};line-height:1.5;margin:0 0 20px;border-${startSide}:4px solid ${primary};padding-${startSide}:16px;">${_escHtml(art.lead)}</p>` : ''}
+        <div style="display:flex;align-items:center;gap:12px;padding:16px 0;border-top:1px solid ${borderColor};border-bottom:1px solid ${borderColor};${isRTL ? 'flex-direction:row-reverse;' : ''}">
             <span style="font-weight:600;font-size:14px;">${art.author ? _escHtml(art.author) : 'Staff Writer'}</span>
             <span style="color:${textTertiary};font-size:13px;">${_escHtml(art.date || '')}</span>
         </div>
-        <div style="font-size:${bodyScale.size};line-height:${bodyScale.lineHeight || bodyScale.line_height || '1.7'};color:${textSecondary};">
+        <!-- Engagement bar -->
+        <div style="display:flex;gap:20px;padding:12px 0;border-bottom:1px solid ${borderColor};margin-bottom:24px;${isRTL ? 'flex-direction:row-reverse;' : ''}">
+            <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:${textSecondary};cursor:pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                ${isRTL ? 'תגובות' : 'Comment'}
+            </span>
+            <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:${textSecondary};cursor:pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                ${isRTL ? 'שתף' : 'Share'}
+            </span>
+            <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:${textSecondary};cursor:pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+                ${isRTL ? 'שמור' : 'Save'}
+            </span>
+        </div>
+        <div style="font-size:${bodyScale.size};line-height:${bodyScale.lineHeight || bodyScale.line_height || '1.7'};color:${textSecondary};position:relative;">
             ${art.paragraphs.slice(0,5).map(p => `<p style="margin:0 0 20px;">${_escHtml(p)}</p>`).join('\n')}
+            <!-- Read more fade-out -->
+            <div style="position:relative;height:80px;margin-top:-80px;background:linear-gradient(transparent, ${bgPage});pointer-events:none;"></div>
+        </div>
+        <div style="text-align:center;padding:16px 0 8px;">
+            <span style="font-size:14px;color:${primary};font-weight:600;cursor:pointer;">${isRTL ? 'המשך קריאה...' : 'Continue reading...'}</span>
         </div>
     </article>
+
+    <!-- Divider between article and feed -->
+    <div style="max-width:760px;margin:0 auto;padding:0 16px;">
+        <hr style="border:none;border-top:2px solid ${borderColor};margin:0;" />
+    </div>
 
     <!-- Taboola Feed -->
     <div style="max-width:760px;margin:0 auto;padding:0 16px 40px;">
@@ -277,10 +344,15 @@ function generatePrototype() {
             </div>
         </div>
 
-        <!-- Row 1: Large Sponsored Grid (3-up) -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:32px;">
-            ${feedContent.sponsoredLarge.map((c, i) => feedCard(c, 'small', i)).join('')}
-            ${feedContent.sponsoredDense.length > 0 ? feedCard(feedContent.sponsoredDense[0], 'small', 3) : ''}
+        <!-- Row 1: Featured Hero + 2 side cards -->
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:32px;">
+            <div>
+                ${feedCard(feedContent.sponsoredLarge[0] || {headline:'',source:''}, 'large', 0)}
+            </div>
+            <div style="display:flex;flex-direction:column;gap:20px;">
+                ${feedContent.sponsoredLarge.slice(1, 2).map((c, i) => feedCard(c, 'small', i + 1)).join('')}
+                ${feedContent.sponsoredDense.length > 0 ? feedCard(feedContent.sponsoredDense[0], 'small', 3) : ''}
+            </div>
         </div>
 
         <!-- Row 2: Native Section (3-up grid) -->
@@ -288,25 +360,23 @@ function generatePrototype() {
             ${feedContent.nativeSection.map((c, i) => feedCard(c, 'small', i + 20)).join('')}
         </div>
 
-        <!-- Row 3: Mixed list-style cards -->
+        <!-- Row 3: Sponsored list-style cards -->
         <div style="margin-bottom:32px;border-top:1px solid ${borderColor};">
             ${feedContent.sponsoredDense.slice(1).map((c, i) => listCard(c, i + 10)).join('')}
         </div>
 
-        <!-- "Trending Now" Section -->
-        <div style="margin-bottom:32px;">
-            <h2 style="font-family:var(--font-headline);font-size:22px;font-weight:700;color:${textPrimary};margin:0 0 16px;text-align:${startSide};">
+        <!-- "Trending Now" Section with numbered list -->
+        <div style="margin-bottom:32px;background:${bgSection};border-radius:${borderRadius};padding:24px;">
+            <h2 style="font-family:var(--font-headline);font-size:22px;font-weight:700;color:${textPrimary};margin:0 0 4px;text-align:${startSide};">
                 ${_escHtml(feedContent.trendingLabel)} ${_escHtml(pub)}<span style="color:${primary};">.</span>
             </h2>
-            <div style="font-size:11px;color:${textTertiary};margin:-12px 0 16px;text-align:${startSide};">
+            <div style="font-size:11px;color:${textTertiary};margin-bottom:16px;text-align:${startSide};">
                 ${_escHtml(feedContent.contentByLabel || 'Content by')} <a href="#" style="color:${primary};text-decoration:none;font-weight:500;">Taboola</a>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
-                ${feedContent.trendingNative.slice(0, 3).map((c, i) => feedCard(c, 'small', i + 40)).join('')}
-            </div>
+            ${feedContent.trendingNative.slice(0, 5).map((c, i) => trendingCard(c, i + 1, i + 40)).join('')}
         </div>
 
-        <!-- Row 4: Mixed Sponsored (2-up) -->
+        <!-- Row 4: Mixed Sponsored (2-up, larger) -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;">
             ${feedContent.sponsoredMixed.map((c, i) => feedCard(c, 'large', i + 30)).join('')}
         </div>

@@ -262,8 +262,8 @@ function generateFeedContent(brandKit, navigation, extractedCards, extractedImag
 
   const sponsored = _pickRandom(pool, 12).map((card, i) => ({
     ...card,
-    // Use real image if available, otherwise deterministic picsum
-    thumbnail: availableImages[i % Math.max(availableImages.length, 1)] || `https://picsum.photos/seed/sp${i}/400/300`,
+    // Use real image if available; prototype.js handles gradient fallback for missing images
+    thumbnail: availableImages.length > 0 ? availableImages[i % availableImages.length] : '',
   }));
 
   const native = _generateNativeCards(brandKit, navigation, extractedCards, extractedImages);
