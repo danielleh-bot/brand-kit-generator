@@ -282,14 +282,29 @@ function _isJunkText(text) {
 /** Clean a text string by stripping any embedded JS/JSON fragments */
 function _cleanTextContent(text) {
     if (!text) return '';
-    // Remove inline script fragments that got concatenated with real text
-    // Pattern: real text followed by window.Something... or {" json stuff
-    text = text.replace(/window\.\w[\w.]*\([^)]*\)[;,]?/g, '');
+    // Aggressive: truncate at "window." boundary — widget code is always appended to real text
+    const winIdx = text.indexOf('window.');
+    if (winIdx > 0) {
+        text = text.substring(0, winIdx);
+    } else if (winIdx === 0) {
+        // Entire string is script code
+        return '';
+    }
+    // Truncate at standalone JS keywords that start code blocks
+    const codeStartPatterns = [/\bfunction\s*\(/, /\bdocument\./, /\bvar\s+\w/, /\blet\s+\w/, /\bconst\s+\w/];
+    for (const pat of codeStartPatterns) {
+        const m = text.match(pat);
+        if (m && m.index > 0) {
+            text = text.substring(0, m.index);
+        }
+    }
+    // Remove any remaining inline fragments
     text = text.replace(/\{[^}]*"[\w]+":[^}]*\}/g, '');
-    text = text.replace(/\[\{[^\]]*\}\]/g, '');
-    // Remove tracking/widget initialization code
-    text = text.replace(/(?:var|let|const)\s+\w+\s*=\s*[^;]+;/g, '');
+    text = text.replace(/\[\{[\s\S]*?\}\]/g, '');
     text = text.replace(/\w+\.\w+\.\w+\([^)]*\);?/g, '');
+    // Remove Hebrew-concatenated social/toolbar text patterns (e.g. "הוספת תגובה" stuck to author names)
+    text = text.replace(/הוספת תגובה.*$/g, '');
+    text = text.replace(/תגובות\s*\(\d+\).*$/g, '');
     return text.trim();
 }
 
@@ -357,7 +372,10 @@ function extractArticleData(doc, url) {
             '[class*="comment"], [class*="share"], [class*="social"], [class*="ad-"], [class*="advert"], ' +
             '[class*="widget"], [class*="related"], [class*="taboola"], [class*="outbrain"], ' +
             '[class*="recommend"], [class*="promo"], [class*="newsletter"], [class*="signup"], ' +
-            '[id*="taboola"], [id*="outbrain"], [id*="google_ads"], [data-widget-type]'
+            '[id*="taboola"], [id*="outbrain"], [id*="google_ads"], [data-widget-type], ' +
+            '[onclick], [onload], [data-widget], ' +
+            '[class*="toolbar"], [class*="actions"], [class*="SiteArticleSocial"], ' +
+            '[class*="art-social"], [class*="article-share"], [class*="social-share"]'
         ).forEach(el => el.remove());
 
         clone.querySelectorAll('p').forEach(p => {
