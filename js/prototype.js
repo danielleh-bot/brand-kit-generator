@@ -238,6 +238,31 @@ function generatePrototype() {
         a { text-decoration: none; color: inherit; }
         a:hover { text-decoration: underline; }
         img { max-width: 100%; }
+
+        /* Responsive grids */
+        .proto-grid-hero { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .proto-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .proto-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .proto-nav-links { display: flex; gap: 20px; flex-wrap: wrap; ${isRTL ? 'flex-direction:row-reverse;' : ''} }
+        .proto-footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+
+        @media (max-width: 768px) {
+            .proto-grid-hero { grid-template-columns: 1fr; }
+            .proto-grid-3 { grid-template-columns: 1fr 1fr; }
+            .proto-grid-2 { grid-template-columns: 1fr 1fr; }
+            .proto-nav-links { gap: 12px; }
+            .proto-nav-links a { font-size: 12px !important; }
+            .proto-footer-grid { grid-template-columns: 1fr 1fr; }
+            .proto-util-bar { display: none; }
+        }
+        @media (max-width: 480px) {
+            .proto-grid-hero { grid-template-columns: 1fr; }
+            .proto-grid-3 { grid-template-columns: 1fr; }
+            .proto-grid-2 { grid-template-columns: 1fr; }
+            .proto-footer-grid { grid-template-columns: 1fr; }
+            .proto-nav-links { display: none !important; }
+            .proto-hamburger { display: block !important; }
+        }
     </style>
 </head>
 <body>
@@ -273,15 +298,18 @@ function generatePrototype() {
         ).join('');
 
         return `<nav style="background:${hdrBg};color:${hdrTextColor};padding:0;${isLightHeader ? 'border-bottom:1px solid ' + borderColor + ';' : ''}">
-        <div style="background:${utilBarBg};padding:4px 0;font-size:12px;">
+        <div class="proto-util-bar" style="background:${utilBarBg};padding:4px 0;font-size:12px;">
             <div style="max-width:1200px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center;${isRTL ? 'flex-direction:row-reverse;' : ''}">
                 <span style="color:${utilTextColor};">${_escHtml(new Date().toLocaleDateString(lang, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }))}</span>
                 <span style="color:${utilTextColor};">${_escHtml(domain)}</span>
             </div>
         </div>
         <div style="max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:32px;${isRTL ? 'flex-direction:row-reverse;' : ''}">
-            <a href="#" style="text-decoration:none;">${logoHtml}</a>
-            <div style="display:flex;gap:20px;flex-wrap:wrap;${isRTL ? 'flex-direction:row-reverse;' : ''}">${navLinksColored}</div>
+            <a href="#" style="text-decoration:none;flex-shrink:0;">${logoHtml}</a>
+            <div class="proto-nav-links">${navLinksColored}</div>
+            <div class="proto-hamburger" style="display:none;cursor:pointer;${isRTL ? 'margin-right:auto;' : 'margin-left:auto;'}">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${hdrTextColor}" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </div>
         </div>
         <div style="height:3px;background:${accentBar};"></div>`;
     })()}
@@ -345,7 +373,7 @@ function generatePrototype() {
         </div>
 
         <!-- Row 1: Featured Hero + 2 side cards -->
-        <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:32px;">
+        <div class="proto-grid-hero" style="margin-bottom:32px;">
             <div>
                 ${feedCard(feedContent.sponsoredLarge[0] || {headline:'',source:''}, 'large', 0)}
             </div>
@@ -356,7 +384,7 @@ function generatePrototype() {
         </div>
 
         <!-- Row 2: Native Section (3-up grid) -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:32px;">
+        <div class="proto-grid-3" style="margin-bottom:32px;">
             ${feedContent.nativeSection.map((c, i) => feedCard(c, 'small', i + 20)).join('')}
         </div>
 
@@ -377,7 +405,7 @@ function generatePrototype() {
         </div>
 
         <!-- Row 4: Mixed Sponsored (2-up, larger) -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;">
+        <div class="proto-grid-2" style="margin-bottom:32px;">
             ${feedContent.sponsoredMixed.map((c, i) => feedCard(c, 'large', i + 30)).join('')}
         </div>
 
@@ -402,7 +430,7 @@ function generatePrototype() {
     <!-- Footer -->
     <footer style="background:${bgDark};color:rgba(255,255,255,0.7);padding:48px 16px 24px;">
         <div style="max-width:1200px;margin:0 auto;">
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:32px;text-align:${startSide};">
+            <div class="proto-footer-grid" style="margin-bottom:32px;text-align:${startSide};">
                 ${footerHtml}
             </div>
             ${nav.socialLinks.length > 0 ? `<div style="display:flex;gap:16px;margin-bottom:24px;${isRTL ? 'flex-direction:row-reverse;justify-content:flex-start;' : ''}">${nav.socialLinks.map(s => `<a href="#" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">${_escHtml(s.platform)}</a>`).join('')}</div>` : ''}
