@@ -1,0 +1,71 @@
+id,section,brand_kit_path,description,bucket,transformer_property_today,gap_notes,code_reference
+1,Fonts,fonts.primary.family,Primary headline font family,Configurable today,fonts.headline.family,1:1 mapping wired in analysis engine,lib/analysis.js:32
+2,Fonts,fonts.secondary.family,Body / secondary font family,Configurable today,fonts.body.family,1:1 mapping wired in analysis engine,lib/analysis.js:34
+3,Fonts,fonts.primary.weights.bold,Headline bold weight,Configurable today,fonts.headline.weight,1:1 mapping,lib/analysis.js:37
+4,Fonts,fonts.type_scale.article_title_card.size,Card headline font size,Configurable today,fonts.headline.size,1:1 mapping,lib/analysis.js:36
+5,Colors,colors.text.primary.hex,Primary text / headline color,Configurable today,colors.headline,1:1 mapping,lib/analysis.js:35
+6,Colors,colors.text.tertiary.hex,Source label / muted text color,Configurable today,colors.sourceLabel,Falls back to text.secondary if tertiary missing,lib/analysis.js:46
+7,Colors,colors.primary.hex,Brand accent / CTA color,Configurable today,colors.cta,1:1 mapping,lib/analysis.js:45
+8,Colors,colors.primary.hex,Accent rule color,Configurable today,spacing.accentRule.color,1:1 mapping,lib/analysis.js:40
+9,Spacing,colors.primary.hex,Accent rule full style (e.g. '3px solid #...'),Configurable today,spacing.accentRule,Composed string from primary color,lib/analysis.js:41-44
+10,Colors,colors.backgrounds.base.hex,Page / card background,Configurable today,colors.background,1:1 mapping,lib/analysis.js:60
+11,Colors,colors.backgrounds.section.hex,Separator / divider color,Configurable today,colors.separator,Falls back to backgrounds.secondary,lib/analysis.js:47
+12,Spacing,photo_style.thumbnail_format.border_radius,Card / image border radius,Configurable today,spacing.borderRadius,1:1 mapping,lib/analysis.js:39
+13,Typography,fonts.type_scale.section_headings.transform,Headline text-transform (uppercase etc.),Configurable today,textStyles.headlineTransform,1:1 mapping,lib/analysis.js:38
+14,Typography,fonts.type_scale.section_headings.letterSpacing,Headline letter-spacing,Configurable today,spacing.letterSpacing,1:1 mapping,lib/analysis.js:53
+15,Fonts,fonts.eyebrow.family (derived),Eyebrow / label font family,Partial,fonts.eyebrow.family,Eyebrow size/weight/transform/letterSpacing exist in defaults but multi-role granularity is lost,lib/analysis.js:33
+16,Colors,colors.text.secondary.hex,Body text color (mid-level),Partial,colors.body,Brand kit has 3 text levels; Transformer exposes 2 + sourceLabel,lib/defaults.js:32
+17,Graphics,graphics.elements[0],First detected badge style,Partial,badges.label / badges.bg / badges.text,Only first badge wired; Live/Breaking/Opinion/Video lost,lib/analysis.js:48-52
+18,Brand voice,brand_voice.content_labels.*,Content label flags (opinion/live/breaking/video/gallery/analysis/sponsored),Partial,categoryLabel,Transformer joins all into one comma-separated string,lib/analysis.js:55-59
+19,Photo,photo_style.thumbnail_format.aspect_ratio,Thumbnail aspect ratio,Partial,thumbnailAspectRatio,Single global value; can't vary by card type,lib/defaults.js:59
+20,Typography,fonts.type_scale.section_headings.size,Section heading size,Partial,—,fonts.headline.size only maps article_title_card; section heading size has no separate slot,lib/crawler.js:257
+21,Colors,colors.backgrounds.section.hex,Section background,Partial,colors.separator (re-used),Section bg and separator are conflated,lib/analysis.js:47
+22,Fonts,fonts.primary.weights.regular,Regular text weight,Partial,—,Only headline.weight (bold) exposed,lib/crawler.js:233-234
+23,Colors,colors.secondary.hex,Secondary brand accent,Partial,—,colors.cta reuses primary; no secondary accent slot,lib/crawler.js:187
+24,Typography,fonts.type_scale.article_title_hero,Hero / front-page headline (size+weight+lineHeight+color),Needs dev,—,No hero headline slot,lib/crawler.js:258
+25,Typography,fonts.type_scale.article_lead,Subtitle / deck typography,Needs dev,—,No deck slot,lib/crawler.js:260
+26,Typography,fonts.type_scale.article_body,Article body paragraph typography,Needs dev,—,No article body slot,lib/crawler.js:261
+27,Typography,fonts.type_scale.navigation,Navigation link typography,Needs dev,—,No nav slot,lib/crawler.js:262
+28,Typography,fonts.type_scale.utility_bar,Utility / top-bar link typography,Needs dev,—,No utility-bar slot,lib/crawler.js:263
+29,Typography,fonts.type_scale.category_pills,Pill / chip / filter typography,Needs dev,—,No pill slot,lib/crawler.js:264
+30,Typography,fonts.type_scale.buttons,Button text typography,Needs dev,—,No button typography slot,lib/crawler.js:265
+31,Typography,fonts.type_scale.meta_text,Date / byline / caption typography,Needs dev,—,No meta-text slot,lib/crawler.js:266
+32,Typography,fonts.type_scale.opinion_headline,Editorial / opinion serif-italic style,Needs dev,—,No editorial slot,lib/crawler.js:296-302
+33,Typography,fonts.type_scale.*.line_height|letter_spacing|style,Per-role line-height / letter-spacing / italic,Needs dev,—,Only section-headings letterSpacing currently wired,lib/crawler.js:277-281
+34,Fonts,fonts.secondary.weight,Secondary font weight,Needs dev,—,Italic editorial pairing not exposed,lib/crawler.js:240-245
+35,Fonts,fonts.secondary.style,Secondary font style (italic),Needs dev,—,No slot,lib/crawler.js:243
+36,Fonts,fonts.tertiary[],Up to 3 additional font families,Needs dev,—,No tertiary slot,lib/crawler.js:248-253
+37,Fonts,fonts.primary.fallbacks[],Per-publisher fallback stack,Needs dev,—,Transformer uses fixed Arial fallback,lib/crawler.js:226
+38,Colors,colors.accents.warning_yellow,Warning yellow accent,Needs dev,—,No accent palette slot,lib/crawler.js:183
+39,Colors,colors.accents.negative_red,Negative red accent (live/breaking),Needs dev,—,No accent palette slot,lib/crawler.js:184
+40,Colors,colors.accents.positive_green,Positive green accent,Needs dev,—,No accent palette slot,lib/crawler.js:185
+41,Colors,colors.accents.info_blue,Info blue accent,Needs dev,—,No accent palette slot,lib/crawler.js:186
+42,Colors,colors.backgrounds.dark.hex,Dark / inverted background,Needs dev,—,No slot,lib/crawler.js:178
+43,Colors,colors.borders.primary.hex,Border color,Needs dev,—,No colors.border slot in defaults.js,js/extractors.js:99-106
+44,Logos,logos.primary.url|svg|text,Publisher logo (image/SVG/text),Needs dev,—,defaults.js has no logo property; needs dev to add,lib/crawler.js:80-102
+45,Logos,logos.primary.font,Logo wordmark font (when text-based),Needs dev,—,No slot,lib/crawler.js:100
+46,Logos,logos.favicon_url,Favicon URL,Needs dev,—,No slot,lib/crawler.js:104-111
+47,Logos,logos.brand_mark,Compact brand mark variant,Needs dev,—,No slot,lib/crawler.js:79
+48,Brand voice,brand_voice.headline_style.case,Headline casing (uppercase / sentence case content rule),Needs dev,—,Distinct from CSS text-transform — content-side rule,lib/crawler.js:319-322
+49,Brand voice,brand_voice.headline_style.pattern,Editorial template (e.g. 'Topic colon pattern'),Needs dev,—,No slot,lib/crawler.js:316-318
+50,Brand voice,brand_voice.content_distinction.opinion.typography,Distinct opinion typography rule,Needs dev,—,Conditional styling not supported,lib/crawler.js:343-348
+51,Brand voice,brand_voice.language,Language override per UI mode,Needs dev,—,layout.direction (rtl/ltr) not exposed,lib/crawler.js:67
+52,Photo,photo_style.video_thumbnails.indicator,Play-button presence/absence,Needs dev,—,No slot,lib/crawler.js:381
+53,Photo,photo_style.video_thumbnails.indicator_color,Play-button tint color,Needs dev,—,No slot,lib/crawler.js:383
+54,Photo,photo_style.author_photos.shape,Author avatar shape (circular/square),Needs dev,—,No slot,lib/crawler.js:390
+55,Photo,photo_style.author_photos.size,Author avatar size,Needs dev,—,No slot,lib/crawler.js:391
+56,Graphics,graphics.elements[],Full multi-badge inventory,Needs dev,—,Each badge type (live/breaking/opinion/sponsored) needs its own slot,lib/crawler.js:402-421
+57,Graphics,graphics.style,Stylistic posture (e.g. 'Minimal — relies on photography'),Needs dev,—,No slot,lib/crawler.js:395
+58,Icons,icons.style,Icon system style (e.g. 'SVG-based'),Needs dev,—,No slot,lib/crawler.js:425
+59,Icons,icons.social_media_icons.platforms[],Detected social networks,Needs dev,—,Drives footer; no slot,lib/crawler.js:431-448
+60,Icons,icons.social_media_icons.placement,Social icon placement (header/footer),Needs dev,—,No slot,lib/crawler.js:427
+61,Layout,layout_patterns.grid,Layout strategy (single/two-column),Needs dev,—,No slot,lib/crawler.js:472
+62,Layout,layout_patterns.header.layers[],Header structure (utility / brand / nav layers),Needs dev,—,No slot,lib/crawler.js:459-466
+63,Layout,layout_patterns.footer.sections[],Footer column structure,Needs dev,—,No slot,lib/crawler.js:476-480
+64,Layout,layout.container.max_width,Container max width,Needs dev,—,No slot,js/extractors.js:213-218
+65,Layout,layout.spacing.{xs|sm|md|lg|xl},5-step spacing scale,Needs dev,—,No slot,js/extractors.js:241-247
+66,Layout,layout.grid.gap,Grid gap,Needs dev,—,Coarser knob (spacing.cardGap) exists but not equivalent,js/extractors.js:220-225
+67,Layout,header.style,Header light/dark style,Needs dev,—,No slot — drives custom-headed UI mode,js/extractors.js:672
+68,Layout,header.background,Header background color,Needs dev,—,No slot,js/extractors.js:673
+69,Layout,header.accentBarColor,Header accent bar color,Needs dev,—,No slot,js/extractors.js:676
+70,Layout,header.hasSearch,Header search field present,Needs dev,—,No slot,js/extractors.js:678
