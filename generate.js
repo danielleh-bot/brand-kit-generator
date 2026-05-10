@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer-core');
 
-const { extractBrandKit, extractContent, extractNavigation } = require('./lib/crawler');
+const { extractBrandKit, extractContent, extractNavigation, extractRelatedArticles } = require('./lib/crawler');
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { generateFeedContent } = require('./lib/feed-content');
@@ -27,6 +27,7 @@ program
   .option('--prototype-only', 'Only generate feed prototype (skip report)')
   .option('--brand-kit <path>', 'Use existing brand-kit.json instead of crawling')
   .option('--chrome <path>', 'Path to Chrome/Chromium executable')
+  .option('--accept-low-quality', 'Allow generating output from a brand kit where most tokens are fallbacks (default: refuse)')
   .option('--list', 'List previously generated publishers')
   .parse();
 
@@ -104,11 +105,23 @@ async function main() {
   let brandKit;
   let content = {};
   let navigation = {};
+  let relatedArticles = [];
 
   // Use existing brand kit or crawl
   if (opts.brandKit) {
     console.log('📄 Loading existing brand kit...');
     brandKit = JSON.parse(fs.readFileSync(path.resolve(opts.brandKit), 'utf-8'));
+    // Refuse to silently produce a "successful" report from a brand kit that
+    // was never actually crawled (i.e. the file is the canned defaults). The
+    // user must opt into using a low-quality kit explicitly.
+    const eq = brandKit && brandKit.metadata && brandKit.metadata.extraction_quality;
+    if (!eq) {
+      console.warn('⚠️  Loaded brand kit has no extraction_quality metadata. It may have been hand-edited or pre-generated. Re-run without --brand-kit if this is unexpected.');
+    } else if (eq.total_tokens > 0 && eq.extraction_ratio < 0.5 && !opts.acceptLowQuality) {
+      console.error('❌ Loaded brand kit was mostly fallbacks (extraction_ratio = ' + eq.extraction_ratio + '). Refusing to generate a polished report from synthetic data.');
+      console.error('   Re-crawl the URL, or pass --accept-low-quality if you really want to proceed.');
+      process.exit(1);
+    }
     console.log('   ✓ Brand kit loaded\n');
   } else {
     // Find Chrome
@@ -154,10 +167,24 @@ async function main() {
 
       console.log('   Extracting navigation...');
       navigation = await extractNavigation(page);
-      console.log('   ✓ Navigation extracted\n');
+      console.log('   ✓ Navigation extracted');
+
+      console.log('   Extracting related articles for feed...');
+      relatedArticles = await extractRelatedArticles(page, url);
+      console.log(`   ✓ ${relatedArticles.length} related articles extracted\n`);
     } finally {
       await browser.close();
     }
+  }
+
+  // Loud warning when extraction quality is poor — surfaces silent failures the
+  // tool used to mask by filling defaults.
+  const eq = brandKit && brandKit.metadata && brandKit.metadata.extraction_quality;
+  if (eq && eq.total_tokens > 0 && eq.extraction_ratio < 0.5) {
+    console.warn(`\n⚠️  Extraction quality is low: only ${eq.extracted_token_count}/${eq.total_tokens} brand tokens were actually pulled from the page. The rest are fallbacks. Common causes: site blocks headless Chrome, content is rendered client-side after networkidle2, or selectors did not match the publisher's markup. Inspect brand-kit.json → metadata.extraction_quality.fallback_tokens for the list.\n`);
+  }
+  if (!opts.brandKit && (!relatedArticles || relatedArticles.length < 3)) {
+    console.warn(`⚠️  Only found ${relatedArticles ? relatedArticles.length : 0} related articles — feed will be padded with synthetic placeholders. The article URL probably doesn't expose a "related"/"popular" section. Try crawling the homepage instead to capture real card content.\n`);
   }
 
   // Ensure output directory exists
@@ -172,8 +199,10 @@ async function main() {
   const resolvedFonts = resolveAllFonts(brandKit);
   const googleFontsUrl = buildGoogleFontsUrl(brandKit);
 
-  // Generate feed content
-  const feedContent = generateFeedContent(brandKit, navigation);
+  // Generate feed content. Native cards prefer real, extracted articles; we
+  // only fall back to synthetic templates when the page didn't expose enough
+  // related content.
+  const feedContent = generateFeedContent(brandKit, navigation, { content, relatedArticles });
 
   // Compute analysis
   const analysis = computeAnalysis(brandKit, defaults);
