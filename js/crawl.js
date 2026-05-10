@@ -8,13 +8,41 @@ const CORS_PROXIES = [
 ];
 
 async function fetchWithProxy(url) {
+    const errors = [];
     for (const proxy of CORS_PROXIES) {
+        const proxyUrl = proxy(url);
         try {
-            const resp = await fetch(proxy(url), { signal: AbortSignal.timeout(15000) });
-            if (resp.ok) return await resp.text();
-        } catch(e) { /* try next */ }
+            const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(15000) });
+            if (resp.ok) {
+                const text = await resp.text();
+                // Some proxies return a JSON error envelope as 200 OK. If the
+                // response is suspiciously short or doesn't look like HTML,
+                // treat it as a failure so we don't crawl error pages.
+                if (text.length < 1000 || !/<html|<!DOCTYPE/i.test(text)) {
+                    errors.push(`${new URL(proxyUrl).hostname}: returned ${text.length} chars, not HTML`);
+                    continue;
+                }
+                return text;
+            }
+            errors.push(`${new URL(proxyUrl).hostname}: HTTP ${resp.status}`);
+        } catch (e) {
+            errors.push(`${new URL(proxyUrl).hostname}: ${e.name === 'TimeoutError' ? 'timeout' : e.message}`);
+        }
+    }
+    if (typeof addLog === 'function') {
+        addLog('All CORS proxies failed: ' + errors.join('; '), 'error');
     }
     return null;
+}
+
+// Heuristic: did a manual HTML paste actually contain a real publisher page?
+// We need at least one h1, one body paragraph, and a <head> with title.
+function looksLikePublisherHtml(html) {
+    if (!html || html.length < 2000) return { ok: false, reason: 'HTML too short (' + (html ? html.length : 0) + ' chars). Did you paste only a fragment?' };
+    if (!/<html/i.test(html)) return { ok: false, reason: 'Missing <html> tag — paste the full page source, not just the body.' };
+    if (!/<head[\s>]/i.test(html)) return { ok: false, reason: 'Missing <head> — full page source is required for brand extraction.' };
+    if (!/<h1/i.test(html) && !/<title/i.test(html)) return { ok: false, reason: 'Missing both <h1> and <title> — the page may be a login wall or 404.' };
+    return { ok: true };
 }
 
 function addLog(msg, type = '') {
@@ -274,6 +302,15 @@ async function startCrawl() {
                 addLog('Crawl cancelled by user.', 'error');
                 statusBar.className = 'status-bar error';
                 statusText.textContent = 'Crawl cancelled';
+                document.getElementById('crawlBtn').disabled = false;
+                return;
+            }
+            const sanity = looksLikePublisherHtml(manualHtml);
+            if (!sanity.ok) {
+                addLog('Pasted HTML did not pass sanity checks: ' + sanity.reason, 'error');
+                addLog('Aborting — refusing to generate a brand kit from invalid input.', 'error');
+                statusBar.className = 'status-bar error';
+                statusText.textContent = 'Invalid HTML input — aborted';
                 document.getElementById('crawlBtn').disabled = false;
                 return;
             }
