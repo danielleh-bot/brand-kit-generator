@@ -5,10 +5,11 @@ website and producing a Taboola feed prototype + analysis report.
 
 This guide covers both ways to run the tool:
 
-1. **CLI mode** (Node.js + headless Chrome) — the recommended path. Deeper
-   extraction, richer output, repeatable.
-2. **Browser mode** (open `index.html` in a browser) — quicker, no install,
-   but limited by CORS proxies.
+1. **Wizard mode** (`npm run dev`) — a guided 5-step browser UI backed by the
+   same Puppeteer extractor as the CLI. Best for humans: live progress, a
+   visual brand-kit preview, JSON/CSS export, and an in-app prototype preview.
+2. **CLI mode** (Node.js + headless Chrome) — for automation and scripts.
+   Identical extraction depth as the wizard, same output files.
 
 If you just want the fastest happy path, jump to
 [The 60-second quick start](#the-60-second-quick-start).
@@ -93,7 +94,19 @@ sudo dnf install chromium
 
 ## The 60-second quick start
 
+### Wizard
+
 From the project root:
+
+```bash
+npm install
+npm run dev          # serves the wizard on http://localhost:4000
+```
+
+Open the URL, paste an article link, watch the animated extractor work
+through its stages, then preview, export, and download the artifacts.
+
+### CLI
 
 ```bash
 npm install
@@ -128,8 +141,9 @@ recover when things look weird.
    npm install
    ```
 
-   This installs three packages:
+   This installs four packages:
    - `commander` — CLI argument parsing
+   - `express` — HTTP server backing the wizard SPA
    - `handlebars` — template engine for the prototype and report
    - `puppeteer-core` — headless Chrome driver (no bundled Chromium)
 
@@ -336,35 +350,37 @@ Useful for stakeholder conversations and design reviews.
 
 ## Running the browser-based tool
 
-If you can't install Node, or just want a quick visual demo:
+The wizard is a full Express + Puppeteer experience that runs the same
+extractor as the CLI — there is no longer a "lite" iframe-proxy mode.
 
-1. Start a local static server from the repo root (any will do; this is
-   what `npm start` wraps):
+1. Install and start the server:
 
    ```bash
-   npm start
-   # or:
-   npx serve .
+   npm install
+   npm run dev          # listens on http://localhost:4000
    ```
 
-2. Open the printed URL (usually `http://localhost:3000`) in your browser
-   and load `index.html`.
+2. Open the printed URL in your browser. The wizard walks you through:
+   - **Step 1 — Crawl publisher.** Paste an article URL. The backend runs
+     headless Chrome and streams live extractor stages over Server-Sent
+     Events.
+   - **Step 2 — Brand kit preview.** Visual swatches, real-font type
+     specimens, the publisher logo, and an extraction-quality meter.
+   - **Step 3 — Export.** Toggle between `brand-kit.json` and
+     `brand-kit.css`, copy or download either. The CSS file is a
+     drop-in: `:root` custom properties plus a small utility-class
+     library that consumes them.
+   - **Step 4 — Try on another article (optional).** Reuse the same
+     brand kit to re-render the prototype against a different article
+     URL. Brand tokens are not re-extracted.
+   - **Step 5 — Preview & share.** The branded feed prototype rendered
+     in an in-page iframe, plus quick links to open or download it and
+     the analysis report.
 
-3. Walk the 4-step stepper UI:
-   - **Step 1 — Crawl Publisher.** Paste the publisher homepage URL, the
-     article URL, and a name. Click **Start Crawl**. Fetching goes
-     through a CORS proxy, so some sites will fail here that work fine
-     with the CLI.
-   - **Step 2 — Brand Kit JSON.** Review the extracted JSON; edit if you
-     like.
-   - **Step 3 — Feed Prototype.** Preview the branded feed.
-   - **Step 4 — Analysis Report.** See the before/after report, with an
-     option to download.
-
-The browser tool is **good for demos and quick exploration** but
-**limited**: it can't execute pages in a real renderer, so it sees the
-raw HTML the proxy returns rather than the fully-styled DOM. For accurate
-results, always prefer the CLI.
+Recent crawls are listed on the landing step — clicking one restores the
+wizard to the brand-kit preview without re-crawling. Session state is
+also persisted to `localStorage`, so reloading mid-flow keeps your
+place.
 
 ---
 
