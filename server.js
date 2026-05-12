@@ -29,6 +29,10 @@ const engine = require('./lib/engine');
 const ROOT = __dirname;
 const OUTPUT_DIR = path.join(ROOT, 'output');
 const PORT = parseInt(process.env.PORT || '4000', 10);
+// Bind to all interfaces by default so the wizard is reachable from phones
+// on the same Wi-Fi network. Override with HOST=127.0.0.1 if you want to
+// restrict it to localhost.
+const HOST = process.env.HOST || '0.0.0.0';
 
 const CHROME_CANDIDATES = [
   '/usr/bin/google-chrome',
@@ -421,10 +425,27 @@ app.get(/^\/(?!api\/|output\/).*/, (req, res) => {
   res.sendFile(path.join(ROOT, 'wizard', 'index.html'));
 });
 
+function getLanAddresses() {
+  const os = require('os');
+  const out = [];
+  const ifaces = os.networkInterfaces();
+  for (const name of Object.keys(ifaces)) {
+    for (const addr of ifaces[name] || []) {
+      if (addr.family === 'IPv4' && !addr.internal) out.push(addr.address);
+    }
+  }
+  return out;
+}
+
 const server = http.createServer(app);
-server.listen(PORT, () => {
+server.listen(PORT, HOST, () => {
   const chrome = findChrome();
-  console.log(`\n🪄  Brand Kit Wizard running on http://localhost:${PORT}`);
-  console.log(`    Output directory: ${OUTPUT_DIR}`);
-  console.log(`    Chrome:           ${chrome || '⚠ not found — set CHROME_PATH'}\n`);
+  console.log(`\n🪄  Brand Kit Wizard listening on ${HOST}:${PORT}`);
+  console.log(`    Local:    http://localhost:${PORT}`);
+  for (const ip of getLanAddresses()) {
+    console.log(`    Network:  http://${ip}:${PORT}   ← open this on your phone`);
+  }
+  console.log(`    Output:   ${OUTPUT_DIR}`);
+  console.log(`    Chrome:   ${chrome || '⚠ not found — set CHROME_PATH'}\n`);
+  console.log(`    Tunnel:   npx cloudflared tunnel --url http://localhost:${PORT}\n`);
 });
