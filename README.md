@@ -2,15 +2,21 @@
 
 Automatically extracts brand design tokens (colors, typography, spacing, layout, brand voice, icons, photos) from any publisher website and generates Taboola feed prototypes + analysis reports.
 
-## Two Modes
+## Two ways to run it
 
-### 1. Node.js CLI (Recommended)
-Uses Puppeteer to crawl the live page with headless Chrome, extracting 50+ design tokens via `getComputedStyle()`. Produces rich nested JSON, a branded feed prototype, and a before/after analysis report.
+### 1. Wizard (recommended for humans)
 
-### 2. Browser-Based Tool
-Open `index.html` for a 4-step interactive tool that fetches pages through CORS proxies. Good for quick demos, but limited in extraction depth.
+Guided 5-step browser experience: crawl a publisher, preview the extracted brand kit, export it as **JSON or drop-in CSS**, optionally re-render the prototype against a different article URL, and preview/share the final HTML.
 
-## Quick Start — CLI
+```bash
+npm install
+npm run dev
+# open http://localhost:4000
+```
+
+The wizard talks to a tiny Express backend (`server.js`) that runs the same Puppeteer extractor as the CLI and streams live progress over Server-Sent Events. All artifacts land in `./output/<slug>/` as self-contained files — exactly what you'd upload to Nexus.
+
+### 2. CLI (recommended for automation)
 
 ```bash
 npm install
@@ -18,11 +24,14 @@ node generate.js --url "https://www.example.com/article-page" --slug example
 ```
 
 Output in `./output/example/`:
-- `brand-kit.json` — Rich nested design tokens (brand, logos, colors, fonts, brand_voice, photo_style, graphics, icons, layout_patterns)
-- `index.html` — Publisher-branded Taboola feed prototype
-- `analysis-report.html` — Before vs. after comparison report
+- `brand-kit.json` — rich nested design tokens
+- `brand-kit.css` — drop-in CSS (`:root` custom properties + utility classes)
+- `index.html` — publisher-branded Taboola feed prototype
+- `analysis-report.html` — before vs. after comparison report
 
-### CLI Options
+> Note: `brand-kit.css` is only written by the wizard (`npm run dev`). The CLI today writes the other three artifacts.
+
+#### CLI Options
 
 ```
 --url <url>         Required. Publisher article URL to crawl
@@ -35,60 +44,26 @@ Output in `./output/example/`:
 --list              List previously generated publishers
 ```
 
-### Examples
-
-```bash
-# Full generation
-node generate.js --url "https://www.t-online.de/nachrichten/article" --slug t-online
-
-# Re-generate from existing brand kit
-node generate.js --url "https://example.com" --brand-kit ./output/t-online/brand-kit.json --slug t-online
-
-# Report only
-node generate.js --url "https://www.bbc.com/news/article" --report-only
-
-# List generated publishers
-node generate.js --url _ --list
-```
-
 ## Project Structure
 
 ```
+├── server.js                   Express backend for the wizard (SSE progress)
 ├── generate.js                 CLI entry point (commander)
+├── wizard/                     Modern SPA — vanilla HTML/CSS/JS
+│   ├── index.html
+│   ├── wizard.css
+│   └── wizard.js
 ├── lib/
 │   ├── crawler.js              Puppeteer-based page crawler (7 extractors)
 │   ├── defaults.js             Generic Taboola baseline for "before" comparison
 │   ├── fonts.js                Proprietary font → Google Fonts mapping
 │   ├── feed-content.js         Sponsored + native card generation
+│   ├── unsplash.js             Curated photo bank + topic detector
+│   ├── css-export.js           brand-kit.json → brand-kit.css
 │   ├── analysis.js             Diff brand kit vs defaults → stats/gaps/workflow
 │   └── engine.js               Handlebars setup, partial registration, helpers
-├── templates/
-│   ├── prototype.hbs           Feed prototype main template
-│   ├── report.hbs              Analysis report main template
-│   └── partials/
-│       ├── proto-nav.hbs
-│       ├── proto-hero.hbs
-│       ├── proto-article.hbs
-│       ├── proto-feed.hbs
-│       ├── proto-footer.hbs
-│       ├── report-header.hbs
-│       ├── report-summary.hbs
-│       ├── report-visual.hbs
-│       ├── report-properties.hbs
-│       ├── report-workflow.hbs
-│       ├── report-ui-modes.hbs
-│       ├── report-advantages.hbs
-│       ├── report-gaps.hbs
-│       ├── report-conclusion.hbs
-│       └── components/
-│           ├── stat-card.hbs
-│           ├── status-tag.hbs
-│           └── feed-card.hbs
-├── output/                     Generated per-publisher output
-├── index.html                  Browser-based tool (standalone)
-├── css/styles.css
-├── js/                         Browser JS modules
-└── package.json
+├── templates/                  Handlebars templates for prototype + report
+└── output/                     Generated per-publisher artifacts
 ```
 
 ## Brand Kit JSON Schema
@@ -106,17 +81,9 @@ The generated `brand-kit.json` contains:
 | `graphics` | badges, labels, decorative elements |
 | `icons` | SVG count, social media icons, style |
 | `layout_patterns` | header layers, grid detection, card patterns |
-| `metadata` | analysis date, source URL, method |
+| `metadata` | analysis date, source URL, extraction quality |
 
 ## Requirements
 
 - Node.js 18+
-- Chrome or Chromium installed on the system
-
-## Browser-Based Tool
-
-```bash
-npm start
-```
-
-Open `index.html` in browser → Enter URL → Start Crawl → Review JSON → Preview Prototype → Download Report
+- Chrome or Chromium installed on the system (or set `CHROME_PATH=/path/to/chrome`)
