@@ -98,6 +98,15 @@ The generated `brand-kit.json` contains:
 | `layout_patterns` | header layers, grid detection, card patterns |
 | `metadata` | analysis date, source URL, extraction quality |
 
+## Deploy it
+
+Want a public URL you can hand teammates? See [`DEPLOY.md`](./DEPLOY.md).
+The repo includes:
+
+- `Dockerfile` — Node 20 + system Chromium, ready to push to any container host.
+- `render.yaml` — one-click [Render](https://render.com) blueprint (deployable from a phone).
+- `fly.toml` — [Fly.io](https://fly.io) config (deployable via `flyctl deploy`).
+
 ## Requirements
 
 - Node.js 18+
