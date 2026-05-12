@@ -16,6 +16,21 @@ npm run dev
 
 The wizard talks to a tiny Express backend (`server.js`) that runs the same Puppeteer extractor as the CLI and streams live progress over Server-Sent Events. All artifacts land in `./output/<slug>/` as self-contained files — exactly what you'd upload to Nexus.
 
+The UI is fully responsive — open it on your phone over Wi-Fi or via a tunnel:
+
+```bash
+# 1) On your laptop, in the same Wi-Fi: the server already binds to 0.0.0.0.
+#    Look for the "Network: http://192.168.x.x:4000" line in the start-up log
+#    and open that URL on your phone.
+
+# 2) Share over the internet via Cloudflare's free tunnel (no signup needed):
+npx cloudflared tunnel --url http://localhost:4000
+# prints a https://<random>.trycloudflare.com URL you can hand anyone
+
+# Or restrict back to localhost only:
+HOST=127.0.0.1 npm run dev
+```
+
 ### 2. CLI (recommended for automation)
 
 ```bash

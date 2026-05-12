@@ -382,6 +382,33 @@ wizard to the brand-kit preview without re-crawling. Session state is
 also persisted to `localStorage`, so reloading mid-flow keeps your
 place.
 
+### Opening the wizard on your phone
+
+The server binds to `0.0.0.0` by default, so any device on the same
+Wi-Fi can reach it.
+
+1. When you start the server you'll see a `Network: http://…` line in
+   the log — that's the LAN URL. Open it on your phone.
+2. The UI is responsive (iOS + Android). Inputs use 16px so iOS Safari
+   doesn't zoom, the stepper collapses to dot-only on small screens, and
+   the modal goes full-screen on phones.
+
+To share over the public internet without deploying, use Cloudflare's
+free quick tunnel — no signup, no account:
+
+```bash
+npx cloudflared tunnel --url http://localhost:4000
+```
+
+It prints a `https://<random>.trycloudflare.com` URL you can paste into
+any browser. The tunnel lasts as long as the command runs.
+
+If you want to bind back to localhost only:
+
+```bash
+HOST=127.0.0.1 npm run dev
+```
+
 ---
 
 ## Choosing a good URL to crawl
