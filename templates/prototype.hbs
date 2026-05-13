@@ -73,28 +73,73 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
       font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    .feed-card-cta {
+    /* Native cards: subtle text link — preserves the editorial feel. */
+    .feed-card-cta-link {
       font-size: 12px;
       color: var(--brand-primary);
       font-weight: 700;
       white-space: nowrap;
     }
-    /* Gradient fallback when Unsplash thumbnail 404s — the img tag's onerror
-       hides itself and adds .feed-card-image-fallback to its parent. */
-    .feed-card-image-fallback {
+    /* Sponsored cards: outline pill that fills on hover. Clean, modern,
+       reads as an action without overpowering the content. */
+    .feed-card-cta-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      background: transparent;
+      color: var(--brand-primary);
+      border: 1px solid var(--brand-primary);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+    .feed-card:hover .feed-card-cta-pill {
+      background: var(--brand-primary);
+      color: var(--brand-bg);
+      transform: translateY(-1px);
+    }
+
+    /* Image wrap background lives in a class so the fallback class can
+       override it cleanly. Inline styles would have higher specificity
+       and silently break the fallback. */
+    .feed-card-image-wrap {
+      background: var(--brand-bg-section);
+      overflow: hidden;
+    }
+    /* Gradient fallback when an Unsplash thumbnail 404s — the img tag's
+       onerror hides itself and adds .feed-card-image-fallback to its
+       parent. Two-class selector wins specificity over .feed-card-image-wrap. */
+    .feed-card-image-wrap.feed-card-image-fallback {
       background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%);
     }
-    .feed-card-image-fallback::after {
+    .feed-card-image-wrap.feed-card-image-fallback::after {
       content: '';
       position: absolute; inset: 0;
       background-image: repeating-linear-gradient(
         45deg,
-        rgba(255,255,255,0.06) 0px,
-        rgba(255,255,255,0.06) 8px,
+        rgba(255,255,255,0.08) 0px,
+        rgba(255,255,255,0.08) 8px,
         transparent 8px,
         transparent 16px
       );
+    }
+    .feed-card-image-wrap.feed-card-image-fallback::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
     }
     .section-label {
       font-family: var(--font-headline);
