@@ -515,9 +515,13 @@
   // -------- Step 5: preview -----------------------------------------------
 
   function renderPreview() {
-    if (!state.links?.prototype) return;
+    if (!state.links?.prototype) {
+      toast('No prototype yet — crawl a publisher first', { error: true });
+      return;
+    }
     const url = `${state.links.prototype}?t=${Date.now()}`;
-    $('#prototype-frame').src = url;
+    const frame = $('#prototype-frame');
+    frame.src = url;
     $('#frame-url').textContent = state.links.prototype;
   }
 
@@ -526,12 +530,34 @@
       toast('No report yet — crawl a publisher first', { error: true });
       return;
     }
-    $('#report-frame').src = `${state.links.report}?t=${Date.now()}`;
-    $('#report-modal').hidden = false;
+    // HEAD-probe the report file so we don't open a blank modal pointing
+    // at a 404. `/output/<slug>/analysis-report.html` can disappear if the
+    // user wiped the output dir between sessions while localStorage still
+    // remembered the slug.
+    fetch(state.links.report, { method: 'HEAD' })
+      .then((r) => {
+        if (!r.ok) throw new Error('missing');
+        $('#report-frame').src = `${state.links.report}?t=${Date.now()}`;
+        $('#report-modal').hidden = false;
+      })
+      .catch(() => {
+        toast('Report file is gone — re-crawl the publisher', { error: true });
+        clearLinks();
+      });
   }
   function closeReportModal() {
     $('#report-modal').hidden = true;
+    // about:blank clears the iframe so the next open doesn't briefly
+    // show the previous report through the modal animation.
     $('#report-frame').src = 'about:blank';
+  }
+
+  function clearLinks() {
+    state.slug = null;
+    state.brandKit = null;
+    state.links = null;
+    state.css = null;
+    saveState();
   }
 
   // -------- Utilities -----------------------------------------------------
@@ -573,6 +599,11 @@
   $('#report-modal').addEventListener('click', (e) => {
     if (e.target.id === 'report-modal') closeReportModal();
   });
+  // Escape closes whichever modal is open. Keyboards are faster than mice
+  // and reviewers will reach for it before clicking the X.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !$('#report-modal').hidden) closeReportModal();
+  });
 
   // Step-action data-attribute dispatch — keeps HTML declarative.
   document.body.addEventListener('click', (e) => {
@@ -607,11 +638,22 @@
     app.dataset.step = String(state.step || 1);
 
     // If we have a stored slug, fetch the latest brand kit so the UI doesn't
-    // depend on whatever was cached in localStorage at last load.
+    // depend on whatever was cached in localStorage at last load. If the
+    // slug no longer exists on disk (output dir wiped between sessions),
+    // throw away the stale links and reset to step 1 so the user isn't
+    // left on a phantom Preview step pointing at 404s.
     if (state.slug) {
       fetch(`/api/brand-kit/${encodeURIComponent(state.slug)}`)
-        .then((r) => (r.ok ? r.json() : null))
+        .then((r) => {
+          if (r.status === 404) return { _missing: true };
+          return r.ok ? r.json() : null;
+        })
         .then((data) => {
+          if (data && data._missing) {
+            clearLinks();
+            goToStep(1);
+            return;
+          }
           if (data?.brandKit) {
             state.brandKit = data.brandKit;
             state.links = data.links;
