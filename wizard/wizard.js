@@ -599,6 +599,22 @@
   $('#report-modal').addEventListener('click', (e) => {
     if (e.target.id === 'report-modal') closeReportModal();
   });
+  $('#report-open').addEventListener('click', () => {
+    if (state.links?.report) window.open(state.links.report, '_blank', 'noopener');
+  });
+  $('#report-download').addEventListener('click', () => {
+    if (!state.links?.report) return;
+    // Forcing the download attribute via a synthetic anchor keeps the
+    // browser from rendering the report inline; same-origin so the
+    // attribute is honored.
+    const a = document.createElement('a');
+    a.href = state.links.report;
+    const slug = state.slug || 'brand-kit';
+    a.download = `${slug}-analysis-report.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
   // Escape closes whichever modal is open. Keyboards are faster than mice
   // and reviewers will reach for it before clicking the X.
   document.addEventListener('keydown', (e) => {
