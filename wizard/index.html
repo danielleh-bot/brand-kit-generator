@@ -245,7 +245,11 @@
     <div class="modal-card">
       <header class="modal-head">
         <h2>Analysis report</h2>
-        <button class="ghost-sm" id="report-close">Close ✕</button>
+        <div style="display: flex; gap: 8px;">
+          <button class="ghost-sm" id="report-open" title="Open in new tab">Open ↗</button>
+          <button class="ghost-sm" id="report-download" title="Download HTML">Download</button>
+          <button class="ghost-sm" id="report-close">Close ✕</button>
+        </div>
       </header>
       <iframe id="report-frame" title="Analysis report"></iframe>
     </div>

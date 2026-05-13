@@ -214,6 +214,44 @@ async function runCrawl({ url, slug, stage, log }) {
   }
 }
 
+// Build a synthetic brand kit that mirrors the publisher's structural data
+// (article content, navigation, logos) but swaps colours/fonts for the
+// generic Taboola baseline. Rendering the same prototype template with this
+// "kit" yields a believable "before" view of the publisher's feed without
+// the brand kit applied — used as the left side of the report's
+// before/after comparison.
+function buildDefaultsBrandKit(realKit) {
+  const safe = realKit || {};
+  return {
+    brand: safe.brand || { name: 'Publisher', website: '', language: 'en' },
+    logos: safe.logos || {},
+    colors: {
+      primary:   { hex: '#1a73e8', name: 'Default CTA Blue' },
+      secondary: { hex: '#1a73e8' },
+      text: {
+        primary:   { hex: '#333333' },
+        secondary: { hex: '#666666' },
+        tertiary: { hex: '#888888' },
+      },
+      backgrounds: {
+        base:    { hex: '#FFFFFF' },
+        section: { hex: '#F3F4F6' },
+        dark:    { hex: '#1F2937' },
+      },
+      accents: {},
+    },
+    fonts: {
+      primary:   { family: 'Arial', fallbacks: ['Helvetica', 'sans-serif'], weights: { regular: 400, bold: 700 } },
+      secondary: { family: 'Arial', fallbacks: ['Helvetica', 'sans-serif'] },
+      tertiary: [],
+      type_scale: {},
+    },
+    brand_voice: safe.brand_voice || {},
+    photo_style: { thumbnail_format: { border_radius: '6px' } },
+    metadata: safe.metadata || {},
+  };
+}
+
 function writeArtifacts({ slug, brandKit, content, navigation, relatedArticles }) {
   const outDir = ensureOutputDir(slug);
 
@@ -246,10 +284,26 @@ function writeArtifacts({ slug, brandKit, content, navigation, relatedArticles }
     slug,
   };
 
+  // After: branded prototype
   fs.writeFileSync(
     path.join(outDir, 'index.html'),
     engine.render('prototype.hbs', templateData),
   );
+
+  // Before: same article + same nav + same content, generic Taboola styling.
+  // Drives the iframe on the left side of the report's Visual Comparison.
+  const defaultKit = buildDefaultsBrandKit(brandKit);
+  fs.writeFileSync(
+    path.join(outDir, 'default-feed.html'),
+    engine.render('prototype.hbs', {
+      ...templateData,
+      brandKit: defaultKit,
+      googleFontsUrl: '',
+      resolvedFonts: {},
+    }),
+  );
+
+  // Analysis report — embeds both prototypes side-by-side.
   fs.writeFileSync(
     path.join(outDir, 'analysis-report.html'),
     engine.render('report.hbs', templateData),
@@ -257,7 +311,7 @@ function writeArtifacts({ slug, brandKit, content, navigation, relatedArticles }
 
   return {
     slug,
-    files: ['brand-kit.json', 'brand-kit.css', 'index.html', 'analysis-report.html'],
+    files: ['brand-kit.json', 'brand-kit.css', 'index.html', 'default-feed.html', 'analysis-report.html'],
     metadata: {
       extraction_quality:
         brandKit && brandKit.metadata && brandKit.metadata.extraction_quality,
