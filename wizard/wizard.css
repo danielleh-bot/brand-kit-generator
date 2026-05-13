@@ -684,6 +684,11 @@ input { -webkit-tap-highlight-color: transparent; }
   z-index: 100;
   animation: fadeIn 200ms var(--ease) both;
 }
+/* The UA stylesheet's [hidden] { display: none } loses to the
+   `.modal { display: grid }` rule on cascade order, so the modal would
+   stay visible forever. This higher-specificity rule restores [hidden]
+   semantics — toggling element.hidden actually hides the modal. */
+.modal[hidden] { display: none; }
 .modal-card {
   background: var(--surface);
   border-radius: var(--radius-lg);

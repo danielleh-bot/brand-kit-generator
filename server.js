@@ -271,10 +271,27 @@ function writeArtifacts({ slug, brandKit, content, navigation, relatedArticles }
 const app = express();
 app.use(express.json({ limit: '2mb' }));
 
-// Static: the wizard SPA itself
-app.use(express.static(path.join(ROOT, 'wizard')));
+// Static: the wizard SPA itself. Disable caching so iterating on the
+// HTML/CSS/JS doesn't require a hard refresh.
+app.use(
+  express.static(path.join(ROOT, 'wizard'), {
+    etag: false,
+    lastModified: false,
+    setHeaders: (res) => {
+      res.setHeader('Cache-Control', 'no-store, must-revalidate');
+    },
+  }),
+);
 // Static: generated artifacts, served read-only so the wizard can iframe them
-app.use('/output', express.static(OUTPUT_DIR));
+app.use(
+  '/output',
+  express.static(OUTPUT_DIR, {
+    setHeaders: (res) => {
+      // Output files change every crawl — never serve a stale prototype.
+      res.setHeader('Cache-Control', 'no-cache');
+    },
+  }),
+);
 
 // List previously generated publishers (for the wizard's "recent" picker)
 app.get('/api/publishers', (req, res) => {
