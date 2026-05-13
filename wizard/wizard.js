@@ -519,10 +519,20 @@
       toast('No prototype yet — crawl a publisher first', { error: true });
       return;
     }
-    const url = `${state.links.prototype}?t=${Date.now()}`;
-    const frame = $('#prototype-frame');
-    frame.src = url;
-    $('#frame-url').textContent = state.links.prototype;
+    // HEAD-probe so a stale link from a wiped output dir surfaces as a
+    // toast instead of a blank iframe.
+    fetch(state.links.prototype, { method: 'HEAD' })
+      .then((r) => {
+        if (!r.ok) throw new Error('missing');
+        const url = `${state.links.prototype}?t=${Date.now()}`;
+        $('#prototype-frame').src = url;
+        $('#frame-url').textContent = state.links.prototype;
+      })
+      .catch(() => {
+        toast('Prototype file is gone — re-crawl the publisher', { error: true });
+        clearLinks();
+        goToStep(1);
+      });
   }
 
   function openReportModal() {
