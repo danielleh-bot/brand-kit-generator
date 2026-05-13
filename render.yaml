@@ -1,0 +1,23 @@
+# Render blueprint — one-click deploy.
+# Visit https://render.com/deploy?repo=https://github.com/danielleh-bot/brand-kit-generator
+# (or the "Deploy to Render" button in README.md) and Render will read this
+# file, build the Dockerfile, and expose the wizard on a public URL.
+services:
+  - type: web
+    name: brand-kit-wizard
+    runtime: docker
+    plan: starter            # 512MB RAM is too tight for Chromium; Starter ($7/mo) has 1GB
+    region: oregon
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: CHROME_PATH
+        value: /usr/bin/chromium
+    disk:
+      name: brand-kit-output
+      mountPath: /app/output
+      sizeGB: 1

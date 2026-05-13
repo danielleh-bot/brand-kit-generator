@@ -1,0 +1,42 @@
+# Fly.io deploy config. Run from the repo root:
+#   flyctl auth login
+#   flyctl launch --copy-config --name brand-kit-wizard
+#   flyctl deploy
+
+app           = "brand-kit-wizard"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  NODE_ENV     = "production"
+  PORT         = "4000"
+  CHROME_PATH  = "/usr/bin/chromium"
+
+[http_service]
+  internal_port       = 4000
+  force_https         = true
+  auto_stop_machines  = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes           = ["app"]
+
+  [http_service.concurrency]
+    type        = "requests"
+    hard_limit  = 30
+    soft_limit  = 20
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout  = "5s"
+    method   = "GET"
+    path     = "/api/health"
+
+[mounts]
+  source      = "brand_kit_output"
+  destination = "/app/output"
+
+[[vm]]
+  size   = "shared-cpu-1x"
+  memory = "1gb"
