@@ -45,6 +45,24 @@
       --btn-transform: {{default brandKit.buttons.primary.text_transform 'none'}};
       --btn-tracking: {{default brandKit.buttons.primary.letter_spacing '0.04em'}};
       --btn-primary-hover: {{default brandKit.colors.primary_variants.darken_5.hex (default brandKit.colors.primary.hex '#1a73e8')}};
+
+      /* Soft CTA — usually a light mint/cream pill the publisher uses for
+         newsletter / sign-up affordances. When the crawler picked one up
+         we mirror it on the sponsored-card badge, which dramatically
+         improves on-brand feel (gold-standard recipe_card.sponsor_label). */
+      --soft-cta-bg: {{default brandKit.buttons.soft_cta.background_color (default brandKit.colors.accents.soft_mint.hex (default brandKit.colors.backgrounds.section.hex '#f3f4f6'))}};
+      --soft-cta-text: {{default brandKit.buttons.soft_cta.text_color (default brandKit.colors.text.primary.hex '#111')}};
+
+      /* Border-radius semantic groups, captured per-element-type. The
+         legacy single radius value is reused as the fallback so existing
+         outputs render the same. */
+      --radius-buttons: {{default brandKit.border_radius.buttons '9999px'}};
+      --radius-cards:   {{default brandKit.border_radius.cards (default brandKit.photo_style.thumbnail_format.border_radius '6px')}};
+      --radius-images:  {{default brandKit.border_radius.images '0px'}};
+
+      /* Real captured shadows. Default is the existing hover shadow so
+         prototypes without extracted shadows look identical to before. */
+      --shadow-natural: {{default brandKit.shadows.natural '0 6px 24px rgba(0,0,0,0.08)'}};
     }
     * { box-sizing: border-box; }
     body {
@@ -68,9 +86,10 @@
       transition: box-shadow 0.2s, transform 0.2s;
       background: var(--brand-bg);
       border: 1px solid var(--brand-bg-section);
+      border-radius: var(--radius-cards);
     }
     .feed-card:hover {
-      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      box-shadow: var(--shadow-natural);
       transform: translateY(-2px);
     }
     .feed-card-headline {
@@ -171,10 +190,10 @@
     }
     .badge-sponsored {
       font-size: 10px;
-      padding: 3px 7px;
-      border-radius: 3px;
-      background: rgba(0,0,0,0.65);
-      color: #fff;
+      padding: 3px 9px;
+      border-radius: var(--radius-buttons);
+      background: var(--soft-cta-bg);
+      color: var(--soft-cta-text);
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-weight: 700;
