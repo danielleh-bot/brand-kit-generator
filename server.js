@@ -155,7 +155,7 @@ async function runArticleCrawl({ url, stage, log }) {
   }
 }
 
-async function runCrawl({ url, slug, stage, log }) {
+async function runCrawl({ url, articleUrl, slug, stage, log }) {
   const chromePath = findChrome();
   if (!chromePath) {
     throw new Error(
@@ -195,6 +195,18 @@ async function runCrawl({ url, slug, stage, log }) {
     const brandKit = await extractBrandKit(page, url);
     stage('brand', 'done');
 
+    // If the user gave us a *different* article URL to use as the content
+    // source, navigate to it now and pull content/nav/related from there.
+    // Brand kit was already extracted from the first URL — we don't want
+    // to re-extract design tokens against a second page.
+    let contentUrl = url;
+    if (articleUrl && articleUrl !== url) {
+      log(`Switching to article URL for content: ${articleUrl}`);
+      await page.goto(articleUrl, { waitUntil: 'networkidle2', timeout: 60000 });
+      await new Promise((r) => setTimeout(r, 1500));
+      contentUrl = articleUrl;
+    }
+
     stage('content', 'active');
     const content = await extractContent(page);
     stage('content', 'done');
@@ -204,7 +216,7 @@ async function runCrawl({ url, slug, stage, log }) {
     stage('navigation', 'done');
 
     stage('related', 'active');
-    const relatedArticles = await extractRelatedArticles(page, url);
+    const relatedArticles = await extractRelatedArticles(page, contentUrl);
     log(`Found ${relatedArticles.length} related articles`);
     stage('related', 'done');
 
@@ -375,6 +387,7 @@ app.get('/api/publishers', (req, res) => {
 // SSE: crawl a publisher URL and stream progress
 app.get('/api/crawl', async (req, res) => {
   const url = (req.query.url || '').trim();
+  const articleUrl = (req.query.articleUrl || '').trim() || null;
   if (!url) {
     res.status(400).json({ error: 'Missing url' });
     return;
@@ -393,7 +406,7 @@ app.get('/api/crawl', async (req, res) => {
   const log = (message) => sendEvent(res, 'log', { message });
 
   try {
-    const crawled = await runCrawl({ url, slug, stage, log });
+    const crawled = await runCrawl({ url, articleUrl, slug, stage, log });
     stage('render', 'active');
     const result = writeArtifacts({ slug, ...crawled });
     stage('render', 'done');

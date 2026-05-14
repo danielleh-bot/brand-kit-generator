@@ -209,13 +209,28 @@
     e.preventDefault();
     const url = $('#crawl-url').value.trim();
     if (!url) return;
+    const articleUrl = $('#article-url').value.trim() || null;
     state.publisherUrl = url;
+    state.articleUrl = articleUrl;
     saveState();
 
     const card = $('#crawl-progress');
     card.hidden = false;
-    $('#progress-title').textContent = `Crawling ${shorten(url)}`;
-    streamFromUrl(`/api/crawl?url=${encodeURIComponent(url)}`, {
+    // Hide the completed banner from any previous run.
+    $('#crawl-complete').hidden = true;
+    card.classList.remove('is-complete');
+
+    $('#progress-title').textContent = articleUrl
+      ? `Crawling ${shorten(url)} + ${shorten(articleUrl)}`
+      : `Crawling ${shorten(url)}`;
+
+    // Auto-scroll so the user immediately sees the progress checklist
+    // instead of staring at the now-stale form above the fold.
+    requestAnimationFrame(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+
+    let qs = `url=${encodeURIComponent(url)}`;
+    if (articleUrl) qs += `&articleUrl=${encodeURIComponent(articleUrl)}`;
+    streamFromUrl(`/api/crawl?${qs}`, {
       stagesEl: $('#crawl-stages'),
       logEl: $('#crawl-log'),
       titleEl: $('#progress-title'),
@@ -226,12 +241,29 @@
         state.css = null;
         saveState();
         renderBrandKit();
-        setTimeout(() => goToStep(2), 350);
+        markCrawlComplete();
       },
       onError: (msg) => {
         toast(msg, { error: true, duration: 5000 });
       },
     });
+  }
+
+  // After all stages succeed, swap the spinner for a "done" banner with an
+  // explicit Continue button. We still auto-advance after a short delay so
+  // a user who's away from keyboard isn't stuck staring at the banner, but
+  // anyone watching the run gets a deliberate moment of confirmation.
+  function markCrawlComplete() {
+    const card = $('#crawl-progress');
+    card.classList.add('is-complete');
+    $('#progress-title').textContent = 'Crawl complete';
+    $('#crawl-complete').hidden = false;
+
+    const autoAdvance = setTimeout(() => goToStep(2), 1800);
+    // If the user clicks Continue we cancel the auto-advance to avoid
+    // a double-transition.
+    const continueBtn = $('#crawl-complete .primary');
+    continueBtn.addEventListener('click', () => clearTimeout(autoAdvance), { once: true });
   }
 
   // -------- Step 2: brand kit preview -------------------------------------
@@ -484,35 +516,7 @@
     navigator.clipboard?.writeText(code).then(() => toast('Copied to clipboard'));
   }
 
-  // -------- Step 4: re-render prototype -----------------------------------
-
-  function onArticleSubmit(e) {
-    e.preventDefault();
-    const url = $('#article-url').value.trim();
-    if (!url) return;
-    if (!state.slug) { toast('Crawl a publisher first', { error: true }); return; }
-    state.articleUrl = url;
-    saveState();
-
-    const card = $('#proto-progress');
-    card.hidden = false;
-    streamFromUrl(
-      `/api/prototype?slug=${encodeURIComponent(state.slug)}&url=${encodeURIComponent(url)}`,
-      {
-        stagesEl: $('#proto-stages'),
-        logEl: $('#proto-log'),
-        onDone: (data) => {
-          state.links = data.links;
-          saveState();
-          // Bust iframe cache when we move to preview
-          setTimeout(() => goToStep(5), 350);
-        },
-        onError: (msg) => toast(msg, { error: true, duration: 5000 }),
-      },
-    );
-  }
-
-  // -------- Step 5: preview -----------------------------------------------
+  // -------- Step 4: preview -----------------------------------------------
 
   function renderPreview() {
     if (!state.links?.prototype) {
@@ -590,7 +594,19 @@
   // -------- Wiring --------------------------------------------------------
 
   $('#crawl-form').addEventListener('submit', onCrawlSubmit);
-  $('#article-form').addEventListener('submit', onArticleSubmit);
+
+  // Optional article URL field is collapsed by default; clicking the link
+  // reveals it. Keep it inline rather than in its own step now.
+  $('#article-toggle-btn').addEventListener('click', () => {
+    const field = $('#article-field');
+    const open = field.hidden;
+    field.hidden = !open;
+    $('#article-toggle .article-toggle-icon').textContent = open ? '−' : '+';
+    if (open) {
+      // Slight delay so the field is rendered before focus.
+      setTimeout(() => $('#article-url').focus(), 80);
+    }
+  });
 
   $$('.toggle-option').forEach((b) =>
     b.addEventListener('click', () => showExport(b.dataset.format)),
@@ -637,12 +653,11 @@
     if (!target) return;
     const action = target.dataset.action;
     switch (action) {
+      case 'go-brand':        goToStep(2); break;
       case 'go-export':       goToStep(3); showExport(state.exportFormat); break;
-      case 'go-article':      goToStep(4); break;
-      case 'go-preview':      goToStep(5); renderPreview(); break;
+      case 'go-preview':      goToStep(4); renderPreview(); break;
       case 'back-to-brand':   goToStep(2); break;
       case 'back-to-export':  goToStep(3); break;
-      case 'back-to-article': goToStep(4); break;
       case 'view-report':     openReportModal(); break;
       case 'open-prototype':
         if (state.links?.prototype) window.open(state.links.prototype, '_blank', 'noopener');
@@ -686,7 +701,9 @@
             saveState();
             renderBrandKit();
             if (state.step === 3) showExport(state.exportFormat);
-            if (state.step === 5) renderPreview();
+            if (state.step === 4) renderPreview();
+            // Migrate legacy 5-step state to the 4-step flow.
+            if (state.step === 5) { state.step = 4; saveState(); goToStep(4); renderPreview(); }
           }
         })
         .catch(() => {});

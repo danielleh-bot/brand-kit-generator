@@ -33,8 +33,7 @@
         <li data-step="1"><span class="dot"></span><span class="label">Crawl</span></li>
         <li data-step="2"><span class="dot"></span><span class="label">Brand kit</span></li>
         <li data-step="3"><span class="dot"></span><span class="label">Export</span></li>
-        <li data-step="4"><span class="dot"></span><span class="label">Try article</span></li>
-        <li data-step="5"><span class="dot"></span><span class="label">Preview</span></li>
+        <li data-step="4"><span class="dot"></span><span class="label">Preview</span></li>
       </ol>
       <button class="ghost" id="reset-btn" title="Start over">Start over</button>
     </header>
@@ -49,7 +48,7 @@
       </div>
 
       <form id="crawl-form" class="card url-card" autocomplete="off">
-        <label for="crawl-url" class="sr-only">Publisher article URL</label>
+        <label for="crawl-url" class="form-label">Publisher article URL <span class="form-required">required</span></label>
         <div class="input-row">
           <input
             type="url"
@@ -60,12 +59,33 @@
             autocomplete="off"
             spellcheck="false"
           />
+        </div>
+
+        <div class="optional-toggle" id="article-toggle">
+          <button type="button" id="article-toggle-btn" class="link-btn">
+            <span class="article-toggle-icon">+</span>
+            Use a different article for the prototype (optional)
+          </button>
+        </div>
+        <div class="optional-field" id="article-field" hidden>
+          <label for="article-url" class="form-label">Article URL <span class="form-hint">— overrides the article content used in the rendered prototype</span></label>
+          <input
+            type="url"
+            id="article-url"
+            name="articleUrl"
+            placeholder="https://www.example.com/another-article"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+
+        <div class="form-submit-row">
+          <p class="hint">Try a real article page, not the homepage — articles expose the publisher's full type scale and related-article rails.</p>
           <button type="submit" class="primary">
             <span>Extract brand kit</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           </button>
         </div>
-        <p class="hint">Try a real article page, not the homepage — articles expose the publisher's full type scale and related-article rails.</p>
       </form>
 
       <div class="card recents" id="recents-card" hidden>
@@ -78,7 +98,16 @@
         <h2 id="progress-title">Working on it…</h2>
         <ol class="stages" id="crawl-stages"></ol>
         <div class="log" id="crawl-log" aria-live="polite"></div>
-        <button type="button" class="ghost" id="crawl-cancel" hidden>Cancel</button>
+        <div class="progress-complete" id="crawl-complete" hidden>
+          <div class="complete-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12.5l5 5L20 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </div>
+          <div class="complete-text">
+            <h3>Brand kit ready</h3>
+            <p>We've pulled the design tokens. Continue to see them.</p>
+          </div>
+          <button type="button" class="primary" data-action="go-brand">Continue →</button>
+        </div>
       </div>
     </section>
 
@@ -164,54 +193,14 @@
 
       <footer class="step-actions">
         <button type="button" class="ghost" data-action="back-to-brand">← Back</button>
-        <button type="button" class="primary" data-action="go-article">Try on another article →</button>
+        <button type="button" class="primary" data-action="go-preview">Continue to preview →</button>
       </footer>
     </section>
 
     <!-- ============================================================ -->
-    <!-- Step 4: Apply to a different article (optional)               -->
+    <!-- Step 4: Preview & share                                       -->
     <!-- ============================================================ -->
     <section class="step" data-step="4">
-      <div class="step-head">
-        <h1>Try the brand kit on another article</h1>
-        <p class="lede">Optional. Drop in any URL from the same publisher to re-render the prototype with that article's content.</p>
-      </div>
-
-      <form id="article-form" class="card url-card" autocomplete="off">
-        <div class="input-row">
-          <input
-            type="url"
-            id="article-url"
-            name="url"
-            required
-            placeholder="https://www.example.com/another-article"
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <button type="submit" class="primary">
-            <span>Re-render prototype</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-          </button>
-        </div>
-        <p class="hint">Same publisher is best — using a different domain will mix navigation styles.</p>
-      </form>
-
-      <div class="card progress-card" id="proto-progress" hidden>
-        <h2>Re-rendering…</h2>
-        <ol class="stages" id="proto-stages"></ol>
-        <div class="log" id="proto-log" aria-live="polite"></div>
-      </div>
-
-      <footer class="step-actions">
-        <button type="button" class="ghost" data-action="back-to-export">← Back</button>
-        <button type="button" class="primary" data-action="go-preview">Skip → Preview prototype</button>
-      </footer>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- Step 5: Preview & share                                       -->
-    <!-- ============================================================ -->
-    <section class="step" data-step="5">
       <div class="step-head">
         <h1>Preview the branded feed</h1>
         <p class="lede">The prototype below is a fully self-contained HTML file — open it, download it, or upload it to Nexus.</p>
@@ -232,7 +221,7 @@
       </div>
 
       <footer class="step-actions">
-        <button type="button" class="ghost" data-action="back-to-article">← Back</button>
+        <button type="button" class="ghost" data-action="back-to-export">← Back</button>
         <button type="button" class="ghost" data-action="view-report">Open analysis report</button>
         <button type="button" class="primary" data-action="restart">Crawl another publisher</button>
       </footer>
