@@ -200,8 +200,7 @@ input { -webkit-tap-highlight-color: transparent; }
 .app[data-step="1"] .step[data-step="1"],
 .app[data-step="2"] .step[data-step="2"],
 .app[data-step="3"] .step[data-step="3"],
-.app[data-step="4"] .step[data-step="4"],
-.app[data-step="5"] .step[data-step="5"] {
+.app[data-step="4"] .step[data-step="4"] {
   display: flex;
 }
 

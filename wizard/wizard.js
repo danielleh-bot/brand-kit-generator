@@ -554,13 +554,26 @@
     return html;
   }
 
+  // Force a real "Save As" via a synthetic anchor with `download`. Plain
+  // `window.location.href = url` would just open the JSON/CSS inline in the
+  // browser since the server serves them as `application/json` / `text/css`,
+  // never triggering a download.
+  function downloadFile(url, filename) {
+    if (!url) return;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   function downloadCurrent() {
+    const slug = state.slug || 'brand-kit';
     if (state.exportFormat === 'json') {
-      if (!state.links?.brandKitJson) return;
-      window.location.href = state.links.brandKitJson;
+      downloadFile(state.links?.brandKitJson, `${slug}-brand-kit.json`);
     } else {
-      if (!state.links?.brandKitCss) return;
-      window.location.href = state.links.brandKitCss;
+      downloadFile(state.links?.brandKitCss, `${slug}-brand-kit.css`);
     }
   }
 
@@ -682,17 +695,7 @@
     if (state.links?.report) window.open(state.links.report, '_blank', 'noopener');
   });
   $('#report-download').addEventListener('click', () => {
-    if (!state.links?.report) return;
-    // Forcing the download attribute via a synthetic anchor keeps the
-    // browser from rendering the report inline; same-origin so the
-    // attribute is honored.
-    const a = document.createElement('a');
-    a.href = state.links.report;
-    const slug = state.slug || 'brand-kit';
-    a.download = `${slug}-analysis-report.html`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    downloadFile(state.links?.report, `${state.slug || 'brand-kit'}-analysis-report.html`);
   });
   // Escape closes whichever modal is open. Keyboards are faster than mice
   // and reviewers will reach for it before clicking the X.
@@ -716,7 +719,7 @@
         if (state.links?.prototype) window.open(state.links.prototype, '_blank', 'noopener');
         break;
       case 'download-prototype':
-        if (state.links?.prototype) window.location.href = state.links.prototype;
+        downloadFile(state.links?.prototype, `${state.slug || 'brand-kit'}-prototype.html`);
         break;
       case 'restart':
         clearState();
