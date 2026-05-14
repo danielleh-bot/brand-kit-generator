@@ -264,35 +264,50 @@ input { -webkit-tap-highlight-color: transparent; }
 .form-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--ink-2);
+  color: var(--ink-1);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
+  letter-spacing: -0.005em;
 }
 .form-required {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--accent-ink);
-  background: var(--accent-soft);
-  padding: 2px 8px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 1px 8px;
   border-radius: 999px;
 }
-.form-hint { color: var(--ink-3); font-weight: 400; }
-
-.optional-toggle { margin-top: 4px; }
-.link-btn {
-  padding: 8px 0;
-  font-size: 13px;
+.form-hint {
   color: var(--ink-3);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+/* "Use a different article (optional)" — sits between the two URL
+   inputs as a subtle disclosure. Keep it understated so the primary
+   input remains the focal point, but bump it on hover/expansion so
+   the secondary field feels intentionally connected. */
+.optional-toggle { margin-top: -2px; }
+.link-btn {
+  padding: 6px 10px;
+  margin-left: -10px;
+  font-size: 13px;
+  color: var(--ink-2);
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: color 160ms var(--ease);
+  border-radius: 999px;
+  transition: color 160ms var(--ease), background 160ms var(--ease);
 }
-.link-btn:hover { color: var(--accent-ink); }
+.link-btn:hover {
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+}
 .article-toggle-icon {
   display: inline-grid;
   place-items: center;
@@ -303,14 +318,26 @@ input { -webkit-tap-highlight-color: transparent; }
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
+  transition: background 160ms var(--ease), color 160ms var(--ease);
 }
-.link-btn:hover .article-toggle-icon { background: var(--accent-soft); color: var(--accent-ink); }
+.link-btn:hover .article-toggle-icon { background: var(--accent); color: white; }
 
 .optional-field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  padding: 18px;
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+  border: 1px solid var(--line);
   animation: stepIn 240ms var(--ease) both;
+}
+.optional-field .form-label {
+  margin: 0;
+  color: var(--ink-2);
+}
+.optional-field input[type="url"] {
+  background: var(--surface);
 }
 
 .form-submit-row {
@@ -328,7 +355,11 @@ input { -webkit-tap-highlight-color: transparent; }
   gap: 10px;
   align-items: stretch;
 }
-.input-row input {
+/* All URL inputs in the form share the same styling so the optional
+   "different article" field doesn't look like a downgrade from the main
+   one. */
+.url-card input[type="url"] {
+  width: 100%;
   flex: 1;
   min-width: 0;
   padding: 14px 16px;
@@ -339,8 +370,11 @@ input { -webkit-tap-highlight-color: transparent; }
   border-radius: var(--radius);
   outline: none;
   transition: border-color 160ms var(--ease), box-shadow 200ms var(--ease);
+  font-family: inherit;
+  color: var(--ink-1);
 }
-.input-row input:focus {
+.url-card input[type="url"]::placeholder { color: var(--ink-3); }
+.url-card input[type="url"]:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 4px rgba(111, 86, 255, 0.18);
 }
