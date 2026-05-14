@@ -731,8 +731,20 @@
   // -------- Bootstrap -----------------------------------------------------
 
   function bootstrap() {
-    updateStepper(state.step || 1);
-    app.dataset.step = String(state.step || 1);
+    // Migrate legacy 5-step localStorage state to the 4-step flow BEFORE
+    // we paint anything. The CSS only has rules for steps 1–4, so leaving
+    // dataset.step at "5" would render an empty page until the async
+    // brand-kit fetch finishes and overwrites it.
+    if (state.step === 5) { state.step = 4; saveState(); }
+    // Clamp anything else outside the valid range so a corrupt
+    // localStorage payload can't blank the wizard.
+    if (!Number.isInteger(state.step) || state.step < 1 || state.step > 4) {
+      state.step = 1;
+      saveState();
+    }
+
+    updateStepper(state.step);
+    app.dataset.step = String(state.step);
 
     // If we have a stored slug, fetch the latest brand kit so the UI doesn't
     // depend on whatever was cached in localStorage at last load. If the
@@ -758,8 +770,6 @@
             renderBrandKit();
             if (state.step === 3) showExport(state.exportFormat);
             if (state.step === 4) renderPreview();
-            // Migrate legacy 5-step state to the 4-step flow.
-            if (state.step === 5) { state.step = 4; saveState(); goToStep(4); renderPreview(); }
           }
         })
         .catch(() => {});
