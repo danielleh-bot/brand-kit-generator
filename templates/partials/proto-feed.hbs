@@ -5,7 +5,7 @@
   <div style="border-top: 3px solid var(--brand-primary); padding-top: 16px; margin-bottom: 24px;">
     <div class="section-label" style="border-bottom: none; margin-bottom: 0;">
       <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-primary);margin-right:8px;vertical-align:middle;"></span>
-      Sponsored Stories
+      {{default feedContent.labels.sponsoredStories 'Sponsored Stories'}}
     </div>
   </div>
 
@@ -27,7 +27,7 @@
   <div style="margin-bottom: 32px;">
     <div class="section-label">
       <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-primary);margin-right:8px;vertical-align:middle;"></span>
-      More From {{../brandKit.brand.name}}
+      {{default feedContent.labels.moreFrom 'More From'}} {{brandKit.brand.name}}
     </div>
     <div data-feed-grid="3-up" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
       {{#each feedContent.nativeSection}}
@@ -47,7 +47,7 @@
   <div style="margin-bottom: 32px;">
     <div class="section-label">
       <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-primary);margin-right:8px;vertical-align:middle;"></span>
-      Trending on {{../brandKit.brand.name}}
+      {{default feedContent.labels.trendingOn 'Trending on'}} {{brandKit.brand.name}}
     </div>
     <div data-feed-grid="3-up" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
       {{#each feedContent.trendingNative}}
@@ -65,6 +65,6 @@
 
   <!-- Taboola Attribution -->
   <div style="text-align: center; padding: 16px 0; font-size: 11px; color: var(--brand-text-tertiary);">
-    by <strong>Taboola</strong> | Sponsored Links
+    by <strong>Taboola</strong> | {{default feedContent.labels.sponsoredLinks 'Sponsored Links'}}
   </div>
 </div>
