@@ -13,6 +13,8 @@ const { extractBrandKit, extractContent, extractNavigation, extractRelatedArticl
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { generateFeedContent } = require('./lib/feed-content');
+const { brandKitToCss } = require('./lib/css-export');
+const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
 const defaults = require('./lib/defaults');
 const engine = require('./lib/engine');
 
@@ -190,10 +192,21 @@ async function main() {
   // Ensure output directory exists
   fs.mkdirSync(outputDir, { recursive: true });
 
+  // Run the same header normalisation the wizard server uses, so a
+  // sticky/translucent publisher header doesn't render as invisible nav
+  // when the CLI generates the prototype.
+  normaliseHeaderForRender(brandKit);
+
   // Save brand kit JSON
   const brandKitPath = path.join(outputDir, 'brand-kit.json');
   fs.writeFileSync(brandKitPath, JSON.stringify(brandKit, null, 2));
   console.log(`📋 Brand kit saved: ${brandKitPath}`);
+
+  // Save brand kit CSS (drop-in `:root` tokens + utility classes).
+  // Keeps the CLI in lockstep with the wizard's artifact set.
+  const brandKitCssPath = path.join(outputDir, 'brand-kit.css');
+  fs.writeFileSync(brandKitCssPath, brandKitToCss(brandKit));
+  console.log(`🎨 Brand kit CSS saved: ${brandKitCssPath}`);
 
   // Resolve fonts
   const resolvedFonts = resolveAllFonts(brandKit);
@@ -242,6 +255,7 @@ async function main() {
 
   console.log(`\n✅ Done! Output files in: ${outputDir}`);
   console.log(`   - brand-kit.json`);
+  console.log(`   - brand-kit.css`);
   if (!opts.reportOnly) console.log(`   - index.html (feed prototype)`);
   if (!opts.prototypeOnly) console.log(`   - analysis-report.html (analysis report)`);
   console.log('');
