@@ -250,20 +250,45 @@
   }
 
   // After all stages succeed, swap the spinner for a "done" banner with an
-  // explicit Continue button. We still auto-advance after a short delay so
-  // a user who's away from keyboard isn't stuck staring at the banner, but
-  // anyone watching the run gets a deliberate moment of confirmation.
+  // explicit Continue button. The banner has to be honest about how much
+  // got captured — promising "Brand kit ready" when extraction grabbed
+  // 20% of the tokens makes the banner feel dishonest at step 2.
   function markCrawlComplete() {
     const card = $('#crawl-progress');
     card.classList.add('is-complete');
-    $('#progress-title').textContent = 'Crawl complete';
-    $('#crawl-complete').hidden = false;
 
-    const autoAdvance = setTimeout(() => goToStep(2), 1800);
-    // If the user clicks Continue we cancel the auto-advance to avoid
-    // a double-transition.
-    const continueBtn = $('#crawl-complete .primary');
-    continueBtn.addEventListener('click', () => clearTimeout(autoAdvance), { once: true });
+    const q = state.brandKit?.metadata?.extraction_quality;
+    const ratio = q?.extraction_ratio || 0;
+    const low = ratio > 0 && ratio < 0.5;
+    const pct = q?.total_tokens ? Math.round(ratio * 100) : null;
+
+    $('#progress-title').textContent = low ? 'Crawl finished — quality is low' : 'Crawl complete';
+
+    const banner = $('#crawl-complete');
+    banner.classList.toggle('is-low-quality', low);
+    const h3 = banner.querySelector('h3');
+    const p = banner.querySelector('p');
+    const btn = banner.querySelector('.primary');
+
+    if (low) {
+      h3.textContent = 'Brand kit captured · low quality';
+      p.textContent = `Only ${pct ?? '?'}% of design tokens came from the page. The site may block headless Chrome, render content client-side, or use a non-standard structure. Continue or re-crawl?`;
+      btn.textContent = 'Continue anyway →';
+    } else {
+      h3.textContent = 'Brand kit ready';
+      p.textContent = pct != null
+        ? `${pct}% of design tokens captured live from the page. Continue to preview.`
+        : "We've pulled the design tokens. Continue to see them.";
+      btn.textContent = 'Continue →';
+    }
+    banner.hidden = false;
+
+    // Low-quality crawls don't auto-advance — give the user a chance to
+    // re-crawl with a better URL before committing to a thin brand kit.
+    if (low) return;
+
+    const autoAdvance = setTimeout(() => goToStep(2), 2200);
+    btn.addEventListener('click', () => clearTimeout(autoAdvance), { once: true });
   }
 
   // -------- Step 2: brand kit preview -------------------------------------

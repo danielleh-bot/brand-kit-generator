@@ -32,6 +32,16 @@
       --size-meta:    {{clampSize brandKit.fonts.type_scale.meta_text.size           '10px' '16px' '13px'}};
       --weight-hero:  {{default brandKit.fonts.type_scale.article_title_hero.weight 700}};
       --leading-body: {{default brandKit.fonts.type_scale.article_body.line_height '1.65'}};
+
+      /* Real button tokens, captured from a prominent CTA on the page.
+         These drive the feed-card pill so a pill-button site looks like
+         pill buttons and a square-button site looks square. */
+      --btn-radius: {{default brandKit.buttons.primary.border_radius '6px'}};
+      --btn-padding: {{default brandKit.buttons.primary.padding '8px 16px'}};
+      --btn-weight: {{default brandKit.buttons.primary.font_weight 700}};
+      --btn-transform: {{default brandKit.buttons.primary.text_transform 'none'}};
+      --btn-tracking: {{default brandKit.buttons.primary.letter_spacing '0.04em'}};
+      --btn-primary-hover: {{default brandKit.colors.primary_variants.darken_5.hex (default brandKit.colors.primary.hex '#1a73e8')}};
     }
     * { box-sizing: border-box; }
     body {
@@ -84,8 +94,9 @@
       font-weight: 700;
       white-space: nowrap;
     }
-    /* Sponsored cards: outline pill that fills on hover. Clean, modern,
-       reads as an action without overpowering the content. */
+    /* Sponsored cards: outline button that fills on hover. Shape comes
+       from the publisher's real button — border-radius, padding,
+       text-transform, weight all extracted at crawl time. */
     .feed-card-cta-pill {
       display: inline-flex;
       align-items: center;
@@ -93,11 +104,11 @@
       background: transparent;
       color: var(--brand-primary);
       border: 1px solid var(--brand-primary);
-      border-radius: 999px;
+      border-radius: var(--btn-radius);
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-weight: var(--btn-weight);
+      letter-spacing: var(--btn-tracking);
+      text-transform: var(--btn-transform);
       white-space: nowrap;
       transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
     }

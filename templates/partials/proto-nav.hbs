@@ -1,34 +1,54 @@
-<!-- Publisher Navigation Bar -->
-<nav style="background: var(--brand-bg-dark); color: #fff; padding: 0;">
-  <!-- Top utility bar -->
-  <div style="background: rgba(0,0,0,0.2); padding: 4px 0; font-size: 12px;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center;">
-      <span style="opacity: 0.7;">{{brandKit.brand_voice.language}}</span>
-      <span style="opacity: 0.7;">{{brandKit.brand.name}}</span>
+{{!-- Publisher Navigation Bar
+     Uses the publisher's real header colours and logo (when extracted),
+     plus an optional utility bar and an accent rule below the nav.
+     Falls back to dark navy + text logo when the extractor came up short
+     so the prototype still looks reasonable. --}}
+<nav style="background: {{default brandKit.layout_patterns.header.background_color (default brandKit.colors.backgrounds.dark.hex '#1a1a1a')}}; padding: 0;">
+
+  {{#if brandKit.layout_patterns.header.utility_bar}}
+    <div style="background: {{brandKit.layout_patterns.header.utility_bar.background_color}}; padding: 6px 0; font-size: 12px;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; color: {{#if brandKit.layout_patterns.header.utility_bar.is_dark}}rgba(255,255,255,0.85){{else}}{{default brandKit.colors.text.secondary.hex '#555555'}}{{/if}};">
+        <span>{{brandKit.brand.website}}</span>
+        <span>{{brandKit.brand_voice.language}}</span>
+      </div>
     </div>
-  </div>
-  <!-- Main nav -->
-  <div style="max-width: 1200px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 32px;">
-    <a href="#" class="headline-font" style="font-size: 24px; font-weight: 700; color: #fff; text-decoration: none;">
-      {{#if brandKit.logos.primary.text}}
-        {{brandKit.logos.primary.text}}
+  {{/if}}
+
+  <div style="max-width: 1200px; margin: 0 auto; padding: 14px 16px; display: flex; align-items: center; gap: 28px;">
+    <a href="#" style="display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; color: inherit;">
+      {{#if brandKit.logos.primary.url}}
+        <img src="{{brandKit.logos.primary.url}}"
+             alt="{{default brandKit.logos.primary.alt brandKit.brand.name}}"
+             referrerpolicy="no-referrer"
+             style="height: 38px; max-width: 240px; object-fit: contain; display: block;"
+             onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='inline';" />
+        <span class="headline-font" style="display:none; font-size: 22px; font-weight: 800; letter-spacing: -0.01em; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}};">{{brandKit.brand.name}}</span>
+      {{else if brandKit.logos.primary.svg}}
+        <span style="display: inline-flex; align-items: center; height: 38px; max-width: 240px; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}};">{{{brandKit.logos.primary.svg}}}</span>
       {{else}}
-        {{brandKit.brand.name}}
+        <span class="headline-font" style="font-size: 22px; font-weight: 800; letter-spacing: -0.01em; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}};">
+          {{default brandKit.logos.primary.text brandKit.brand.name}}
+        </span>
       {{/if}}
     </a>
-    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+
+    <div style="display: flex; gap: 22px; flex-wrap: wrap; flex: 1;">
       {{#each navigation.navLinks}}
         {{#if (lt @index 8)}}
-          <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px; text-decoration: none; font-weight: 500;">{{this.text}}</a>
+          <a href="#" style="color: {{#if ../brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}{{default ../brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}}; font-size: 14px; text-decoration: none; font-weight: 500;">{{this.text}}</a>
         {{/if}}
       {{/each}}
       {{#unless navigation.navLinks}}
-        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">News</a>
-        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Sports</a>
-        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Business</a>
-        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Opinion</a>
-        <a href="#" style="color: rgba(255,255,255,0.85); font-size: 14px;">Tech</a>
+        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}#1a1a1a{{/if}}; font-size: 14px;">News</a>
+        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}#1a1a1a{{/if}}; font-size: 14px;">Sports</a>
+        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}#1a1a1a{{/if}}; font-size: 14px;">Business</a>
       {{/unless}}
     </div>
   </div>
+
+  {{#if brandKit.layout_patterns.header.accent_rule_color}}
+    <div style="height: 3px; background: {{brandKit.layout_patterns.header.accent_rule_color}};"></div>
+  {{else}}
+    <div style="height: 2px; background: {{default brandKit.colors.primary.hex '#1a73e8'}}; opacity: 0.85;"></div>
+  {{/if}}
 </nav>
