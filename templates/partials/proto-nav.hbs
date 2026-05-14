@@ -20,11 +20,11 @@
         <img src="{{brandKit.logos.primary.url}}"
              alt="{{default brandKit.logos.primary.alt brandKit.brand.name}}"
              referrerpolicy="no-referrer"
-             style="height: 38px; max-width: 240px; object-fit: contain; display: block;"
+             style="height: 38px; max-height: 38px; width: auto; max-width: 240px; object-fit: contain; display: block;"
              onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='inline';" />
         <span class="headline-font" style="display:none; font-size: 22px; font-weight: 800; letter-spacing: -0.01em; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}};">{{brandKit.brand.name}}</span>
       {{else if brandKit.logos.primary.svg}}
-        <span style="display: inline-flex; align-items: center; height: 38px; max-width: 240px; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}};">{{{brandKit.logos.primary.svg}}}</span>
+        <span class="nav-logo-svg" style="color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}};">{{{brandKit.logos.primary.svg}}}</span>
       {{else}}
         <span class="headline-font" style="font-size: 22px; font-weight: 800; letter-spacing: -0.01em; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}};">
           {{default brandKit.logos.primary.text brandKit.brand.name}}

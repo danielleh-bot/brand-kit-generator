@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{brandKit.brand.name}} — Feed Prototype</title>
+  {{#if brandKit.logos.favicon_url}}
+  <link rel="icon" href="{{brandKit.logos.favicon_url}}" referrerpolicy="no-referrer">
+  {{/if}}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="{{googleFontsUrl}}" rel="stylesheet">
@@ -120,12 +123,13 @@
 
     /* Image wrap background lives in a class so the fallback class can
        override it cleanly. Inline styles would have higher specificity
-       and silently break the fallback. min-height defends against grid
-       contexts where aspect-ratio collapses to 0. */
+       and silently break the fallback. The wrapper relies on the inline
+       `aspect-ratio: 4/3` on the partial — no min-height, since on narrow
+       3-column rows that floor would override the aspect ratio and stretch
+       images vertically. */
     .feed-card-image-wrap {
       background: var(--brand-bg-section);
       overflow: hidden;
-      min-height: 140px;
     }
     /* Gradient fallback when an Unsplash thumbnail 404s — the img tag's
        onerror hides itself and adds .feed-card-image-fallback to its
@@ -191,6 +195,38 @@
       transition: filter 160ms ease, transform 160ms ease;
     }
     .brand-cta-button:hover { filter: brightness(0.92); transform: translateY(-1px); text-decoration: none; }
+
+    /* Logo sizing — the inline SVG comes from a publisher page where it
+       might declare its own width/height attributes (often >38px). Force it
+       to fit the nav slot by overriding both attributes via CSS. Same goes
+       for the wrapper span: keep the SVG vertically centered, never let it
+       overflow vertically. */
+    .nav-logo-svg {
+      display: inline-flex;
+      align-items: center;
+      height: 38px;
+      max-width: 240px;
+      overflow: hidden;
+    }
+    .nav-logo-svg > svg {
+      height: 100% !important;
+      width: auto !important;
+      max-width: 100% !important;
+      display: block;
+    }
+
+    /* Responsive collapse: 3-up and 4-up grids don't fit on phones. The
+       inline grid-template-columns on the partials sits at higher
+       specificity, so we override with !important inside the breakpoint. */
+    @media (max-width: 720px) {
+      [data-feed-grid="3-up"],
+      [data-feed-grid="2-up"] { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+      [data-footer-grid] { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
+    }
+    @media (max-width: 480px) {
+      [data-feed-grid] { grid-template-columns: 1fr !important; }
+      [data-footer-grid] { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>

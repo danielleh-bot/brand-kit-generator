@@ -205,6 +205,11 @@
     });
   }
 
+  // Auto-advance timer from a previous completed crawl. Cleared whenever we
+  // start a fresh crawl so a stale 2.2s timer can't yank the user to step 2
+  // mid-second-crawl.
+  let autoAdvanceTimer = null;
+
   function onCrawlSubmit(e) {
     e.preventDefault();
     const url = $('#crawl-url').value.trim();
@@ -219,6 +224,7 @@
     // Hide the completed banner from any previous run.
     $('#crawl-complete').hidden = true;
     card.classList.remove('is-complete');
+    if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
 
     $('#progress-title').textContent = articleUrl
       ? `Crawling ${shorten(url)} + ${shorten(articleUrl)}`
@@ -307,8 +313,10 @@
     // re-crawl with a better URL before committing to a thin brand kit.
     if (low) return;
 
-    const autoAdvance = setTimeout(() => goToStep(2), 2200);
-    btn.addEventListener('click', () => clearTimeout(autoAdvance), { once: true });
+    autoAdvanceTimer = setTimeout(() => { autoAdvanceTimer = null; goToStep(2); }, 2200);
+    btn.addEventListener('click', () => {
+      if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+    }, { once: true });
   }
 
   // -------- Step 2: brand kit preview -------------------------------------
