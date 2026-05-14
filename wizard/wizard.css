@@ -506,6 +506,14 @@ input { -webkit-tap-highlight-color: transparent; }
 .progress-card.is-complete .stages li.is-done { opacity: 1; }
 .progress-card.is-complete .log { opacity: 0.6; }
 .progress-card.is-complete h2 { color: var(--success); }
+.progress-card.is-complete .progress-complete.is-low-quality {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.30);
+}
+.progress-card.is-complete .progress-complete.is-low-quality .complete-icon {
+  background: var(--warning);
+}
+.progress-card.is-complete:has(.is-low-quality) h2 { color: var(--warning); }
 
 .progress-complete {
   display: flex;
