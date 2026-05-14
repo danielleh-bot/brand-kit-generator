@@ -255,6 +255,26 @@
   // 20% of the tokens makes the banner feel dishonest at step 2.
   function markCrawlComplete() {
     const card = $('#crawl-progress');
+
+    // Force-tick any stages that were still mid-animation. SSE delivers
+    // the final `stage render done` and `done` events on the same paint
+    // frame, so without this nudge the banner can appear *before* the
+    // last checkmark visibly settles — which is what made the user say
+    // "the complete bar shows before the crawl finishes".
+    const stagesEl = $('#crawl-stages');
+    if (stagesEl) {
+      stagesEl.querySelectorAll('li').forEach((li) => {
+        li.classList.remove('is-active');
+        li.classList.add('is-done');
+      });
+    }
+
+    // 600ms hold so the last checkmark animation completes and the user
+    // sees the checklist actually finish before the banner pops in.
+    setTimeout(() => completeBanner(card), 600);
+  }
+
+  function completeBanner(card) {
     card.classList.add('is-complete');
 
     const q = state.brandKit?.metadata?.extraction_quality;

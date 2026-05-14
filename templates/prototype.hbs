@@ -120,10 +120,12 @@
 
     /* Image wrap background lives in a class so the fallback class can
        override it cleanly. Inline styles would have higher specificity
-       and silently break the fallback. */
+       and silently break the fallback. min-height defends against grid
+       contexts where aspect-ratio collapses to 0. */
     .feed-card-image-wrap {
       background: var(--brand-bg-section);
       overflow: hidden;
+      min-height: 140px;
     }
     /* Gradient fallback when an Unsplash thumbnail 404s — the img tag's
        onerror hides itself and adds .feed-card-image-fallback to its

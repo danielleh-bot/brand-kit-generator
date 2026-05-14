@@ -43,15 +43,15 @@
     {{/each}}
   </div>
 
-  <!-- Trending Native (4-up) -->
+  <!-- Trending Native (3-up — 4-up was too cramped at the article column width) -->
   <div style="margin-bottom: 32px;">
     <div class="section-label">
       <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-primary);margin-right:8px;vertical-align:middle;"></span>
       Trending on {{../brandKit.brand.name}}
     </div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
       {{#each feedContent.trendingNative}}
-        {{> components-feed-card this size="tiny"}}
+        {{#if (lt @index 3)}}{{> components-feed-card this size="small"}}{{/if}}
       {{/each}}
     </div>
   </div>
