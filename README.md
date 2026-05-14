@@ -44,8 +44,6 @@ Output in `./output/example/`:
 - `index.html` — publisher-branded Taboola feed prototype
 - `analysis-report.html` — before vs. after comparison report
 
-> Note: `brand-kit.css` is only written by the wizard (`npm run dev`). The CLI today writes the other three artifacts.
-
 #### CLI Options
 
 ```

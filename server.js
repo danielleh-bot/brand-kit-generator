@@ -23,6 +23,7 @@ const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { generateFeedContent } = require('./lib/feed-content');
 const { brandKitToCss } = require('./lib/css-export');
+const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
 const defaults = require('./lib/defaults');
 const engine = require('./lib/engine');
 
@@ -262,29 +263,6 @@ function buildDefaultsBrandKit(realKit) {
     photo_style: { thumbnail_format: { border_radius: '6px' } },
     metadata: safe.metadata || {},
   };
-}
-
-// Guarantee the prototype templates have a concrete header background and
-// `is_dark` flag — even when the crawler couldn't resolve them (translucent
-// sticky headers, sites that skin everything via JS, etc.). Without this,
-// the template falls back to dark bg + dark text → invisible nav.
-function normaliseHeaderForRender(brandKit) {
-  const lp = (brandKit.layout_patterns = brandKit.layout_patterns || {});
-  const hdr = (lp.header = lp.header || {});
-  if (!hdr.background_color) {
-    hdr.background_color =
-      brandKit.colors?.backgrounds?.dark?.hex ||
-      brandKit.colors?.backgrounds?.base?.hex ||
-      '#1a1a1a';
-  }
-  // Recompute is_dark from whatever colour we actually ended up with so
-  // the text-contrast branch in the template can't fight reality.
-  const m = String(hdr.background_color).replace('#', '').padEnd(6, '0');
-  const r = parseInt(m.slice(0, 2), 16);
-  const g = parseInt(m.slice(2, 4), 16);
-  const b = parseInt(m.slice(4, 6), 16);
-  hdr.is_dark = Number.isFinite(r) ? 0.299 * r + 0.587 * g + 0.114 * b < 140 : true;
-  return brandKit;
 }
 
 function writeArtifacts({ slug, brandKit, content, navigation, relatedArticles }) {

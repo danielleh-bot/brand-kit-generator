@@ -205,6 +205,11 @@
     });
   }
 
+  // Auto-advance timer from a previous completed crawl. Cleared whenever we
+  // start a fresh crawl so a stale 2.2s timer can't yank the user to step 2
+  // mid-second-crawl.
+  let autoAdvanceTimer = null;
+
   function onCrawlSubmit(e) {
     e.preventDefault();
     const url = $('#crawl-url').value.trim();
@@ -219,6 +224,7 @@
     // Hide the completed banner from any previous run.
     $('#crawl-complete').hidden = true;
     card.classList.remove('is-complete');
+    if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
 
     $('#progress-title').textContent = articleUrl
       ? `Crawling ${shorten(url)} + ${shorten(articleUrl)}`
@@ -307,8 +313,10 @@
     // re-crawl with a better URL before committing to a thin brand kit.
     if (low) return;
 
-    const autoAdvance = setTimeout(() => goToStep(2), 2200);
-    btn.addEventListener('click', () => clearTimeout(autoAdvance), { once: true });
+    autoAdvanceTimer = setTimeout(() => { autoAdvanceTimer = null; goToStep(2); }, 2200);
+    btn.addEventListener('click', () => {
+      if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+    }, { once: true });
   }
 
   // -------- Step 2: brand kit preview -------------------------------------
@@ -546,13 +554,26 @@
     return html;
   }
 
+  // Force a real "Save As" via a synthetic anchor with `download`. Plain
+  // `window.location.href = url` would just open the JSON/CSS inline in the
+  // browser since the server serves them as `application/json` / `text/css`,
+  // never triggering a download.
+  function downloadFile(url, filename) {
+    if (!url) return;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   function downloadCurrent() {
+    const slug = state.slug || 'brand-kit';
     if (state.exportFormat === 'json') {
-      if (!state.links?.brandKitJson) return;
-      window.location.href = state.links.brandKitJson;
+      downloadFile(state.links?.brandKitJson, `${slug}-brand-kit.json`);
     } else {
-      if (!state.links?.brandKitCss) return;
-      window.location.href = state.links.brandKitCss;
+      downloadFile(state.links?.brandKitCss, `${slug}-brand-kit.css`);
     }
   }
 
@@ -674,17 +695,7 @@
     if (state.links?.report) window.open(state.links.report, '_blank', 'noopener');
   });
   $('#report-download').addEventListener('click', () => {
-    if (!state.links?.report) return;
-    // Forcing the download attribute via a synthetic anchor keeps the
-    // browser from rendering the report inline; same-origin so the
-    // attribute is honored.
-    const a = document.createElement('a');
-    a.href = state.links.report;
-    const slug = state.slug || 'brand-kit';
-    a.download = `${slug}-analysis-report.html`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    downloadFile(state.links?.report, `${state.slug || 'brand-kit'}-analysis-report.html`);
   });
   // Escape closes whichever modal is open. Keyboards are faster than mice
   // and reviewers will reach for it before clicking the X.
@@ -708,7 +719,7 @@
         if (state.links?.prototype) window.open(state.links.prototype, '_blank', 'noopener');
         break;
       case 'download-prototype':
-        if (state.links?.prototype) window.location.href = state.links.prototype;
+        downloadFile(state.links?.prototype, `${state.slug || 'brand-kit'}-prototype.html`);
         break;
       case 'restart':
         clearState();
@@ -720,8 +731,20 @@
   // -------- Bootstrap -----------------------------------------------------
 
   function bootstrap() {
-    updateStepper(state.step || 1);
-    app.dataset.step = String(state.step || 1);
+    // Migrate legacy 5-step localStorage state to the 4-step flow BEFORE
+    // we paint anything. The CSS only has rules for steps 1–4, so leaving
+    // dataset.step at "5" would render an empty page until the async
+    // brand-kit fetch finishes and overwrites it.
+    if (state.step === 5) { state.step = 4; saveState(); }
+    // Clamp anything else outside the valid range so a corrupt
+    // localStorage payload can't blank the wizard.
+    if (!Number.isInteger(state.step) || state.step < 1 || state.step > 4) {
+      state.step = 1;
+      saveState();
+    }
+
+    updateStepper(state.step);
+    app.dataset.step = String(state.step);
 
     // If we have a stored slug, fetch the latest brand kit so the UI doesn't
     // depend on whatever was cached in localStorage at last load. If the
@@ -747,8 +770,6 @@
             renderBrandKit();
             if (state.step === 3) showExport(state.exportFormat);
             if (state.step === 4) renderPreview();
-            // Migrate legacy 5-step state to the 4-step flow.
-            if (state.step === 5) { state.step = 4; saveState(); goToStep(4); renderPreview(); }
           }
         })
         .catch(() => {});
