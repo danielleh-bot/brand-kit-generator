@@ -260,7 +260,69 @@ input { -webkit-tap-highlight-color: transparent; }
    URL input card
    ============================================================ */
 
-.url-card { padding: 28px; }
+.url-card { padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.form-required {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.form-hint { color: var(--ink-3); font-weight: 400; }
+
+.optional-toggle { margin-top: 4px; }
+.link-btn {
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 160ms var(--ease);
+}
+.link-btn:hover { color: var(--accent-ink); }
+.article-toggle-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 18px; height: 18px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+}
+.link-btn:hover .article-toggle-icon { background: var(--accent-soft); color: var(--accent-ink); }
+
+.optional-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: stepIn 240ms var(--ease) both;
+}
+
+.form-submit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+.form-submit-row .hint { margin: 0; }
+.form-submit-row .primary { flex-shrink: 0; }
+
 .input-row {
   display: flex;
   gap: 10px;
@@ -402,6 +464,60 @@ input { -webkit-tap-highlight-color: transparent; }
 }
 .log .log-line { padding: 1px 0; }
 .log .log-line.error { color: var(--danger); }
+
+/* Completed state for a finished progress card. Once `.is-complete` is
+   added by the JS, the stage list collapses visually (the work is done,
+   no need to keep drawing attention to it) and the banner takes over. */
+.progress-card.is-complete .stages li { opacity: 0.55; }
+.progress-card.is-complete .stages li.is-done { opacity: 1; }
+.progress-card.is-complete .log { opacity: 0.6; }
+.progress-card.is-complete h2 { color: var(--success); }
+
+.progress-complete {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: rgba(21, 167, 114, 0.08);
+  border: 1px solid rgba(21, 167, 114, 0.22);
+  animation: completeIn 360ms var(--ease-emph) both;
+}
+.complete-icon {
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  background: var(--success);
+  color: white;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  animation: completePop 480ms var(--ease-emph) both;
+}
+.complete-icon svg { width: 22px; height: 22px; }
+.complete-text { flex: 1; }
+.complete-text h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+.complete-text p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.progress-complete .primary { flex-shrink: 0; }
+
+@keyframes completeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes completePop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
 
 /* ============================================================
    Brand kit preview grid
@@ -811,6 +927,17 @@ input { -webkit-tap-highlight-color: transparent; }
   /* Stack the URL input and submit vertically — too tight side-by-side */
   .input-row { flex-direction: column; align-items: stretch; }
   .input-row .primary { width: 100%; justify-content: center; }
+  .form-submit-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-submit-row .primary { width: 100%; justify-content: center; }
+  .progress-complete {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .progress-complete .primary { width: 100%; justify-content: center; }
 
   /* Buttons grow to fill, easier to tap one-handed */
   .step-actions {
