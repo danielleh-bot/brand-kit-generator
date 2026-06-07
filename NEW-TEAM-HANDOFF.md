@@ -1,109 +1,134 @@
-# 🚀 New Team Handoff — Brand Kit Generator
+# New Claude Org/Team — Complete Setup & Handoff Guide
 
-Everything you need to spin up a fully-loaded Claude Code session in a new org/team in under 2 minutes.
+> Everything you need to be fully operational in a new Claude team from scratch.  
+> Read time: 2 min. Setup time: under 5 min.
 
 ---
 
-## Step 1 — Create your environment
+## Part 1 — What carries over automatically (user-scoped, nothing to do)
+
+| Component | Location | Notes |
+|---|---|---|
+| Global rules (Ada ban, revenue pipeline) | `~/.claude/CLAUDE.md` | Persists across orgs |
+| MCP servers (sage, datahub, feature-catalog) | `~/.claude/settings.json` | Persists across orgs |
+| Plugins (datastore, code-truth, coo-analytics, telemetry) | `~/.claude/plugins/` | v2026.05.12 |
+| code-truth index | `~/.cache/code-truth/index.sqlite` | 417,828 records |
+| Project memory (16 files) | `~/.claude/projects/.../memory/` | Persists across orgs |
+| DataHub token | `~/.claude/settings.json` | Expires **2026-08-10** — see Watch List |
+
+**Org-provisioned MCPs** (Slack, Calendar, Drive, Gmail, GitHub, Atlassian) reappear automatically once the new org is provisioned — nothing to do.
+
+---
+
+## Part 2 — One-time environment setup (new team only)
 
 1. Go to **[claude.ai/code](https://claude.ai/code)** → switch to your new org/team
-2. Click **New environment**
-3. Connect the GitHub repo: **`danielleh-bot/brand-kit-generator`**
-4. Re-authorize each integration below (OAuth is team-scoped, one click each):
+2. Click **New environment** → connect repo: **`danielleh-bot/brand-kit-generator`**
+3. If any OAuth integrations don't auto-provision, reconnect them:
 
-| Integration | What it's used for |
+| Integration | Used for |
 |---|---|
-| **GitHub** | Read/write PRs, branches, files, CI |
-| **Atlassian** | Jira tickets + Confluence pages |
-| **Slack** | Messaging, canvases, channel search |
-| **Gmail** | Drafts, thread reading, labels |
-| **Google Calendar** | Event management |
-| **Google Drive** | File access and uploads |
+| GitHub | PRs, branches, CI, file access |
+| Atlassian | Jira + Confluence |
+| Slack | Messaging, canvases, search |
+| Gmail | Drafts, threads, labels |
+| Google Calendar | Events |
+| Google Drive | Files |
 
-> Full environment setup docs: https://code.claude.com/docs/en/claude-code-on-the-web
+> Docs: https://code.claude.com/docs/en/claude-code-on-the-web
 
 ---
 
-## Step 2 — Start a session and paste this prompt
+## Part 3 — Day 1 Prompt (copy, paste, done)
 
-> Copy everything inside the box below and paste it as your first message.
+> Paste this as your **very first message** in the new session. It self-checks your entire environment, loads project context, and gets Claude fully oriented before you say another word.
 
 ---
 
 ```
-I'm continuing work on the Taboola Brand Kit Generator from a previous Claude Code session.
-The repo has a CLAUDE.md with full context — please read it first, then confirm you're oriented.
+Before we do anything, run a full self-check. Confirm ✅ or flag ❌ and fix autonomously — do not ask me to do manual steps.
 
-Key facts to load immediately:
+## System checks
 
-**Repo:** danielleh-bot/brand-kit-generator
-**Active branch:** claude/wonderful-planck-zVP9Z
-**My email:** danielle.h@taboola.com
+1. Read ~/.claude/CLAUDE.md — confirm the Ada ban rule and revenue pipeline rule are present
+2. Run: sqlite3 ~/.cache/code-truth/index.sqlite 'SELECT COUNT(*) FROM records' — confirm > 0
+3. Run: cat ~/.claude/plugins/installed_plugins.json | python3 -c "import json,sys; d=json.load(sys.stdin); [print(k) for k in d['plugins']]" — confirm datastore, code-truth, coo-analytics appear
+4. Run: python3 -c "import json; d=json.load(open('/Users/danielle.h/.claude/settings.json')); [print(k) for k in d.get('mcpServers',{})]" — confirm sage, datahub, feature-catalog appear
+5. Read ~/.claude/projects/-Users-danielle-h-git-publisher-product-analysts-repo/memory/MEMORY.md — confirm it loads
 
-**What this project is:**
-A Taboola internal tool that crawls any publisher article URL with headless Chrome (Puppeteer),
-extracts 50+ brand design tokens (colors, fonts, spacing, logos, layout), and generates:
-- A branded Taboola feed prototype (index.html)
-- A before/after analysis report (analysis-report.html)
-- Exportable brand-kit.json and brand-kit.css
+## Project context
 
-Two interfaces: a 5-step browser wizard (Express + SSE on port 4000) and a CLI.
+6. Read CLAUDE.md in the current repo (brand-kit-generator) — confirm you understand the project
 
-**To run:**
-npm install && npm run dev    # wizard at http://localhost:4000
-node generate.js --url "https://example.com/article" --slug example   # CLI
+## Key facts
 
-**MCP tools available in this environment:**
-- mcp__github__* → full GitHub access on danielleh-bot/brand-kit-generator
-- mcp__Atlassian__* → Jira + Confluence
-- mcp__Slack__* → Slack
-- mcp__Gmail__* → Gmail
-- mcp__Google_Calendar__* → Calendar
-- mcp__Google_Drive__* → Drive
-(Always load schemas via ToolSearch before calling any mcp__ tool)
+- Repo: danielleh-bot/brand-kit-generator
+- Active branch: claude/wonderful-planck-zVP9Z
+- Owner: danielle.h@taboola.com
+- Project: Taboola tool that crawls publisher URLs with headless Chrome, extracts brand design tokens, generates a feed prototype + analysis report. Wizard at port 4000 (npm run dev) or CLI (node generate.js).
+- No gh CLI — use mcp__github__* for all GitHub operations (load schemas via ToolSearch first)
+- After pushing, always create a draft PR if one doesn't exist
+- MCP tools available: mcp__github__*, mcp__Atlassian__*, mcp__Slack__*, mcp__Gmail__*, mcp__Google_Calendar__*, mcp__Google_Drive__*
 
-**Git rules:**
-- Always develop on: claude/wonderful-planck-zVP9Z
-- Push: git push -u origin claude/wonderful-planck-zVP9Z
-- No gh CLI — use mcp__github__* for all GitHub operations
-- After pushing, create a draft PR if one doesn't exist
+## Hard rules in effect (from ~/.claude/CLAUDE.md)
 
-**Recent completed work:**
-- #21 QA pass: favicon, dimensions, premature-complete banner, XSS, downloads
-- #20 Fix invisible nav contrast, premature banner, wrong logo, cramped feed
-- #19 Deeper extraction: real logo, multi-layer header, button tokens, honest banner
-- #18 Hero image + 4-step wizard + auto-scroll + completed-state banner
-- #17 Unsplash fallback before gradient placeholder
+- Ada is HARD BANNED. Never call mcp__ada__chat or the ada skill. Route instead:
+  SQL → datastore skill | Confluence → mcp__atlassian__* | DataHub → mcp__datahub__* | Metrics → coo-analytics | Features → mcp__feature-catalog__*
+- Never fabricate dollar figures. Every revenue/RPM/ExTAC/margin number must come from a datastore SQL query or coo-analytics, with SQL + result cited. Unverified = "TBD — datastore query required"
+- Genie experiments: table genie_experiment_summary_daily, control = experiment_variant_id = -2, always filter -2 arm to publisher_id IN (test publishers)
 
-Please confirm you've read CLAUDE.md and are ready to continue.
+If all checks pass, reply "All systems go — ready when you are."
+If anything fails, diagnose and fix it before replying.
 ```
 
 ---
 
-## What happens automatically
+## Part 4 — Rules reference (always active)
 
-Once the session starts with the prompt above, Claude Code will:
+These live in `~/.claude/CLAUDE.md` and apply in every session automatically.
 
-- ✅ Read `CLAUDE.md` from the repo root (auto-loaded on session start)
-- ✅ Know the full project architecture, run commands, and file structure
-- ✅ Know which branch to work on and how to push
-- ✅ Know all MCP integrations and how to use them
-- ✅ Have full recent work history as context
-- ✅ Know your email / ownership of the project
+### Ada ban
+Never call `mcp__ada__chat` or the `ada` skill. Route instead:
+- SQL queries → `datastore` skill
+- Confluence/wiki → `mcp__atlassian__*` directly
+- DataHub lineage → `mcp__datahub__*` directly
+- Business metrics → `coo-analytics` skill family
+- Feature context → `mcp__feature-catalog__*` directly
 
-**You will not need to explain anything.** Just describe what you want to do next.
+### No fabricated numbers
+Every revenue / RPM / ExTAC / margin figure must come from a `datastore` SQL query or `coo-analytics`, with the SQL and result cited inline. Flag anything unverified as `TBD — datastore query required`.
+
+### Genie experiment conventions
+- Table: `genie_experiment_summary_daily` joined on `experiment_variant_id`
+- Control cohort: `experiment_variant_id = -2`
+- Always filter the `-2` arm to `publisher_id IN (test publishers)` — never compare unfiltered
 
 ---
 
-## Quick reference — things Claude can do in this environment
+## Part 5 — Watch list
 
-| Task | How to ask |
+| Item | Date | Action |
+|---|---|---|
+| DataHub PAT expiry | **2026-08-10** | Regenerate at `datahub.taboolasyndication.com` → run `/update-config` to write new token |
+| code-truth index freshness | Check if repos changed significantly | Re-run indexer via `code-truth` skill |
+
+---
+
+## Part 6 — Brand Kit Generator quick reference
+
+| Task | Command / ask |
 |---|---|
-| Run the wizard | "Start the dev server and check it loads" |
-| Crawl a publisher | "Crawl bbc.com/news/some-article and generate the brand kit" |
-| Fix a bug | Describe it — Claude reads the source directly |
-| Create/review a PR | "Create a PR for the current changes" |
-| Check Jira | "Find open tickets related to brand kit extraction" |
-| Post to Slack | "Send a summary of today's work to #brand-kit channel" |
-| Deploy to Render | "Help me deploy this to Render" |
-| Watch a PR | "Watch PR #23 and autofix any CI failures" |
+| Run wizard | `npm run dev` → http://localhost:4000 |
+| Run CLI | `node generate.js --url "https://..." --slug name` |
+| Regen prototype only | `node generate.js --url _ --brand-kit ./output/<slug>/brand-kit.json --prototype-only` |
+| List past crawls | `node generate.js --url _ --list` |
+| Deploy (Render) | Push to GitHub → New Blueprint → paste repo URL |
+| Deploy (Fly.io) | `flyctl deploy` |
+| Quick public URL | `npx cloudflared tunnel --url http://localhost:4000` |
+
+**Recent work (newest first):**
+- `#21` QA pass: favicon, dimensions, premature-complete banner, XSS, downloads
+- `#20` Fix invisible nav contrast, premature banner, wrong logo, cramped feed
+- `#19` Deeper extraction: real logo, multi-layer header, button tokens, honest banner
+- `#18` Hero image + 4-step wizard + auto-scroll + completed-state banner
+- `#17` Unsplash fallback before gradient placeholder
