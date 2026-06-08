@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Insider — Brand Kit Analysis Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #FF5A00;
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #334155;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-bright: #f8fafc;
+      --border: #334155;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+    h1, h2, h3 { color: var(--text-bright); }
+    h2 { font-size: 22px; margin-bottom: 16px; }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 10px 12px; background: rgba(255,255,255,0.05); color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+    td { padding: 10px 12px; border-top: 1px solid var(--border); }
+    .section-title {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent);
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 24px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .accent-text { color: var(--accent); }
+    .mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Report Header -->
+    <div style="margin-bottom: 40px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <h1 style="font-size: 32px;">Brand Kit Analysis</h1>
+        <span style="background: var(--accent); color: #fff; font-size: 11px; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">AUTOMATED</span>
+      </div>
+      <p style="font-size: 18px; color: var(--text-muted); margin-bottom: 20px;">
+        Business Insider — Design Token Extraction Report
+      </p>
+      <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted);">
+        <span>Publisher: <strong class="accent-text">Business Insider</strong></span>
+        <span>Domain: <strong>https://www.businessinsider.com</strong></span>
+        <span>Generated: <strong>2026-06-08</strong></span>
+        <span>Properties: <strong>18</strong></span>
+      </div>
+    </div>
+    <!-- Executive Summary -->
+    <div class="card" style="border-left: 4px solid var(--accent);">
+      <h2 style="margin-bottom: 12px;">Executive Summary</h2>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">
+        The Brand Kit Generator automatically extracted <strong style="color: var(--text-bright);">18</strong> design properties from Business Insider's live website.
+        <strong style="color: var(--accent);">13</strong> properties differ from Taboola defaults, representing a <strong style="color: var(--accent);">72%</strong> customization opportunity.
+      </p>
+      <div class="grid-4">
+        <!-- Stat Card Component -->
+        <div class="card" style="text-align: center; padding: 20px 16px;">
+          <div style="font-size: 36px; font-weight: 700; color: #6366f1; line-height: 1;">18</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Total Properties</div>
+        </div>
+        <!-- Stat Card Component -->
+        <div class="card" style="text-align: center; padding: 20px 16px;">
+          <div style="font-size: 36px; font-weight: 700; color: #f59e0b; line-height: 1;">10</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Drift Detected</div>
+        </div>
+        <!-- Stat Card Component -->
+        <div class="card" style="text-align: center; padding: 20px 16px;">
+          <div style="font-size: 36px; font-weight: 700; color: #3b82f6; line-height: 1;">3</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.04em;">New Discoveries</div>
+        </div>
+        <!-- Stat Card Component -->
+        <div class="card" style="text-align: center; padding: 20px 16px;">
+          <div style="font-size: 36px; font-weight: 700; color: #10b981; line-height: 1;">5</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.04em;">Exact Matches</div>
+        </div>
+      </div>
+    </div>
+    <!-- Before / After Visual Comparison — embeds the rendered "default-feed.html"
+         (generic Taboola styling applied to the same article) and "index.html"
+         (the publisher-branded prototype) as live iframes. They sit inside a
+         scaled wrapper so they fit side-by-side at a glance; click "Open" to
+         inspect either at full size. -->
+    <div style="margin-bottom: 32px;">
+      <div class="section-title"><h2>Visual Comparison — same article, before &amp; after</h2></div>
+      <div class="grid-2" style="gap: 24px;">
+    
+        <!-- Before -->
+        <div class="card" style="border-top: 3px solid #666; padding: 0; overflow: hidden;">
+          <div style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);">
+            <h3 style="font-size: 13px; color: var(--text-muted); margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Before — Generic Taboola</h3>
+            <a href="./default-feed.html" target="_blank" rel="noopener" style="font-size: 11px; color: var(--text-muted); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px;">Open ↗</a>
+          </div>
+          <div style="position: relative; height: 540px; overflow: hidden; background: #fff;">
+            <iframe src="./default-feed.html" loading="lazy" title="Before — generic Taboola feed"
+              style="position: absolute; top: 0; left: 0; width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: top left; background: #fff;"></iframe>
+          </div>
+        </div>
+    
+        <!-- After -->
+        <div class="card" style="border-top: 3px solid var(--accent); padding: 0; overflow: hidden;">
+          <div style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border);">
+            <h3 style="font-size: 13px; color: var(--accent); margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">After — Business Insider Branded</h3>
+            <a href="./index.html" target="_blank" rel="noopener" style="font-size: 11px; color: var(--text-muted); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px;">Open ↗</a>
+          </div>
+          <div style="position: relative; height: 540px; overflow: hidden; background: #fff;">
+            <iframe src="./index.html" loading="lazy" title="After — publisher-branded feed"
+              style="position: absolute; top: 0; left: 0; width: 200%; height: 200%; border: none; transform: scale(0.5); transform-origin: top left; background: #fff;"></iframe>
+          </div>
+        </div>
+    
+      </div>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px;">
+        Both previews show the same article URL with the same content. The only difference is the brand kit: colours, fonts, spacing, and layout applied on the right.
+      </p>
+    </div>
+    <!-- Property Table -->
+    <div style="margin-bottom: 32px;">
+      <div class="section-title"><h2>Property Comparison</h2></div>
+      <div class="card" style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 22%;">Property</th>
+              <th style="width: 25%;">Before (Default)</th>
+              <th style="width: 25%;">After (Brand Kit)</th>
+              <th style="width: 15%;">Source</th>
+              <th style="width: 13%;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Headline Font Family</td>
+                <td class="mono">
+                  
+                  Arial, Helvetica, sans-serif
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--warning);">Brother 1816</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">fonts.primary</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Eyebrow / Label Font</td>
+                <td class="mono">
+                  
+                  Arial, Helvetica, sans-serif
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--warning);">Brother 1816</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">fonts.type_scale</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Body Font Family</td>
+                <td class="mono">
+                  
+                  Arial, Helvetica, sans-serif
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--warning);">Brother 1816</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">fonts.secondary</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Headline Color</td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#333333;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  #333333
+                </td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#111111;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  <span style="color: var(--warning);">#111111</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">colors.text</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Headline Font Size</td>
+                <td class="mono">
+                  
+                  14px
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--warning);">20px</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">fonts.type_scale</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Headline Font Weight</td>
+                <td class="mono">
+                  
+                  700
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--success);">700</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">fonts.primary</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#d1fae5;color:#065f46">Match</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Headline Transform</td>
+                <td class="mono">
+                  
+                  none
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--success);">none</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">fonts.type_scale</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#d1fae5;color:#065f46">Match</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Card Border Radius</td>
+                <td class="mono">
+                  
+                  6px
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--warning);">0px</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">photo_style</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Accent Rule Color</td>
+                <td class="mono">
+                  
+                  —
+                </td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FF5A00;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  <span style="color: var(--info);">#FF5A00</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">colors.primary</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#dbeafe;color:#1e40af">New</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Accent Rule Style</td>
+                <td class="mono">
+                  
+                  —
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--info);">3px solid #FF5A00</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">colors.primary</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#dbeafe;color:#1e40af">New</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">CTA / Link Color</td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#1a73e8;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  #1a73e8
+                </td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FF5A00;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  <span style="color: var(--warning);">#FF5A00</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">colors.primary</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Source Label Color</td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#888888;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  #888888
+                </td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#888888;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  <span style="color: var(--success);">#888888</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">colors.text</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#d1fae5;color:#065f46">Match</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Separator Color</td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#f3f4f6;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  #f3f4f6
+                </td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#F7F7F7;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  <span style="color: var(--warning);">#F7F7F7</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">colors.backgrounds</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Badge / Label Style</td>
+                <td class="mono">
+                  
+                  {&quot;label&quot;:&quot;Sponsored&quot;,&quot;bg&quot;:&quot;#f3f4f6&quot;,&quot;text&quot;:&quot;#666666&quot;}
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--warning);">BREAKING</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">graphics</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Letter Spacing</td>
+                <td class="mono">
+                  
+                  0
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--success);">—</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">fonts.type_scale</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#d1fae5;color:#065f46">Match</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Hover Decoration</td>
+                <td class="mono">
+                  
+                  none
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--warning);">underline</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">textStyles</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#fef3c7;color:#92400e">Drift</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Category Labels</td>
+                <td class="mono">
+                  
+                  —
+                </td>
+                <td class="mono">
+                  
+                  <span style="color: var(--info);">breaking, live, exclusive, opinion, video, premium, sponsored, analysis</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">brand_voice</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#dbeafe;color:#1e40af">New</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-bright);">Background Color</td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FFFFFF;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  #FFFFFF
+                </td>
+                <td class="mono">
+                  <span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#FFFFFF;border:1px solid rgba(0,0,0,0.15);vertical-align:middle;margin-right:4px"></span>
+                  <span style="color: var(--success);">#FFFFFF</span>
+                </td>
+                <td style="color: var(--text-muted); font-size: 12px;">colors.backgrounds</td>
+                <td><span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:11px;font-weight:600;background:#d1fae5;color:#065f46">Match</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Workflow Comparison -->
+    <div style="margin-bottom: 32px;">
+      <div class="section-title"><h2>Workflow Comparison</h2></div>
+      <div class="grid-2">
+        <!-- Manual Workflow -->
+        <div class="card" style="border-top: 3px solid #ef4444;">
+          <h3 style="font-size: 16px; margin-bottom: 16px;">
+            <span style="color: #ef4444;">Manual Process</span>
+            <span style="font-size: 12px; color: var(--text-muted); margin-left: 8px;">~2-4 hours per publisher</span>
+          </h3>
+          <ol style="list-style: none; counter-reset: step;">
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">1</span>
+                Open Business Insider&#x27;s website in browser
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">2</span>
+                Inspect headline elements with DevTools to find font-family
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">3</span>
+                Identify Brother 1816 and search for Google Fonts equivalent
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">4</span>
+                Manually sample colors from headers, links, backgrounds
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">5</span>
+                Cross-reference with brand guidelines PDF (if available)
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">6</span>
+                Build Taboola config JSON by hand, property by property
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">7</span>
+                Test in staging, iterate on visual mismatches
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">8</span>
+                Document all values for future reference
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid #ef4444; font-size: 9px; display: flex; align-items: center; justify-content: center; color: #ef4444;">9</span>
+                Repeat entire process when publisher redesigns
+              </li>
+          </ol>
+        </div>
+        <!-- Crawler Workflow -->
+        <div class="card" style="border-top: 3px solid var(--success);">
+          <h3 style="font-size: 16px; margin-bottom: 16px;">
+            <span style="color: var(--success);">Automated Crawler</span>
+            <span style="font-size: 12px; color: var(--text-muted); margin-left: 8px;">~30 seconds</span>
+          </h3>
+          <ol style="list-style: none;">
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--success); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--success);">1</span>
+                Run: node generate.js --url &quot;https://www.businessinsider.com&quot;
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--success); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--success);">2</span>
+                Puppeteer loads page, executes all JavaScript
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--success); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--success);">3</span>
+                Extracts Brother 1816, #FF5A00, and 50+ tokens automatically
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--success); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--success);">4</span>
+                Generates brand-kit.json with full nested structure
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--success); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--success);">5</span>
+                Renders publisher-branded feed prototype
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--success); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--success);">6</span>
+                Produces before/after analysis report
+              </li>
+              <li style="position: relative; padding: 8px 0 8px 36px; border-left: 2px solid var(--border); margin-left: 12px; font-size: 13px; color: var(--text-muted);">
+                <span style="position: absolute; left: -9px; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--success); font-size: 9px; display: flex; align-items: center; justify-content: center; color: var(--success);">7</span>
+                Re-run anytime for updated results
+              </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- UI Mode Replacement Section -->
+    <div style="margin-bottom: 32px;">
+      <div class="section-title"><h2>UI Mode Replacement</h2></div>
+      <div class="card">
+        <p style="color: var(--text-muted); margin-bottom: 16px;">
+          The Brand Kit Generator replaces manual per-publisher configuration with automated token extraction.
+          Instead of browsing DevTools and sampling values by hand, the crawler programmatically reads <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 12px;">getComputedStyle()</code> on live DOM elements.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Manual Mode</th>
+              <th>Brand Kit Mode</th>
+              <th>Coverage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight: 500; color: var(--text-bright);">Typography</td>
+              <td style="color: var(--text-muted);">Inspect each element, copy font-family</td>
+              <td style="color: var(--success);">10-role type scale with weights & sizes</td>
+              <td><span style="color: var(--success); font-weight: 600;">Full</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 500; color: var(--text-bright);">Colors</td>
+              <td style="color: var(--text-muted);">Eyedropper on 3-4 elements</td>
+              <td style="color: var(--success);">Full palette: primary, text (3), bg (4), accents</td>
+              <td><span style="color: var(--success); font-weight: 600;">Full</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 500; color: var(--text-bright);">Brand Voice</td>
+              <td style="color: var(--text-muted);">Not captured</td>
+              <td style="color: var(--info);">Language, headline patterns, content labels</td>
+              <td><span style="color: var(--info); font-weight: 600;">New</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 500; color: var(--text-bright);">Photo Style</td>
+              <td style="color: var(--text-muted);">Not captured</td>
+              <td style="color: var(--info);">Aspect ratio, border radius, video indicators</td>
+              <td><span style="color: var(--info); font-weight: 600;">New</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 500; color: var(--text-bright);">Layout Patterns</td>
+              <td style="color: var(--text-muted);">Approximate grid guessing</td>
+              <td style="color: var(--success);">Header layers, grid detection, card patterns</td>
+              <td><span style="color: var(--success); font-weight: 600;">Full</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 500; color: var(--text-bright);">Icons & Graphics</td>
+              <td style="color: var(--text-muted);">Not captured</td>
+              <td style="color: var(--info);">SVG count, social icons, badge inventory</td>
+              <td><span style="color: var(--info); font-weight: 600;">New</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Advantages Grid -->
+    <div style="margin-bottom: 32px;">
+      <div class="section-title"><h2>Key Advantages</h2></div>
+      <div class="grid-3">
+          <div class="card" style="text-align: center; padding: 28px 20px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">🎯</div>
+            <h3 style="font-size: 15px; margin-bottom: 8px;">Pixel-Perfect Accuracy</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Extracts 18 design properties directly from Business Insider&#x27;s live site CSS.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">⚡</div>
+            <h3 style="font-size: 15px; margin-bottom: 8px;">Instant Generation</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Full brand kit generated in under 30 seconds vs. hours of manual configuration.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">🔄</div>
+            <h3 style="font-size: 15px; margin-bottom: 8px;">Always Up-to-Date</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Re-crawl anytime the publisher redesigns to automatically capture changes.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">📊</div>
+            <h3 style="font-size: 15px; margin-bottom: 8px;">Deep Token Coverage</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Covers typography, colors, spacing, brand voice, photos, icons, and layout patterns.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">🧩</div>
+            <h3 style="font-size: 15px; margin-bottom: 8px;">Drop-In Integration</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Generates Taboola-ready property values that map directly to feed configuration.</p>
+          </div>
+          <div class="card" style="text-align: center; padding: 28px 20px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">📈</div>
+            <h3 style="font-size: 15px; margin-bottom: 8px;">Scalable</h3>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Run against any publisher URL — no per-publisher manual work required.</p>
+          </div>
+      </div>
+    </div>
+    <!-- Gap Analysis -->
+    <div style="margin-bottom: 32px;">
+      <div class="section-title"><h2>Gap Analysis</h2></div>
+        <div class="card" style="border-left: 4px solid #ef4444;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 600;
+              background: #fef2f2; color: #dc2626;">
+              HIGH
+            </span>
+            <h3 style="font-size: 16px;">Typography</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">4 typography properties differ from Taboola defaults. The publisher uses custom fonts that should replace generic Arial/Helvetica.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Headline Font Family</span>
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Eyebrow / Label Font</span>
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Body Font Family</span>
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Headline Font Size</span>
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid #ef4444;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 600;
+              background: #fef2f2; color: #dc2626;">
+              HIGH
+            </span>
+            <h3 style="font-size: 16px;">Colors</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">3 color values diverge from defaults. Publisher brand colors should be applied for native feel.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Headline Color</span>
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">CTA / Link Color</span>
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Separator Color</span>
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid #f59e0b;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 600;
+              background: #fffbeb; color: #d97706;">
+              MEDIUM
+            </span>
+            <h3 style="font-size: 16px;">Spacing &amp; Layout</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">1 spacing/layout properties need publisher-specific values for visual consistency.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Card Border Radius</span>
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid #3b82f6;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 600;
+              background: #eff6ff; color: #2563eb;">
+              INFO
+            </span>
+            <h3 style="font-size: 16px;">New Discoveries</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">3 properties were discovered by the crawler that aren&#x27;t in the default Taboola config. These represent opportunities for enhanced brand alignment.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Accent Rule Color</span>
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Accent Rule Style</span>
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Category Labels</span>
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid #f59e0b;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span style="font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 600;
+              background: #fffbeb; color: #d97706;">
+              MEDIUM
+            </span>
+            <h3 style="font-size: 16px;">Badges &amp; Labels</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 12px;">Publisher uses custom badge styling that should be reflected in the Taboola feed for native appearance.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--text-muted);">Badge / Label Style</span>
+          </div>
+        </div>
+    </div>
+    <!-- Conclusion -->
+    <div class="card" style="border: 1px solid var(--accent); background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(99,102,241,0.02));">
+      <h2 style="margin-bottom: 12px;">Conclusion</h2>
+      <div class="grid-3" style="margin-bottom: 20px;">
+        <div style="text-align: center; padding: 16px;">
+          <div style="font-size: 36px; font-weight: 700; color: var(--accent);">72%</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Customization Coverage</div>
+        </div>
+        <div style="text-align: center; padding: 16px;">
+          <div style="font-size: 36px; font-weight: 700; color: var(--warning);">10</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Properties to Customize</div>
+        </div>
+        <div style="text-align: center; padding: 16px;">
+          <div style="font-size: 36px; font-weight: 700; color: var(--success);">5</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Already Matching</div>
+        </div>
+      </div>
+      <p style="color: var(--text-muted); font-size: 14px; line-height: 1.7;">
+        The automated Brand Kit Generator successfully extracted a comprehensive set of design tokens from <strong style="color: var(--text-bright);">Business Insider</strong>.
+        With <strong style="color: var(--accent);">13</strong> out of <strong>18</strong> properties showing brand-specific values,
+        this publisher's Taboola feed can be significantly enhanced to match their native site design.
+        The crawler-generated brand kit provides a complete starting point that would take hours to replicate manually.
+      </p>
+    </div>
+    
+    <!-- Footer -->
+    <div style="text-align: center; padding: 32px 0; font-size: 12px; color: var(--text-muted);">
+      Generated by <strong>Taboola Brand Kit Generator v2.0</strong> | 2026-06-08
+    </div>
+  </div>
+</body>
+</html>

@@ -122,6 +122,14 @@ async function main() {
       console.error('   Re-crawl the URL, or pass --accept-low-quality if you really want to proceed.');
       process.exit(1);
     }
+    // A hand-constructed brand kit may also embed navigation/content/related
+    // so the prototype renders with realistic publisher chrome (nav links,
+    // article hero, related cards) instead of falling back to placeholders.
+    // These are read at top-level keys outside the canonical schema so the
+    // crawler output is unaffected.
+    if (brandKit.navigation) navigation = brandKit.navigation;
+    if (brandKit.content)    content    = brandKit.content;
+    if (Array.isArray(brandKit.related_articles)) relatedArticles = brandKit.related_articles;
     console.log('   ✓ Brand kit loaded\n');
   } else {
     // Find Chrome
