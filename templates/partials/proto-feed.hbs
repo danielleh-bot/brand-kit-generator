@@ -27,7 +27,7 @@
   <div style="margin-bottom: 32px;">
     <div class="section-label">
       <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-primary);margin-right:8px;vertical-align:middle;"></span>
-      More From {{../brandKit.brand.name}}
+      More From {{@root.brandKit.brand.name}}
     </div>
     <div data-feed-grid="3-up" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
       {{#each feedContent.nativeSection}}
@@ -47,7 +47,7 @@
   <div style="margin-bottom: 32px;">
     <div class="section-label">
       <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-primary);margin-right:8px;vertical-align:middle;"></span>
-      Trending on {{../brandKit.brand.name}}
+      Trending on {{@root.brandKit.brand.name}}
     </div>
     <div data-feed-grid="3-up" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
       {{#each feedContent.trendingNative}}
