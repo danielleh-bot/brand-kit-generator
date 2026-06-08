@@ -8,38 +8,40 @@ Deliverable package for the BI workshop on **2026-06-08**.
 |---|---|---|
 | `brand-kit.json` | Full nested brand kit (colors, fonts, type scale, layout, brand voice, photo style, graphics, buttons, navigation, sample article, related cards) | Source of truth — feeds the prototype, the report, the CSS export, and the loader |
 | `brand-kit.css` | Drop-in CSS — `:root` custom properties + utility classes (`.brand-headline`, `.brand-button`, etc.) | Hand to a BI engineer who wants to consume the tokens directly |
-| `index.html` | Branded prototype — BI masthead, hero article, sponsored + native Taboola feed cards, footer | Open in a browser during the workshop |
+| `index.html` | Branded prototype — white BI masthead, hero article, two-column body + sidebar, full-width sponsored + native Taboola feed, footer | Open in a browser during the workshop |
 | `analysis-report.html` | Before/after comparison against generic Taboola defaults: drift table, gaps, workflow comparison | Walk through with the BI team to show what changes |
 | `loader.js` | Production-shape Taboola loader for BI — CSS override + per-mode `__style__` overrideConfig, mirrors the t-online integration pattern | Ship to BI AdOps once `publisherName` is confirmed |
 
 ## Brand kit at a glance
 
 ```
-Primary:        BI Orange      #FF5A00   Subscribe CTA, accent rules, hover underlines
-Secondary:      BI Red         #E03625   Breaking news, live ticker
-Background:     White / Black  #FFFFFF / #000000
+Primary:        BI Yellow      #FECF41   Signature 'Bright Sun' — premium / brand highlight (black text)
+Accent:         BI Red         #C71A1E   'Thunderbird' — kickers, hover underlines, section rules
+Action (CTA):   Black          #0A0A0A   Subscribe / load-more / sponsored CTA fill
+Background:     White          #FFFFFF   (dark footer #0A0A0A)
 Text:           Near-black     #111111
 Type:           Brother 1816 → Manrope (Google Fonts equivalent)
 Card radius:    0px (sharp corners)
 Image ratio:    16:9
-Logo:           BUSINESS INSIDER wordmark on black, BI cube mark
-Section labels: UPPERCASE BI ORANGE
+Logo:           BUSINESS INSIDER black wordmark on a WHITE masthead, BI cube mark
+Section labels: UPPERCASE, red kicker
 ```
 
 ## Provenance — **read this before the workshop**
 
 > This brand kit was **constructed from publicly-documented BI brand
-> information**, NOT extracted by a live crawl. The workshop sandbox cannot
-> reach `businessinsider.com` (network egress is denied at the proxy: HTTP
-> 403 `host_not_allowed`).
+> sources** (BrandColorCode, Brandfetch, 1000logos), NOT extracted by a live
+> crawl. The workshop sandbox cannot reach `businessinsider.com` (network
+> egress is denied at the proxy: HTTP 403 `host_not_allowed`).
 >
-> Token values are well-grounded — BI Orange, the black masthead, the
-> Brother-1816-style headline grotesque, the sharp 0px corners, and the
-> "BI" cube mark are all stable, publicly-visible facets of BI's visual
-> identity. They are marked `"source": "extracted"` to keep the CLI's
-> quality gates happy and the analysis report meaningful, but the
-> `metadata.extraction_method` field in `brand-kit.json` is explicit
-> about how the file was produced.
+> **Correction (2026-06-08):** an earlier draft of this kit used an invented
+> orange `#FF5A00` accent on a black masthead. That did not match BI's actual
+> identity and has been replaced with the documented palette — the signature
+> 'Bright Sun' yellow `#FECF41`, the 'Thunderbird' red `#C71A1E`, and BI's
+> black wordmark on a white masthead (the logo was de-serifed and blackened
+> in 2017). Color/logo tokens are marked `"source": "documented"`; the
+> `metadata.extraction_method` field in `brand-kit.json` records the change.
+> Re-crawl for byte-exact values when network access is available.
 
 If you want the *real* extracted tokens (resolved font CSS, exact pixel
 sizes, real button border-radius, actual logo SVG, real related-article

@@ -12,8 +12,9 @@
       "text": "BUSINESS INSIDER",
       "font": "Brother 1816 Bold (uppercase)",
       "color": "#FFFFFF",
-      "background": "#000000",
-      "treatment": "Wordmark in heavy, low-contrast grotesque set in uppercase. Used in white on the black masthead; flips to black-on-white in body contexts. The 'BI' cube mark — a black square with white 'BI' — is the supplementary brand badge."
+      "color": "#0A0A0A",
+      "background": "#FFFFFF",
+      "treatment": "Black 'BUSINESS INSIDER' wordmark in a heavy uppercase sans-serif on a white masthead (the brand de-serifed and blackened the logo in 2017). The 'BI' cube mark — a black square with white 'BI' — is the supplementary brand badge used as favicon/avatar."
     },
     "brand_mark": {
       "name": "BI cube",
@@ -25,38 +26,40 @@
   },
   "colors": {
     "primary": {
-      "name": "BI Orange",
-      "hex": "#FF5A00",
-      "rgb": "rgb(255, 90, 0)",
+      "name": "BI Yellow (Bright Sun)",
+      "hex": "#FECF41",
+      "rgb": "rgb(254, 207, 65)",
       "usage": [
-        "Subscribe CTA",
-        "Section accent rules",
-        "Sponsored / exclusive ribbons",
-        "Section labels",
-        "Hover underlines"
+        "Signature brand highlight",
+        "Subscribe / premium accents",
+        "Hover underlines",
+        "Section rules",
+        "Feed CTA highlight"
       ],
-      "source": "extracted"
+      "source": "documented",
+      "note": "Business Insider's documented signature color (BrandColorCode: 'Bright Sun'). Pairs with black text — never white."
     },
     "primary_variants": {
       "darken_5": {
-        "hex": "#E65100",
-        "rgb": "rgb(230, 81, 0)"
+        "hex": "#F5C01F",
+        "rgb": "rgb(245, 192, 31)"
       },
       "darken_10": {
-        "hex": "#CC4900",
-        "rgb": "rgb(204, 73, 0)"
+        "hex": "#E0AC0A",
+        "rgb": "rgb(224, 172, 10)"
       }
     },
     "secondary": {
-      "name": "BI Red (Breaking)",
-      "hex": "#E03625",
-      "rgb": "rgb(224, 54, 37)",
+      "name": "BI Red (Thunderbird)",
+      "hex": "#C71A1E",
+      "rgb": "rgb(199, 26, 30)",
       "usage": [
+        "Editorial category kickers",
         "Breaking news label",
         "Live ticker",
-        "Premium/exclusive flag"
+        "Section accent rules"
       ],
-      "source": "extracted"
+      "source": "documented"
     },
     "text": {
       "primary": {
@@ -138,24 +141,24 @@
     },
     "accents": {
       "warning_yellow": {
-        "name": "Insider Yellow",
-        "hex": "#FFC700",
-        "rgb": "rgb(255, 199, 0)",
+        "name": "BI Yellow (Bright Sun)",
+        "hex": "#FECF41",
+        "rgb": "rgb(254, 207, 65)",
         "usage": [
-          "Newsletter banner",
-          "Premium gold ribbon"
+          "Premium / subscriber gold ribbon",
+          "Newsletter banner"
         ],
-        "source": "extracted"
+        "source": "documented"
       },
       "negative_red": {
-        "name": "BI Red",
-        "hex": "#E03625",
-        "rgb": "rgb(224, 54, 37)",
+        "name": "BI Red (Thunderbird)",
+        "hex": "#C71A1E",
+        "rgb": "rgb(199, 26, 30)",
         "usage": [
           "Breaking news",
           "Market loss indicator"
         ],
-        "source": "extracted"
+        "source": "documented"
       },
       "positive_green": {
         "name": "Market Green",
@@ -287,8 +290,8 @@
         "family": "Brother 1816",
         "text_transform": "uppercase",
         "letter_spacing": "0.08em",
-        "color": "#FF5A00",
-        "source": "extracted",
+        "color": "#C71A1E",
+        "source": "documented",
         "matched_selector": "[class*='category'], [class*='kicker']"
       },
       "buttons": {
@@ -313,7 +316,7 @@
   },
   "buttons": {
     "primary": {
-      "background_color": "#FF5A00",
+      "background_color": "#0A0A0A",
       "text_color": "#FFFFFF",
       "border_radius": "2px",
       "padding": "10px 20px",
@@ -321,8 +324,22 @@
       "text_transform": "uppercase",
       "letter_spacing": "0.06em",
       "font_size": "13px",
-      "hover_background": "#E65100",
-      "source": "extracted"
+      "hover_background": "#333333",
+      "source": "documented",
+      "note": "BI's primary action (Subscribe) is a solid black pill-less rectangle with white uppercase text. The yellow 'Bright Sun' is reserved for brand/premium highlights, not the default button fill."
+    },
+    "highlight": {
+      "background_color": "#FECF41",
+      "text_color": "#0A0A0A",
+      "border_radius": "2px",
+      "padding": "10px 20px",
+      "font_weight": 700,
+      "text_transform": "uppercase",
+      "letter_spacing": "0.06em",
+      "font_size": "13px",
+      "hover_background": "#F5C01F",
+      "source": "documented",
+      "usage": "Premium / signature brand CTA — yellow fill, black text"
     },
     "secondary": {
       "background_color": "transparent",
@@ -360,7 +377,7 @@
       "opinion": {
         "label": "Opinion",
         "typography": "Brother 1816 Italic 500",
-        "description": "Editorial commentary signposted with an 'OPINION' kicker in BI Orange."
+        "description": "Editorial commentary signposted with an 'OPINION' kicker in BI Red."
       },
       "premium": {
         "label": "BI PREMIUM",
@@ -376,7 +393,7 @@
     },
     "video_thumbnails": {
       "indicator": "Solid circle with white play triangle",
-      "indicator_color": "#FF5A00"
+      "indicator_color": "#C71A1E"
     },
     "author_photos": {
       "shape": "circular",
@@ -390,7 +407,7 @@
         "name": "BREAKING",
         "label": "BREAKING",
         "description": "Live news label",
-        "background_color": "#E03625",
+        "background_color": "#C71A1E",
         "text_color": "#FFFFFF"
       },
       {
@@ -404,7 +421,7 @@
         "name": "BI PREMIUM",
         "label": "BI PREMIUM",
         "description": "Paywalled / subscriber content",
-        "background_color": "#FFC700",
+        "background_color": "#FECF41",
         "text_color": "#111111"
       },
       {
@@ -412,7 +429,7 @@
         "label": "OPINION",
         "description": "Editorial commentary kicker",
         "background_color": "transparent",
-        "text_color": "#FF5A00"
+        "text_color": "#C71A1E"
       }
     ]
   },
@@ -435,12 +452,13 @@
   "layout_patterns": {
     "grid": "Two-column at desktop (main + sidebar), single-column at mobile, 760px article reading width.",
     "header": {
-      "background_color": "#000000",
-      "is_dark": true,
-      "accent_rule_color": "#FF5A00",
+      "background_color": "#FFFFFF",
+      "is_dark": false,
+      "accent_rule_color": "#0A0A0A",
       "utility_bar": {
-        "background_color": "#000000",
-        "is_dark": true,
+        "background_color": "#FAFAFA",
+        "is_dark": false,
+        "border_bottom": "1px solid #EEEEEE",
         "items": [
           "Subscribe",
           "Newsletters",
@@ -449,17 +467,17 @@
         ]
       },
       "layers": [
-        "div: utility bar — Subscribe / Account / Search",
-        "div: masthead — wordmark + main nav",
+        "div: utility bar (light) — market ticker + Subscribe / Account / Search",
+        "div: masthead (white) — black wordmark + main nav, black 'Subscribe' button",
         "div: section sub-nav — Tech, Markets, Finance, Strategy, Politics",
-        "div: 3px orange accent rule"
+        "div: thin black rule separating header from content"
       ]
     },
     "content_cards": {
       "border_radius": "0px",
       "border": "1px solid #EEEEEE",
       "padding": "16px",
-      "hover": "background shifts to #F7F7F7, headline picks up underline in BI Orange"
+      "hover": "background shifts to #FAFAFA, headline picks up underline in BI Red"
     },
     "footer": {
       "background_color": "#000000",
@@ -599,14 +617,14 @@
     "analysis_date": "2026-06-08",
     "source_url": "https://www.businessinsider.com/",
     "generator": "brand-kit-generator v2.1.0 (hand-constructed)",
-    "extraction_method": "Constructed from public brand documentation. Live crawl was not possible from the workshop sandbox (egress to businessinsider.com is blocked). Re-run `node generate.js --url <BI article URL> --slug business-insider` from a machine with network access to BI to replace this file with live-extracted tokens. See README.md in this directory.",
+    "extraction_method": "Constructed from documented brand sources (BrandColorCode, Brandfetch, 1000logos) because live crawl was blocked from the sandbox (egress to businessinsider.com is blocked). Color tokens corrected on 2026-06-08 to match BI's documented palette — signature 'Bright Sun' yellow #FECF41, 'Thunderbird' red #C71A1E, black wordmark on white masthead — replacing an earlier hand-constructed draft that incorrectly used an orange #FF5A00 / black-masthead scheme. Re-run `node generate.js --url <BI article URL> --slug business-insider` from a machine with network access to BI to replace these with byte-for-byte live-extracted tokens.",
     "extraction_quality": {
-      "extracted_token_count": 28,
+      "documented_token_count": 28,
       "fallback_token_count": 0,
       "total_tokens": 28,
-      "extraction_ratio": 1,
+      "confidence": "medium-high",
       "fallback_tokens": [],
-      "note": "Token sources are marked 'extracted' to reflect the confidence level of hand-constructed BI brand data (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners are well-documented public knowledge). They will be replaced byte-for-byte when the crawler is re-run with live access."
+      "note": "Color and logo tokens are sourced from published BI brand references (see extraction_method). They will be confirmed byte-for-byte when the crawler is re-run with live access to businessinsider.com."
     }
   }
 }

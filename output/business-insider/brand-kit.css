@@ -10,17 +10,20 @@
 :root {
   --brand-name: "Business Insider";
   --brand-website: "https://www.businessinsider.com";
-  --brand-color-primary: #FF5A00;
-  --brand-color-secondary: #E03625;
+  --brand-color-primary: #FECF41;          /* BI 'Bright Sun' yellow — pairs with black text */
+  --brand-color-on-primary: #0A0A0A;       /* text/icon color to use ON the yellow */
+  --brand-color-secondary: #C71A1E;        /* BI 'Thunderbird' red — editorial accent */
+  --brand-color-action: #0A0A0A;           /* primary button / Subscribe fill */
+  --brand-color-action-hover: #333333;
   --brand-color-text-primary: #111111;
   --brand-color-text-secondary: #4D4D4D;
   --brand-color-text-tertiary: #888888;
   --brand-color-bg-base: #FFFFFF;
-  --brand-color-bg-section: #F7F7F7;
+  --brand-color-bg-section: #FAFAFA;
   --brand-color-bg-secondary: #EEEEEE;
-  --brand-color-bg-dark: #000000;
-  --brand-color-accent-warning: #FFC700;
-  --brand-color-accent-negative: #E03625;
+  --brand-color-bg-dark: #0A0A0A;
+  --brand-color-accent-warning: #FECF41;
+  --brand-color-accent-negative: #C71A1E;
   --brand-color-accent-positive: #1A8F4C;
   --brand-color-accent-info: #0F69FF;
   --brand-font-primary: "Brother 1816", Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -71,11 +74,11 @@
 .text-brand-primary   { color: var(--brand-color-text-primary); }
 .text-brand-secondary { color: var(--brand-color-text-secondary); }
 .text-brand-tertiary  { color: var(--brand-color-text-tertiary); }
-.text-brand-accent    { color: var(--brand-color-primary); }
+.text-brand-accent    { color: var(--brand-color-secondary); }
 
 /* ---- Borders ---- */
-.border-brand { border: 1px solid var(--brand-color-bg-section); }
-.border-brand-accent { border: 1px solid var(--brand-color-primary); }
+.border-brand { border: 1px solid var(--brand-color-bg-secondary); }
+.border-brand-accent { border: 1px solid var(--brand-color-secondary); }
 
 /* ---- Type roles ---- */
 .font-brand           { font-family: var(--brand-font-primary, sans-serif); }
@@ -107,26 +110,49 @@
 
 .brand-eyebrow {
   font-family: var(--brand-font-primary, sans-serif);
-  font-size: var(--brand-size-meta-text, 12px);
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: var(--brand-size-category-pills, 11px);
+  font-weight: var(--brand-weight-category-pills, 700);
+  letter-spacing: var(--brand-tracking-category-pills, 0.08em);
   text-transform: uppercase;
-  color: var(--brand-color-primary);
+  color: var(--brand-color-secondary);   /* red kicker — BI editorial accent */
 }
 
+/* Primary action — BI's Subscribe button: solid black, white uppercase,
+   sharp 2px corners. */
 .brand-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 20px;
+  padding: var(--brand-button-padding, 10px 20px);
   border: none;
-  border-radius: 6px;
-  background: var(--brand-color-primary);
-  color: var(--brand-color-bg-base, #fff);
+  border-radius: 2px;
+  background: var(--brand-color-action);
+  color: #fff;
   font-family: var(--brand-font-primary, sans-serif);
-  font-size: var(--brand-size-buttons, 15px);
+  font-size: var(--brand-size-buttons, 13px);
   font-weight: var(--brand-weight-buttons, 700);
+  letter-spacing: var(--brand-tracking-buttons, 0.06em);
+  text-transform: uppercase;
   cursor: pointer;
-  transition: filter 160ms ease;
+  transition: background-color 160ms ease;
 }
-.brand-button:hover { filter: brightness(0.92); }
+.brand-button:hover { background: var(--brand-color-action-hover); }
+
+/* Signature highlight CTA — the yellow 'Bright Sun' fill with black text,
+   reserved for premium / brand moments. */
+.brand-button-highlight {
+  background: var(--brand-color-primary);
+  color: var(--brand-color-on-primary);
+}
+.brand-button-highlight:hover { background: #F5C01F; }
+
+/* Outline / sponsored CTA — fills on hover, the dominant feed-card pattern. */
+.brand-button-outline {
+  background: transparent;
+  border: 1px solid var(--brand-color-text-primary);
+  color: var(--brand-color-text-primary);
+}
+.brand-button-outline:hover {
+  background: var(--brand-color-text-primary);
+  color: #fff;
+}
