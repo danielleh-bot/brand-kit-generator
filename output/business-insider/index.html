@@ -6,37 +6,31 @@
   <title>The ultrawealthy are spending $150,000 a year on 'lifestyle managers' to plan their leisure — Business Insider</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
   <style>
     /* ─── Design tokens ─────────────────────────────────────────────────── */
     :root {
-      /* Documented BI palette: black wordmark on white, 'Bright Sun' yellow
-         signature, 'Thunderbird' red editorial accent. --accent (red) drives
-         kickers/hovers/rules; --yellow is reserved for premium/brand fills;
-         --action (black) is the Subscribe/primary button language. */
+      /* Brand kit (2026-06-09): primary #002AFF, Garnett sans, white masthead */
       --bi-black:        #0A0A0A;
-      --accent:          #C71A1E;   /* editorial red — kickers, hovers, rules */
-      --accent-hover:    #A01419;
-      --action:          #0A0A0A;   /* primary button / Subscribe fill */
-      --action-hover:    #333333;
-      --bi-yellow:       #FECF41;   /* signature 'Bright Sun' — premium fills */
-      --bi-yellow-hover: #F5C01F;
-      --bi-red:          #C71A1E;
+      --accent:          #002AFF;   /* primary blue — CTAs, kickers, hovers */
+      --accent-hover:    #0025E0;   /* darken_10 */
+      --accent-mid:      #0028F2;   /* darken_5 */
+      --action:          #002AFF;   /* primary button fill */
+      --action-hover:    #0025E0;
       --bi-green:        #1A8F4C;
-      --bi-blue:         #0F69FF;
+      --bi-red:          #CC0000;
 
-      --text-primary:    #111111;
-      --text-secondary:  #4D4D4D;
-      --text-tertiary:   #888888;
+      --text-primary:    #0A0A0A;
+      --text-secondary:  #0A0A0A;
+      --text-tertiary:   #31313B;
       --text-white:      #FFFFFF;
 
       --bg-white:        #FFFFFF;
       --bg-off:          #FAFAFA;
       --bg-light:        #EEEEEE;
 
-      /* Garnett is BI's proprietary Commercial Type serif.
-         Source Serif 4 is the closest freely-available stand-in. */
-      --font:            'Garnett', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      /* Garnett is BI's proprietary sans-serif (Commercial Type).
+         System sans stack as live-preview stand-in. */
+      --font:            'Garnett', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
       --max-w:           1240px;
       --gutter:          20px;
@@ -114,16 +108,16 @@
     }
     .utility-actions a { color: var(--text-secondary); transition: color 120ms; }
     .utility-actions a:hover { color: var(--accent); }
-    /* Subscribe = solid black rectangle, white uppercase — BI's primary action */
+    /* Subscribe = solid blue rectangle, white uppercase — BI's primary action */
     .btn-subscribe {
       background: var(--action);
       color: #fff !important;
       padding: 5px 12px;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      border-radius: 2px;
+      border-radius: 4px;
       transition: background 120ms;
     }
     .btn-subscribe:hover { background: var(--action-hover) !important; }
@@ -168,7 +162,7 @@
     .masthead-menu {
       width: 38px; height: 38px;
       border-radius: 50%;
-      background: var(--bi-black);
+      background: var(--accent);
       border: none;
       cursor: pointer;
       display: flex;
@@ -220,8 +214,8 @@
     }
     .search-icon { width: 18px; height: 18px; }
 
-    /* Thin black rule under the masthead */
-    .header-accent { height: 2px; background: var(--bi-black); }
+    /* Thin blue rule under the masthead */
+    .header-accent { height: 2px; background: var(--accent); }
 
     /* ═══════════════════════════════════════════════════════════════════════
        ARTICLE PAGE LAYOUT
@@ -305,6 +299,8 @@
       border-bottom: 1px solid var(--bg-light);
       margin-bottom: 28px;
       font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
     }
     .meta-author { font-weight: 700; color: var(--text-primary); }
     .meta-author a:hover { color: var(--accent); }
@@ -320,18 +316,18 @@
       gap: 5px;
       padding: 5px 10px;
       border: 1px solid var(--bg-light);
-      border-radius: 2px;
+      border-radius: 4px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--text-secondary);
+      color: var(--text-tertiary);
       cursor: pointer;
       transition: border-color 120ms, color 120ms;
     }
     .share-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    .article-content { font-size: 17px; line-height: 1.65; color: var(--text-primary); }
+    .article-content { font-size: 13px; line-height: 1.385; color: var(--text-tertiary); }
     .article-content p { margin-bottom: 22px; }
     .article-content p:last-child { margin-bottom: 0; }
     .article-content blockquote {
@@ -364,12 +360,12 @@
     .article-tag {
       padding: 5px 12px;
       border: 1px solid var(--bg-light);
-      border-radius: 2px;
+      border-radius: 4px;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--text-secondary);
+      color: var(--text-tertiary);
       cursor: pointer;
       transition: border-color 120ms, color 120ms;
     }
@@ -383,11 +379,11 @@
       margin-bottom: 28px;
     }
     .sidebar-block-header {
-      background: var(--bi-black);
+      background: var(--accent);
       color: #fff;
       font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       padding: 9px 14px;
     }
@@ -450,26 +446,24 @@
     .sidebar-nl-input:focus { border-color: var(--accent); }
     .btn-nl-submit {
       width: 100%;
-      background: var(--accent);
+      background: var(--action);
       color: #fff;
       border: none;
-      border-radius: 2px;
-      padding: 10px;
+      border-radius: 4px;
+      padding: 14px;
       font-family: var(--font);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
       transition: background 120ms;
     }
-    .btn-nl-submit:hover { background: var(--accent-hover); }
+    .btn-nl-submit:hover { background: var(--action-hover); }
 
     /* ═══════════════════════════════════════════════════════════════════════
        TABOOLA FEED  — full container width (not constrained to article col)
     ═══════════════════════════════════════════════════════════════════════ */
     .feed-section {
-      border-top: 3px solid var(--accent);
+      border-top: 2px solid var(--accent);
       padding: 0 var(--gutter) 60px;
       max-width: var(--max-w);
       margin: 48px auto 0;
@@ -484,10 +478,9 @@
       margin-bottom: 28px;
     }
     .feed-section-title {
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
       color: var(--text-primary);
     }
     .feed-section-title span { color: var(--accent); }
@@ -538,14 +531,14 @@
     }
     .badge-sponsored { background: rgba(0,0,0,0.72); color: #fff; }
     .badge-category  { background: var(--accent); color: #fff; }
-    .badge-premium   { background: var(--bi-yellow); color: var(--bi-black); }
+    .badge-premium   { background: var(--accent); color: #fff; }
     .badge-breaking  { background: var(--bi-red); color: #fff; }
 
     .feed-card-body { padding: 14px 14px 12px; }
     .feed-card-headline {
       font-size: 15px;
-      font-weight: 700;
-      line-height: 1.35;
+      font-weight: 500;
+      line-height: 1.4;
       color: var(--text-primary);
       margin-bottom: 10px;
       transition: color 120ms;
@@ -558,29 +551,26 @@
       gap: 8px;
     }
     .feed-card-source {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
       color: var(--text-tertiary);
     }
-    /* Sponsored CTA mirrors BI's button language: black outline that fills
-       solid black on hover (same shape/weight/tracking as the Subscribe CTA). */
+    /* Sponsored CTA: solid blue, 4px radius — matches primary button language */
     .feed-card-cta {
       display: inline-flex;
       align-items: center;
-      padding: 5px 12px;
-      border: 1px solid var(--bi-black);
-      border-radius: 2px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--bi-black);
+      padding: 7px 14px;
+      background: var(--action);
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
       white-space: nowrap;
-      transition: background 120ms, color 120ms;
+      transition: background 120ms;
     }
-    .feed-card:hover .feed-card-cta { background: var(--bi-black); color: #fff; }
+    .feed-card:hover .feed-card-cta { background: var(--action-hover); }
 
     /* ─── Grid layouts ───────────────────────────────────────────────────── */
     .feed-grid-2  { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 36px; }
@@ -588,12 +578,12 @@
     .feed-grid-4  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 36px; }
 
     /* Hero card — large image */
-    .feed-card .feed-card-img-wrap.ratio-16-9 { aspect-ratio: 16/9; }
-    .feed-card .feed-card-img-wrap.ratio-4-3  { aspect-ratio: 4/3; }
+    .feed-card .feed-card-img-wrap.ratio-3-2 { aspect-ratio: 16/9; }
+    .feed-card .feed-card-img-wrap.ratio-3-2  { aspect-ratio: 4/3; }
     .feed-card .feed-card-img-wrap.ratio-3-2  { aspect-ratio: 3/2; }
 
     /* Large card variant — bigger headline */
-    .feed-card.feed-card-lg .feed-card-headline { font-size: 18px; }
+    .feed-card.feed-card-lg .feed-card-headline { font-size: 18px; font-weight: 700; }
 
     /* List-style native row (headline-right, thumbnail-left) */
     .feed-row {
@@ -623,15 +613,15 @@
       margin-bottom: 5px;
     }
     .feed-row-headline {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.3;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
       color: var(--text-primary);
       margin-bottom: 6px;
       transition: color 120ms;
     }
     .feed-row:hover .feed-row-headline { color: var(--accent); }
-    .feed-row-meta { font-size: 11px; color: var(--text-tertiary); font-weight: 500; }
+    .feed-row-meta { font-size: 12px; color: var(--text-tertiary); font-weight: 600; }
 
     /* Sub-section label */
     .feed-sub-header {
@@ -676,7 +666,7 @@
       color: #fff;
       margin-bottom: 24px;
     }
-    .footer-logo span { color: var(--accent); }
+    .footer-logo span { color: var(--accent); opacity: 0.7; }
     .footer-cols {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -951,10 +941,10 @@
         </div>
 
         <!-- Premium upsell -->
-        <div style="border: 2px solid var(--bi-yellow); padding: 16px; background: #fffbf0;">
-          <div style="font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #a07800; margin-bottom: 6px;">BI Premium</div>
-          <div style="font-size: 14px; font-weight: 700; line-height: 1.4; margin-bottom: 10px;">Get unrestricted access to every story, every analysis, every data set.</div>
-          <a href="#" style="display: block; text-align: center; background: var(--bi-black); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px; border-radius: 2px; transition: background 120ms;">
+        <div style="border: 2px solid var(--accent); padding: 16px; background: #f0f3ff;">
+          <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">BI Premium</div>
+          <div style="font-size: 14px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: var(--text-primary);">Get unrestricted access to every story, every analysis, every data set.</div>
+          <a href="#" style="display: block; text-align: center; background: var(--action); color: #fff; font-size: 14px; font-weight: 600; padding: 14px; border-radius: 4px; transition: background 120ms;">
             Subscribe — $9.99/mo
           </a>
         </div>
@@ -982,7 +972,7 @@
     <div class="feed-grid-2" style="margin-bottom: 40px;">
 
       <div class="feed-card feed-card-lg">
-        <div class="feed-card-img-wrap ratio-16-9">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=338&fit=crop&auto=format&q=75"
                alt="Exclusive Private Residences — St. Barts" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -998,7 +988,7 @@
       </div>
 
       <div class="feed-card feed-card-lg">
-        <div class="feed-card-img-wrap ratio-16-9">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=338&fit=crop&auto=format&q=75"
                alt="Private Jet Charter — On Demand" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -1022,7 +1012,7 @@
     <div class="feed-grid-4" style="margin-bottom: 40px;">
 
       <div class="feed-card">
-        <div class="feed-card-img-wrap ratio-4-3">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop&auto=format&q=75"
                alt="Markets" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -1037,7 +1027,7 @@
       </div>
 
       <div class="feed-card">
-        <div class="feed-card-img-wrap ratio-4-3">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=300&fit=crop&auto=format&q=75"
                alt="Exclusive Wardrobe" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -1053,7 +1043,7 @@
       </div>
 
       <div class="feed-card">
-        <div class="feed-card-img-wrap ratio-4-3">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop&auto=format&q=75"
                alt="Tech boardroom" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -1068,7 +1058,7 @@
       </div>
 
       <div class="feed-card">
-        <div class="feed-card-img-wrap ratio-4-3">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop&auto=format&q=75"
                alt="Tax planning" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -1165,7 +1155,7 @@
     <div class="feed-grid-3">
 
       <div class="feed-card">
-        <div class="feed-card-img-wrap ratio-16-9">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&h=270&fit=crop&auto=format&q=75"
                alt="" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -1181,7 +1171,7 @@
       </div>
 
       <div class="feed-card">
-        <div class="feed-card-img-wrap ratio-16-9">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=480&h=270&fit=crop&auto=format&q=75"
                alt="" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
@@ -1197,7 +1187,7 @@
       </div>
 
       <div class="feed-card">
-        <div class="feed-card-img-wrap ratio-16-9">
+        <div class="feed-card-img-wrap ratio-3-2">
           <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=480&h=270&fit=crop&auto=format&q=75"
                alt="" loading="lazy"
                onerror="this.onerror=null;this.parentElement.style.background='#ccc';this.style.display='none'">
