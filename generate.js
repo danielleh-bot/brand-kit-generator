@@ -9,7 +9,10 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer-core');
 
-const { extractBrandKit, extractContent, extractNavigation, extractRelatedArticles } = require('./lib/crawler');
+const {
+  extractBrandKit, extractContent, extractNavigation, extractRelatedArticles,
+  extractResponsiveBreakpoints, installBehaviorObservers, extractInteractionBehaviors,
+} = require('./lib/crawler');
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { generateFeedContent } = require('./lib/feed-content');
@@ -30,6 +33,7 @@ program
   .option('--brand-kit <path>', 'Use existing brand-kit.json instead of crawling')
   .option('--chrome <path>', 'Path to Chrome/Chromium executable')
   .option('--accept-low-quality', 'Allow generating output from a brand kit where most tokens are fallbacks (default: refuse)')
+  .option('--no-behaviors', 'Skip interaction-behavior extraction (hover/focus probes, keyframes, scroll reveal)')
   .option('--list', 'List previously generated publishers')
   .parse();
 
@@ -153,6 +157,13 @@ async function main() {
       await page.setViewport({ width: 1440, height: 900 });
       await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
 
+      // Behavior observers MUST be installed before goto() — they capture
+      // Web-Animations calls and IntersectionObserver registrations that
+      // fire during page load.
+      if (opts.behaviors !== false) {
+        await installBehaviorObservers(page);
+      }
+
       console.log('   Navigating to page...');
       await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
@@ -162,6 +173,16 @@ async function main() {
       console.log('   Extracting brand kit...');
       brandKit = await extractBrandKit(page, url);
       console.log('   ✓ Brand kit extracted');
+
+      if (opts.behaviors !== false) {
+        console.log('   Observing interactions (hover/focus/scroll)...');
+        brandKit.behaviors = await extractInteractionBehaviors(page);
+        console.log(`   ✓ ${brandKit.behaviors.transitions.length} transitions, ${brandKit.behaviors.hover_states.length} hover states, ${brandKit.behaviors.keyframes.length} keyframes`);
+      }
+
+      console.log('   Probing responsive breakpoints...');
+      brandKit.layout_patterns.breakpoints = await extractResponsiveBreakpoints(page);
+      console.log(`   ✓ Breakpoints (${brandKit.layout_patterns.breakpoints.source})`);
 
       console.log('   Extracting article content...');
       content = await extractContent(page);
