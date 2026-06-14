@@ -305,18 +305,29 @@ for the full schema):
 |---|---|
 | `brand` | name, tagline, website, description, language |
 | `logos` | primary logo (SVG / text / image URL), favicon, variants |
-| `colors` | primary + 3 levels of text + 4 backgrounds + accents |
-| `fonts` | primary / secondary / tertiary + a 10-role type scale |
+| `colors` | primary + 3 levels of text + 4 backgrounds + accents + (Phase 1 v2.2.0) css custom-property scrape, rgba ui_overlays, divider colors, show-brand colors |
+| `fonts` | primary / secondary / tertiary + a 10-role type scale + (v2.2.0) 16-role `type_scale_extended` |
+| `buttons` | primary + (v2.2.0) secondary / outline / soft_cta variants |
+| `shadows` | (v2.2.0) box-shadow registry for cards / buttons / popups / elevated surfaces |
+| `border_radius` | (v2.2.0) per-role radius map (buttons, cards, images, overlays, pills, inputs) |
 | `brand_voice` | language, headline patterns, content labels |
 | `photo_style` | aspect ratio, border radius, video indicators |
 | `graphics` | badges, labels, decorative elements |
-| `icons` | SVG count, social icons, style |
-| `layout_patterns` | header layers, grid detection, card patterns |
+| `icons` | SVG count, social icons + (v2.2.0) detailed `catalog[]` with viewBox / aria-label / role hint |
+| `layout_patterns` | header layers + (v2.2.0) `layers_detailed[]`, grid, footer, + `max_widths`, `spacing_scale` from custom props |
 | `metadata` | analysis date, source URL, method, **extraction_quality** |
 
 `metadata.extraction_quality` is the most important field for debugging —
 it tells you how many tokens were genuinely extracted vs. filled from
-fallback defaults. See [Reading the extraction quality warning](#reading-the-extraction-quality-warning).
+fallback defaults. As of v2.2.0 the counter is 5-bucket:
+`extracted_token_count` (lifted straight from the page),
+`refined_token_count` (extracted, then renamed using a matching CSS
+custom-property name like `--brand-magenta-500`),
+`derived_token_count` (computed from extracted values, e.g. `darken_5`
+of the primary), `enriched_token_count` (reserved for the upcoming
+LLM enrichment layer — always `0` for crawler-only runs), and
+`fallback_token_count` (no match found; generic default used). See
+[Reading the extraction quality warning](#reading-the-extraction-quality-warning).
 
 You can hand-edit this JSON and re-run with `--brand-kit` if you want to
 tweak a colour or override a font before regenerating the prototype.
