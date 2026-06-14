@@ -287,14 +287,40 @@ node generate.js --url _ --list
 
 ## Understanding the output
 
-Every run drops three files into `./output/<slug>/`:
+Every run drops these files into `./output/<slug>/`:
 
 ```
 output/<slug>/
-├── brand-kit.json          ← raw extracted design tokens
-├── index.html              ← Taboola feed prototype (publisher-branded)
-└── analysis-report.html    ← before/after comparison report
+├── brand-kit.json             ← extracted design tokens (+ AI enrichment if enabled)
+├── brand-kit.css              ← drop-in :root tokens + utility classes
+├── index.html                 ← Taboola feed prototype (publisher-branded)
+├── analysis-report.html       ← before/after comparison report
+├── loader.js                  ← data-driven feed loader (BRAND block + CSS injector)
+├── loader.css                 ← the same overrides, standalone
+└── feed-mapping-report.html   ← Applied / Gaps / Skipped — the workshop deliverable
 ```
+
+> Skip the loader files with `--no-loader`. The **feed-mapping-report.html**
+> is what you hand to Taboola AdOps / engineering: its **Gaps** section lists
+> the publisher brand expressions that have no Taboola hook today, each with a
+> concrete recommendation for what hook to add.
+
+### Optional: AI enrichment
+
+Set `ANTHROPIC_API_KEY` before running and the tool adds an interpretive layer
+(brand voice, semantic colour names + usage, logo/photo descriptions, icon
+names, interaction intent) via one `claude-sonnet-4-6` call:
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+node generate.js --url "https://www.example.com/article" --slug example
+```
+
+No key? It skips silently — nothing breaks, output is crawler-only. Opt out
+explicitly with `--no-enrich`. AI-authored fields are tagged `enriched` /
+`refined` and never overwrite a value the crawler measured; invented colours
+are dropped and logged to `metadata.enrichment.dropped_fields`. Typical cost is
+under $0.05 per run.
 
 ### `brand-kit.json`
 

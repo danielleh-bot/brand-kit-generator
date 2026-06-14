@@ -21,6 +21,8 @@ const {
 } = require('./lib/crawler');
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
+const { enrichBrandKit } = require('./lib/enrich');
+const { buildLoaderArtifacts } = require('./lib/loader-build');
 const { generateFeedContent } = require('./lib/feed-content');
 const { brandKitToCss } = require('./lib/css-export');
 const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
@@ -92,9 +94,11 @@ const CRAWL_STAGES = [
   { id: 'launch',     label: 'Launching browser' },
   { id: 'navigate',   label: 'Loading the page' },
   { id: 'brand',      label: 'Reading colours, fonts & logo' },
+  { id: 'enriching_brand_kit', label: 'Enriching with AI' },
   { id: 'content',    label: 'Extracting article content' },
   { id: 'navigation', label: 'Mapping site navigation' },
   { id: 'related',    label: 'Collecting related articles' },
+  { id: 'building_loader', label: 'Building feed loader' },
   { id: 'render',     label: 'Rendering report & prototype' },
 ];
 
@@ -194,7 +198,19 @@ async function runCrawl({ url, articleUrl, slug, stage, log }) {
 
     stage('brand', 'active');
     const brandKit = await extractBrandKit(page, url);
+    let pageHtml = '';
+    try { pageHtml = await page.content(); } catch { pageHtml = ''; }
     stage('brand', 'done');
+
+    // Layer 2: LLM enrichment. Skips silently with no ANTHROPIC_API_KEY —
+    // the wizard shows the stage flip straight to done either way.
+    stage('enriching_brand_kit', 'active');
+    try {
+      const { metadata: em } = await enrichBrandKit(brandKit, { url, pageHtml, options: {} });
+      if (em && em.status && em.status.startsWith('skipped')) log(`Enrichment ${em.status}`);
+      else if (em) log(`Enrichment ${em.status} (+${(em.fields_added || []).length} fields)`);
+    } catch (e) { log(`Enrichment error (continuing): ${e.message}`); }
+    stage('enriching_brand_kit', 'done');
 
     // If the user gave us a *different* article URL to use as the content
     // source, navigate to it now and pull content/nav/related from there.
@@ -233,6 +249,10 @@ async function runCrawl({ url, articleUrl, slug, stage, log }) {
 // "kit" yields a believable "before" view of the publisher's feed without
 // the brand kit applied — used as the left side of the report's
 // before/after comparison.
+// IMPORTANT: this synthetic "before" kit is the un-branded Taboola baseline.
+// It MUST NOT be enriched and MUST NOT produce a loader — it is only rendered
+// into default-feed.html for the report's left-hand comparison panel. It never
+// passes through enrichBrandKit() or writeArtifacts(), so both are guaranteed.
 function buildDefaultsBrandKit(realKit) {
   const safe = realKit || {};
   return {
@@ -279,13 +299,22 @@ function writeArtifacts({ slug, brandKit, content, navigation, relatedArticles }
     brandKitToCss(brandKit),
   );
 
+  // Layer 3: generated loader artifacts (loader.js / loader.css /
+  // feed-mapping-report.html) for the REAL brand kit only. The synthetic
+  // defaults kit below is never passed here, so it never gets a loader.
+  let mappingSummary = null;
+  try {
+    const built = buildLoaderArtifacts(brandKit, { slug, outputDir: outDir });
+    mappingSummary = built.summary;
+  } catch (e) { /* loader is best-effort; never block artifact writing */ }
+
   const resolvedFonts = resolveAllFonts(brandKit);
   const googleFontsUrl = buildGoogleFontsUrl(brandKit);
   const feedContent = generateFeedContent(brandKit, navigation, {
     content,
     relatedArticles,
   });
-  const analysis = computeAnalysis(brandKit, defaults);
+  const analysis = computeAnalysis(brandKit, defaults, { mappingSummary });
 
   engine.init();
   const templateData = {
@@ -324,12 +353,17 @@ function writeArtifacts({ slug, brandKit, content, navigation, relatedArticles }
     engine.render('report.hbs', templateData),
   );
 
+  const files = ['brand-kit.json', 'brand-kit.css', 'index.html', 'default-feed.html', 'analysis-report.html'];
+  if (mappingSummary) files.push('loader.js', 'loader.css', 'feed-mapping-report.html');
+
   return {
     slug,
-    files: ['brand-kit.json', 'brand-kit.css', 'index.html', 'default-feed.html', 'analysis-report.html'],
+    files,
     metadata: {
       extraction_quality:
         brandKit && brandKit.metadata && brandKit.metadata.extraction_quality,
+      enrichment: brandKit && brandKit.metadata && brandKit.metadata.enrichment,
+      mapping: mappingSummary,
       related_article_count: relatedArticles ? relatedArticles.length : 0,
     },
   };
@@ -410,8 +444,10 @@ app.get('/api/crawl', async (req, res) => {
 
   try {
     const crawled = await runCrawl({ url, articleUrl, slug, stage, log });
-    stage('render', 'active');
+    stage('building_loader', 'active');
     const result = writeArtifacts({ slug, ...crawled });
+    stage('building_loader', 'done');
+    stage('render', 'active');
     stage('render', 'done');
     sendEvent(res, 'done', {
       slug,

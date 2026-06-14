@@ -15,7 +15,6 @@ th{background:#f5f5f7}code{background:#f0f0f4;padding:1px 4px;border-radius:3px;
 <h2><span class="tag applied">Applied</span> Tokens driving the feed (15)</h2>
 <table><tr><th>Token</th><th>Selector</th><th>Property</th><th>Resolved value</th><th>Note</th></tr>
 <tr><td><code>colors.primary.hex</code></td><td><code>.tbl-feed-card:hover .video-title</code></td><td>text-decoration-color</td><td><span style="display:inline-block;width:12px;height:12px;border:1px solid #999;background:#BC2A9B;vertical-align:middle;margin-right:4px"></span>#BC2A9B</td><td></td></tr>
-<tr><td><code>colors.primary.hex</code></td><td><code>.tbl-feed-more-btn</code></td><td>background-color</td><td><span style="display:inline-block;width:12px;height:12px;border:1px solid #999;background:#BC2A9B;vertical-align:middle;margin-right:4px"></span>#BC2A9B</td><td></td></tr>
 <tr><td><code>colors.primary.hex</code></td><td><code>.tbl-feed-card .trc-pre-label</code></td><td>color</td><td><span style="display:inline-block;width:12px;height:12px;border:1px solid #999;background:#BC2A9B;vertical-align:middle;margin-right:4px"></span>#BC2A9B</td><td></td></tr>
 <tr><td><code>colors.text.primary.hex</code></td><td><code>.tbl-feed-card .video-title</code></td><td>color</td><td><span style="display:inline-block;width:12px;height:12px;border:1px solid #999;background:#000000;vertical-align:middle;margin-right:4px"></span>#000000</td><td></td></tr>
 <tr><td><code>colors.text.secondary.hex</code></td><td><code>.tbl-feed-card .branding, .tbl-feed-card .tbl-card-desc</code></td><td>color</td><td><span style="display:inline-block;width:12px;height:12px;border:1px solid #999;background:#404040;vertical-align:middle;margin-right:4px"></span>#404040</td><td></td></tr>
@@ -29,6 +28,7 @@ th{background:#f5f5f7}code{background:#f0f0f4;padding:1px 4px;border-radius:3px;
 <tr><td><code>shadows.natural</code></td><td><code>.tbl-feed-card</code></td><td>box-shadow</td><td>rgba(0, 0, 0, 0.4) 0px 0px 10px 0px</td><td></td></tr>
 <tr><td><code>photo_style.video_thumbnails.indicator_color</code></td><td><code>.tbl-feed-card .trc-video-play-icon</code></td><td>color</td><td><span style="display:inline-block;width:12px;height:12px;border:1px solid #999;background:#FFFFFF;vertical-align:middle;margin-right:4px"></span>#FFFFFF</td><td></td></tr>
 <tr><td><code>photo_style.thumbnail_format.border_radius</code></td><td><code>.tbl-feed-card .thumbnail</code></td><td>border-radius</td><td>0px</td><td></td></tr>
+<tr><td><code>behaviors.keyframes[role=badge_pulse]</code></td><td><code>.tbl-feed-card .trc-pre-label[data-kind="live"]</code></td><td>animation</td><td>live_updates_pulse 1200ms infinite (LIVE-only, reduced-motion gated)</td><td><span class="note">continuous animation — LIVE-content-only exception, reduced-motion gated</span></td></tr>
 </table>
 
 <h2><span class="tag gap">Gaps</span> Brand expressions with no Taboola hook (3)</h2>
@@ -36,7 +36,7 @@ th{background:#f5f5f7}code{background:#f0f0f4;padding:1px 4px;border-radius:3px;
 <table><tr><th>Token</th><th>Criticality</th><th>Recommendation</th></tr>
 <tr><td><code>behaviors.hover_states[role=link]</code></td><td>critical</td><td>No hover state captured for role "link" — nothing to install.</td></tr>
 <tr><td><code>behaviors.hover_states[role=card]</code></td><td>enhances</td><td>No hover state captured for role "card" — nothing to install.</td></tr>
-<tr><td><code>behaviors.keyframes[role=badge_pulse]</code></td><td>enhances</td><td>No brand pulse keyframe captured (only vendor keyframes present).</td></tr>
+<tr><td><code>behaviors.scroll_reveal[role=card]</code></td><td>enhances</td><td>Per-card scroll-reveal — propose a feed-card `data-tbl-reveal` attribute + a TRC-engine-managed IntersectionObserver that adds a reveal class. Keeping loader.js declarative-CSS-only avoids racing TRC's own viewport observer.</td></tr>
 </table>
 
 <h2><span class="tag skip">Skipped</span> Deliberately not applied (7)</h2>

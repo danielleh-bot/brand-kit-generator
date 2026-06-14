@@ -10,14 +10,14 @@
 :root {
   --brand-name: "E! Online";
   --brand-website: "https://www.eonline.com";
-  --brand-color-primary: #BC2A9B;
-  --brand-color-secondary: #2CA8C8;
+  --brand-color-primary: #BC2A9B; /* Primary — Button text, Headlines */
+  --brand-color-secondary: #2CA8C8; /* Content Icon — Button text, Headlines */
   --brand-color-text-primary: #000000;
-  --brand-color-text-secondary: #404040;
+  --brand-color-text-secondary: #404040; /* Page Title Secondary Line — Headlines, Body text */
   --brand-color-text-tertiary: #999999;
   --brand-color-bg-base: #FFFFFF;
   --brand-color-bg-section: #F7F9FC;
-  --brand-color-bg-dark: #1E1E1E;
+  --brand-color-bg-dark: #1E1E1E; /* Widget Title — Links, Navigation, Headlines */
   --brand-color-accent-info: #2CA8C8;
   --brand-font-primary: "Open Sans", Arial;
   --brand-font-primary-regular: 500;

@@ -288,8 +288,8 @@ async function main() {
   // related content.
   const feedContent = generateFeedContent(brandKit, navigation, { content, relatedArticles });
 
-  // Compute analysis
-  const analysis = computeAnalysis(brandKit, defaults);
+  // Compute analysis (threads Layer-3 mapping confidence when the loader ran)
+  const analysis = computeAnalysis(brandKit, defaults, { mappingSummary });
 
   // Initialize template engine
   engine.init();

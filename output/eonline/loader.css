@@ -3,9 +3,6 @@
 .tbl-feed-card:hover .video-title {
   text-decoration-color: #BC2A9B !important;
 }
-.tbl-feed-more-btn {
-  background-color: #BC2A9B !important;
-}
 .tbl-feed-card .trc-pre-label {
   color: #BC2A9B !important;
 }
@@ -44,4 +41,16 @@
 }
 .tbl-feed-card .thumbnail {
   border-radius: 0px !important;
+}
+.tbl-feed-card .trc-pre-label[data-kind="live"] {
+  animation: live_updates_pulse 1200ms ease infinite !important;
+}
+@keyframes live_updates_pulse {
+  0% { background-color: transparent; }
+  50% { background-color: rgb(255, 255, 255); }
+  100% { background-color: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tbl-feed-card .trc-pre-label[data-kind="live"] { transition: none !important; animation: none !important; }
 }
