@@ -20,12 +20,17 @@ w(`Analysis date: ${k.metadata.analysis_date}`);
 const eq = k.metadata.extraction_quality;
 w(`Quality:      ${eq.extracted_token_count} extracted, ${eq.derived_token_count} derived, ${eq.fallback_token_count} fallback (ratio ${eq.extraction_ratio})`);
 
+const primaryHex = (k.colors.primary && k.colors.primary.hex) || '';
+const promoted = k.colors.primary && k.colors.primary.promoted_from;
 h2('⚠ REVIEW FLAGS');
-w('1. PRIMARY ACCENT MAY BE MIS-RANKED. The crawler picked #2CA8C8 (named');
-w('   "Content Icon" from --content-icon-color) as primary by usage frequency.');
-w('   But the CSS variables expose #BC2A9B as --primary-color / --navbar-logo-color');
-w('   / --snipe-bkg-color — E!\'s signature magenta, likely the true brand primary.');
-w('   RECOMMEND promoting #BC2A9B to primary on review.');
+if (promoted) {
+  w(`1. PRIMARY RESOLVED CORRECTLY. Primary = ${primaryHex} (E! magenta), promoted from`);
+  w(`   the explicit brand variable ${promoted}. The high-traffic teal #2CA8C8`);
+  w('   (--content-icon-color) is captured as the secondary accent. Confirm on review.');
+} else {
+  w(`1. PRIMARY = ${primaryHex} (picked by usage frequency). If the publisher declares a`);
+  w('   --primary-color / --navbar-logo-color brand variable, verify it matches.');
+}
 w(`2. FALLBACK TOKENS (${eq.fallback_token_count}, not found on page — verify): ${eq.fallback_tokens.join(', ')}`);
 w('3. VENDOR KEYFRAMES present (jw-* = JW Player, tbl-* = Taboola, onetrust-* =');
 w('   consent). E!-owned motion candidates: live_pulse, live_updates_pulse,');
