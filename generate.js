@@ -16,6 +16,7 @@ const {
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { enrichBrandKit } = require('./lib/enrich');
+const { buildLoaderArtifacts } = require('./lib/loader-build');
 const { generateFeedContent } = require('./lib/feed-content');
 const { brandKitToCss } = require('./lib/css-export');
 const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
@@ -38,6 +39,8 @@ program
   .option('--no-enrich', 'Skip Layer-2 LLM enrichment (brand voice, colour names, descriptions)')
   .option('--re-enrich', 'Run enrichment against a kit loaded via --brand-kit (resume path)')
   .option('--enrich-model <name>', 'Override the enrichment model (default: claude-sonnet-4-6)')
+  .option('--no-loader', 'Skip Layer-3 loader artifacts (loader.js, loader.css, feed-mapping-report.html)')
+  .option('--validate-render', 'Run static render checks on the generated loader CSS')
   .option('--list', 'List previously generated publishers')
   .parse();
 
@@ -262,6 +265,19 @@ async function main() {
   const brandKitCssPath = path.join(outputDir, 'brand-kit.css');
   fs.writeFileSync(brandKitCssPath, brandKitToCss(brandKit));
   console.log(`🎨 Brand kit CSS saved: ${brandKitCssPath}`);
+
+  // ---- Layer 3: token→feed mapping + generated loader ----
+  let mappingSummary = null;
+  if (opts.loader !== false) {
+    console.log('🧩 Building feed loader + mapping report...');
+    const built = buildLoaderArtifacts(brandKit, { slug, outputDir, validateRender: opts.validateRender });
+    mappingSummary = built.summary;
+    console.log(`   ✓ ${built.summary.applied_count} applied, ${built.summary.gap_count} gaps, ${built.summary.safe_ignored_count} safe-ignored (${built.summary.css_bytes}B CSS)`);
+    if (built.validation) {
+      console.log(`   ${built.validation.ok ? '✓ render checks passed' : '⚠ render issues: ' + built.validation.issues.join('; ')}`);
+    }
+    console.log('   → loader.js, loader.css, feed-mapping-report.html');
+  }
 
   // Resolve fonts
   const resolvedFonts = resolveAllFonts(brandKit);
