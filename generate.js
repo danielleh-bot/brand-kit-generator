@@ -15,6 +15,7 @@ const {
 } = require('./lib/crawler');
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
+const { enrichBrandKit } = require('./lib/enrich');
 const { generateFeedContent } = require('./lib/feed-content');
 const { brandKitToCss } = require('./lib/css-export');
 const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
@@ -34,6 +35,9 @@ program
   .option('--chrome <path>', 'Path to Chrome/Chromium executable')
   .option('--accept-low-quality', 'Allow generating output from a brand kit where most tokens are fallbacks (default: refuse)')
   .option('--no-behaviors', 'Skip interaction-behavior extraction (hover/focus probes, keyframes, scroll reveal)')
+  .option('--no-enrich', 'Skip Layer-2 LLM enrichment (brand voice, colour names, descriptions)')
+  .option('--re-enrich', 'Run enrichment against a kit loaded via --brand-kit (resume path)')
+  .option('--enrich-model <name>', 'Override the enrichment model (default: claude-sonnet-4-6)')
   .option('--list', 'List previously generated publishers')
   .parse();
 
@@ -112,6 +116,7 @@ async function main() {
   let content = {};
   let navigation = {};
   let relatedArticles = [];
+  let pageHtml = '';
 
   // Use existing brand kit or crawl
   if (opts.brandKit) {
@@ -195,9 +200,38 @@ async function main() {
       console.log('   Extracting related articles for feed...');
       relatedArticles = await extractRelatedArticles(page, url);
       console.log(`   ✓ ${relatedArticles.length} related articles extracted\n`);
+
+      // Capture a copy of the rendered HTML for Layer-2 enrichment context.
+      try { pageHtml = await page.content(); } catch { pageHtml = ''; }
     } finally {
       await browser.close();
     }
+  }
+
+  // ---- Layer 2: LLM enrichment ----
+  // Runs after the browser is closed. Skips silently with no API key, on
+  // --no-enrich, or (for the --brand-kit resume path) unless --re-enrich is set.
+  const wantEnrich = opts.enrich !== false && (!opts.brandKit || opts.reEnrich);
+  if (wantEnrich) {
+    console.log('🧠 Enriching with AI (brand voice, colour names, descriptions)...');
+    const { metadata: enrichMeta } = await enrichBrandKit(brandKit, {
+      url,
+      pageHtml,
+      options: { noEnrich: false, model: opts.enrichModel },
+    });
+    const tag = {
+      enriched: `✓ enriched (+${(enrichMeta.fields_added || []).length} fields, ${(enrichMeta.fields_refined || []).length} refined, ${enrichMeta.latency_ms}ms)`,
+      partial: '⚠ partial enrichment',
+      skipped_no_key: '○ skipped — no ANTHROPIC_API_KEY set',
+      skipped_opt_out: '○ skipped (opt-out)',
+      failed: `✗ failed — ${enrichMeta.error || 'unknown'} (crawler output kept)`,
+    }[enrichMeta.status] || enrichMeta.status;
+    console.log(`   ${tag}\n`);
+  } else if (opts.brandKit && !opts.reEnrich) {
+    // resume without re-enrich: leave the loaded kit untouched
+  } else {
+    brandKit.metadata = brandKit.metadata || {};
+    brandKit.metadata.enrichment = { status: 'skipped_opt_out', model: opts.enrichModel || 'claude-sonnet-4-6' };
   }
 
   // Loud warning when extraction quality is poor — surfaces silent failures the

@@ -1,0 +1,275 @@
+
+════════════════════════════════════════════════════════════════════════
+E! ONLINE — EXTRACTED BRAND KIT TOKENS (REVIEW)
+════════════════════════════════════════════════════════════════════════
+Source URL:   https://www.eonline.com/news/1432807/katy-perry-performs-at-fifa-world-cup-2026-opening-ceremony-in-l-a
+Crawler:      v2.2.0 — Puppeteer computed-style extraction (deep)
+Analysis date: 2026-06-14
+Quality:      85 extracted, 2 derived, 5 fallback (ratio 0.94)
+
+⚠ REVIEW FLAGS
+────────────────────────────────────────────────────────────────────────
+1. PRIMARY ACCENT MAY BE MIS-RANKED. The crawler picked #2CA8C8 (named
+   "Content Icon" from --content-icon-color) as primary by usage frequency.
+   But the CSS variables expose #BC2A9B as --primary-color / --navbar-logo-color
+   / --snipe-bkg-color — E!'s signature magenta, likely the true brand primary.
+   RECOMMEND promoting #BC2A9B to primary on review.
+2. FALLBACK TOKENS (5, not found on page — verify): colors.backgrounds.section, fonts.type_scale.article_title_card, fonts.type_scale.article_lead, fonts.type_scale.article_body, fonts.type_scale.utility_bar
+3. VENDOR KEYFRAMES present (jw-* = JW Player, tbl-* = Taboola, onetrust-* =
+   consent). E!-owned motion candidates: live_pulse, live_updates_pulse,
+   spinAround, slide-down-custom.
+
+════════════════════════════════════════════════════════════════════════
+1. BRAND IDENTITY
+════════════════════════════════════════════════════════════════════════
+Name:        E! Online
+Tagline:     (empty)
+Website:     https://www.eonline.com
+Language:    en
+Description: Katy Perry put on the performance of a lifetime alongside Tius at the FIFA 2026 World Cup Opening Ceremony in Los Angeles June 12.
+
+════════════════════════════════════════════════════════════════════════
+2. LOGO
+════════════════════════════════════════════════════════════════════════
+Type:          svg
+Rendered size: 60 × 45 px
+SVG viewBox:   0 0 745 441
+Logo kind:     mark-only (path_count 1, has_text false)
+Unique fills:  currentColor, #e8f3f3
+Favicon:       https://www.eonline.com/images/icon.png
+Variants:      none
+
+════════════════════════════════════════════════════════════════════════
+3. COLORS
+════════════════════════════════════════════════════════════════════════
+• Primary accent: #2CA8C8  "Content Icon"  — usage: Button text, Headlines  [From page]  (named via css_custom_property)
+• Text — primary: #000000  "Primary Text"  — usage: Links, Button text, Navigation, Headlines, Section background, Tags & badges  [From page]
+• Text — secondary: #404040  "Page Title Secondary Line"  — usage: Headlines, Body text  [From page]  (named via css_custom_property)
+• Text — tertiary: #999999  "Tertiary Text"  — usage: Separators  [From page]
+• Text — deep dark: #1E1E1E  "Deep Dark"  — usage: Hero headlines  [From page]
+• Text — body: #404040  "Body"  — usage: Body copy  [From page]
+• Text — caption: #1E1E1E  "Caption"  — usage: Captions  [From page]
+• Background — base: #FFFFFF  "White"  — usage: Links, Buttons, Button text, Navigation, Headlines, Body text, Footer background, Tags & badges  [From page]
+• Background — section: #F7F9FC  "Off-White"  — usage: Section backgrounds  [DEFAULT — VERIFY]
+• Background — dark: #1E1E1E  "Widget Title"  — usage: Links, Navigation, Headlines, Body text, Timestamps, Section background, Tags & badges  [From page]  (named via css_custom_property)
+• Accent — info_blue: #2CA8C8  "Info Blue"  — usage: Button text, Headlines  [From page]
+• Primary variant — darken_5: #2AA0BE  "Darker primary"  — usage: Hover states  [Computed]
+• Primary variant — darken_10: #2794B0  "Deepest primary"  — usage: Active/pressed states  [Computed]
+• Border — divider: #999999  [From page]
+
+UI overlays (translucent):
+• modal: rgba(38, 38, 38, 0.8)  [From page]
+
+3a. CSS custom properties (56 total)
+────────────────────────────────────────────────────────────────────────
+• --cm-video-text-secondary = #6e7780  [color]  → #6E7780
+• --cm-video-bg-secondary = #f5f8fa  [color]  → #F5F8FA
+• --primary-color = #bc2a9b  [color]  → #BC2A9B
+• --numbered-list-border-color = #bc2a9b  [color]  → #BC2A9B
+• --content-icon-color = #2ca8c8  [color]  → #2CA8C8
+• --secondary-color = #2ca8c8  [color]  → #2CA8C8
+• --cm-video-label-border-radius = 8px  [radius]
+• --cm-video-text-primary = #1d2228  [color]  → #1D2228
+• --widget-header-border-color = #bc2a9b  [color]  → #BC2A9B
+• --page-title-secondary-line-color = #404040  [color]  → #404040
+• --cm-video-label-padding = 8px  [spacing]
+• --widget-header-color = #bc2a9b  [color]  → #BC2A9B
+• --cm-video-border-on-dark = #ffffff  [other]  → #FFFFFF
+• --cm-video-hover-overlay = rgba(255, 255, 255, 0.1)  [other]  → #FFFFFF
+• --widget-link-color = #2ca8c8  [color]  → #2CA8C8
+• --cm-video-shadow-light = 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 1px 0 rgba(0, 0, 0, 0.1)  [shadow]  → #000000
+• --snipe-bkg-color = #bc2a9b  [color]  → #BC2A9B
+• --cm-video-repeat-border-radius = 11px  [radius]
+• --widget-title-color = #1e1e1e  [color]  → #1E1E1E
+• --cm-video-controls-bg = linear-gradient(93.29deg, #7e1fff -0.72%, #2f42d4 101.96%)  [other]
+• --cm-video-border-accent = #7e1fff  [color]  → #7E1FFF
+• --widget-link-hover-color = #007997  [color]  → #007997
+• --snipe-inverted-bkg-color = #fff  [color]  → #FFFFFF
+• --cm-video-border-light = #e0e4e9  [other]  → #E0E4E9
+• --caption-bkg-color = #2ca8c8  [color]  → #2CA8C8
+• --widget-caption-title-color = #1e1e1e  [color]  → #1E1E1E
+• --cm-video-repeat-border = #ffffff  [other]  → #FFFFFF
+• --cm-video-focus-accent = rgba(126, 31, 255, 0.5)  [color]  → #7E1FFF
+• --cm-video-bg-hover = #f5f8fa  [other]  → #F5F8FA
+• --cm-video-bg-primary = #ffffff  [color]  → #FFFFFF
+• --cm-video-bg-card = #ffffff  [other]  → #FFFFFF
+• --widget-hover-color = #007997  [color]  → #007997
+• --widget-bkg-color = #fff  [color]  → #FFFFFF
+• --navbar-logo-color = #bc2a9b  [color]  → #BC2A9B
+• --widget-byline-text-color = #9f9f9f  [color]  → #9F9F9F
+• --cm-video-label-bg = #ffffff  [other]  → #FFFFFF
+• --cm-video-controls-progress-height = 8px  [sizing]
+• --cm-video-repeat-text = #ffffff  [other]  → #FFFFFF
+• --widget-header-hover-color = #007997  [color]  → #007997
+• --cm-video-brand-secondary = #2f42d4  [color]  → #2F42D4
+• --notification-bar-color = #bc2a9b  [color]  → #BC2A9B
+• --cm-video-bg-overlay = rgba(0, 0, 0, 0.4)  [other]  → #000000
+• --cm-video-brand-primary = #7e1fff  [color]  → #7E1FFF
+• --now-playing-overlay-color = #2ca8c8  [color]  → #2CA8C8
+• --cm-video-controls-text = #ffffff  [other]  → #FFFFFF
+• --cm-video-label-shadow = 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 1px 0 rgba(0, 0, 0, 0.1)  [shadow]  → #000000
+• --alt-navbar-logo-color = #2ca8c8  [color]  → #2CA8C8
+• --cm-video-label-margin = 0 17px  [spacing]
+• --snipe-inverted-text-color = #bc2a9b  [color]  → #BC2A9B
+• --cm-video-brand-gradient = linear-gradient(93.29deg, #7e1fff -0.72%, #2f42d4 101.96%)  [color]
+• --cm-video-repeat-bg = linear-gradient(93.29deg, #7e1fff -0.72%, #2f42d4 101.96%)  [other]
+• --cm-video-text-on-brand = #ffffff  [color]  → #FFFFFF
+• --cm-video-shadow-elevated = 0 4px 16px 0 rgba(0, 0, 0, 0.2), 0 0 2px 0 rgba(0, 0, 0, 0.05)  [shadow]  → #000000
+• --cm-video-text-on-dark = #ffffff  [other]  → #FFFFFF
+• --navbar-hover-color = #007997  [color]  → #007997
+• --page-title-secondary-color = #404040  [color]  → #404040
+
+════════════════════════════════════════════════════════════════════════
+4. TYPOGRAPHY
+════════════════════════════════════════════════════════════════════════
+Primary font:   Open Sans (fallbacks: Arial; weights {"bold":700,"regular":500})  [From page]
+   usage: Headlines, Body text, Navigation, Buttons, Meta text, Captions
+Secondary font: Arial (weight 600; usage Buttons)  [From page]
+
+4a. Type scale — extended 16-role hierarchy
+────────────────────────────────────────────────────────────────────────
+• hero_headline: 28px / w700 / Open Sans / lh 37.8px / tracking 0.25px / #1E1E1E  [From page]
+• secondary_headline: 16px / w500 / Open Sans / lh 25.6px / tracking 0.25px / #404040  [From page]
+• tertiary_headline: 16px / w700 / Open Sans / lh 20.8px / #696969  [From page]
+• sub_nav: 12px / w800 / Open Sans / lh 18px / uppercase / tracking 0.25px / #000000  [From page]
+• byline: 12px / w700 / Open Sans / lh 18px / uppercase / tracking 0.25px / #1E1E1E  [From page]
+• footer_link: 16px / w500 / Open Sans / lh 24px / tracking 0.25px / #1E1E1E  [From page]
+• caption: 21px / w500 / Arial / lh 21px / #1E1E1E  [From page]
+• tag_label: 16px / w600 / Open Sans / lh 22.88px / tracking 0.25px / #1E1E1E  [From page]
+• button_label: 16px / w500 / Open Sans / lh 24px / tracking 0.25px / #FFFFFF  [From page]
+
+4b. Type scale — legacy 10-role (back-compat)
+────────────────────────────────────────────────────────────────────────
+• section_headings: 16px / w500 / Open Sans / lh 25.6px / #404040  [From page]
+• article_title_hero: 28px / w700 / Open Sans / lh 37.8px / #1E1E1E  [From page]
+• article_title_card: 22px / w700 / Open Sans  [DEFAULT — VERIFY]
+• article_lead: 18px / w700 / Open Sans  [DEFAULT — VERIFY]
+• article_body: 18px / w400 / Open Sans  [DEFAULT — VERIFY]
+• navigation: 16px / w500 / Open Sans / lh 24px / #1E1E1E  [From page]
+• utility_bar: 13px / w400 / Open Sans  [DEFAULT — VERIFY]
+• category_pills: 16px / w600 / Open Sans / lh 22.88px / #1E1E1E  [From page]
+• buttons: 16px / w500 / Open Sans / lh 24px / #FFFFFF  [From page]
+• meta_text: 12px / w500 / Open Sans / lh 18px / #1E1E1E  [From page]
+• opinion_headline: 16px / w500 / Open Sans
+
+════════════════════════════════════════════════════════════════════════
+5. BUTTONS
+════════════════════════════════════════════════════════════════════════
+• primary: bg #000000 / text #FFFFFF / radius 2px / pad 12px 10px / 13.008px w600  [From page]
+
+════════════════════════════════════════════════════════════════════════
+6. SHADOWS, BORDER-RADIUS, SPACING
+════════════════════════════════════════════════════════════════════════
+Shadow registry:
+• sharp: rgb(29, 29, 29) 0px 2px 9px 0px
+• natural: rgba(0, 0, 0, 0.4) 0px 0px 10px 0px
+• deep: rgba(0, 0, 0, 0.4) 0px 0px 10px 0px
+
+Border-radius map:
+• buttons: 0px
+• cards: 0px
+• overlays: 0px
+• pills: 0px
+
+Spacing:
+• card_border_radius: 0px
+• container_max_width: 1310px
+
+════════════════════════════════════════════════════════════════════════
+7. LAYOUT PATTERNS
+════════════════════════════════════════════════════════════════════════
+Grid:            Single-column layout
+Header bg:       #FFFFFF (is_dark false)
+Container width: 1310px
+Breakpoints:     mobile 600px, tablet 1024px, desktop 1408px  (source: stylesheet)
+• header layer <nav>: bg — / text #1E1E1E / h60  [From page]
+
+════════════════════════════════════════════════════════════════════════
+8. PHOTO & MEDIA STYLE
+════════════════════════════════════════════════════════════════════════
+Thumbnail aspect ratio: 16:9
+Thumbnail border radius: 0px
+Video indicator: Play button icon (#FFFFFF)
+
+════════════════════════════════════════════════════════════════════════
+9. ICONS
+════════════════════════════════════════════════════════════════════════
+Style: SVG-based | SVGs detected: 73 | Social: Instagram, Facebook, Pinterest, X (Twitter), YouTube
+
+Icon catalog:
+• #1 viewBox 0 0 745 441
+• #2 viewBox 0 0 24 24
+• #3 viewBox 0 0 24 24 / aria "menu" / role "menu"
+• #4 viewBox 0 0 7 12 / role "Tags"
+• #5 viewBox 0 0 18 18
+• #6 viewBox 0 0 240 240 / aria "Close" / role "Close"
+• #7 viewBox 0 0 240 240 / aria "Pause" / role "Pause"
+• #8 viewBox 0 0 240 240 / aria "Rewind 10 Seconds" / role "Rewind 10 Seconds"
+• #9 viewBox 0 0 240 240
+• #10 viewBox 0 0 240 240 / aria "Closed Captions" / role "Closed Captions"
+• #11 viewBox 0 0 240 240 / aria "Settings" / role "Settings"
+• #12 viewBox 0 0 24 24 / aria "Picture in Picture (PiP)" / role "Picture in Picture (PiP)"
+• #13 viewBox 0 0 240 240 / aria "Fullscreen" / role "Fullscreen"
+• #14 viewBox 0 0 39 38 / aria "previous"
+• #15 viewBox 0 0 33 38 / aria "pause"
+• #16 viewBox 0 0 39 38 / aria "next"
+
+════════════════════════════════════════════════════════════════════════
+11. GRAPHICS & BADGES
+════════════════════════════════════════════════════════════════════════
+Style: Minimal — relies on photography and typography
+• "270p (925 kbps)": bg transparent / text #FFFFFF
+• "Meet Female Officers Online": bg transparent / text #1E1E1E
+• "המחיר השקט של הקנאביס": bg transparent / text #1E1E1E
+• "checkbox label": bg transparent / text #696969
+• "label": bg transparent / text #696969
+• "Live": bg transparent / text #FFFFFF
+
+════════════════════════════════════════════════════════════════════════
+12. BRAND VOICE
+════════════════════════════════════════════════════════════════════════
+Headline format: sentence case / case sentence case
+Content labels:  opinion, live, breaking, video, gallery, analysis, sponsored
+
+════════════════════════════════════════════════════════════════════════
+13. INTERACTION BEHAVIORS (LAYER 1B)
+════════════════════════════════════════════════════════════════════════
+Captured: 0 transitions, 0 hover, 3 focus, 0 active, 20 keyframes, 1 scroll-reveal.
+
+Focus states:
+• a: {"outline_width":{"from":"3px","to":"1px"},"outline_color":{"from":"rgb(30, 30, 30)","to":"rgb(0, 95, 204)"},"outline_style":{"from":"none","to":"auto"}}
+• nav a: {"outline_width":{"from":"3px","to":"1px"},"outline_color":{"from":"rgb(30, 30, 30)","to":"rgb(0, 95, 204)"},"outline_style":{"from":"none","to":"auto"}}
+• button: {"outline_width":{"from":"3px","to":"1px"},"outline_color":{"from":"rgb(255, 255, 255)","to":"rgb(0, 121, 151)"},"outline_style":{"from":"none","to":"solid"}}
+
+Keyframes (animation library):
+• spinAround (2 steps) — E! / site
+• live_updates_pulse (3 steps) — E! / site
+• live_pulse (3 steps) — E! / site
+• onetrust-fade-in (2 steps) — OneTrust
+• slide-down-custom (2 steps) — E! / site
+• jw-float-to-bottom (2 steps) — JW Player
+• jw-float-to-top (2 steps) — JW Player
+• jw-spin (1 steps) — JW Player
+• jw-shimmer (2 steps) — JW Player
+• jw-related-item (2 steps) — JW Player
+• jw-dash (1 steps) — JW Player
+• tbl-animation-slide-out-left (2 steps) — Taboola
+• tbl-animation-slide-out-right (2 steps) — Taboola
+• tbl-animation-fade-in (2 steps) — Taboola
+• tbl-animation-fade-out (2 steps) — Taboola
+• tbl-animation-close-ui-line (2 steps) — Taboola
+• tbl-animation-open-ui-line (2 steps) — Taboola
+• tbl-animation-zoom-In (2 steps) — Taboola
+• tbl-animation-progress-bar (2 steps) — Taboola
+• load3 (2 steps) — E! / site
+
+Motion/lazy:
+• Lazy images: 0 | Skeleton present: true
+• Scroll-reveal: span.thumb.thumb--inview
+• Easing palette: —
+• Duration tiers: {}
+
+════════════════════════════════════════════════════════════════════════
+Generated from output/eonline/brand-kit.json — every token in the kit is
+represented above. Source tags: From page = extracted live; Computed = derived;
+DEFAULT — VERIFY = fallback (not found on page).
