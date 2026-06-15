@@ -259,6 +259,13 @@ async function main() {
     const reportPath = path.join(outputDir, 'analysis-report.html');
     fs.writeFileSync(reportPath, reportHtml);
     console.log(`   ✓ Report saved: ${reportPath}`);
+
+    // Customer-facing report: brand properties catalog + in-feed mockups.
+    console.log('🪪 Generating customer-facing brand kit report...');
+    const customerHtml = engine.render('customer-report.hbs', templateData);
+    const customerPath = path.join(outputDir, 'customer-report.html');
+    fs.writeFileSync(customerPath, customerHtml);
+    console.log(`   ✓ Customer report saved: ${customerPath}`);
   }
 
   console.log(`\n✅ Done! Output files in: ${outputDir}`);
@@ -266,6 +273,7 @@ async function main() {
   console.log(`   - brand-kit.css`);
   if (!opts.reportOnly) console.log(`   - index.html (feed prototype)`);
   if (!opts.prototypeOnly) console.log(`   - analysis-report.html (analysis report)`);
+  if (!opts.prototypeOnly) console.log(`   - customer-report.html (customer-facing brand kit report)`);
   console.log('');
 }
 

@@ -1,0 +1,11 @@
+<!-- Color swatch card for the customer report.
+     Params: color={ name, hex, usage[] }, role="short label" -->
+<div class="swatch">
+  <div class="chip" style="background:{{color.hex}};">
+    <span class="hex" style="background:rgba({{#if (eq (contrastColor color.hex) '#ffffff')}}0,0,0,0.35{{else}}255,255,255,0.85{{/if}});color:{{contrastColor color.hex}};">{{color.hex}}</span>
+  </div>
+  <div class="meta">
+    <div class="nm">{{default color.name role}}</div>
+    <div class="role">{{#if color.usage}}{{lookup color.usage 0}}{{else}}{{role}}{{/if}}</div>
+  </div>
+</div>

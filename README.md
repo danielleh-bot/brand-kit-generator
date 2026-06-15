@@ -43,6 +43,7 @@ Output in `./output/example/`:
 - `brand-kit.css` — drop-in CSS (`:root` custom properties + utility classes)
 - `index.html` — publisher-branded Taboola feed prototype
 - `analysis-report.html` — before vs. after comparison report
+- `customer-report.html` — customer-facing brand kit report: every analyzed property with visual examples + mocked in-feed screenshots (desktop & mobile)
 
 #### CLI Options
 

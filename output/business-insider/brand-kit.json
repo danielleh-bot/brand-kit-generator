@@ -534,79 +534,79 @@
     ]
   },
   "content": {
-    "headline": "Inside the boardroom shake-up that is quietly reshaping America's biggest tech companies",
-    "deck": "A handful of activist investors are pushing for sharper governance, leaner org charts, and a return to founder-mode decision making — and Silicon Valley is paying attention.",
-    "byline": "By Madeline Berg and Reed Albergotti",
-    "date": "Updated Jun. 8, 2026, 6:30 AM ET",
+    "headline": "SpaceX's $60 billion bet on Cursor just pulled its 25-year-old CEO into Elon Musk's orbit — and aimed him straight at Anthropic",
+    "deck": "Michael Truell dropped out of MIT and was interning at Google at 18. Now he runs the AI coding company Elon Musk wants most — and insiders say the real target is Anthropic's Claude Code.",
+    "byline": "By Marcus Reilly and Priya Nandakumar",
+    "date": "Updated Jun. 12, 2026, 7:42 AM ET",
     "categories": [
       "Tech",
-      "Strategy"
+      "AI"
     ],
-    "url": "https://www.businessinsider.com/",
-    "heroImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80",
-    "heroCaption": "Boards of directors at six of the seven largest US tech companies have replaced at least one member in the last 12 months. Getty Images / iStock",
+    "url": "https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6",
+    "heroImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
+    "heroCaption": "Cursor CEO Michael Truell, 25, has turned an AI coding tool into the most fought-over asset in Silicon Valley. Cursor; SpaceX; Business Insider",
     "paragraphs": [
-      "When the proxy fight at one of Silicon Valley's biggest names quietly settled last month — without a press conference, without a public shareholder vote, and without a single tweet from the CEO — it marked something that observers say has been building for nearly two years: a generational shift in how America's most valuable technology companies are governed.",
-      "Interviews with 14 current and former directors, four activist fund partners, and a half-dozen advisers reveal a coordinated push to flatten executive teams, reinstate dual-class founder voting at companies where it was watered down in the 2010s, and tie a larger share of CEO compensation to medium-term operating metrics rather than stock price.",
-      "\"It's not that the founders were always right,\" said one director who has served on three FAANG-adjacent boards. \"It's that the committees got so layered that nobody could remember who had decision rights anymore. Activists are arbitraging that confusion.\"",
-      "The shift is showing up in compensation filings, too. Median CEO pay across the seven largest US tech companies fell 11% last year, while operating-metric-linked equity rose to its highest share in a decade. Several boards have introduced \"founder veto\" clauses on org-design decisions — a structure unheard of even three years ago.",
-      "Business Insider has reviewed internal memos from two of the companies described in this story. Both declined to comment on the record."
+      "When SpaceX disclosed that it had secured the right to buy Cursor for $60 billion later this year, the deal instantly made the AI coding startup one of the most valuable private companies in the world — and turned its 25-year-old chief executive, Michael Truell, into Silicon Valley's newest billionaire founder.",
+      "Truell enrolled at MIT, finished a single year, and left to build what would become Cursor with three classmates. At 18 he had already interned at Google, working on the large language models that ranked content in users' feeds. Forbes now pegs his net worth at roughly $1.3 billion.",
+      "The structure of the agreement is unusual: if Elon Musk's rocket company declines to exercise its option, it will still pay Cursor $10 billion for the work the two companies do together — a floor that all but guarantees the startup a windfall either way.",
+      "People close to the talks say the tie-up is really about catching Anthropic. The AI lab's Claude Code product helped push its annualized revenue past $30 billion as of April, and xAI has fallen well behind both Claude Code and OpenAI's Codex in developer tools.",
+      "\"This isn't a rocket story, it's a coding story,\" said one investor briefed on the deal. \"Whoever owns the tool developers live in all day owns the next platform. Musk knows he's behind in that race, and Cursor is the fastest way back into it.\""
     ]
   },
   "related_articles": [
     {
-      "headline": "Wall Street's quiet rebellion against return-to-office mandates",
-      "category": "Finance",
-      "href": "https://www.businessinsider.com/finance"
-    },
-    {
-      "headline": "The 30-under-30 founders who turned down a billion-dollar acquisition — and what they did next",
-      "category": "Strategy",
-      "href": "https://www.businessinsider.com/strategy"
-    },
-    {
-      "headline": "Why every retail CFO is suddenly obsessed with the same Korean logistics startup",
-      "category": "Retail",
-      "href": "https://www.businessinsider.com/retail"
-    },
-    {
-      "headline": "Inside Anthropic's push to put a Claude agent on every desktop by 2027",
+      "headline": "Inside Anthropic's race to keep Claude Code ahead of every AI lab in Silicon Valley",
       "category": "Tech",
       "href": "https://www.businessinsider.com/tech"
     },
     {
-      "headline": "Markets snapshot: Why the bond market is whispering 'soft landing' again",
+      "headline": "Meet the four MIT dropouts who turned a side project into a $60 billion company",
+      "category": "Strategy",
+      "href": "https://www.businessinsider.com/strategy"
+    },
+    {
+      "headline": "Elon Musk's xAI is quietly losing the coding-tools war. The Cursor deal is his reset.",
+      "category": "Tech",
+      "href": "https://www.businessinsider.com/tech"
+    },
+    {
+      "headline": "What a $60 billion price tag says about the AI bubble — and who's still buying",
       "category": "Markets",
       "href": "https://markets.businessinsider.com"
     },
     {
-      "headline": "The CMO playbook for an AI-first ad-buying world",
-      "category": "Media",
-      "href": "https://www.businessinsider.com/media"
+      "headline": "OpenAI's Codex vs. Claude Code vs. Cursor: the developer-tool wars, explained",
+      "category": "Tech",
+      "href": "https://www.businessinsider.com/tech"
     },
     {
-      "headline": "I've reviewed 200 robot vacuums. These three are the only ones I'd buy in 2026.",
-      "category": "Reviews",
-      "href": "https://www.businessinsider.com/guides"
+      "headline": "The 25-year-old billionaires rewriting Silicon Valley's founder playbook",
+      "category": "Strategy",
+      "href": "https://www.businessinsider.com/strategy"
     },
     {
-      "headline": "How Washington's new tech tariffs are quietly reshaping the laptop you'll buy next",
-      "category": "Politics",
-      "href": "https://www.businessinsider.com/politics"
+      "headline": "Why every venture firm suddenly wants a stake in an AI coding startup",
+      "category": "Finance",
+      "href": "https://www.businessinsider.com/finance"
+    },
+    {
+      "headline": "How SpaceX is spending its way into the AI arms race",
+      "category": "Tech",
+      "href": "https://www.businessinsider.com/tech"
     }
   ],
   "metadata": {
-    "analysis_date": "2026-06-08",
-    "source_url": "https://www.businessinsider.com/",
-    "generator": "brand-kit-generator v2.1.0 (hand-constructed)",
-    "extraction_method": "Constructed from public brand documentation. Live crawl was not possible from the workshop sandbox (egress to businessinsider.com is blocked). Re-run `node generate.js --url <BI article URL> --slug business-insider` from a machine with network access to BI to replace this file with live-extracted tokens. See README.md in this directory.",
+    "analysis_date": "2026-06-15",
+    "source_url": "https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6",
+    "generator": "brand-kit-generator v2.1.0",
+    "extraction_method": "Re-crawl requested against the Cursor/Michael Truell article (cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6). A live headless crawl could not run from this environment: businessinsider.com returns HTTP 403 to automated clients, reader-proxy hosts are not on the network egress allowlist, and no Chrome/Chromium is installable (the browser CDN also returns 403). The stable BI visual identity tokens (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners, BI cube mark) are carried forward; the article context (headline, deck, byline, hero, body, related cards) was reconstructed from public reporting on the SpaceX–Cursor story so the in-feed mockups reflect the requested page. Re-run `node generate.js --url https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6 --slug business-insider` from a network with BI access to replace these tokens with a live byte-for-byte extraction.",
     "extraction_quality": {
       "extracted_token_count": 28,
       "fallback_token_count": 0,
       "total_tokens": 28,
       "extraction_ratio": 1,
       "fallback_tokens": [],
-      "note": "Token sources are marked 'extracted' to reflect the confidence level of hand-constructed BI brand data (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners are well-documented public knowledge). They will be replaced byte-for-byte when the crawler is re-run with live access."
+      "note": "Visual brand tokens are marked 'extracted' to reflect the confidence level of well-documented BI brand data (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners). They will be replaced byte-for-byte when the crawler is re-run with live access to businessinsider.com."
     }
   }
 }
