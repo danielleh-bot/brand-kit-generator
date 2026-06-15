@@ -303,8 +303,8 @@
       <div class="grid g4" style="margin-bottom:22px;">
         {{> customer-swatch color=brandKit.colors.primary role="Primary"}}
         {{#if brandKit.colors.secondary}}{{> customer-swatch color=brandKit.colors.secondary role="Secondary"}}{{/if}}
-        {{> customer-swatch color=brandKit.colors.accents.warning_yellow role="Accent"}}
-        {{> customer-swatch color=brandKit.colors.accents.info_blue role="Links"}}
+        {{#if brandKit.colors.accents.warning_yellow}}{{> customer-swatch color=brandKit.colors.accents.warning_yellow role="Accent"}}{{/if}}
+        {{#if brandKit.colors.accents.info_blue}}{{> customer-swatch color=brandKit.colors.accents.info_blue role="Links"}}{{/if}}
       </div>
 
       <h3 class="report-headline-font" style="font-size:15px;margin:0 0 12px;">Text</h3>
@@ -316,10 +316,10 @@
 
       <h3 class="report-headline-font" style="font-size:15px;margin:0 0 12px;">Surfaces</h3>
       <div class="grid g4">
-        {{> customer-swatch color=brandKit.colors.backgrounds.base role="Page / cards"}}
-        {{> customer-swatch color=brandKit.colors.backgrounds.section role="Sections / hover"}}
-        {{> customer-swatch color=brandKit.colors.backgrounds.secondary role="Borders / rules"}}
-        {{> customer-swatch color=brandKit.colors.backgrounds.dark role="Masthead / footer"}}
+        {{#if brandKit.colors.backgrounds.base}}{{> customer-swatch color=brandKit.colors.backgrounds.base role="Page / cards"}}{{/if}}
+        {{#if brandKit.colors.backgrounds.section}}{{> customer-swatch color=brandKit.colors.backgrounds.section role="Sections / hover"}}{{/if}}
+        {{#if brandKit.colors.backgrounds.secondary}}{{> customer-swatch color=brandKit.colors.backgrounds.secondary role="Borders / rules"}}{{/if}}
+        {{#if brandKit.colors.backgrounds.dark}}{{> customer-swatch color=brandKit.colors.backgrounds.dark role="Masthead / footer"}}{{/if}}
       </div>
     </section>
 
@@ -477,7 +477,7 @@
         <!-- Mobile device -->
         <div>
           <div class="device">
-            <div class="masthead" style="border-radius:0;"><div style="padding:12px 14px;text-align:center;"><span class="masthead-wordmark" style="font-size:15px;">{{default brandKit.logos.primary.text brandKit.brand.name}}</span></div></div>
+            <div style="background:{{default brandKit.layout_patterns.header.background_color brandKit.colors.backgrounds.base.hex}};border-bottom:1px solid rgba(0,0,0,0.08);"><div style="padding:12px 14px;text-align:center;"><span class="masthead-wordmark" style="font-size:15px;color:{{contrastColor (default brandKit.layout_patterns.header.background_color brandKit.colors.backgrounds.base.hex)}};">{{default brandKit.logos.primary.text brandKit.brand.name}}</span></div></div>
             <div style="height:3px;background:var(--brand-primary);"></div>
             <div class="shot-surface">
               <div class="feed-label" style="font-size:12px;"><span class="dot"></span>{{default brandKit.taboola.trending_label 'Trending'}}</div>

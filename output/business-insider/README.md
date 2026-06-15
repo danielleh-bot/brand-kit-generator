@@ -18,44 +18,52 @@ article
 ## Brand kit at a glance
 
 ```
-Primary:        BI Orange      #FF5A00   Subscribe CTA, accent rules, hover underlines
-Secondary:      BI Red         #E03625   Breaking news, live ticker
-Background:     White / Black  #FFFFFF / #000000
-Text:           Near-black     #111111
-Type:           Brother 1816 → Manrope (Google Fonts equivalent)
+Primary accent: BI Blue        #002AFF   Links, buttons, navigation, tags
+Text:           Black / near    #000000 / #0A0A0A / #31313B
+Backgrounds:    White / Dark    #FFFFFF (page + masthead) / #0A0A0A (footer)
+Type:           Garnett → Hanken Grotesk (Google Fonts equivalent); Tiempos serif
+Masthead:       WHITE header, black wordmark, blue accent rule (light, is_dark:false)
 Card radius:    0px (sharp corners)
 Image ratio:    16:9
-Logo:           BUSINESS INSIDER wordmark on black, BI cube mark
-Section labels: UPPERCASE BI ORANGE
+Logo:           "Business Insider" wordmark (image); no BI cube mark
+Headlines:      sentence case
 ```
+
+> **Note — this replaces the earlier legacy values.** A first pass used BI's
+> *old* identity (orange `#FF5A00`, Brother 1816, black masthead, BI cube).
+> BI's current live site is **blue / Garnett / white**. These tokens were
+> reconciled against a real Puppeteer crawl — see Provenance.
 
 ## Provenance — **read this before sharing**
 
-> A re-crawl was requested against the Cursor / Michael Truell article. A
-> **live headless crawl could not run from this environment**:
-> `businessinsider.com` returns **HTTP 403** to automated clients,
-> reader-proxy hosts are off the network egress allowlist, and no
-> Chrome/Chromium is installable (the browser CDN also 403s).
+> The **visual brand tokens** (colors, fonts, logo, buttons, photo style,
+> header) are reconciled from a **live Puppeteer crawl** of
+> businessinsider.com: primary accent `#002AFF` (blue — *not* the legacy
+> orange), Garnett headline/UI type with a Tiempos editorial serif, a white
+> masthead, and square 0px corners. Tokens are publisher-level, so they apply
+> across BI articles.
 >
-> So: the **visual brand tokens** (BI Orange `#FF5A00`, the black masthead,
-> the Brother-1816 headline grotesque, the sharp 0px corners, the "BI"
-> cube mark) are carried forward from BI's well-documented, stable visual
-> identity. The **article context** (headline, deck, byline, hero, body,
-> related cards) was reconstructed from public reporting on the SpaceX–Cursor
-> story so the in-feed mockups in `customer-report.html` reflect the
-> requested page. Tokens are marked `"source": "extracted"` to keep the
-> CLI quality gates and the reports meaningful; `metadata.extraction_method`
-> in `brand-kit.json` documents exactly how this run was produced.
+> The **article context** (headline, deck, byline, hero, body, related cards)
+> is the requested Cursor / Michael Truell story, so the in-feed mockups in
+> `customer-report.html` reflect the page you asked about.
+>
+> A few **obvious mis-extractions were corrected** and flagged inline in
+> `brand-kit.json` (`note` fields): `article_title_hero` font-size (18px →
+> 36px, from its 44px line-height), `buttons` font-size (20px → 14px), button
+> horizontal padding (the crawl collapsed it to `0px`), and the `graphics`
+> badge list (page UI chrome like "Share"/"WhatsApp" was dropped; the real
+> coloured CTAs "Sign up"/"Play now" are kept and LIVE/BREAKING/VIDEO are
+> derived from `brand_voice.content_labels`). Extraction quality:
+> **17/21 tokens extracted (0.81)**, 4 fallbacks.
 >
 > The mocked feed "screenshots" in `customer-report.html` are
 > self-contained, pixel-accurate HTML/CSS renderings (the medium this tool
 > emits) — open the file in any browser to view them. True PNG capture
-> requires a headless browser, which is unavailable in this environment.
+> requires a headless browser.
 
-If you want the *real* extracted tokens (resolved font CSS, exact pixel
-sizes, real button border-radius, actual logo SVG, real related-article
-list), run the re-crawl command below from a machine with normal
-internet access and replace this `brand-kit.json` with the output.
+To refresh from a live crawl of *this exact article* (replaces both tokens
+and content), run the command below from a machine with normal internet
+access and Chrome installed.
 
 ## Re-crawl from your laptop (5 minutes)
 

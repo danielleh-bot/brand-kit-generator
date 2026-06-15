@@ -4,90 +4,83 @@
     "tagline": "Business news, analysis, and insights — covering markets, tech, leadership, and the global economy.",
     "website": "https://www.businessinsider.com",
     "description": "Business Insider is a global business news website covering technology, finance, markets, strategy, retail, real estate, and the people shaping the economy. Owned by Axel Springer.",
-    "language": "en"
+    "language": "en-US"
   },
   "logos": {
     "primary": {
-      "type": "text",
-      "text": "BUSINESS INSIDER",
-      "font": "Brother 1816 Bold (uppercase)",
-      "color": "#FFFFFF",
-      "background": "#000000",
-      "treatment": "Wordmark in heavy, low-contrast grotesque set in uppercase. Used in white on the black masthead; flips to black-on-white in body contexts. The 'BI' cube mark — a black square with white 'BI' — is the supplementary brand badge."
+      "type": "image",
+      "url": "",
+      "alt": "Business Insider",
+      "width": 410,
+      "height": 36,
+      "text": "Business Insider",
+      "font": "Garnett 400",
+      "color": "#0A0A0A",
+      "background": "#FFFFFF",
+      "treatment": "The 'Business Insider' wordmark is set in Garnett and sits on a white masthead in near-black (#0A0A0A). The legacy orange 'BI' cube mark has been retired — the current identity is the full wordmark plus a blue (#002AFF) accent.",
+      "source": "extracted"
     },
-    "brand_mark": {
-      "name": "BI cube",
-      "description": "A solid black square containing a stacked, condensed white 'BI'. Used as the bookmarkable favicon, social avatar, and inline byline mark.",
-      "background": "#000000",
-      "foreground": "#FFFFFF"
-    },
-    "favicon_url": "https://www.businessinsider.com/public/assets/icons/favicon-32x32.png"
+    "variants": [],
+    "brand_mark": null,
+    "favicon_url": "https://www.businessinsider.com/public/assets/BI/US/favicons/apple-touch-icon-192x192.png?v=2025-05"
   },
   "colors": {
     "primary": {
-      "name": "BI Orange",
-      "hex": "#FF5A00",
-      "rgb": "rgb(255, 90, 0)",
+      "name": "Primary Accent",
+      "hex": "#002AFF",
+      "rgb": "rgb(0, 42, 255)",
       "usage": [
-        "Subscribe CTA",
-        "Section accent rules",
-        "Sponsored / exclusive ribbons",
-        "Section labels",
-        "Hover underlines"
+        "Links",
+        "Buttons",
+        "Navigation",
+        "Timestamps",
+        "Tags & badges"
       ],
       "source": "extracted"
     },
     "primary_variants": {
       "darken_5": {
-        "hex": "#E65100",
-        "rgb": "rgb(230, 81, 0)"
+        "hex": "#0028F2",
+        "name": "Darker primary",
+        "usage": "Hover states",
+        "source": "derived"
       },
       "darken_10": {
-        "hex": "#CC4900",
-        "rgb": "rgb(204, 73, 0)"
+        "hex": "#0025E0",
+        "name": "Deepest primary",
+        "usage": "Active/pressed states",
+        "source": "derived"
       }
-    },
-    "secondary": {
-      "name": "BI Red (Breaking)",
-      "hex": "#E03625",
-      "rgb": "rgb(224, 54, 37)",
-      "usage": [
-        "Breaking news label",
-        "Live ticker",
-        "Premium/exclusive flag"
-      ],
-      "source": "extracted"
     },
     "text": {
       "primary": {
-        "name": "Near Black",
-        "hex": "#111111",
-        "rgb": "rgb(17, 17, 17)",
+        "name": "Primary Text",
+        "hex": "#000000",
+        "rgb": "rgb(0, 0, 0)",
         "usage": [
-          "Headlines",
-          "Article body",
-          "Wordmark"
+          "Button text"
         ],
         "source": "extracted"
       },
       "secondary": {
-        "name": "Dark Gray",
-        "hex": "#4D4D4D",
-        "rgb": "rgb(77, 77, 77)",
+        "name": "Secondary Text",
+        "hex": "#0A0A0A",
+        "rgb": "rgb(10, 10, 10)",
         "usage": [
-          "Deck / standfirst",
-          "Body text on light cards"
+          "Headlines",
+          "Body text",
+          "Navigation",
+          "Timestamps"
         ],
         "source": "extracted"
       },
       "tertiary": {
-        "name": "Medium Gray",
-        "hex": "#888888",
-        "rgb": "rgb(136, 136, 136)",
+        "name": "Tertiary Text",
+        "hex": "#31313B",
+        "rgb": "rgb(49, 49, 59)",
         "usage": [
-          "Timestamps",
-          "Byline metadata",
-          "Disclosure labels"
+          "Article deck",
+          "Tags & badges"
         ],
         "source": "extracted"
       }
@@ -99,79 +92,45 @@
         "rgb": "rgb(255, 255, 255)",
         "usage": [
           "Page background",
-          "Card surface"
+          "Header background",
+          "Card surface",
+          "Section background"
         ],
         "source": "extracted"
       },
       "section": {
         "name": "Off-White",
-        "hex": "#F7F7F7",
-        "rgb": "rgb(247, 247, 247)",
+        "hex": "#F7F9FC",
+        "rgb": "rgb(247, 249, 252)",
         "usage": [
-          "Section dividers",
-          "Hover state",
-          "Loading placeholders"
+          "Section backgrounds"
         ],
-        "source": "extracted"
+        "source": "fallback"
       },
-      "secondary": {
-        "name": "Light Gray",
-        "hex": "#EEEEEE",
-        "rgb": "rgb(238, 238, 238)",
-        "usage": [
-          "Card borders",
-          "Horizontal rules"
-        ],
-        "source": "extracted"
-      },
+      "secondary": null,
       "dark": {
-        "name": "BI Black",
-        "hex": "#000000",
-        "rgb": "rgb(0, 0, 0)",
+        "name": "Dark Background",
+        "hex": "#0A0A0A",
+        "rgb": "rgb(10, 10, 10)",
         "usage": [
-          "Masthead",
           "Footer",
-          "Sponsored overlay"
+          "Dark sections",
+          "Headlines / body text"
         ],
         "source": "extracted"
       }
     },
     "accents": {
-      "warning_yellow": {
-        "name": "Insider Yellow",
-        "hex": "#FFC700",
-        "rgb": "rgb(255, 199, 0)",
-        "usage": [
-          "Newsletter banner",
-          "Premium gold ribbon"
-        ],
-        "source": "extracted"
-      },
-      "negative_red": {
-        "name": "BI Red",
-        "hex": "#E03625",
-        "rgb": "rgb(224, 54, 37)",
-        "usage": [
-          "Breaking news",
-          "Market loss indicator"
-        ],
-        "source": "extracted"
-      },
-      "positive_green": {
-        "name": "Market Green",
-        "hex": "#1A8F4C",
-        "rgb": "rgb(26, 143, 76)",
-        "usage": [
-          "Market gain indicator"
-        ],
-        "source": "extracted"
-      },
       "info_blue": {
-        "name": "Link Blue",
-        "hex": "#0F69FF",
-        "rgb": "rgb(15, 105, 255)",
+        "name": "Info Blue",
+        "hex": "#002AFF",
+        "rgb": "rgb(0, 42, 255)",
         "usage": [
-          "In-body article links"
+          "Links",
+          "Buttons",
+          "Navigation",
+          "Timestamps",
+          "Tags & badges"
         ],
         "source": "extracted"
       }
@@ -179,195 +138,158 @@
   },
   "fonts": {
     "primary": {
-      "family": "Brother 1816",
+      "family": "Garnett",
       "fallbacks": [
-        "Helvetica Neue",
-        "Helvetica",
-        "Arial",
         "sans-serif"
       ],
       "weights": {
         "regular": 400,
-        "medium": 500,
-        "bold": 700,
-        "black": 900
+        "bold": 500
       },
-      "usage": "Headlines, Navigation, Buttons, Wordmark",
+      "usage": "Headlines, Body text, Navigation, Buttons",
       "source": "extracted",
       "is_generic": false,
-      "google_equivalent": "Manrope"
+      "google_equivalent": "Hanken Grotesk"
     },
     "secondary": {
-      "family": "Brother 1816",
-      "weight": 400,
+      "family": "garnett",
+      "weight": 600,
       "style": "normal",
-      "usage": "Body text, Deck, Captions",
+      "usage": "Headlines, Body text, Navigation, Buttons, Meta text, Captions",
       "source": "extracted",
-      "google_equivalent": "Inter"
+      "google_equivalent": "Hanken Grotesk"
     },
     "tertiary": [
       {
-        "family": "Georgia",
-        "usage": "Long-form editorial pullquotes",
-        "source": "extracted"
+        "family": "tiempos",
+        "usage": "Long-form editorial body text",
+        "source": "extracted",
+        "google_equivalent": "Source Serif 4"
       }
     ],
     "type_scale": {
       "section_headings": {
-        "size": "20px",
-        "weight": 800,
-        "family": "Brother 1816",
-        "line_height": "1.2",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.04em",
-        "color": "#111111",
+        "size": "18px",
+        "weight": 700,
+        "family": "garnett",
+        "line_height": "24.3px",
+        "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "h2, .section-title"
+        "matched_selector": "h2, .section-title, [class*=\"section-head\"]"
       },
       "article_title_hero": {
-        "size": "40px",
-        "weight": 800,
-        "family": "Brother 1816",
-        "line_height": "1.1",
-        "color": "#111111",
-        "source": "extracted",
-        "matched_selector": "h1, .headline"
+        "size": "36px",
+        "weight": 500,
+        "family": "Garnett",
+        "line_height": "1.15",
+        "color": "#0A0A0A",
+        "source": "extracted (size corrected)",
+        "matched_selector": "h1, .headline, [class*=\"headline\"]",
+        "note": "Crawl returned font-size 18px with a 44px line-height — a mis-read of a transformed element. Corrected to ~36px (the line-height implies a ~36-38px display size)."
       },
       "article_title_card": {
-        "size": "20px",
+        "size": "22px",
         "weight": 700,
-        "family": "Brother 1816",
+        "family": "Garnett",
         "line_height": "1.25",
-        "color": "#111111",
-        "source": "extracted",
-        "matched_selector": ".card h3, .card-title"
+        "color": "#0A0A0A",
+        "source": "fallback",
+        "attempted_selector": ".card h3, .card-title, [class*=\"card\"] h3"
       },
       "article_lead": {
-        "size": "20px",
-        "weight": 500,
-        "family": "Brother 1816",
-        "line_height": "1.4",
-        "color": "#4D4D4D",
+        "size": "14px",
+        "weight": 400,
+        "family": "Garnett",
+        "line_height": "21px",
+        "color": "#31313B",
         "source": "extracted",
-        "matched_selector": ".deck, .standfirst"
+        "matched_selector": ".lead, .deck, .article-lead, [class*=\"subtitle\"]"
       },
       "article_body": {
         "size": "18px",
         "weight": 400,
-        "family": "Brother 1816",
+        "family": "Garnett",
         "line_height": "1.6",
-        "color": "#111111",
-        "source": "extracted",
-        "matched_selector": "article p"
+        "color": "#0A0A0A",
+        "source": "fallback",
+        "attempted_selector": "article p, .article-body p, .story-body p"
       },
       "navigation": {
-        "size": "13px",
-        "weight": 700,
-        "family": "Brother 1816",
-        "line_height": "1.2",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.06em",
-        "color": "#FFFFFF",
+        "size": "16px",
+        "weight": 400,
+        "family": "garnett",
+        "line_height": "24px",
+        "color": "#002AFF",
         "source": "extracted",
-        "matched_selector": "nav a"
+        "matched_selector": "nav a, [role=\"navigation\"] a"
       },
       "utility_bar": {
-        "size": "11px",
-        "weight": 600,
-        "family": "Brother 1816",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.08em",
-        "color": "#FFFFFF",
-        "source": "extracted",
-        "matched_selector": ".utility a"
+        "size": "13px",
+        "weight": 400,
+        "family": "Garnett",
+        "color": "#0A0A0A",
+        "source": "fallback",
+        "attempted_selector": ".utility a, .topbar a, [class*=\"utility\"] a"
       },
       "category_pills": {
-        "size": "11px",
-        "weight": 700,
-        "family": "Brother 1816",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.08em",
-        "color": "#FF5A00",
+        "size": "16px",
+        "weight": 400,
+        "family": "garnett",
+        "line_height": "24px",
+        "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "[class*='category'], [class*='kicker']"
+        "matched_selector": "[class*=\"pill\"], [class*=\"chip\"], [class*=\"tag\"]"
       },
       "buttons": {
-        "size": "13px",
-        "weight": 700,
-        "family": "Brother 1816",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.06em",
+        "size": "14px",
+        "weight": 600,
+        "family": "garnett",
+        "line_height": "1.2",
         "color": "#FFFFFF",
-        "source": "extracted",
-        "matched_selector": "button, .btn"
+        "letter_spacing": "0.28px",
+        "source": "extracted (size corrected)",
+        "matched_selector": "button, .btn, [role=\"button\"]",
+        "note": "Crawl returned 20px / 16px line-height; corrected to the button's real 14px (matches buttons.primary.font_size)."
       },
       "meta_text": {
         "size": "12px",
-        "weight": 500,
-        "family": "Brother 1816",
-        "color": "#888888",
+        "weight": 600,
+        "family": "garnett",
+        "line_height": "16.8px",
+        "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "time, .byline"
+        "matched_selector": "time, .date, [class*=\"meta\"], figcaption"
       }
     }
   },
   "buttons": {
     "primary": {
-      "background_color": "#FF5A00",
+      "background_color": "#002AFF",
       "text_color": "#FFFFFF",
-      "border_radius": "2px",
-      "padding": "10px 20px",
-      "font_weight": 700,
-      "text_transform": "uppercase",
-      "letter_spacing": "0.06em",
-      "font_size": "13px",
-      "hover_background": "#E65100",
-      "source": "extracted"
-    },
-    "secondary": {
-      "background_color": "transparent",
-      "text_color": "#111111",
-      "border": "1px solid #111111",
-      "border_radius": "2px",
-      "padding": "10px 20px",
-      "font_weight": 700,
-      "text_transform": "uppercase",
-      "source": "extracted"
+      "border_radius": "4px",
+      "padding": "14px 22px 16px",
+      "font_size": "14px",
+      "font_weight": 600,
+      "text_transform": null,
+      "letter_spacing": "0.28px",
+      "hover_background": "#0028F2",
+      "source": "extracted",
+      "note": "Crawl padding was '14px 0px 16px' (horizontal collapsed by the extractor); restored to a realistic 22px horizontal."
     }
   },
   "brand_voice": {
-    "language": "en",
+    "language": "en-US",
     "headline_style": {
       "format": "sentence case",
       "case": "sentence case",
-      "pattern": "Plain editorial sentence-case; occasional 'BREAKING:' or category colon prefix for live coverage."
+      "pattern": "Plain editorial sentence case; live coverage uses LIVE / BREAKING signposts."
     },
     "content_labels": {
-      "breaking": true,
       "live": true,
-      "exclusive": true,
-      "opinion": true,
-      "video": true,
-      "premium": true,
-      "sponsored": true,
-      "analysis": true
+      "breaking": true,
+      "video": true
     },
-    "content_distinction": {
-      "news": {
-        "typography": "Brother 1816 Bold, uppercase kickers",
-        "description": "Factual reporting with clean sans-serif headlines and short, scannable decks."
-      },
-      "opinion": {
-        "label": "Opinion",
-        "typography": "Brother 1816 Italic 500",
-        "description": "Editorial commentary signposted with an 'OPINION' kicker in BI Orange."
-      },
-      "premium": {
-        "label": "BI PREMIUM",
-        "typography": "Brother 1816 Black",
-        "description": "Subscriber-only content marked with a yellow padlock badge and BI PREMIUM kicker."
-      }
-    }
+    "content_distinction": {}
   },
   "photo_style": {
     "thumbnail_format": {
@@ -375,72 +297,83 @@
       "border_radius": "0px"
     },
     "video_thumbnails": {
-      "indicator": "Solid circle with white play triangle",
-      "indicator_color": "#FF5A00"
+      "indicator": "Play button icon",
+      "indicator_color": "#0A0A0A"
     },
     "author_photos": {
-      "shape": "circular",
-      "size": "32px"
+      "shape": "square",
+      "size": "40px"
     }
   },
   "graphics": {
-    "style": "Editorial — relies on photography, sharp corners, and bold typography. Almost no decorative illustration in the news flow.",
+    "style": "Minimal — relies on photography and typography. Almost no decorative illustration.",
     "elements": [
+      {
+        "name": "Sign up",
+        "label": "Sign up",
+        "description": "Newsletter sign-up CTA",
+        "background_color": "#002AFF",
+        "text_color": "#FFFFFF",
+        "source": "extracted"
+      },
+      {
+        "name": "Play now",
+        "label": "Play now",
+        "description": "Audio-narration CTA",
+        "background_color": "#0A0A0A",
+        "text_color": "#FFFFFF",
+        "source": "extracted"
+      },
+      {
+        "name": "LIVE",
+        "label": "LIVE",
+        "description": "Live coverage label",
+        "background_color": "transparent",
+        "text_color": "#002AFF",
+        "source": "derived"
+      },
       {
         "name": "BREAKING",
         "label": "BREAKING",
-        "description": "Live news label",
-        "background_color": "#E03625",
-        "text_color": "#FFFFFF"
-      },
-      {
-        "name": "EXCLUSIVE",
-        "label": "EXCLUSIVE",
-        "description": "Original reporting flag",
-        "background_color": "#111111",
-        "text_color": "#FFFFFF"
-      },
-      {
-        "name": "BI PREMIUM",
-        "label": "BI PREMIUM",
-        "description": "Paywalled / subscriber content",
-        "background_color": "#FFC700",
-        "text_color": "#111111"
-      },
-      {
-        "name": "OPINION",
-        "label": "OPINION",
-        "description": "Editorial commentary kicker",
+        "description": "Breaking-news label",
         "background_color": "transparent",
-        "text_color": "#FF5A00"
+        "text_color": "#0A0A0A",
+        "source": "derived"
+      },
+      {
+        "name": "VIDEO",
+        "label": "VIDEO",
+        "description": "Video content indicator",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A",
+        "source": "derived"
       }
-    ]
+    ],
+    "elements_note": "The live crawl captured page UI chrome (Share, Copy link, WhatsApp, etc.) as 'badges'. Those were dropped; the two real coloured CTAs (Sign up, Play now) are kept verbatim and the LIVE/BREAKING/VIDEO labels are derived from brand_voice.content_labels using the real palette."
   },
   "icons": {
-    "style": "Stroked monoline SVG — 1.5px stroke, square caps, no fills.",
-    "count_detected": 48,
+    "style": "SVG-based",
+    "count_detected": 54,
     "social_media_icons": {
       "platforms": [
-        "X (Twitter)",
         "Facebook",
-        "Instagram",
+        "X (Twitter)",
         "LinkedIn",
         "YouTube",
-        "TikTok"
+        "Instagram"
       ],
-      "placement": "Footer + share rail on articles",
-      "color": "#FFFFFF on black footer; #111111 in body"
+      "placement": "Footer"
     }
   },
   "layout_patterns": {
-    "grid": "Two-column at desktop (main + sidebar), single-column at mobile, 760px article reading width.",
+    "grid": "Two-column layout (main content + sidebar)",
     "header": {
-      "background_color": "#000000",
-      "is_dark": true,
-      "accent_rule_color": "#FF5A00",
+      "background_color": "#FFFFFF",
+      "is_dark": false,
+      "accent_rule_color": "#002AFF",
       "utility_bar": {
-        "background_color": "#000000",
-        "is_dark": true,
+        "background_color": "#FFFFFF",
+        "is_dark": false,
         "items": [
           "Subscribe",
           "Newsletters",
@@ -449,37 +382,33 @@
         ]
       },
       "layers": [
-        "div: utility bar — Subscribe / Account / Search",
-        "div: masthead — wordmark + main nav",
+        "div: masthead — Business Insider wordmark + main nav (white)",
         "div: section sub-nav — Tech, Markets, Finance, Strategy, Politics",
-        "div: 3px orange accent rule"
+        "div: blue accent rule (#002AFF)"
       ]
     },
     "content_cards": {
       "border_radius": "0px",
-      "border": "1px solid #EEEEEE",
+      "border": "1px solid #E6E9F0",
       "padding": "16px",
-      "hover": "background shifts to #F7F7F7, headline picks up underline in BI Orange"
+      "hover": "headline picks up the blue accent"
     },
     "footer": {
-      "background_color": "#000000",
+      "background_color": "#0A0A0A",
       "text_color": "#FFFFFF",
       "sections": [
         "About",
         "Newsletters",
         "Subscribe",
-        "Reprints & Permissions",
         "Advertise",
-        "Sitemap",
-        "Contact Us",
-        "Masthead"
+        "Contact Us"
       ]
     }
   },
   "spacing": {
     "card_border_radius": "0px",
     "container_max_width": "1200px",
-    "grid_gap": "16px",
+    "grid_gap": "8px",
     "card_gap": "20px",
     "section_padding": "32px"
   },
@@ -599,14 +528,19 @@
     "analysis_date": "2026-06-15",
     "source_url": "https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6",
     "generator": "brand-kit-generator v2.1.0",
-    "extraction_method": "Re-crawl requested against the Cursor/Michael Truell article (cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6). A live headless crawl could not run from this environment: businessinsider.com returns HTTP 403 to automated clients, reader-proxy hosts are not on the network egress allowlist, and no Chrome/Chromium is installable (the browser CDN also returns 403). The stable BI visual identity tokens (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners, BI cube mark) are carried forward; the article context (headline, deck, byline, hero, body, related cards) was reconstructed from public reporting on the SpaceX–Cursor story so the in-feed mockups reflect the requested page. Re-run `node generate.js --url https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6 --slug business-insider` from a network with BI access to replace these tokens with a live byte-for-byte extraction.",
+    "analysis_method": "Automated web crawling with Puppeteer computed-style extraction",
+    "extraction_method": "Visual brand tokens (colors, fonts, logo, buttons, photo style, header) are reconciled from a live Puppeteer crawl of businessinsider.com — primary accent #002AFF (blue, not the legacy orange), Garnett headline/UI type with a Tiempos editorial serif, white masthead, square 0px corners. The article context (headline, deck, byline, hero, body, related cards) is the requested Cursor/Truell story; BI's chrome tokens are publisher-level and apply across articles. A handful of obvious mis-extractions were corrected and noted inline: article_title_hero and buttons font sizes, button horizontal padding, and the graphics badge list (page UI chrome was dropped, keeping the real coloured CTAs and deriving LIVE/BREAKING/VIDEO from content_labels).",
     "extraction_quality": {
-      "extracted_token_count": 28,
-      "fallback_token_count": 0,
-      "total_tokens": 28,
-      "extraction_ratio": 1,
-      "fallback_tokens": [],
-      "note": "Visual brand tokens are marked 'extracted' to reflect the confidence level of well-documented BI brand data (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners). They will be replaced byte-for-byte when the crawler is re-run with live access to businessinsider.com."
+      "extracted_token_count": 17,
+      "fallback_token_count": 4,
+      "total_tokens": 21,
+      "extraction_ratio": 0.81,
+      "fallback_tokens": [
+        "colors.backgrounds.section",
+        "fonts.type_scale.article_title_card",
+        "fonts.type_scale.article_body",
+        "fonts.type_scale.utility_bar"
+      ]
     }
   }
 }
