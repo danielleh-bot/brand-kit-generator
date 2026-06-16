@@ -180,17 +180,16 @@
        Token-driven so the mocked cards match the publisher's real article
        cards: aspect ratio, card-title type, meta type, kicker, solid CTA, and
        the real "headline picks up the accent" hover (no card lift). */
-    .feed-card { transition: border-color .15s ease; background: var(--brand-bg); border: var(--card-border); }
-    .feed-card:hover { border-color: var(--brand-bg-section); }
+    .feed-card { background: var(--brand-bg); border: var(--card-border); }
     .feed-card-kicker { font-family: var(--font-headline); color: #0A0A0A; font-weight: 400; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
-    .feed-card-headline { font-family: var(--font-headline); font-weight: 700; color: #0A0A0A; line-height: 1.25; font-size: 15px; }
+    .feed-card-headline { font-family: var(--font-headline); font-weight: 700; color: #0A0A0A; line-height: 1.25; font-size: 15px; transition: color .15s ease; }
     .feed-card-headline.is-large { font-size: 22px; }
     .feed-card-headline.is-tiny { font-size: 13px; }
     .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
     .feed-card-source { font-size: 12px; color: #0A0A0A; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .feed-card-cta-link { font-size: 12px; color: var(--brand-primary); font-weight: 700; white-space: nowrap; }
-    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: var(--btn-padding); background: #002AFF; color: #FFFFFF; border: 1px solid #002AFF; border-radius: var(--btn-radius); font-size: 14px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
-    .feed-card:hover .feed-card-cta-pill { background: #0028F2; }
+    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: #002AFF; color: #FFFFFF; border: 1px solid #002AFF; border-radius: var(--btn-radius); font-size: 12px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
+    .feed-card:hover .feed-card-cta-pill { background: var(--btn-primary-hover); }
     .feed-card-image-wrap { background: var(--brand-bg-section); overflow: hidden; }
     .feed-card-image-wrap.feed-card-image-fallback { background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%); }
     .feed-card-image-wrap.feed-card-image-fallback::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 16px); }
@@ -603,8 +602,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Your Best Workout Starts Here — 30 Day Free Trial" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1517649763962-0c623066013b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -612,11 +611,11 @@
   <div style="padding: 16px;">
     
     <div class="feed-card-headline is-large">
-      Learn from the Best — New Classes Available
+      Your Best Workout Starts Here — 30 Day Free Trial
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">MasterClass</span>
-          <span class="feed-card-cta-pill">Start Now</span>
+      <span class="feed-card-source">Peloton</span>
+          <span class="feed-card-cta-pill">Try Free</span>
     </div>
   </div>
 </div>
@@ -625,8 +624,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Best High-Yield Savings Accounts of 2025" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The Award-Winning Mattress — Try 100 Nights Risk-Free" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -634,11 +633,11 @@
   <div style="padding: 16px;">
     
     <div class="feed-card-headline is-large">
-      Best High-Yield Savings Accounts of 2025
+      The Award-Winning Mattress — Try 100 Nights Risk-Free
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">NerdWallet</span>
-          <span class="feed-card-cta-pill">Compare Now</span>
+      <span class="feed-card-source">Casper</span>
+          <span class="feed-card-cta-pill">Shop Now</span>
     </div>
   </div>
 </div>
@@ -735,8 +734,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The New Galaxy S25 Ultra — Pre-Order Today" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Experience Amazing — The All-New RX 500h" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -744,11 +743,11 @@
   <div style="padding: 16px;">
     
     <div class="feed-card-headline ">
-      The New Galaxy S25 Ultra — Pre-Order Today
+      Experience Amazing — The All-New RX 500h
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">Samsung</span>
-          <span class="feed-card-cta-pill">Shop Now</span>
+      <span class="feed-card-source">Lexus</span>
+          <span class="feed-card-cta-pill">Build Yours</span>
     </div>
   </div>
 </div>
@@ -757,8 +756,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Top Financial Advisors Near You — See the List" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Bundle Home &amp; Auto for Maximum Savings" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -766,11 +765,11 @@
   <div style="padding: 16px;">
     
     <div class="feed-card-headline ">
-      Top Financial Advisors Near You — See the List
+      Bundle Home &amp; Auto for Maximum Savings
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">SmartAsset</span>
-          <span class="feed-card-cta-pill">Learn More</span>
+      <span class="feed-card-source">Allstate</span>
+          <span class="feed-card-cta-pill">Get a Quote</span>
     </div>
   </div>
 </div>
@@ -779,8 +778,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Protect Your Devices — Award-Winning Security" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -788,11 +787,11 @@
   <div style="padding: 16px;">
     
     <div class="feed-card-headline ">
-      Protect Your Devices — Award-Winning Security
+      Learn from the Best — New Classes Available
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">Norton</span>
-          <span class="feed-card-cta-pill">Download</span>
+      <span class="feed-card-source">MasterClass</span>
+          <span class="feed-card-cta-pill">Start Now</span>
     </div>
   </div>
 </div>

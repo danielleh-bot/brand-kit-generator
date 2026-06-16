@@ -84,6 +84,7 @@
     .body-font { font-family: var(--font-body); }
     a { color: var(--brand-primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    nav a:hover, .feed-card a:hover { text-decoration: none; }
     img { max-width: 100%; }
 
     /* Feed card styles — type & behaviour driven by the extracted tokens so
@@ -91,11 +92,9 @@
        don't lift cards on hover; the real behaviour is "headline picks up the
        accent" (layout_patterns.content_cards.hover), so that's what we do. */
     .feed-card {
-      transition: border-color 0.15s ease;
       background: var(--brand-bg);
       border: var(--card-border);
     }
-    .feed-card:hover { border-color: var(--brand-bg-section); }
     /* Kicker / category — a coloured text eyebrow above the headline (BI uses
        a coloured kicker, not a filled badge over the image). */
     .feed-card-kicker {
@@ -115,6 +114,7 @@
       color: #0A0A0A;
       line-height: 1.25;
       font-size: 15px;
+      transition: color 0.15s ease;
     }
     .feed-card-headline.is-large { font-size: 22px; }
     .feed-card-headline.is-tiny { font-size: 13px; }
@@ -142,12 +142,12 @@
     .feed-card-cta-pill {
       display: inline-flex;
       align-items: center;
-      padding: var(--btn-padding);
+      padding: 6px 14px;
       background: #002AFF;
       color: #FFFFFF;
       border: 1px solid #002AFF;
       border-radius: var(--btn-radius);
-      font-size: var(--btn-font-size);
+      font-size: 12px;
       font-weight: var(--btn-weight);
       letter-spacing: var(--btn-tracking);
       text-transform: var(--btn-transform);
@@ -219,17 +219,19 @@
        brand owner flagged as "looks weird". Now reads as a real action. */
     .brand-cta-button {
       display: inline-block;
-      padding: 10px 18px;
+      padding: var(--btn-padding);
       background: var(--brand-primary);
       color: var(--brand-bg);
       font-family: var(--font-headline);
-      font-weight: 700;
-      font-size: 14px;
-      border-radius: 4px;
+      font-weight: var(--btn-weight);
+      font-size: var(--btn-font-size);
+      border-radius: var(--btn-radius);
+      letter-spacing: var(--btn-tracking);
+      text-transform: var(--btn-transform);
       text-decoration: none;
-      transition: filter 160ms ease, transform 160ms ease;
+      transition: background 160ms ease;
     }
-    .brand-cta-button:hover { filter: brightness(0.92); transform: translateY(-1px); text-decoration: none; }
+    .brand-cta-button:hover { background: var(--btn-primary-hover); text-decoration: none; }
 
     /* Logo sizing — the inline SVG comes from a publisher page where it
        might declare its own width/height attributes (often >38px). Force it
@@ -268,9 +270,11 @@
   <nav style="background: #FFFFFF; padding: 0;">
   
       <div style="background: #FFFFFF; padding: 6px 0; font-size: var(--util-size);">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; color: #0A0A0A;">
-          <span>https://www.businessinsider.com</span>
-          <span>en-US</span>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: flex-end; align-items: center; gap: 18px; color: #0A0A0A;">
+            <a href="#" style="color: inherit; text-decoration: none; font-weight: 500;">Subscribe</a>
+            <a href="#" style="color: inherit; text-decoration: none; font-weight: 500;">Newsletters</a>
+            <a href="#" style="color: inherit; text-decoration: none; font-weight: 500;">Account</a>
+            <a href="#" style="color: inherit; text-decoration: none; font-weight: 500;">Search</a>
         </div>
       </div>
   
@@ -312,9 +316,9 @@
   <!-- Article Content Section -->
   <article style="max-width: 760px; margin: 0 auto; padding: 32px 16px;">
       <div style="margin-bottom: 12px;">
-          <span class="brand-accent" style="font-size: var(--size-meta); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Tech</span>
+          <span class="brand-accent" style="font-size: var(--kicker-size); font-weight: var(--kicker-weight); text-transform: uppercase; letter-spacing: 0.05em;">Tech</span>
            <span style="color: var(--brand-text-tertiary); margin: 0 6px;">|</span> 
-          <span class="brand-accent" style="font-size: var(--size-meta); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">AI</span>
+          <span class="brand-accent" style="font-size: var(--kicker-size); font-weight: var(--kicker-weight); text-transform: uppercase; letter-spacing: 0.05em;">AI</span>
           
       </div>
   
@@ -355,8 +359,8 @@
              type, meta type, button shape, kicker), not generic defaults. -->
         <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
           <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
-                 data-fallback="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+            <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Your Best Workout Starts Here — 30 Day Free Trial" loading="lazy" referrerpolicy="no-referrer"
+                 data-fallback="https://images.unsplash.com/photo-1517649763962-0c623066013b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;"
                  onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
               <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -364,11 +368,11 @@
           <div style="padding: 16px;">
             
             <div class="feed-card-headline is-large">
-              Learn from the Best — New Classes Available
+              Your Best Workout Starts Here — 30 Day Free Trial
             </div>
             <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">MasterClass</span>
-                  <span class="feed-card-cta-pill">Start Now</span>
+              <span class="feed-card-source">Peloton</span>
+                  <span class="feed-card-cta-pill">Try Free</span>
             </div>
           </div>
         </div>
@@ -377,8 +381,8 @@
              type, meta type, button shape, kicker), not generic defaults. -->
         <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
           <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Best High-Yield Savings Accounts of 2025" loading="lazy" referrerpolicy="no-referrer"
-                 data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The Award-Winning Mattress — Try 100 Nights Risk-Free" loading="lazy" referrerpolicy="no-referrer"
+                 data-fallback="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;"
                  onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
               <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -386,11 +390,11 @@
           <div style="padding: 16px;">
             
             <div class="feed-card-headline is-large">
-              Best High-Yield Savings Accounts of 2025
+              The Award-Winning Mattress — Try 100 Nights Risk-Free
             </div>
             <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">NerdWallet</span>
-                  <span class="feed-card-cta-pill">Compare Now</span>
+              <span class="feed-card-source">Casper</span>
+                  <span class="feed-card-cta-pill">Shop Now</span>
             </div>
           </div>
         </div>
@@ -403,8 +407,8 @@
              type, meta type, button shape, kicker), not generic defaults. -->
         <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
           <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The New Galaxy S25 Ultra — Pre-Order Today" loading="lazy" referrerpolicy="no-referrer"
-                 data-fallback="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Experience Amazing — The All-New RX 500h" loading="lazy" referrerpolicy="no-referrer"
+                 data-fallback="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;"
                  onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
               <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -412,11 +416,11 @@
           <div style="padding: 16px;">
             
             <div class="feed-card-headline ">
-              The New Galaxy S25 Ultra — Pre-Order Today
+              Experience Amazing — The All-New RX 500h
             </div>
             <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">Samsung</span>
-                  <span class="feed-card-cta-pill">Shop Now</span>
+              <span class="feed-card-source">Lexus</span>
+                  <span class="feed-card-cta-pill">Build Yours</span>
             </div>
           </div>
         </div>
@@ -425,8 +429,8 @@
              type, meta type, button shape, kicker), not generic defaults. -->
         <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
           <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Top Financial Advisors Near You — See the List" loading="lazy" referrerpolicy="no-referrer"
-                 data-fallback="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Bundle Home &amp; Auto for Maximum Savings" loading="lazy" referrerpolicy="no-referrer"
+                 data-fallback="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;"
                  onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
               <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -434,11 +438,11 @@
           <div style="padding: 16px;">
             
             <div class="feed-card-headline ">
-              Top Financial Advisors Near You — See the List
+              Bundle Home &amp; Auto for Maximum Savings
             </div>
             <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">SmartAsset</span>
-                  <span class="feed-card-cta-pill">Learn More</span>
+              <span class="feed-card-source">Allstate</span>
+                  <span class="feed-card-cta-pill">Get a Quote</span>
             </div>
           </div>
         </div>
@@ -447,8 +451,8 @@
              type, meta type, button shape, kicker), not generic defaults. -->
         <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
           <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Protect Your Devices — Award-Winning Security" loading="lazy" referrerpolicy="no-referrer"
-                 data-fallback="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
+                 data-fallback="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;"
                  onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
               <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -456,11 +460,11 @@
           <div style="padding: 16px;">
             
             <div class="feed-card-headline ">
-              Protect Your Devices — Award-Winning Security
+              Learn from the Best — New Classes Available
             </div>
             <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">Norton</span>
-                  <span class="feed-card-cta-pill">Download</span>
+              <span class="feed-card-source">MasterClass</span>
+                  <span class="feed-card-cta-pill">Start Now</span>
             </div>
           </div>
         </div>
@@ -565,8 +569,8 @@
              type, meta type, button shape, kicker), not generic defaults. -->
         <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
           <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The All-Electric EX90: Scandinavian Design Meets Innovation" loading="lazy" referrerpolicy="no-referrer"
-                 data-fallback="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Deals You Won&#x27;t Find Anywhere Else" loading="lazy" referrerpolicy="no-referrer"
+                 data-fallback="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;"
                  onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
               <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -574,11 +578,11 @@
           <div style="padding: 16px;">
             
             <div class="feed-card-headline is-large">
-              The All-Electric EX90: Scandinavian Design Meets Innovation
+              Deals You Won&#x27;t Find Anywhere Else
             </div>
             <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">Volvo</span>
-                  <span class="feed-card-cta-pill">Explore</span>
+              <span class="feed-card-source">Booking.com</span>
+                  <span class="feed-card-cta-pill">Book Now</span>
             </div>
           </div>
         </div>
@@ -665,29 +669,7 @@
              type, meta type, button shape, kicker), not generic defaults. -->
         <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
           <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Find Your Dream Home — Search Listings Now" loading="lazy" referrerpolicy="no-referrer"
-                 data-fallback="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-                 style="width: 100%; height: 100%; object-fit: cover; display: block;"
-                 onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-              <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
-          </div>
-          <div style="padding: 16px;">
-            
-            <div class="feed-card-headline is-large">
-              Find Your Dream Home — Search Listings Now
-            </div>
-            <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">Zillow</span>
-                  <span class="feed-card-cta-pill">Search</span>
-            </div>
-          </div>
-        </div>
-        <!-- Feed Card Component — every visual is driven by a brand-kit token so the
-             card matches the publisher's real article cards (aspect ratio, card-title
-             type, meta type, button shape, kicker), not generic defaults. -->
-        <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-          <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Start Investing with as Little as $1" loading="lazy" referrerpolicy="no-referrer"
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Best High-Yield Savings Accounts of 2025" loading="lazy" referrerpolicy="no-referrer"
                  data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;"
                  onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
@@ -696,11 +678,33 @@
           <div style="padding: 16px;">
             
             <div class="feed-card-headline is-large">
-              Start Investing with as Little as $1
+              Best High-Yield Savings Accounts of 2025
             </div>
             <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-              <span class="feed-card-source">Fidelity</span>
-                  <span class="feed-card-cta-pill">Open Account</span>
+              <span class="feed-card-source">NerdWallet</span>
+                  <span class="feed-card-cta-pill">Compare Now</span>
+            </div>
+          </div>
+        </div>
+        <!-- Feed Card Component — every visual is driven by a brand-kit token so the
+             card matches the publisher's real article cards (aspect ratio, card-title
+             type, meta type, button shape, kicker), not generic defaults. -->
+        <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
+          <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Unique Stays Around the World — Book Now" loading="lazy" referrerpolicy="no-referrer"
+                 data-fallback="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                 onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
+              <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
+          </div>
+          <div style="padding: 16px;">
+            
+            <div class="feed-card-headline is-large">
+              Unique Stays Around the World — Book Now
+            </div>
+            <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+              <span class="feed-card-source">Airbnb</span>
+                  <span class="feed-card-cta-pill">Explore</span>
             </div>
           </div>
         </div>
@@ -730,7 +734,7 @@
   
   
       <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; font-size: 12px; opacity: 0.5;">
-        &copy; 2025 Business Insider. All rights reserved. | Brand Kit Prototype generated by Taboola Brand Kit Generator
+        &copy; Business Insider. All rights reserved. | Brand Kit Prototype generated by Taboola Brand Kit Generator
       </div>
     </div>
   </footer>

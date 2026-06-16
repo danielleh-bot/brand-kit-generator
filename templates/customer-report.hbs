@@ -182,17 +182,16 @@
        Token-driven so the mocked cards match the publisher's real article
        cards: aspect ratio, card-title type, meta type, kicker, solid CTA, and
        the real "headline picks up the accent" hover (no card lift). */
-    .feed-card { transition: border-color .15s ease; background: var(--brand-bg); border: var(--card-border); }
-    .feed-card:hover { border-color: var(--brand-bg-section); }
+    .feed-card { background: var(--brand-bg); border: var(--card-border); }
     .feed-card-kicker { font-family: var(--font-headline); color: {{default brandKit.fonts.type_scale.category_pills.color 'var(--brand-primary)'}}; font-weight: {{default brandKit.fonts.type_scale.category_pills.weight 700}}; font-size: {{clampSize brandKit.fonts.type_scale.category_pills.size '10px' '18px' '12px'}}; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
-    .feed-card-headline { font-family: var(--font-headline); font-weight: {{default brandKit.fonts.type_scale.article_title_card.weight 700}}; color: {{default brandKit.fonts.type_scale.article_title_card.color 'var(--brand-text)'}}; line-height: {{default brandKit.fonts.type_scale.article_title_card.line_height '1.25'}}; font-size: 15px; }
+    .feed-card-headline { font-family: var(--font-headline); font-weight: {{default brandKit.fonts.type_scale.article_title_card.weight 700}}; color: {{default brandKit.fonts.type_scale.article_title_card.color 'var(--brand-text)'}}; line-height: {{default brandKit.fonts.type_scale.article_title_card.line_height '1.25'}}; font-size: 15px; transition: color .15s ease; }
     .feed-card-headline.is-large { font-size: {{clampSize brandKit.fonts.type_scale.article_title_card.size '16px' '22px' '20px'}}; }
     .feed-card-headline.is-tiny { font-size: 13px; }
     .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
     .feed-card-source { font-size: {{clampSize brandKit.fonts.type_scale.meta_text.size '10px' '14px' '12px'}}; color: {{default brandKit.fonts.type_scale.meta_text.color 'var(--brand-text-tertiary)'}}; font-weight: {{default brandKit.fonts.type_scale.meta_text.weight 600}}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .feed-card-cta-link { font-size: 12px; color: var(--brand-primary); font-weight: 700; white-space: nowrap; }
-    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: var(--btn-padding); background: {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; color: {{default brandKit.buttons.primary.text_color 'var(--brand-bg)'}}; border: 1px solid {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; border-radius: var(--btn-radius); font-size: {{clampSize brandKit.buttons.primary.font_size '10px' '18px' '11px'}}; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
-    .feed-card:hover .feed-card-cta-pill { background: {{default brandKit.buttons.primary.hover_background 'var(--btn-primary-hover)'}}; }
+    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; color: {{default brandKit.buttons.primary.text_color 'var(--brand-bg)'}}; border: 1px solid {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; border-radius: var(--btn-radius); font-size: 12px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
+    .feed-card:hover .feed-card-cta-pill { background: var(--btn-primary-hover); }
     .feed-card-image-wrap { background: var(--brand-bg-section); overflow: hidden; }
     .feed-card-image-wrap.feed-card-image-fallback { background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%); }
     .feed-card-image-wrap.feed-card-image-fallback::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 16px); }
