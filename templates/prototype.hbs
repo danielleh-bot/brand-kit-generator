@@ -45,6 +45,11 @@
       --btn-transform: {{default brandKit.buttons.primary.text_transform 'none'}};
       --btn-tracking: {{default brandKit.buttons.primary.letter_spacing '0.04em'}};
       --btn-primary-hover: {{default brandKit.colors.primary_variants.darken_5.hex (default brandKit.colors.primary.hex '#1a73e8')}};
+
+      /* Content-card tokens from the brand kit */
+      --card-border: {{default brandKit.layout_patterns.content_cards.border '1px solid transparent'}};
+      --card-padding: {{default brandKit.layout_patterns.content_cards.padding '12px'}};
+      --card-gap: {{default brandKit.spacing.card_gap '16px'}};
     }
     * { box-sizing: border-box; }
     body {
@@ -70,7 +75,7 @@
     .feed-card {
       transition: border-color 0.15s ease;
       background: var(--brand-bg);
-      border: 1px solid transparent;
+      border: var(--card-border);
     }
     .feed-card:hover { border-color: var(--brand-bg-section); }
     /* Kicker / category — a coloured text eyebrow above the headline (BI uses
@@ -232,7 +237,7 @@
        specificity, so we override with !important inside the breakpoint. */
     @media (max-width: 720px) {
       [data-feed-grid="3-up"],
-      [data-feed-grid="2-up"] { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+      [data-feed-grid="2-up"] { grid-template-columns: 1fr 1fr !important; gap: var(--card-gap) !important; }
       [data-footer-grid] { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
     }
     @media (max-width: 480px) {

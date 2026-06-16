@@ -1,5 +1,5 @@
 <!-- Publisher Footer -->
-<footer style="background: var(--brand-bg-dark); color: rgba(255,255,255,0.7); padding: 48px 16px 24px;">
+<footer style="background: {{default brandKit.layout_patterns.footer.background_color 'var(--brand-bg-dark)'}}; color: {{default brandKit.layout_patterns.footer.text_color 'rgba(255,255,255,0.7)'}}; padding: 48px 16px 24px;">
   <div style="max-width: 1200px; margin: 0 auto;">
     <div data-footer-grid style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 32px;">
       {{#each navigation.footerLinks}}

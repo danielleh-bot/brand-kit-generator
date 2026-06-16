@@ -11,7 +11,7 @@
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
     {{/unless}}
   </div>
-  <div style="padding: {{#if (eq size 'tiny')}}10px 2px 6px{{else}}12px 2px 8px{{/if}};">
+  <div style="padding: {{#if (eq size 'tiny')}}10px 2px 6px{{else}}{{default @root.brandKit.layout_patterns.content_cards.padding '12px 2px 8px'}}{{/if}};">
     {{#if isNative}}{{#if category}}<div class="feed-card-kicker">{{category}}</div>{{/if}}{{/if}}
     <div class="feed-card-headline {{#if (eq size 'large')}}is-large{{else if (eq size 'tiny')}}is-tiny{{/if}}">
       {{headline}}

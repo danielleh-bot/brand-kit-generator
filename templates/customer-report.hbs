@@ -32,6 +32,11 @@
       --btn-transform: {{default brandKit.buttons.primary.text_transform 'uppercase'}};
       --btn-tracking: {{default brandKit.buttons.primary.letter_spacing '0.06em'}};
 
+      /* Content-card tokens from the brand kit */
+      --card-border: {{default brandKit.layout_patterns.content_cards.border '1px solid transparent'}};
+      --card-padding: {{default brandKit.layout_patterns.content_cards.padding '12px'}};
+      --card-gap: {{default brandKit.spacing.card_gap '16px'}};
+
       --ink: #0f172a;
       --ink-soft: #475569;
       --ink-faint: #94a3b8;
@@ -52,7 +57,7 @@
     a { color: inherit; }
 
     /* ---- Branded masthead (mirrors the publisher's real header) ---- */
-    .masthead { background: var(--brand-bg-dark); color: #fff; }
+    .masthead { background: {{default brandKit.layout_patterns.header.background_color 'var(--brand-bg-dark)'}}; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}var(--brand-text){{/if}}; }
     .masthead-bar {
       max-width: 1080px; margin: 0 auto; padding: 18px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -60,13 +65,13 @@
     .masthead-wordmark {
       font-family: var(--font-headline);
       font-weight: 800; font-size: 22px; letter-spacing: 0.02em;
-      text-transform: uppercase; color: #fff; white-space: nowrap;
+      text-transform: uppercase; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}var(--brand-text){{/if}}; white-space: nowrap;
     }
     .masthead-tag {
       font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--brand-primary); font-weight: 700;
     }
-    .masthead-rule { height: 3px; background: var(--brand-primary); }
+    .masthead-rule { height: 3px; background: {{default brandKit.layout_patterns.header.accent_rule_color 'var(--brand-primary)'}}; }
 
     /* ---- Layout ---- */
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
@@ -175,7 +180,7 @@
        Token-driven so the mocked cards match the publisher's real article
        cards: aspect ratio, card-title type, meta type, kicker, solid CTA, and
        the real "headline picks up the accent" hover (no card lift). */
-    .feed-card { transition: border-color .15s ease; background: var(--brand-bg); border: 1px solid transparent; }
+    .feed-card { transition: border-color .15s ease; background: var(--brand-bg); border: var(--card-border); }
     .feed-card:hover { border-color: var(--brand-bg-section); }
     .feed-card-kicker { font-family: var(--font-headline); color: var(--brand-primary); font-weight: 700; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
     .feed-card-headline { font-family: var(--font-headline); font-weight: {{default brandKit.fonts.type_scale.article_title_card.weight 700}}; color: {{default brandKit.fonts.type_scale.article_title_card.color 'var(--brand-text)'}}; line-height: {{default brandKit.fonts.type_scale.article_title_card.line_height '1.25'}}; font-size: 15px; }
@@ -443,12 +448,12 @@
 
             <div style="margin-top:22px;">
               <div class="feed-label"><span class="dot"></span>{{default brandKit.taboola.sponsored_label 'Sponsored Stories'}}</div>
-              <div data-feed-grid="2-up" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:26px;">
+              <div data-feed-grid="2-up" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap);margin-bottom:26px;">
                 {{#each feedContent.sponsoredLarge}}{{> components-feed-card this size="large"}}{{/each}}
               </div>
 
-              <div class="feed-label"><span class="dot"></span>{{default brandKit.taboola.feed_label 'More From'}} {{#unless brandKit.taboola.feed_label}}{{brandKit.brand.name}}{{/unless}}</div>
-              <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+              <div class="feed-label"><span class="dot"></span>{{default brandKit.taboola.feed_label 'More From'}}{{#unless brandKit.taboola.feed_label}} {{brandKit.brand.name}}{{/unless}}</div>
+              <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--card-gap);">
                 {{#each feedContent.nativeSection}}{{> components-feed-card this size="small"}}{{/each}}
               </div>
 
@@ -471,7 +476,7 @@
             </div>
             <div class="shot-surface">
               <div class="feed-label"><span class="dot"></span>{{default brandKit.taboola.sponsored_label 'Sponsored Stories'}}</div>
-              <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+              <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--card-gap);">
                 {{#each feedContent.sponsoredDense}}{{> components-feed-card this size="small"}}{{/each}}
               </div>
               <div class="taboola-attr">by <strong>Taboola</strong> | Sponsored Links</div>
@@ -484,7 +489,7 @@
         <div>
           <div class="device">
             <div style="background:{{default brandKit.layout_patterns.header.background_color brandKit.colors.backgrounds.base.hex}};border-bottom:1px solid rgba(0,0,0,0.08);"><div style="padding:12px 14px;text-align:center;"><span class="masthead-wordmark" style="font-size:15px;color:{{contrastColor (default brandKit.layout_patterns.header.background_color brandKit.colors.backgrounds.base.hex)}};">{{default brandKit.logos.primary.text brandKit.brand.name}}</span></div></div>
-            <div style="height:3px;background:var(--brand-primary);"></div>
+            <div style="height:3px;background:{{default brandKit.layout_patterns.header.accent_rule_color 'var(--brand-primary)'}};"></div>
             <div class="shot-surface">
               <div class="feed-label" style="font-size:12px;"><span class="dot"></span>{{default brandKit.taboola.trending_label 'Trending'}}</div>
               <div style="display:grid;grid-template-columns:1fr;gap:14px;">
