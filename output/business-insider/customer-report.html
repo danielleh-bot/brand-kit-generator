@@ -26,9 +26,11 @@
       --font-body: 'Hanken Grotesk', system-ui, sans-serif;
 
       --btn-radius: 4px;
+      --btn-padding: 14px 22px 16px;
       --btn-weight: 600;
       --btn-transform: uppercase;
       --btn-tracking: 0.28px;
+      --btn-primary-hover: #0028F2;
 
       /* Content-card tokens from the brand kit */
       --card-border: 1px solid #E6E9F0;
@@ -180,22 +182,22 @@
        the real "headline picks up the accent" hover (no card lift). */
     .feed-card { transition: border-color .15s ease; background: var(--brand-bg); border: var(--card-border); }
     .feed-card:hover { border-color: var(--brand-bg-section); }
-    .feed-card-kicker { font-family: var(--font-headline); color: var(--brand-primary); font-weight: 700; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+    .feed-card-kicker { font-family: var(--font-headline); color: #0A0A0A; font-weight: 400; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
     .feed-card-headline { font-family: var(--font-headline); font-weight: 700; color: #0A0A0A; line-height: 1.25; font-size: 15px; }
     .feed-card-headline.is-large { font-size: 22px; }
     .feed-card-headline.is-tiny { font-size: 13px; }
     .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
-    .feed-card-source { font-size: 12px; color: var(--brand-text-tertiary); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .feed-card-source { font-size: 12px; color: #0A0A0A; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .feed-card-cta-link { font-size: 12px; color: var(--brand-primary); font-weight: 700; white-space: nowrap; }
-    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: #002AFF; color: #FFFFFF; border: 1px solid #002AFF; border-radius: var(--btn-radius); font-size: 11px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: filter .16s ease; }
-    .feed-card:hover .feed-card-cta-pill { filter: brightness(0.92); }
+    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: var(--btn-padding); background: #002AFF; color: #FFFFFF; border: 1px solid #002AFF; border-radius: var(--btn-radius); font-size: 14px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
+    .feed-card:hover .feed-card-cta-pill { background: #0028F2; }
     .feed-card-image-wrap { background: var(--brand-bg-section); overflow: hidden; }
     .feed-card-image-wrap.feed-card-image-fallback { background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%); }
     .feed-card-image-wrap.feed-card-image-fallback::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 16px); }
     .feed-card-image-wrap.feed-card-image-fallback::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 999px; background: rgba(255,255,255,0.18); }
     .badge-sponsored { font-size: 10px; padding: 3px 7px; border-radius: 3px; background: rgba(0,0,0,0.65); color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
     .feed-label {
-      font-family: var(--font-headline); font-size: 13px; font-weight: 800;
+      font-family: var(--font-headline); font-size: 18px; font-weight: 800;
       text-transform: uppercase; letter-spacing: 0.05em; color: var(--brand-text-secondary);
       padding-bottom: 8px; margin: 0 0 16px; border-bottom: 3px solid var(--brand-primary);
       display: flex; align-items: center; gap: 8px;
@@ -601,30 +603,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Your Favorite Restaurants, Delivered" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block;"
-         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-      <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
-  </div>
-  <div style="padding: 16px;">
-    
-    <div class="feed-card-headline is-large">
-      Your Favorite Restaurants, Delivered
-    </div>
-    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">DoorDash</span>
-          <span class="feed-card-cta-pill">Order Now</span>
-    </div>
-  </div>
-</div>
-<!-- Feed Card Component — every visual is driven by a brand-kit token so the
-     card matches the publisher's real article cards (aspect ratio, card-title
-     type, meta type, button shape, kicker), not generic defaults. -->
-<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -637,6 +617,28 @@
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">MasterClass</span>
           <span class="feed-card-cta-pill">Start Now</span>
+    </div>
+  </div>
+</div>
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
+<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Best High-Yield Savings Accounts of 2025" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
+         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
+      <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
+  </div>
+  <div style="padding: 16px;">
+    
+    <div class="feed-card-headline is-large">
+      Best High-Yield Savings Accounts of 2025
+    </div>
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+      <span class="feed-card-source">NerdWallet</span>
+          <span class="feed-card-cta-pill">Compare Now</span>
     </div>
   </div>
 </div>
@@ -733,8 +735,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The All-Electric EX90: Scandinavian Design Meets Innovation" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The New Galaxy S25 Ultra — Pre-Order Today" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -742,11 +744,11 @@
   <div style="padding: 16px;">
     
     <div class="feed-card-headline ">
-      The All-Electric EX90: Scandinavian Design Meets Innovation
+      The New Galaxy S25 Ultra — Pre-Order Today
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">Volvo</span>
-          <span class="feed-card-cta-pill">Explore</span>
+      <span class="feed-card-source">Samsung</span>
+          <span class="feed-card-cta-pill">Shop Now</span>
     </div>
   </div>
 </div>
@@ -755,8 +757,8 @@
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
   <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Engineered for Performance — New V15 Detect" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1483985988355-763728e1935b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Top Financial Advisors Near You — See the List" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
@@ -764,11 +766,11 @@
   <div style="padding: 16px;">
     
     <div class="feed-card-headline ">
-      Engineered for Performance — New V15 Detect
+      Top Financial Advisors Near You — See the List
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">Dyson</span>
-          <span class="feed-card-cta-pill">Shop Now</span>
+      <span class="feed-card-source">SmartAsset</span>
+          <span class="feed-card-cta-pill">Learn More</span>
     </div>
   </div>
 </div>
