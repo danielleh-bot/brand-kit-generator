@@ -3,7 +3,7 @@
   {{#if content.categories}}
     <div style="margin-bottom: 12px;">
       {{#each content.categories}}
-        <span class="brand-accent" style="font-size: var(--kicker-size); font-weight: var(--kicker-weight); text-transform: uppercase; letter-spacing: 0.05em;">{{this}}</span>
+        <span class="brand-accent" style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{{this}}</span>
         {{#unless @last}} <span style="color: var(--brand-text-tertiary); margin: 0 6px;">|</span> {{/unless}}
       {{/each}}
     </div>
@@ -14,7 +14,7 @@
   </h1>
 
   {{#if content.deck}}
-    <p style="font-size: var(--deck-size); color: var(--deck-color); line-height: 1.5; margin: 0 0 20px; font-weight: var(--deck-weight);">{{content.deck}}</p>
+    <p style="font-size: 18px; color: var(--brand-text-secondary); line-height: 1.5; margin: 0 0 20px; font-weight: 400;">{{content.deck}}</p>
   {{/if}}
 
   <div style="display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--brand-bg-section); border-bottom: 1px solid var(--brand-bg-section); margin-bottom: 24px; font-size: var(--size-meta);">
