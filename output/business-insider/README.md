@@ -13,7 +13,7 @@ article
 | `customer-report.html` | **Customer-facing brand kit report** — every analyzed property with visual examples, plus mocked "screenshots" of how sponsored + recommended content renders in the BI feed (desktop and mobile) | Share with the BI / brand stakeholders — this is the client deliverable |
 | `index.html` | Branded prototype — BI masthead, hero article, sponsored + native Taboola feed cards, footer | Open in a browser to walk the full page |
 | `analysis-report.html` | Before/after comparison against generic Taboola defaults: drift table, gaps, workflow comparison | Internal/engineering view of what changes |
-| `loader.js` | Production-shape Taboola loader for BI — CSS override + per-mode `__style__` overrideConfig, mirrors the t-online integration pattern | Ship to BI AdOps once `publisherName` is confirmed |
+| `loader.js` | Production-shape Taboola TrueNative loader for BI — CSS override + per-mode `__style__` overrideConfig. **Generated from `brand-kit.json`** by `generate.js`, so it never drifts from the kit | Ship to BI AdOps once `publisherName` is confirmed |
 
 ## Brand kit at a glance
 
@@ -87,10 +87,10 @@ This will:
 4. Overwrite `output/business-insider/brand-kit.json`
 5. Regenerate `index.html`, `analysis-report.html`, and `customer-report.html`
 
-After re-crawling, regenerate the CSS export and the loader (the loader
-isn't yet auto-emitted by `generate.js` — copy the per-mode style block
-and the CSS tokens from the new `brand-kit.json` into `loader.js`'s
-`BRAND` object).
+Re-crawling regenerates everything in one pass — `brand-kit.json`,
+`brand-kit.css`, `index.html`, the reports, **and `loader.js`**. The loader is
+now emitted from the kit by `generate.js` (`lib/loader-export.js`), so its
+`BRAND` tokens and CSS always match the latest crawl. No hand-copying.
 
 ## Loader.js — pre-production checklist
 
@@ -100,15 +100,16 @@ and the CSS tokens from the new `brand-kit.json` into `loader.js`'s
 - [ ] Confirm the production `loaderType` and `experimentID` system flags
       (currently carried over from the t-online integration —
       `trecs-3017-yielding_ctrl` / `29860`).
-- [ ] Decide on Brother 1816 hosting. Manrope is the visual stand-in but
-      the licensed Brother 1816 web font is what BI ships in their own
-      pages. If BI is willing to expose the font CSS to the Taboola feed
-      origin, swap the `@import` for their licensed font URL.
-- [ ] Verify the dark-section variant against BI's footer placement —
-      we apply `.trc_dark_section` overrides but BI may not currently
-      use a dark feed surface.
+- [ ] Decide on Garnett hosting. The loader leads every font stack with
+      `'Garnett'` (BI's licensed face) and falls back to **Hanken Grotesk**
+      (the Google-Fonts equivalent it `@import`s) for parity in the feed
+      origin. If BI exposes its licensed Garnett web font to the Taboola
+      origin, the fallback is never used.
 - [ ] Confirm the target modes list against BI's current Taboola
-      deployment. The list mirrors t-online's; BI may use fewer.
+      deployment (driven by `taboola.modes_in_use` in the kit; falls back to
+      a fuller default list). BI may use fewer.
+- [ ] Card-title size is a **fallback** in the kit (not crawled) — verify it
+      on the next live crawl. The loader flags this inline.
 
 ## Workshop talking points
 

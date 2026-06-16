@@ -14,6 +14,7 @@ const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { generateFeedContent } = require('./lib/feed-content');
 const { brandKitToCss } = require('./lib/css-export');
+const { brandKitToLoader } = require('./lib/loader-export');
 const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
 const defaults = require('./lib/defaults');
 const engine = require('./lib/engine');
@@ -229,6 +230,13 @@ async function main() {
   fs.writeFileSync(brandKitCssPath, brandKitToCss(brandKit));
   console.log(`🎨 Brand kit CSS saved: ${brandKitCssPath}`);
 
+  // Save the Taboola TrueNative loader (brand-driven CSS override + per-mode
+  // styles + TRC scaffolding). Generated from the same kit so it can never
+  // drift from the brand identity the way a hand-maintained loader did.
+  const loaderPath = path.join(outputDir, 'loader.js');
+  fs.writeFileSync(loaderPath, brandKitToLoader(brandKit));
+  console.log(`🔌 Taboola loader saved: ${loaderPath}`);
+
   // Resolve fonts
   const resolvedFonts = resolveAllFonts(brandKit);
   const googleFontsUrl = buildGoogleFontsUrl(brandKit);
@@ -284,6 +292,7 @@ async function main() {
   console.log(`\n✅ Done! Output files in: ${outputDir}`);
   console.log(`   - brand-kit.json`);
   console.log(`   - brand-kit.css`);
+  console.log(`   - loader.js (Taboola TrueNative loader)`);
   if (!opts.reportOnly) console.log(`   - index.html (feed prototype)`);
   if (!opts.prototypeOnly) console.log(`   - analysis-report.html (analysis report)`);
   if (!opts.prototypeOnly) console.log(`   - customer-report.html (customer-facing brand kit report)`);
