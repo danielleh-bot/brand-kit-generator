@@ -18,7 +18,12 @@ const {
   extractContent,
   extractNavigation,
   extractRelatedArticles,
+  crawlSite,
 } = require('./lib/crawler');
+
+// How many pages the wizard samples across the site when building a brand kit.
+// Overridable via env so a deploy can tune crawl time vs. coverage.
+const WIZARD_MAX_PAGES = parseInt(process.env.BRANDKIT_MAX_PAGES, 10) || 6;
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { generateFeedContent } = require('./lib/feed-content');
@@ -179,47 +184,54 @@ async function runCrawl({ url, articleUrl, slug, stage, log }) {
   });
   stage('launch', 'done');
 
+  const userAgent =
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
   try {
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1440, height: 900 });
-    await page.setUserAgent(
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-    );
-
+    // A brand kit is a site-wide design system, so we sample several pages
+    // (homepage + sections + articles) and merge their tokens by frequency
+    // instead of trusting whatever one URL happened to use.
     stage('navigate', 'active');
-    log(`Navigating to ${url}`);
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
-    await new Promise((r) => setTimeout(r, 2000));
-    stage('navigate', 'done');
-
     stage('brand', 'active');
-    const brandKit = await extractBrandKit(page, url);
+    const site = await crawlSite(browser, url, {
+      maxPages: WIZARD_MAX_PAGES,
+      userAgent,
+      log,
+    });
+    const brandKit = site.brandKit;
+    log(`Merged brand kit from ${site.pages.length} pages`);
+    stage('navigate', 'done');
     stage('brand', 'done');
 
-    // If the user gave us a *different* article URL to use as the content
-    // source, navigate to it now and pull content/nav/related from there.
-    // Brand kit was already extracted from the first URL — we don't want
-    // to re-extract design tokens against a second page.
-    let contentUrl = url;
+    // Content comes from the start URL by default; if the user gave a
+    // *different* article URL to feature, pull content/related from there.
+    let content = site.content;
+    let relatedArticles = site.relatedArticles;
+    let navigation = site.navigation;
+
     if (articleUrl && articleUrl !== url) {
       log(`Switching to article URL for content: ${articleUrl}`);
+      const page = await browser.newPage();
+      await page.setViewport({ width: 1440, height: 900 });
+      await page.setUserAgent(userAgent);
       await page.goto(articleUrl, { waitUntil: 'networkidle2', timeout: 60000 });
       await new Promise((r) => setTimeout(r, 1500));
-      contentUrl = articleUrl;
+      stage('content', 'active');
+      content = await extractContent(page);
+      stage('content', 'done');
+      stage('navigation', 'active');
+      navigation = await extractNavigation(page);
+      stage('navigation', 'done');
+      stage('related', 'active');
+      relatedArticles = await extractRelatedArticles(page, articleUrl);
+      stage('related', 'done');
+      await page.close();
+    } else {
+      stage('content', 'done');
+      stage('navigation', 'done');
+      stage('related', 'done');
     }
-
-    stage('content', 'active');
-    const content = await extractContent(page);
-    stage('content', 'done');
-
-    stage('navigation', 'active');
-    const navigation = await extractNavigation(page);
-    stage('navigation', 'done');
-
-    stage('related', 'active');
-    const relatedArticles = await extractRelatedArticles(page, contentUrl);
     log(`Found ${relatedArticles.length} related articles`);
-    stage('related', 'done');
 
     return { brandKit, content, navigation, relatedArticles };
   } finally {

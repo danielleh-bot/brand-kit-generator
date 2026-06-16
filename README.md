@@ -48,15 +48,39 @@ Output in `./output/example/`:
 #### CLI Options
 
 ```
---url <url>         Required. Publisher article URL to crawl
+--url <url>         Required. A URL anywhere on the publisher's site (the crawl
+                    fans out from here across the whole site)
 --slug <slug>       Publisher slug for output dir (default: derived from domain)
 --output <dir>      Output directory (default: ./output)
+--max-pages <n>     Pages to sample across the site for the brand kit (default 8)
+--single-page       Only analyze the given URL (legacy; less reliable)
 --report-only       Only generate analysis report
 --prototype-only    Only generate feed prototype
 --brand-kit <path>  Use existing brand-kit.json (skip crawl)
 --chrome <path>     Path to Chrome/Chromium executable
 --list              List previously generated publishers
 ```
+
+### Site-wide crawl (why one page isn't enough)
+
+A brand kit is a *site-wide* design system — a single article only exercises
+whatever colors, fonts, and components that one page happened to use, so a
+one-page crawl misses card styles, section heads, real button CTAs, and the
+full palette (and silently fills the gaps with fallbacks).
+
+So the crawler **samples several pages and merges them**:
+
+1. From the URL you give, it discovers the **homepage**, the top-level
+   **section/category** pages, and a spread of **article** pages (same-origin).
+2. It extracts a brand kit from each page independently.
+3. It **merges** them (`mergeBrandKits`): every token is decided by how many
+   pages agree on it, and an **extracted value always beats a fallback** — so a
+   real card-title size found on a section page fills the gap left by a thin
+   article page. Colors carry an `_agreement` note (e.g. `"7/8 pages"`), and
+   `metadata.pages_crawled` lists exactly what was sampled.
+
+Use `--max-pages` to widen/narrow the sample, or `--single-page` for the old
+one-URL behaviour.
 
 ## Project Structure
 
@@ -68,7 +92,8 @@ Output in `./output/example/`:
 │   ├── wizard.css
 │   └── wizard.js
 ├── lib/
-│   ├── crawler.js              Puppeteer-based page crawler (7 extractors)
+│   ├── crawler.js              Puppeteer crawler — per-page extractors + site-wide
+│   │                           crawlSite() and mergeBrandKits() (multi-page merge)
 │   ├── defaults.js             Generic Taboola baseline for "before" comparison
 │   ├── fonts.js                Proprietary font → Google Fonts mapping
 │   ├── feed-content.js         Sponsored + native card generation

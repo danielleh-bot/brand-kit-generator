@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer-core');
 
-const { extractBrandKit, extractContent, extractNavigation, extractRelatedArticles } = require('./lib/crawler');
+const { extractBrandKit, extractContent, extractNavigation, extractRelatedArticles, crawlSite } = require('./lib/crawler');
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
 const { generateFeedContent } = require('./lib/feed-content');
@@ -28,6 +28,8 @@ program
   .option('--report-only', 'Only generate analysis report (skip prototype)')
   .option('--prototype-only', 'Only generate feed prototype (skip report)')
   .option('--brand-kit <path>', 'Use existing brand-kit.json instead of crawling')
+  .option('--max-pages <n>', 'How many pages across the site to sample for the brand kit (homepage + sections + articles). A brand kit is a site-wide system, so the crawler samples several pages and merges them.', '8')
+  .option('--single-page', 'Only analyze the given URL (legacy single-page behaviour — less reliable)')
   .option('--chrome <path>', 'Path to Chrome/Chromium executable')
   .option('--accept-low-quality', 'Allow generating output from a brand kit where most tokens are fallbacks (default: refuse)')
   .option('--list', 'List previously generated publishers')
@@ -156,32 +158,43 @@ async function main() {
       ],
     });
 
+    const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
     try {
-      const page = await browser.newPage();
-      await page.setViewport({ width: 1440, height: 900 });
-      await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
-
-      console.log('   Navigating to page...');
-      await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
-
-      // Wait a bit for lazy-loaded content
-      await new Promise(r => setTimeout(r, 2000));
-
-      console.log('   Extracting brand kit...');
-      brandKit = await extractBrandKit(page, url);
-      console.log('   ✓ Brand kit extracted');
-
-      console.log('   Extracting article content...');
-      content = await extractContent(page);
-      console.log('   ✓ Content extracted');
-
-      console.log('   Extracting navigation...');
-      navigation = await extractNavigation(page);
-      console.log('   ✓ Navigation extracted');
-
-      console.log('   Extracting related articles for feed...');
-      relatedArticles = await extractRelatedArticles(page, url);
-      console.log(`   ✓ ${relatedArticles.length} related articles extracted\n`);
+      if (opts.singlePage) {
+        // Legacy single-page behaviour — kept behind a flag because a brand
+        // kit inferred from one URL is only as complete as that page.
+        const page = await browser.newPage();
+        await page.setViewport({ width: 1440, height: 900 });
+        await page.setUserAgent(userAgent);
+        console.log('   Navigating to page...');
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+        await new Promise(r => setTimeout(r, 2000));
+        console.log('   Extracting brand kit (single page)...');
+        brandKit = await extractBrandKit(page, url);
+        content = await extractContent(page);
+        navigation = await extractNavigation(page);
+        relatedArticles = await extractRelatedArticles(page, url);
+        await page.close();
+        console.log(`   ✓ Extracted from 1 page, ${relatedArticles.length} related articles\n`);
+      } else {
+        // Default: sample the whole site (homepage + sections + articles) and
+        // merge tokens by cross-page frequency so no single page dominates.
+        const maxPages = parseInt(opts.maxPages, 10) || 8;
+        console.log(`   Crawling up to ${maxPages} pages across the site...`);
+        const site = await crawlSite(browser, url, {
+          maxPages,
+          userAgent,
+          log: (m) => console.log(`     ${m}`),
+        });
+        brandKit = site.brandKit;
+        content = site.content;
+        navigation = site.navigation;
+        relatedArticles = site.relatedArticles;
+        console.log(`   ✓ Brand kit merged from ${site.pages.length} pages`);
+        site.pages.forEach(p => console.log(`       • [${p.role}] ${p.url}`));
+        console.log(`   ✓ ${relatedArticles.length} related articles aggregated\n`);
+      }
     } finally {
       await browser.close();
     }

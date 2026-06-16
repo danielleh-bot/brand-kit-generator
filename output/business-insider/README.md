@@ -78,10 +78,14 @@ node generate.js \
 This will:
 
 1. Launch headless Chrome
-2. Navigate to the article page (where Taboola feed is embedded)
-3. Extract ~50 brand tokens from live CSS
+2. **Crawl the whole site** — starting from your URL, it samples the homepage,
+   the section pages, and several articles (tune with `--max-pages <n>`)
+3. Extract a brand kit from each page and **merge** them by cross-page
+   frequency, so card styles / section heads / real CTAs are captured even if
+   your start article didn't show them (`metadata.pages_crawled` lists what was
+   sampled; pass `--single-page` to force the old one-URL behaviour)
 4. Overwrite `output/business-insider/brand-kit.json`
-5. Regenerate `index.html` and `analysis-report.html`
+5. Regenerate `index.html`, `analysis-report.html`, and `customer-report.html`
 
 After re-crawling, regenerate the CSS export and the loader (the loader
 isn't yet auto-emitted by `generate.js` — copy the per-mode style block
