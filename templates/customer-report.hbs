@@ -171,15 +171,21 @@
     .ctx-p { color: var(--brand-text-secondary); font-size: 14px; line-height: 1.6; margin: 0 0 10px; }
     .ctx-p.faded { color: var(--brand-text-tertiary); -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent); }
 
-    /* ====== feed-card styles (consumed by components-feed-card partial) ====== */
-    .feed-card { transition: box-shadow .2s, transform .2s; background: var(--brand-bg); border: 1px solid var(--brand-bg-section); }
-    .feed-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
-    .feed-card-headline { font-family: var(--font-headline); font-weight: 700; color: var(--brand-text); line-height: 1.3; }
-    .feed-card-headline:hover { color: var(--brand-primary); }
-    .feed-card-source { font-size: 11px; color: var(--brand-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    /* ====== feed-card styles (consumed by components-feed-card partial) ======
+       Token-driven so the mocked cards match the publisher's real article
+       cards: aspect ratio, card-title type, meta type, kicker, solid CTA, and
+       the real "headline picks up the accent" hover (no card lift). */
+    .feed-card { transition: border-color .15s ease; background: var(--brand-bg); border: 1px solid transparent; }
+    .feed-card:hover { border-color: var(--brand-bg-section); }
+    .feed-card-kicker { font-family: var(--font-headline); color: var(--brand-primary); font-weight: 700; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+    .feed-card-headline { font-family: var(--font-headline); font-weight: {{default brandKit.fonts.type_scale.article_title_card.weight 700}}; color: {{default brandKit.fonts.type_scale.article_title_card.color 'var(--brand-text)'}}; line-height: {{default brandKit.fonts.type_scale.article_title_card.line_height '1.25'}}; font-size: 15px; }
+    .feed-card-headline.is-large { font-size: {{clampSize brandKit.fonts.type_scale.article_title_card.size '16px' '22px' '20px'}}; }
+    .feed-card-headline.is-tiny { font-size: 13px; }
+    .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
+    .feed-card-source { font-size: {{clampSize brandKit.fonts.type_scale.meta_text.size '10px' '14px' '12px'}}; color: var(--brand-text-tertiary); font-weight: {{default brandKit.fonts.type_scale.meta_text.weight 600}}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .feed-card-cta-link { font-size: 12px; color: var(--brand-primary); font-weight: 700; white-space: nowrap; }
-    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: transparent; color: var(--brand-primary); border: 1px solid var(--brand-primary); border-radius: var(--btn-radius); font-size: 11px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background-color .16s ease, color .16s ease; }
-    .feed-card:hover .feed-card-cta-pill { background: var(--brand-primary); color: var(--brand-bg); }
+    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; color: {{default brandKit.buttons.primary.text_color 'var(--brand-bg)'}}; border: 1px solid {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; border-radius: var(--btn-radius); font-size: 11px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: filter .16s ease; }
+    .feed-card:hover .feed-card-cta-pill { filter: brightness(0.92); }
     .feed-card-image-wrap { background: var(--brand-bg-section); overflow: hidden; }
     .feed-card-image-wrap.feed-card-image-fallback { background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%); }
     .feed-card-image-wrap.feed-card-image-fallback::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 16px); }

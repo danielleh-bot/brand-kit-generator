@@ -169,15 +169,21 @@
     .ctx-p { color: var(--brand-text-secondary); font-size: 14px; line-height: 1.6; margin: 0 0 10px; }
     .ctx-p.faded { color: var(--brand-text-tertiary); -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent); }
 
-    /* ====== feed-card styles (consumed by components-feed-card partial) ====== */
-    .feed-card { transition: box-shadow .2s, transform .2s; background: var(--brand-bg); border: 1px solid var(--brand-bg-section); }
-    .feed-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
-    .feed-card-headline { font-family: var(--font-headline); font-weight: 700; color: var(--brand-text); line-height: 1.3; }
-    .feed-card-headline:hover { color: var(--brand-primary); }
-    .feed-card-source { font-size: 11px; color: var(--brand-text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    /* ====== feed-card styles (consumed by components-feed-card partial) ======
+       Token-driven so the mocked cards match the publisher's real article
+       cards: aspect ratio, card-title type, meta type, kicker, solid CTA, and
+       the real "headline picks up the accent" hover (no card lift). */
+    .feed-card { transition: border-color .15s ease; background: var(--brand-bg); border: 1px solid transparent; }
+    .feed-card:hover { border-color: var(--brand-bg-section); }
+    .feed-card-kicker { font-family: var(--font-headline); color: var(--brand-primary); font-weight: 700; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+    .feed-card-headline { font-family: var(--font-headline); font-weight: 700; color: #0A0A0A; line-height: 1.25; font-size: 15px; }
+    .feed-card-headline.is-large { font-size: 22px; }
+    .feed-card-headline.is-tiny { font-size: 13px; }
+    .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
+    .feed-card-source { font-size: 12px; color: var(--brand-text-tertiary); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .feed-card-cta-link { font-size: 12px; color: var(--brand-primary); font-weight: 700; white-space: nowrap; }
-    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: transparent; color: var(--brand-primary); border: 1px solid var(--brand-primary); border-radius: var(--btn-radius); font-size: 11px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background-color .16s ease, color .16s ease; }
-    .feed-card:hover .feed-card-cta-pill { background: var(--brand-primary); color: var(--brand-bg); }
+    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: #002AFF; color: #FFFFFF; border: 1px solid #002AFF; border-radius: var(--btn-radius); font-size: 11px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: filter .16s ease; }
+    .feed-card:hover .feed-card-cta-pill { filter: brightness(0.92); }
     .feed-card-image-wrap { background: var(--brand-bg-section); overflow: hidden; }
     .feed-card-image-wrap.feed-card-image-fallback { background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%); }
     .feed-card-image-wrap.feed-card-image-fallback::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 16px); }
@@ -585,41 +591,47 @@
             <div style="margin-top:22px;">
               <div class="feed-label"><span class="dot"></span>Sponsored Stories</div>
               <div data-feed-grid="2-up" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:26px;">
-                <!-- Feed Card Component -->
+                <!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
-    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Protect Your Devices — Award-Winning Security" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
+    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Experience Amazing — The All-New RX 500h" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 16px; margin-bottom: 10px;">
-      Protect Your Devices — Award-Winning Security
+  <div style="padding: 12px 2px 8px;">
+    
+    <div class="feed-card-headline is-large">
+      Experience Amazing — The All-New RX 500h
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-      <span class="feed-card-source">Norton</span>
-          <span class="feed-card-cta-pill">Download</span>
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+      <span class="feed-card-source">Lexus</span>
+          <span class="feed-card-cta-pill">Build Yours</span>
     </div>
   </div>
 </div>
-<!-- Feed Card Component -->
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
-    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The Award-Winning Mattress — Try 100 Nights Risk-Free" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Top Financial Advisors Near You — See the List" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 16px; margin-bottom: 10px;">
-      The Award-Winning Mattress — Try 100 Nights Risk-Free
+  <div style="padding: 12px 2px 8px;">
+    
+    <div class="feed-card-headline is-large">
+      Top Financial Advisors Near You — See the List
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-      <span class="feed-card-source">Casper</span>
-          <span class="feed-card-cta-pill">Shop Now</span>
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+      <span class="feed-card-source">SmartAsset</span>
+          <span class="feed-card-cta-pill">Learn More</span>
     </div>
   </div>
 </div>
@@ -628,56 +640,62 @@
 
               <div class="feed-label"><span class="dot"></span>More From Business Insider </div>
               <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
-                <!-- Feed Card Component -->
+                <!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
     <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1600&amp;q&#x3D;80" alt="SpaceX&#x27;s $60 billion bet on Cursor just pulled its 25-year-old CEO into Elon Musk&#x27;s orbit — and aimed him straight at Anthropic" loading="lazy" referrerpolicy="no-referrer"
          data-fallback="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-        <span style="position: absolute; top: 8px; left: 8px; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--brand-primary); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;">Tech</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 14px; margin-bottom: 10px;">
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Tech</div>
+    <div class="feed-card-headline ">
       SpaceX&#x27;s $60 billion bet on Cursor just pulled its 25-year-old CEO into Elon Musk&#x27;s orbit — and aimed him straight at Anthropic
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
     </div>
   </div>
 </div>
-<!-- Feed Card Component -->
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
     <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Inside Anthropic&#x27;s race to keep Claude Code ahead of every AI lab in Silicon Valley" loading="lazy" referrerpolicy="no-referrer"
          data-fallback="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-        <span style="position: absolute; top: 8px; left: 8px; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--brand-primary); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;">Tech</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 14px; margin-bottom: 10px;">
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Tech</div>
+    <div class="feed-card-headline ">
       Inside Anthropic&#x27;s race to keep Claude Code ahead of every AI lab in Silicon Valley
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
     </div>
   </div>
 </div>
-<!-- Feed Card Component -->
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
     <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Meet the four MIT dropouts who turned a side project into a $60 billion company" loading="lazy" referrerpolicy="no-referrer"
          data-fallback="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-        <span style="position: absolute; top: 8px; left: 8px; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--brand-primary); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;">Strategy</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 14px; margin-bottom: 10px;">
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Strategy</div>
+    <div class="feed-card-headline ">
       Meet the four MIT dropouts who turned a side project into a $60 billion company
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
     </div>
   </div>
@@ -705,60 +723,69 @@
             <div class="shot-surface">
               <div class="feed-label"><span class="dot"></span>Sponsored Stories</div>
               <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
-                <!-- Feed Card Component -->
+                <!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
-    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
-         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-      <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
-  </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 14px; margin-bottom: 10px;">
-      Learn from the Best — New Classes Available
-    </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-      <span class="feed-card-source">MasterClass</span>
-          <span class="feed-card-cta-pill">Start Now</span>
-    </div>
-  </div>
-</div>
-<!-- Feed Card Component -->
-<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
-    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Switch and Save with Our Best Unlimited Plan" loading="lazy" referrerpolicy="no-referrer"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
+    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Create Anything You Imagine with Creative Cloud" loading="lazy" referrerpolicy="no-referrer"
          data-fallback="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 14px; margin-bottom: 10px;">
-      Switch and Save with Our Best Unlimited Plan
+  <div style="padding: 12px 2px 8px;">
+    
+    <div class="feed-card-headline ">
+      Create Anything You Imagine with Creative Cloud
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
-      <span class="feed-card-source">T-Mobile</span>
-          <span class="feed-card-cta-pill">See Plans</span>
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+      <span class="feed-card-source">Adobe</span>
+          <span class="feed-card-cta-pill">Start Free Trial</span>
     </div>
   </div>
 </div>
-<!-- Feed Card Component -->
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Unique Stays Around the World — Book Now" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
+    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Unique Stays Around the World — Book Now" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 14px; margin-bottom: 10px;">
+  <div style="padding: 12px 2px 8px;">
+    
+    <div class="feed-card-headline ">
       Unique Stays Around the World — Book Now
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Airbnb</span>
           <span class="feed-card-cta-pill">Explore</span>
+    </div>
+  </div>
+</div>
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
+<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Your Favorite Restaurants, Delivered" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
+         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
+      <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
+  </div>
+  <div style="padding: 12px 2px 8px;">
+    
+    <div class="feed-card-headline ">
+      Your Favorite Restaurants, Delivered
+    </div>
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+      <span class="feed-card-source">DoorDash</span>
+          <span class="feed-card-cta-pill">Order Now</span>
     </div>
   </div>
 </div>
@@ -778,56 +805,62 @@
             <div class="shot-surface">
               <div class="feed-label" style="font-size:12px;"><span class="dot"></span>Trending on Business Insider</div>
               <div style="display:grid;grid-template-columns:1fr;gap:14px;">
-                <!-- Feed Card Component -->
+                <!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Elon Musk&#x27;s xAI is quietly losing the coding-tools war. The Cursor deal is his reset." loading="lazy" referrerpolicy="no-referrer"
          data-fallback="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-        <span style="position: absolute; top: 8px; left: 8px; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--brand-primary); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;">Tech</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 16px; margin-bottom: 10px;">
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Tech</div>
+    <div class="feed-card-headline is-large">
       Elon Musk&#x27;s xAI is quietly losing the coding-tools war. The Cursor deal is his reset.
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
     </div>
   </div>
 </div>
-<!-- Feed Card Component -->
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
     <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="What a $60 billion price tag says about the AI bubble — and who&#x27;s still buying" loading="lazy" referrerpolicy="no-referrer"
          data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-        <span style="position: absolute; top: 8px; left: 8px; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--brand-primary); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;">Markets</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 16px; margin-bottom: 10px;">
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Markets</div>
+    <div class="feed-card-headline is-large">
       What a $60 billion price tag says about the AI bubble — and who&#x27;s still buying
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
     </div>
   </div>
 </div>
-<!-- Feed Card Component -->
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 4/3;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
     <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="OpenAI&#x27;s Codex vs. Claude Code vs. Cursor: the developer-tool wars, explained" loading="lazy" referrerpolicy="no-referrer"
          data-fallback="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0px 0px 0 0;"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-        <span style="position: absolute; top: 8px; left: 8px; font-size: 10px; padding: 2px 6px; border-radius: 3px; background: var(--brand-primary); color: #fff; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600;">Tech</span>
   </div>
-  <div style="padding: 14px 6px 8px;">
-    <div class="feed-card-headline" style="font-size: 16px; margin-bottom: 10px;">
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Tech</div>
+    <div class="feed-card-headline is-large">
       OpenAI&#x27;s Codex vs. Claude Code vs. Cursor: the developer-tool wars, explained
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
     </div>
   </div>
