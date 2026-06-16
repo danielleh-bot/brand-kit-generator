@@ -1,7 +1,7 @@
 /**
  * Business Insider — Taboola TrueNative Feed Loader (brand-kit generated)
  * =============================================================
- * Publisher: axelspringer-businessinsider
+ * Publisher: CONFIRM-WITH-ADOPS
  *
  * GENERATED FILE — do not hand-edit. Emitted by generate.js from
  * Business Insider's brand-kit.json so the feed styling can never drift from the
@@ -11,8 +11,8 @@
  * real button CTA, 0px card corners) to every feed card mode so
  * paid + recommended placements read as native Business Insider cards.
  *
- * Brand kit: Business Insider/brand-kit.json (2026-06-15)
- * NOTE: Confirm with AdOps — Axel Springer-owned BI uses an Axel-Springer-prefixed publisher slug on the TRC engine. Replace before pushing to production.
+ * Brand kit: Business Insider/brand-kit.json (2026-06-16)
+ * NOTE: Confirm the publisher slug with AdOps before pushing to production.
  */
 
 (function () {
@@ -26,27 +26,27 @@
     deck:          '#31313B',
     meta:          '#0A0A0A',
     white:         '#FFFFFF',
-    offWhite:      '#F7F9FC',
+    offWhite:      '#D9FFD9',
     dark:          '#0A0A0A',
-    cardBorder:    '1px solid #E6E9F0',
+    cardBorder:    '1px solid #D9FFD9',
 
     // Typography — licensed face first, Google-Fonts equivalent as fallback
     fontPrimary:   "'Garnett', 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif",
     fontSerif:     "'tiempos', 'Source Serif 4', Georgia, serif",
 
     // Sizes (from type_scale)
-    sectionSize:   '18px',
-    cardSize:      '22px',
-    cardLineH:     '1.25',
+    sectionSize:   '24px',
+    cardSize:      '24.5px',
+    cardLineH:     '34.3px',
     deckSize:      '14px',
     metaSize:      '12px',
 
     // Button (real CTA — buttons.primary)
-    btnBg:         '#002AFF',
+    btnBg:         '#0A0A0A',
     btnText:       '#FFFFFF',
     btnRadius:     '4px',
     btnWeight:     '600',
-    btnSize:       '14px',
+    btnSize:       '20px',
     btnTracking:   '0.28px',
     btnTransform:  'none',
     btnHover:      '#0028F2',
@@ -59,7 +59,7 @@
     playColor:     '#0A0A0A',
 
     // Publisher (confirm with AdOps before production)
-    publisherName: 'axelspringer-businessinsider'
+    publisherName: 'CONFIRM-WITH-ADOPS'
   };
 
   // ─── Initialize Taboola globals ────────────────────────────────────
@@ -151,7 +151,6 @@
     ".tbl-feed-header-logo { display: none !important; }",
 
     // ── Card titles ──
-      // NOTE: card-title size is a FALLBACK in the brand kit (not crawled). Verify on a re-crawl.
     ".trc_rbox_div .video-title,",
     ".tbl-feed-card .video-title,",
     ".videoCube .video-title {",
@@ -311,10 +310,32 @@
 
   var targetModes = [
     "alternating-thumbnails-a",
-    "organic-thumbs-feed-01",
+    "alternating-thumbnails-a-delta",
+    "alternating-thumbnails-b",
+    "organic-thumbs-feed-01-delta",
+    "organic-thumbs-feed-01-x-delta",
+    "organic-thumbs-feed-01-b-em-delta",
+    "organic-thumbs-feed-01-c-delta",
+    "organic-thumbs-feed-01-y-em-delta",
+    "organic-thumbs-feed-01-z-delta",
+    "organic-thumbs-feed-y-em-delta",
+    "organic-thumbs-hero-01-a-delta",
+    "organic-thumbs-feed-01-mp-delta",
+    "organic-thumbs-feed-01-x-no-desc-delta",
+    "organic-premium-card-1x1-delta",
+    "organic-premium-stream-card-delta",
+    "organic-premium-short-article-3-card-1x1-delta",
+    "organic-premium-video-reel-delta",
+    "organic-rec-reel-01-x-delta",
     "organic-thumbnails-feed-stream",
+    "organic-thumbnails-feed-mobile",
+    "organic-thumbnails-feed-3x1-new",
     "organic-thumbnails-feed-3x1-with-header-editorial",
-    "exchange-thumbnails-feed-with-header"
+    "organic-thumbnails-feed-2x1-header",
+    "organic-thumbnails-feed-2x1",
+    "exchange-thumbnails-feed-with-header",
+    "exchange-thumbnails-feed-carousel",
+    "native-thumbnails-feed-mobile"
   ];
 
   var modeOverrideConfig = {};

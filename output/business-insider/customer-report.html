@@ -12,12 +12,12 @@
   <style>
     :root {
       --brand-primary: #002AFF;
-      --brand-secondary: #002AFF;
+      --brand-secondary: #D9FFD9;
       --brand-text: #000000;
       --brand-text-secondary: #0A0A0A;
       --brand-text-tertiary: #31313B;
       --brand-bg: #FFFFFF;
-      --brand-bg-section: #F7F9FC;
+      --brand-bg-section: #D9FFD9;
       --brand-bg-dark: #0A0A0A;
       --brand-accent-warning:  #FFC700;
       --brand-accent-negative: #E03625;
@@ -26,16 +26,16 @@
       --font-body: 'Hanken Grotesk', system-ui, sans-serif;
 
       --btn-radius: 4px;
-      --btn-padding: 14px 22px 16px;
+      --btn-padding: 16.5px 0px;
       --btn-weight: 600;
       --btn-transform: uppercase;
       --btn-tracking: 0.28px;
       --btn-primary-hover: #0028F2;
 
       /* Content-card tokens from the brand kit */
-      --card-border: 1px solid #E6E9F0;
-      --card-padding: 16px;
-      --card-gap: 20px;
+      --card-border: 1px solid transparent;
+      --card-padding: 12px;
+      --card-gap: 16px;
 
       --ink: #0f172a;
       --ink-soft: #475569;
@@ -71,7 +71,7 @@
       font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--brand-primary); font-weight: 700;
     }
-    .masthead-rule { height: 3px; background: #002AFF; }
+    .masthead-rule { height: 3px; background: var(--brand-primary); }
 
     /* ---- Layout ---- */
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
@@ -182,13 +182,13 @@
        the real "headline picks up the accent" hover (no card lift). */
     .feed-card { background: var(--brand-bg); border: var(--card-border); }
     .feed-card-kicker { font-family: var(--font-headline); color: var(--brand-primary); font-weight: 700; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
-    .feed-card-headline { font-family: var(--font-headline); font-weight: 700; color: #0A0A0A; line-height: 1.25; font-size: 15px; transition: color .15s ease; }
+    .feed-card-headline { font-family: var(--font-headline); font-weight: 400; color: #0A0A0A; line-height: 34.3px; font-size: 15px; transition: color .15s ease; }
     .feed-card-headline.is-large { font-size: 22px; }
     .feed-card-headline.is-tiny { font-size: 13px; }
     .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
     .feed-card-source { font-size: var(--size-meta, 12px); color: var(--brand-text-tertiary); font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .feed-card-cta-link { font-size: 12px; color: var(--brand-primary); font-weight: 700; white-space: nowrap; }
-    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: #002AFF; color: #FFFFFF; border: 1px solid #002AFF; border-radius: var(--btn-radius); font-size: 12px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
+    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: #0A0A0A; color: #FFFFFF; border: 1px solid #0A0A0A; border-radius: var(--btn-radius); font-size: 12px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
     .feed-card:hover .feed-card-cta-pill { background: var(--btn-primary-hover); }
     .feed-card-image-wrap { background: var(--brand-bg-section); overflow: hidden; }
     .feed-card-image-wrap.feed-card-image-fallback { background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%); }
@@ -245,8 +245,8 @@
       </p>
       <div class="source-line">
         <span><span class="k">Source article</span><br><a href="https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6" target="_blank" rel="noopener">https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6</a></span>
-        <span><span class="k">Analyzed</span><br><span class="v">2026-06-15</span></span>
-        <span><span class="k">Properties captured</span><br><span class="v">17 brand tokens</span></span>
+        <span><span class="k">Analyzed</span><br><span class="v">2026-06-16</span></span>
+        <span><span class="k">Properties captured</span><br><span class="v">21 brand tokens</span></span>
       </div>
     </div>
 
@@ -270,7 +270,7 @@
         <div class="card pad">
           <div class="kv"><div class="k">Card corners</div></div>
           <div style="margin-top:10px;font-weight:700;font-size:18px;">0px radius</div>
-          <div style="font-size:12px;color:var(--ink-faint);margin-top:2px;">image ratio 16:9</div>
+          <div style="font-size:12px;color:var(--ink-faint);margin-top:2px;">image ratio 1:1</div>
         </div>
         <div class="card pad">
           <div class="kv"><div class="k">Masthead</div></div>
@@ -285,13 +285,13 @@
     <!-- ============ 1. Logo ============ -->
     <section class="block">
       <div class="sec-head"><span class="sec-num">1</span><h2 class="sec-title">Logo &amp; wordmark</h2></div>
-      <p class="sec-sub">The &#x27;Business Insider&#x27; wordmark is set in Garnett and sits on a white masthead in near-black (#0A0A0A). The legacy orange &#x27;BI&#x27; cube mark has been retired — the current identity is the full wordmark plus a blue (#002AFF) accent.</p>
+      <p class="sec-sub"></p>
       <div class="grid g2">
         <div class="card" style="overflow:hidden;">
-          <div style="background:#FFFFFF;padding:40px 22px;display:flex;align-items:center;justify-content:center;">
-            <span style="font-family:var(--font-headline);font-weight:800;font-size:30px;letter-spacing:0.02em;text-transform:uppercase;color:#0A0A0A;">Business Insider</span>
+          <div style="background:#000;padding:40px 22px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--font-headline);font-weight:800;font-size:30px;letter-spacing:0.02em;text-transform:uppercase;color:#fff;">Business Insider</span>
           </div>
-          <div class="pad"><div class="kv"><span class="k">Primary wordmark</span> — <span class="v">Garnett 400</span></div></div>
+          <div class="pad"><div class="kv"><span class="k">Primary wordmark</span> — <span class="v">garnett 400</span></div></div>
         </div>
       </div>
     </section>
@@ -314,7 +314,18 @@
             <div class="role">Links</div>
           </div>
         </div>
-        
+        <!-- Color swatch card for the customer report.
+     Params: color={ name, hex, usage[] }, role="short label" -->
+<div class="swatch">
+  <div class="chip" style="background:#D9FFD9;">
+    <span class="hex" style="background:rgba(255,255,255,0.85);color:#111111;">#D9FFD9</span>
+  </div>
+  <div class="meta">
+    <div class="nm">Secondary Accent</div>
+    <div class="role">Tags &amp; badges</div>
+  </div>
+</div>
+
         
         <!-- Color swatch card for the customer report.
      Params: color={ name, hex, usage[] }, role="short label" -->
@@ -351,7 +362,7 @@
           </div>
           <div class="meta">
             <div class="nm">Secondary Text</div>
-            <div class="role">Headlines</div>
+            <div class="role">Links</div>
           </div>
         </div>
         <!-- Color swatch card for the customer report.
@@ -362,7 +373,7 @@
           </div>
           <div class="meta">
             <div class="nm">Tertiary Text</div>
-            <div class="role">Article deck</div>
+            <div class="role">Timestamps</div>
           </div>
         </div>
       </div>
@@ -377,23 +388,34 @@
   </div>
   <div class="meta">
     <div class="nm">White</div>
-    <div class="role">Page background</div>
+    <div class="role">Button text</div>
   </div>
 </div>
 
         <!-- Color swatch card for the customer report.
      Params: color={ name, hex, usage[] }, role="short label" -->
 <div class="swatch">
-  <div class="chip" style="background:#F7F9FC;">
-    <span class="hex" style="background:rgba(255,255,255,0.85);color:#111111;">#F7F9FC</span>
+  <div class="chip" style="background:#D9FFD9;">
+    <span class="hex" style="background:rgba(255,255,255,0.85);color:#111111;">#D9FFD9</span>
   </div>
   <div class="meta">
-    <div class="nm">Off-White</div>
-    <div class="role">Section backgrounds</div>
+    <div class="nm">Section</div>
+    <div class="role">Tags &amp; badges</div>
   </div>
 </div>
 
-        
+        <!-- Color swatch card for the customer report.
+     Params: color={ name, hex, usage[] }, role="short label" -->
+<div class="swatch">
+  <div class="chip" style="background:#D9FFD9;">
+    <span class="hex" style="background:rgba(255,255,255,0.85);color:#111111;">#D9FFD9</span>
+  </div>
+  <div class="meta">
+    <div class="nm">Secondary</div>
+    <div class="role">Tags &amp; badges</div>
+  </div>
+</div>
+
         <!-- Color swatch card for the customer report.
      Params: color={ name, hex, usage[] }, role="short label" -->
 <div class="swatch">
@@ -402,7 +424,7 @@
   </div>
   <div class="meta">
     <div class="nm">Dark Background</div>
-    <div class="role">Footer</div>
+    <div class="role">Links</div>
   </div>
 </div>
 
@@ -421,27 +443,27 @@
         <div class="type-row">
           <div class="type-meta">
             <div class="role">Section Headings</div>
-            <div class="spec">18px · 700</div>
+            <div class="spec">24px · 600</div>
           </div>
-          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:18px; font-weight:700; line-height:24.3px; color:#0A0A0A;">
+          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:24px; font-weight:600; line-height:31.2px; color:#0A0A0A;">
             Section Headings — 
           </div>
         </div>
         <div class="type-row">
           <div class="type-meta">
             <div class="role">Article Title Hero</div>
-            <div class="spec">36px · 500</div>
+            <div class="spec">32px · 700</div>
           </div>
-          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:36px; font-weight:500; line-height:1.15; color:#0A0A0A;">
+          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:32px; font-weight:700; line-height:32px; color:#0A0A0A;">
             Article Title Hero — 
           </div>
         </div>
         <div class="type-row">
           <div class="type-meta">
             <div class="role">Article Title Card</div>
-            <div class="spec">22px · 700</div>
+            <div class="spec">24.5px · 400</div>
           </div>
-          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:22px; font-weight:700; line-height:1.25; color:#0A0A0A;">
+          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:24.5px; font-weight:400; line-height:34.3px; color:#0A0A0A;">
             Article Title Card — 
           </div>
         </div>
@@ -459,7 +481,7 @@
             <div class="role">Article Body</div>
             <div class="spec">18px · 400</div>
           </div>
-          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:18px; font-weight:400; line-height:1.6; color:#0A0A0A;">
+          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:18px; font-weight:400; line-height:1.3; color:var(--brand-text);">
             Article Body — 
           </div>
         </div>
@@ -477,25 +499,25 @@
             <div class="role">Utility Bar</div>
             <div class="spec">13px · 400</div>
           </div>
-          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:13px; font-weight:400; line-height:1.3; color:#0A0A0A;">
+          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:13px; font-weight:400; line-height:1.3; color:var(--brand-text);">
             Utility Bar — 
           </div>
         </div>
         <div class="type-row">
           <div class="type-meta">
             <div class="role">Category Pills</div>
-            <div class="spec">16px · 400</div>
+            <div class="spec">20px · 400</div>
           </div>
-          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:16px; font-weight:400; line-height:24px; color:#0A0A0A;">
+          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:20px; font-weight:400; line-height:30px; color:#0A0A0A;">
             Category Pills — 
           </div>
         </div>
         <div class="type-row">
           <div class="type-meta">
             <div class="role">Buttons</div>
-            <div class="spec">14px · 600</div>
+            <div class="spec">20px · 400</div>
           </div>
-          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:14px; font-weight:600; line-height:1.2; color:#FFFFFF; letter-spacing:0.28px;">
+          <div class="type-sample" style="font-family:'Hanken Grotesk', sans-serif; font-size:20px; font-weight:400; line-height:16px; color:#FFFFFF;">
             Buttons — 
           </div>
         </div>
@@ -528,13 +550,138 @@
     <!-- ============ 5. Content labels ============ -->
     <section class="block">
       <div class="sec-head"><span class="sec-num">5</span><h2 class="sec-title">Content labels &amp; badges</h2></div>
-      <p class="sec-sub">Minimal — relies on photography and typography. Almost no decorative illustration.</p>
+      <p class="sec-sub">Minimal — relies on photography and typography</p>
       <div class="card pad" style="display:flex;flex-wrap:wrap;gap:14px;">
-        <span class="badge-demo" style="background:#002AFF;color:#FFFFFF;">Sign up</span>
-        <span class="badge-demo" style="background:#0A0A0A;color:#FFFFFF;">Play now</span>
-        <span class="badge-demo" style="background:transparent;color:#002AFF;border:1px solid #002AFF;">LIVE</span>
-        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;">BREAKING</span>
-        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;">VIDEO</span>
+        <span class="badge-demo" style="background:transparent;color:#002AFF;border:1px solid #002AFF;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:#0A0A0A;color:#FFFFFF;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:#002AFF;color:#FFFFFF;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:#D9FFD9;color:#0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#FFFFFF;border:1px solid #FFFFFF;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:#002AFF;color:#FFFFFF;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:#0A0A0A;color:#FFFFFF;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#71717A;border:1px solid #71717A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#0A0A0A;border:1px solid #0A0A0A;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
+        <span class="badge-demo" style="background:transparent;color:#31313B;border:1px solid #31313B;"></span>
       </div>
     </section>
 
@@ -544,7 +691,7 @@
       <p class="sec-sub">Thumbnail crop, corner radius, and header anatomy that the feed inherits.</p>
       <div class="grid g2">
         <div class="card pad stack">
-          <div class="kv"><span class="k">Thumbnail ratio</span> &nbsp; <span class="v">16:9</span></div>
+          <div class="kv"><span class="k">Thumbnail ratio</span> &nbsp; <span class="v">1:1</span></div>
           <div class="kv"><span class="k">Corner radius</span> &nbsp; <span class="v">0px</span></div>
           <div class="kv"><span class="k">Video indicator</span> &nbsp; <span class="v">Play button icon</span></div>
           <div style="display:flex;gap:10px;margin-top:6px;">
@@ -555,9 +702,10 @@
         <div class="card pad stack">
           <div class="kv"><span class="k">Grid</span> &nbsp; <span class="v">Two-column layout (main content + sidebar)</span></div>
           <div style="margin-top:4px;">
-            <div style="font-size:12px;color:var(--ink-soft);padding:6px 10px;background:var(--paper);border-radius:8px;margin-bottom:6px;">div: masthead — Business Insider wordmark + main nav (white)</div>
-            <div style="font-size:12px;color:var(--ink-soft);padding:6px 10px;background:var(--paper);border-radius:8px;margin-bottom:6px;">div: section sub-nav — Tech, Markets, Finance, Strategy, Politics</div>
-            <div style="font-size:12px;color:var(--ink-soft);padding:6px 10px;background:var(--paper);border-radius:8px;margin-bottom:6px;">div: blue accent rule (#002AFF)</div>
+            <div style="font-size:12px;color:var(--ink-soft);padding:6px 10px;background:var(--paper);border-radius:8px;margin-bottom:6px;">section: Business Insider
+          
+            
+         </div>
           </div>
         </div>
       </div>
@@ -569,7 +717,7 @@
       <p class="sec-sub">Headline conventions and editorial signals the recommendation engine should respect.</p>
       <div class="card pad stack">
         <div class="kv"><span class="k">Headline case</span> &nbsp; <span class="v">sentence case</span></div>
-        <div style="color:var(--ink-soft);font-size:14px;">Plain editorial sentence case; live coverage uses LIVE / BREAKING signposts.</div>
+        <div style="color:var(--ink-soft);font-size:14px;"></div>
       </div>
     </section>
 
@@ -585,14 +733,14 @@
       <div class="shot" style="margin-bottom:14px;">
         <div class="shot-bar">
           <span class="shot-dots"><i style="background:#f87171;"></i><i style="background:#fbbf24;"></i><i style="background:#34d399;"></i></span>
-          <span class="shot-url">https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6</span>
+          <span class="shot-url">https://www.businessinsider.com</span>
         </div>
         <div class="shot-surface">
           <div style="max-width:680px;margin:0 auto;">
-            <div class="ctx-kicker">Tech · AI</div>
-            <div class="ctx-head">SpaceX&#x27;s $60 billion bet on Cursor just pulled its 25-year-old CEO into Elon Musk&#x27;s orbit — and aimed him straight at Anthropic</div>
-            <p class="ctx-p">When SpaceX disclosed that it had secured the right to buy Cursor for $60 billion later this year, the deal instantly made the AI coding startup one of the most valuable private companies in the world — and turned its 25…</p>
-            <p class="ctx-p faded">Truell enrolled at MIT, finished a single year, and left to build what would become Cursor with three classmates. At 18 he had already interned at Google, worki…</p>
+            
+            <div class="ctx-head"></div>
+            
+            <p class="ctx-p faded"></p>
 
             <div style="margin-top:22px;">
               <div class="feed-label"><span class="dot"></span>Sponsored Stories</div>
@@ -601,36 +749,14 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Your Favorite Restaurants, Delivered" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The All-Electric EX90: Scandinavian Design Meets Innovation" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 16px;">
-    
-    <div class="feed-card-headline is-large">
-      Your Favorite Restaurants, Delivered
-    </div>
-    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">DoorDash</span>
-          <span class="feed-card-cta-pill">Order Now</span>
-    </div>
-  </div>
-</div>
-<!-- Feed Card Component — every visual is driven by a brand-kit token so the
-     card matches the publisher's real article cards (aspect ratio, card-title
-     type, meta type, button shape, kicker), not generic defaults. -->
-<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The All-Electric EX90: Scandinavian Design Meets Innovation" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block;"
-         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-      <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
-  </div>
-  <div style="padding: 16px;">
+  <div style="padding: 12px 2px 8px;">
     
     <div class="feed-card-headline is-large">
       The All-Electric EX90: Scandinavian Design Meets Innovation
@@ -638,6 +764,28 @@
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Volvo</span>
           <span class="feed-card-cta-pill">Explore</span>
+    </div>
+  </div>
+</div>
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
+<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Sleep Better Tonight with Guided Meditations" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
+         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
+      <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
+  </div>
+  <div style="padding: 12px 2px 8px;">
+    
+    <div class="feed-card-headline is-large">
+      Sleep Better Tonight with Guided Meditations
+    </div>
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+      <span class="feed-card-source">Calm</span>
+          <span class="feed-card-cta-pill">Try Free</span>
     </div>
   </div>
 </div>
@@ -650,16 +798,16 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1600&amp;q&#x3D;80" alt="SpaceX&#x27;s $60 billion bet on Cursor just pulled its 25-year-old CEO into Elon Musk&#x27;s orbit — and aimed him straight at Anthropic" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://i.insider.com/6a2b28ee6588b2a09a7c6e8a?width&#x3D;1200&amp;format&#x3D;jpeg" alt="Inside Cursor&#x27;s wild rise, from its Anthropic situationship to dating SpaceX" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
   </div>
-  <div style="padding: 16px;">
-    <div class="feed-card-kicker">Tech</div>
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Discourse</div>
     <div class="feed-card-headline ">
-      SpaceX&#x27;s $60 billion bet on Cursor just pulled its 25-year-old CEO into Elon Musk&#x27;s orbit — and aimed him straight at Anthropic
+      Inside Cursor&#x27;s wild rise, from its Anthropic situationship to dating SpaceX
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
@@ -670,36 +818,36 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Inside Anthropic&#x27;s race to keep Claude Code ahead of every AI lab in Silicon Valley" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The Better Work Project" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1495020689067-958852a7765e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
   </div>
-  <div style="padding: 16px;">
-    <div class="feed-card-kicker">Tech</div>
-    <div class="feed-card-headline ">
-      Inside Anthropic&#x27;s race to keep Claude Code ahead of every AI lab in Silicon Valley
-    </div>
-    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">Business Insider</span>
-    </div>
-  </div>
-</div>
-<!-- Feed Card Component — every visual is driven by a brand-kit token so the
-     card matches the publisher's real article cards (aspect ratio, card-title
-     type, meta type, button shape, kicker), not generic defaults. -->
-<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Meet the four MIT dropouts who turned a side project into a $60 billion company" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
-         style="width: 100%; height: 100%; object-fit: cover; display: block;"
-         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
-  </div>
-  <div style="padding: 16px;">
+  <div style="padding: 12px 2px 8px;">
     <div class="feed-card-kicker">Strategy</div>
     <div class="feed-card-headline ">
-      Meet the four MIT dropouts who turned a side project into a $60 billion company
+      The Better Work Project
+    </div>
+    <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
+      <span class="feed-card-source">Business Insider</span>
+    </div>
+  </div>
+</div>
+<!-- Feed Card Component — every visual is driven by a brand-kit token so the
+     card matches the publisher's real article cards (aspect ratio, card-title
+     type, meta type, button shape, kicker), not generic defaults. -->
+<div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Authorized Account" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+         style="width: 100%; height: 100%; object-fit: cover; display: block;"
+         onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
+  </div>
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Economy</div>
+    <div class="feed-card-headline ">
+      Authorized Account
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
@@ -714,7 +862,7 @@
           </div>
         </div>
       </div>
-      <p class="shot-cap"><b>Desktop, in-article.</b> Sponsored cards (top) sit above editorial recommendations. The first “More From Business Insider” card is the source article itself — your real content, restyled.</p>
+      <p class="shot-cap"><b>Desktop, in-article.</b> Sponsored cards (top) sit above editorial recommendations. The first “More From” card is the source article itself — your real content, restyled.</p>
 
       <!-- Two more screenshots side by side -->
       <div class="grid g2" style="margin-top:30px;align-items:start;">
@@ -733,21 +881,21 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Top Financial Advisors Near You — See the List" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Bundle Home &amp; Auto for Maximum Savings" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 16px;">
+  <div style="padding: 12px 2px 8px;">
     
     <div class="feed-card-headline ">
-      Top Financial Advisors Near You — See the List
+      Bundle Home &amp; Auto for Maximum Savings
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">SmartAsset</span>
-          <span class="feed-card-cta-pill">Learn More</span>
+      <span class="feed-card-source">Allstate</span>
+          <span class="feed-card-cta-pill">Get a Quote</span>
     </div>
   </div>
 </div>
@@ -755,21 +903,21 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Best High-Yield Savings Accounts of 2025" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="The Award-Winning Mattress — Try 100 Nights Risk-Free" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1483985988355-763728e1935b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 16px;">
+  <div style="padding: 12px 2px 8px;">
     
     <div class="feed-card-headline ">
-      Best High-Yield Savings Accounts of 2025
+      The Award-Winning Mattress — Try 100 Nights Risk-Free
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">NerdWallet</span>
-          <span class="feed-card-cta-pill">Compare Now</span>
+      <span class="feed-card-source">Casper</span>
+          <span class="feed-card-cta-pill">Shop Now</span>
     </div>
   </div>
 </div>
@@ -777,21 +925,21 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Learn from the Best — New Classes Available" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Your Best Workout Starts Here — 30 Day Free Trial" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
       <span class="badge-sponsored" style="position: absolute; top: 8px; left: 8px;">Sponsored</span>
   </div>
-  <div style="padding: 16px;">
+  <div style="padding: 12px 2px 8px;">
     
     <div class="feed-card-headline ">
-      Learn from the Best — New Classes Available
+      Your Best Workout Starts Here — 30 Day Free Trial
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
-      <span class="feed-card-source">MasterClass</span>
-          <span class="feed-card-cta-pill">Start Now</span>
+      <span class="feed-card-source">Peloton</span>
+          <span class="feed-card-cta-pill">Try Free</span>
     </div>
   </div>
 </div>
@@ -807,24 +955,30 @@
         <div>
           <div class="device">
             <div style="background:#FFFFFF;border-bottom:1px solid rgba(0,0,0,0.08);"><div style="padding:12px 14px;text-align:center;"><span class="masthead-wordmark" style="font-size:15px;color:#111111;">Business Insider</span></div></div>
-            <div style="height:3px;background:#002AFF;"></div>
+            <div style="height:3px;background:var(--brand-primary);"></div>
             <div class="shot-surface">
-              <div class="feed-label" style="font-size:12px;"><span class="dot"></span>Trending on Business Insider</div>
+              <div class="feed-label" style="font-size:12px;"><span class="dot"></span>Trending</div>
               <div style="display:grid;grid-template-columns:1fr;gap:14px;">
                 <!-- Feed Card Component — every visual is driven by a brand-kit token so the
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Elon Musk&#x27;s xAI is quietly losing the coding-tools war. The Cursor deal is his reset." loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1518770660439-4636190af475?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Cannes Diary
+        
+          
+          Sign up" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
   </div>
-  <div style="padding: 16px;">
-    <div class="feed-card-kicker">Tech</div>
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Finance</div>
     <div class="feed-card-headline is-large">
-      Elon Musk&#x27;s xAI is quietly losing the coding-tools war. The Cursor deal is his reset.
+      Cannes Diary
+        
+          
+          Sign up
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
@@ -835,16 +989,16 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="What a $60 billion price tag says about the AI bubble — and who&#x27;s still buying" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Explore Group Subscriptions" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1483985988355-763728e1935b?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
   </div>
-  <div style="padding: 16px;">
-    <div class="feed-card-kicker">Markets</div>
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Retail</div>
     <div class="feed-card-headline is-large">
-      What a $60 billion price tag says about the AI bubble — and who&#x27;s still buying
+      Explore Group Subscriptions
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
@@ -855,16 +1009,16 @@
      card matches the publisher's real article cards (aspect ratio, card-title
      type, meta type, button shape, kicker), not generic defaults. -->
 <div class="feed-card" style="border-radius: 0px; overflow: hidden; cursor: pointer;">
-  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 16 / 9;">
-    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="OpenAI&#x27;s Codex vs. Claude Code vs. Cursor: the developer-tool wars, explained" loading="lazy" referrerpolicy="no-referrer"
-         data-fallback="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
+  <div class="feed-card-image-wrap" style="position: relative; aspect-ratio: 1 / 1;">
+    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75" alt="Breaking: Major Policy Shift Expected This Week" loading="lazy" referrerpolicy="no-referrer"
+         data-fallback="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w&#x3D;400&amp;h&#x3D;300&amp;fit&#x3D;crop&amp;auto&#x3D;format&amp;q&#x3D;75"
          style="width: 100%; height: 100%; object-fit: cover; display: block;"
          onerror="var fb=this.getAttribute('data-fallback');if(fb&&this.src!==fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.display='none';this.parentElement.classList.add('feed-card-image-fallback');" />
   </div>
-  <div style="padding: 16px;">
-    <div class="feed-card-kicker">Tech</div>
+  <div style="padding: 12px 2px 8px;">
+    <div class="feed-card-kicker">Business</div>
     <div class="feed-card-headline is-large">
-      OpenAI&#x27;s Codex vs. Claude Code vs. Cursor: the developer-tool wars, explained
+      Breaking: Major Policy Shift Expected This Week
     </div>
     <div class="feed-card-foot" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px;">
       <span class="feed-card-source">Business Insider</span>
@@ -886,7 +1040,7 @@
       <div class="sec-head"><span class="sec-num">✓</span><h2 class="sec-title">How this was produced</h2></div>
       <div class="note">
         <p style="margin:0 0 8px;"><b>Brand tokens:</b> the colors, typography, logo, buttons, and layout above are Business Insider's documented visual identity, packaged as a reusable kit.</p>
-        <p style="margin:0;">Visual brand tokens (colors, fonts, logo, buttons, photo style, header) are reconciled from a live Puppeteer crawl of businessinsider.com — primary accent #002AFF (blue, not the legacy orange), Garnett headline/UI type with a Tiempos editorial serif, white masthead, square 0px corners. The article context (headline, deck, byline, hero, body, related cards) is the requested Cursor/Truell story; BI&#x27;s chrome tokens are publisher-level and apply across articles. A handful of obvious mis-extractions were corrected and noted inline: article_title_hero and buttons font sizes, button horizontal padding, and the graphics badge list (page UI chrome was dropped, keeping the real coloured CTAs and deriving LIVE/BREAKING/VIDEO from content_labels).</p>
+        <p style="margin:0;"></p>
       </div>
     </section>
   </div>
@@ -894,7 +1048,7 @@
   <footer class="foot">
     <div class="wrap">
       <div class="fm">Business Insider × Taboola</div>
-      <div style="margin-top:6px;">Brand Kit Report · generated 2026-06-15 · brand-kit-generator v2.1.0</div>
+      <div style="margin-top:6px;">Brand Kit Report · generated 2026-06-16 · </div>
     </div>
   </footer>
 </body>

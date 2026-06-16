@@ -1,24 +1,20 @@
 {
   "brand": {
     "name": "Business Insider",
-    "tagline": "Business news, analysis, and insights — covering markets, tech, leadership, and the global economy.",
+    "tagline": "",
     "website": "https://www.businessinsider.com",
-    "description": "Business Insider is a global business news website covering technology, finance, markets, strategy, retail, real estate, and the people shaping the economy. Owned by Axel Springer.",
+    "description": "Business Insider tells the global tech, finance, stock market, media, economy, lifestyle, real estate, AI and innovative stories you want to know.",
     "language": "en-US"
   },
   "logos": {
     "primary": {
       "type": "image",
       "url": "",
-      "alt": "Business Insider",
+      "alt": "",
       "width": 410,
-      "height": 36,
+      "height": 36.03125,
       "text": "Business Insider",
-      "font": "Garnett 400",
-      "color": "#0A0A0A",
-      "background": "#FFFFFF",
-      "treatment": "The 'Business Insider' wordmark is set in Garnett and sits on a white masthead in near-black (#0A0A0A). The legacy orange 'BI' cube mark has been retired — the current identity is the full wordmark plus a blue (#002AFF) accent.",
-      "source": "extracted"
+      "font": "garnett 400"
     },
     "variants": [],
     "brand_mark": null,
@@ -34,9 +30,134 @@
         "Buttons",
         "Navigation",
         "Timestamps",
-        "Tags & badges"
+        "Tags & badges",
+        "Button text",
+        "Headlines"
       ],
-      "source": "extracted"
+      "source": "extracted",
+      "_agreement": "10/10 pages"
+    },
+    "text": {
+      "primary": {
+        "name": "Primary Text",
+        "hex": "#000000",
+        "rgb": "rgb(0, 0, 0)",
+        "usage": [
+          "Button text"
+        ],
+        "source": "extracted",
+        "_agreement": "10/10 pages"
+      },
+      "secondary": {
+        "name": "Secondary Text",
+        "hex": "#0A0A0A",
+        "rgb": "rgb(10, 10, 10)",
+        "usage": [
+          "Links",
+          "Buttons",
+          "Button text",
+          "Navigation",
+          "Headlines",
+          "Body text",
+          "Timestamps",
+          "Tags & badges"
+        ],
+        "source": "extracted",
+        "_agreement": "9/10 pages"
+      },
+      "tertiary": {
+        "name": "Tertiary Text",
+        "hex": "#31313B",
+        "rgb": "rgb(49, 49, 59)",
+        "usage": [
+          "Timestamps",
+          "Article deck",
+          "Headlines",
+          "Body text",
+          "Tags & badges",
+          "Links",
+          "Navigation"
+        ],
+        "source": "extracted",
+        "_agreement": "9/10 pages"
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "rgb": "rgb(255, 255, 255)",
+        "usage": [
+          "Button text",
+          "Header background",
+          "Page background",
+          "Section background",
+          "Tags & badges",
+          "Separators",
+          "Buttons",
+          "Headlines",
+          "Links",
+          "Navigation"
+        ],
+        "source": "extracted",
+        "_agreement": "10/10 pages"
+      },
+      "section": {
+        "name": "Section",
+        "hex": "#D9FFD9",
+        "rgb": "rgb(217, 255, 217)",
+        "usage": [
+          "Tags & badges"
+        ],
+        "source": "extracted",
+        "_agreement": "7/10 pages"
+      },
+      "secondary": {
+        "name": "Secondary",
+        "hex": "#D9FFD9",
+        "rgb": "rgb(217, 255, 217)",
+        "usage": [
+          "Tags & badges"
+        ],
+        "source": "extracted",
+        "_agreement": "7/10 pages"
+      },
+      "dark": {
+        "name": "Dark Background",
+        "hex": "#0A0A0A",
+        "rgb": "rgb(10, 10, 10)",
+        "usage": [
+          "Links",
+          "Buttons",
+          "Button text",
+          "Navigation",
+          "Headlines",
+          "Body text",
+          "Timestamps",
+          "Tags & badges",
+          "Article deck"
+        ],
+        "source": "extracted",
+        "_agreement": "10/10 pages"
+      }
+    },
+    "accents": {
+      "info_blue": {
+        "name": "Info Blue",
+        "hex": "#002AFF",
+        "rgb": "rgb(0, 42, 255)",
+        "usage": [
+          "Links",
+          "Buttons",
+          "Navigation",
+          "Timestamps",
+          "Tags & badges",
+          "Button text",
+          "Headlines"
+        ],
+        "source": "extracted",
+        "_agreement": "10/10 pages"
+      }
     },
     "primary_variants": {
       "darken_5": {
@@ -52,88 +173,15 @@
         "source": "derived"
       }
     },
-    "text": {
-      "primary": {
-        "name": "Primary Text",
-        "hex": "#000000",
-        "rgb": "rgb(0, 0, 0)",
-        "usage": [
-          "Button text"
-        ],
-        "source": "extracted"
-      },
-      "secondary": {
-        "name": "Secondary Text",
-        "hex": "#0A0A0A",
-        "rgb": "rgb(10, 10, 10)",
-        "usage": [
-          "Headlines",
-          "Body text",
-          "Navigation",
-          "Timestamps"
-        ],
-        "source": "extracted"
-      },
-      "tertiary": {
-        "name": "Tertiary Text",
-        "hex": "#31313B",
-        "rgb": "rgb(49, 49, 59)",
-        "usage": [
-          "Article deck",
-          "Tags & badges"
-        ],
-        "source": "extracted"
-      }
-    },
-    "backgrounds": {
-      "base": {
-        "name": "White",
-        "hex": "#FFFFFF",
-        "rgb": "rgb(255, 255, 255)",
-        "usage": [
-          "Page background",
-          "Header background",
-          "Card surface",
-          "Section background"
-        ],
-        "source": "extracted"
-      },
-      "section": {
-        "name": "Off-White",
-        "hex": "#F7F9FC",
-        "rgb": "rgb(247, 249, 252)",
-        "usage": [
-          "Section backgrounds"
-        ],
-        "source": "fallback"
-      },
-      "secondary": null,
-      "dark": {
-        "name": "Dark Background",
-        "hex": "#0A0A0A",
-        "rgb": "rgb(10, 10, 10)",
-        "usage": [
-          "Footer",
-          "Dark sections",
-          "Headlines / body text"
-        ],
-        "source": "extracted"
-      }
-    },
-    "accents": {
-      "info_blue": {
-        "name": "Info Blue",
-        "hex": "#002AFF",
-        "rgb": "rgb(0, 42, 255)",
-        "usage": [
-          "Links",
-          "Buttons",
-          "Navigation",
-          "Timestamps",
-          "Tags & badges"
-        ],
-        "source": "extracted"
-      }
+    "secondary": {
+      "name": "Secondary Accent",
+      "hex": "#D9FFD9",
+      "rgb": "rgb(217, 255, 217)",
+      "usage": [
+        "Tags & badges"
+      ],
+      "source": "extracted",
+      "_agreement": "7/10 pages"
     }
   },
   "fonts": {
@@ -143,76 +191,81 @@
         "sans-serif"
       ],
       "weights": {
-        "regular": 400,
-        "bold": 500
+        "bold": 500,
+        "regular": 400
       },
-      "usage": "Headlines, Body text, Navigation, Buttons",
+      "usage": "Headlines, Body text, Navigation, Buttons, Captions",
       "source": "extracted",
       "is_generic": false,
-      "google_equivalent": "Hanken Grotesk"
+      "_agreement": "10/10 pages"
     },
     "secondary": {
       "family": "garnett",
       "weight": 600,
       "style": "normal",
       "usage": "Headlines, Body text, Navigation, Buttons, Meta text, Captions",
-      "source": "extracted",
-      "google_equivalent": "Hanken Grotesk"
+      "source": "extracted"
     },
     "tertiary": [
       {
         "family": "tiempos",
-        "usage": "Long-form editorial body text",
-        "source": "extracted",
-        "google_equivalent": "Source Serif 4"
+        "usage": "Body text",
+        "source": "extracted"
       }
     ],
     "type_scale": {
       "section_headings": {
-        "size": "18px",
-        "weight": 700,
-        "family": "garnett",
-        "line_height": "24.3px",
+        "size": "24px",
+        "weight": 600,
+        "family": "Garnett",
+        "line_height": "31.2px",
         "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "h2, .section-title, [class*=\"section-head\"]"
+        "matched_selector": "h2, .section-title, [class*=\"section-head\"]",
+        "_agreement": "8/10 pages",
+        "_extracted_on": 10
       },
       "article_title_hero": {
-        "size": "36px",
-        "weight": 500,
-        "family": "Garnett",
-        "line_height": "1.15",
+        "size": "32px",
+        "weight": 700,
+        "family": "garnett",
+        "line_height": "32px",
         "color": "#0A0A0A",
-        "source": "extracted (size corrected)",
+        "source": "extracted",
         "matched_selector": "h1, .headline, [class*=\"headline\"]",
-        "note": "Crawl returned font-size 18px with a 44px line-height — a mis-read of a transformed element. Corrected to ~36px (the line-height implies a ~36-38px display size)."
+        "_agreement": "7/10 pages",
+        "_extracted_on": 10
       },
       "article_title_card": {
-        "size": "22px",
-        "weight": 700,
+        "size": "24.5px",
+        "weight": 400,
         "family": "Garnett",
-        "line_height": "1.25",
+        "line_height": "34.3px",
         "color": "#0A0A0A",
-        "source": "fallback",
-        "attempted_selector": ".card h3, .card-title, [class*=\"card\"] h3"
+        "source": "extracted",
+        "matched_selector": ".card h3, .card-title, [class*=\"card\"] h3",
+        "_agreement": "1/10 pages",
+        "_extracted_on": 1
       },
       "article_lead": {
         "size": "14px",
         "weight": 400,
-        "family": "Garnett",
+        "family": "garnett",
         "line_height": "21px",
         "color": "#31313B",
         "source": "extracted",
-        "matched_selector": ".lead, .deck, .article-lead, [class*=\"subtitle\"]"
+        "matched_selector": ".lead, .deck, .article-lead, [class*=\"subtitle\"]",
+        "_agreement": "9/10 pages",
+        "_extracted_on": 9
       },
       "article_body": {
         "size": "18px",
         "weight": 400,
         "family": "Garnett",
-        "line_height": "1.6",
-        "color": "#0A0A0A",
         "source": "fallback",
-        "attempted_selector": "article p, .article-body p, .story-body p"
+        "attempted_selector": "article p, .article-body p, .story-body p",
+        "_agreement": "10/10 pages",
+        "_extracted_on": 0
       },
       "navigation": {
         "size": "16px",
@@ -221,35 +274,40 @@
         "line_height": "24px",
         "color": "#002AFF",
         "source": "extracted",
-        "matched_selector": "nav a, [role=\"navigation\"] a"
+        "matched_selector": "nav a, [role=\"navigation\"] a",
+        "_agreement": "7/10 pages",
+        "_extracted_on": 9
       },
       "utility_bar": {
         "size": "13px",
         "weight": 400,
         "family": "Garnett",
-        "color": "#0A0A0A",
         "source": "fallback",
-        "attempted_selector": ".utility a, .topbar a, [class*=\"utility\"] a"
+        "attempted_selector": ".utility a, .topbar a, [class*=\"utility\"] a",
+        "_agreement": "10/10 pages",
+        "_extracted_on": 0
       },
       "category_pills": {
-        "size": "16px",
+        "size": "20px",
         "weight": 400,
         "family": "garnett",
-        "line_height": "24px",
+        "line_height": "30px",
         "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "[class*=\"pill\"], [class*=\"chip\"], [class*=\"tag\"]"
+        "matched_selector": "[class*=\"pill\"], [class*=\"chip\"], [class*=\"tag\"], [class*=\"filter\"] a",
+        "_agreement": "9/10 pages",
+        "_extracted_on": 10
       },
       "buttons": {
-        "size": "14px",
-        "weight": 600,
+        "size": "20px",
+        "weight": 400,
         "family": "garnett",
-        "line_height": "1.2",
+        "line_height": "16px",
         "color": "#FFFFFF",
-        "letter_spacing": "0.28px",
-        "source": "extracted (size corrected)",
+        "source": "extracted",
         "matched_selector": "button, .btn, [role=\"button\"]",
-        "note": "Crawl returned 20px / 16px line-height; corrected to the button's real 14px (matches buttons.primary.font_size)."
+        "_agreement": "9/10 pages",
+        "_extracted_on": 10
       },
       "meta_text": {
         "size": "12px",
@@ -258,42 +316,31 @@
         "line_height": "16.8px",
         "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "time, .date, [class*=\"meta\"], figcaption"
+        "matched_selector": "time, .date, [class*=\"meta\"], [class*=\"timestamp\"], figcaption",
+        "_agreement": "1/10 pages",
+        "_extracted_on": 2
       }
-    }
-  },
-  "buttons": {
-    "primary": {
-      "background_color": "#002AFF",
-      "text_color": "#FFFFFF",
-      "border_radius": "4px",
-      "padding": "14px 22px 16px",
-      "font_size": "14px",
-      "font_weight": 600,
-      "text_transform": null,
-      "letter_spacing": "0.28px",
-      "hover_background": "#0028F2",
-      "source": "extracted",
-      "note": "Crawl padding was '14px 0px 16px' (horizontal collapsed by the extractor); restored to a realistic 22px horizontal."
     }
   },
   "brand_voice": {
     "language": "en-US",
     "headline_style": {
       "format": "sentence case",
-      "case": "sentence case",
-      "pattern": "Plain editorial sentence case; live coverage uses LIVE / BREAKING signposts."
+      "case": "sentence case"
     },
     "content_labels": {
       "live": true,
       "breaking": true,
-      "video": true
+      "video": true,
+      "analysis": true,
+      "gallery": true,
+      "opinion": true
     },
     "content_distinction": {}
   },
   "photo_style": {
     "thumbnail_format": {
-      "aspect_ratio": "16:9",
+      "aspect_ratio": "1:1",
       "border_radius": "0px"
     },
     "video_thumbnails": {
@@ -306,50 +353,789 @@
     }
   },
   "graphics": {
-    "style": "Minimal — relies on photography and typography. Almost no decorative illustration.",
+    "style": "Minimal — relies on photography and typography",
     "elements": [
       {
-        "name": "Sign up",
-        "label": "Sign up",
-        "description": "Newsletter sign-up CTA",
-        "background_color": "#002AFF",
-        "text_color": "#FFFFFF",
-        "source": "extracted"
+        "name": "Subscribe",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#002AFF"
+      },
+      {
+        "name": "Newsletters",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Discourse",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Jun 15, 2026, 11:11 AM GMT+3",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Read in app",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Share",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Copy link",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Email",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Facebook",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "WhatsApp",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "X",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "LinkedIn",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Bluesky",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Threads",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Impact Link",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Loading audio narration...",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
       },
       {
         "name": "Play now",
-        "label": "Play now",
-        "description": "Audio-narration CTA",
+        "description": "Badge/label element",
         "background_color": "#0A0A0A",
-        "text_color": "#FFFFFF",
-        "source": "extracted"
+        "text_color": "#FFFFFF"
       },
       {
-        "name": "LIVE",
-        "label": "LIVE",
-        "description": "Live coverage label",
+        "name": "Shubhangi Goel",
+        "description": "Badge/label element",
         "background_color": "transparent",
-        "text_color": "#002AFF",
-        "source": "derived"
+        "text_color": "#0A0A0A"
       },
       {
-        "name": "BREAKING",
-        "label": "BREAKING",
-        "description": "Breaking-news label",
+        "name": "Follow",
+        "description": "Badge/label element",
         "background_color": "transparent",
-        "text_color": "#0A0A0A",
-        "source": "derived"
+        "text_color": "#0A0A0A"
       },
       {
-        "name": "VIDEO",
-        "label": "VIDEO",
-        "description": "Video content indicator",
+        "name": "Charles Rollet",
+        "description": "Badge/label element",
         "background_color": "transparent",
-        "text_color": "#0A0A0A",
-        "source": "derived"
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Enter your email",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Sign up",
+        "description": "Badge/label element",
+        "background_color": "#002AFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "More stories by",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "More stories from",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "SpaceX",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "AI",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Elon Musk",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "More",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "NEW",
+        "description": "Badge/label element",
+        "background_color": "#D9FFD9",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Business",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Strategy",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Economy",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Finance",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Retail",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Advertising",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Careers",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Law",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Media",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Real Estate",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Small Business",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "The Better Work Project",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Personal Finance",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Tech",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Science",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Enterprise",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Transportation",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Startups",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Innovation",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Markets",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "News",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Stocks",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Indices",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Commodities",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Crypto",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Currencies",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "ETFs",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Lifestyle",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Entertainment",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Culture",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Travel",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Food",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Health",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Education",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Parenting",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Military & Defense",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Politics",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Reviews",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Home",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Kitchen",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Style",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Streaming",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Pets",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Deals",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Gifts",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Tickets",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Video",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Big Business",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "So Expensive",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "View From Above",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Authorized Account",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Risky Business",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Boot Camp",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Still Standing",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "How Crime Works",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Life Lessons",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Level Up",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Games",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Boxed",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Pipeline",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Knighthop",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Tally",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Today's Briefing",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "2 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "11 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "4 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "3 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "Exclusive",
+        "description": "Badge/label element",
+        "background_color": "#002AFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Joe Ciolli",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Peter Kafka",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "All",
+        "description": "Badge/label element",
+        "background_color": "#0A0A0A",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Power Hours",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "7 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "5 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "Style & Success",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "Business Insider",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Latest",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "See all",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Working the World Cup",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "6 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "World Cup",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "Vibe Mode",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "Work Shift",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "1 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "8 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "Cost of the City",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "9 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "13 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "Robotics",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "20 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "Smart People Say",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "15 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "19 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "AI Chain Reaction",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "16 min read",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "How AI Is Changing Everything",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "Katie Notopoulos",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Trader Joe's Diaries",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "Tiny Teams",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "Data Centers",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
+      },
+      {
+        "name": "Salary Journeys",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#31313B"
       }
-    ],
-    "elements_note": "The live crawl captured page UI chrome (Share, Copy link, WhatsApp, etc.) as 'badges'. Those were dropped; the two real coloured CTAs (Sign up, Play now) are kept verbatim and the LIVE/BREAKING/VIDEO labels are derived from brand_voice.content_labels using the real palette."
+    ]
   },
   "icons": {
     "style": "SVG-based",
@@ -368,176 +1154,96 @@
   "layout_patterns": {
     "grid": "Two-column layout (main content + sidebar)",
     "header": {
-      "background_color": "#FFFFFF",
-      "is_dark": false,
-      "accent_rule_color": "#002AFF",
-      "utility_bar": {
-        "background_color": "#FFFFFF",
-        "is_dark": false,
-        "items": [
-          "Subscribe",
-          "Newsletters",
-          "Account",
-          "Search"
-        ]
-      },
       "layers": [
-        "div: masthead — Business Insider wordmark + main nav (white)",
-        "div: section sub-nav — Tech, Markets, Finance, Strategy, Politics",
-        "div: blue accent rule (#002AFF)"
-      ]
+        "section: Business Insider\n          \n            \n         "
+      ],
+      "background_color": "#FFFFFF",
+      "is_dark": false
     },
-    "content_cards": {
-      "border_radius": "0px",
-      "border": "1px solid #E6E9F0",
-      "padding": "16px",
-      "hover": "headline picks up the blue accent"
-    },
+    "content_cards": {},
     "footer": {
-      "background_color": "#0A0A0A",
-      "text_color": "#FFFFFF",
-      "sections": [
-        "About",
-        "Newsletters",
-        "Subscribe",
-        "Advertise",
-        "Contact Us"
-      ]
+      "sections": []
     }
   },
   "spacing": {
     "card_border_radius": "0px",
-    "container_max_width": "1200px",
-    "grid_gap": "8px",
-    "card_gap": "20px",
-    "section_padding": "32px"
+    "grid_gap": "8px normal"
   },
-  "taboola": {
-    "publisher_id": "axelspringer-businessinsider",
-    "publisher_id_note": "Confirm with AdOps — Axel Springer-owned BI uses an Axel-Springer-prefixed publisher slug on the TRC engine. Replace before pushing to production.",
-    "feed_label": "More From Business Insider",
-    "sponsored_label": "Sponsored Stories",
-    "trending_label": "Trending on Business Insider",
-    "modes_in_use": [
-      "alternating-thumbnails-a",
-      "organic-thumbs-feed-01",
-      "organic-thumbnails-feed-stream",
-      "organic-thumbnails-feed-3x1-with-header-editorial",
-      "exchange-thumbnails-feed-with-header"
-    ]
-  },
-  "navigation": {
-    "navLinks": [
-      {
-        "text": "Tech",
-        "href": "https://www.businessinsider.com/tech"
-      },
-      {
-        "text": "Markets",
-        "href": "https://markets.businessinsider.com"
-      },
-      {
-        "text": "Finance",
-        "href": "https://www.businessinsider.com/finance"
-      },
-      {
-        "text": "Strategy",
-        "href": "https://www.businessinsider.com/strategy"
-      },
-      {
-        "text": "Retail",
-        "href": "https://www.businessinsider.com/retail"
-      },
-      {
-        "text": "Politics",
-        "href": "https://www.businessinsider.com/politics"
-      },
-      {
-        "text": "Media",
-        "href": "https://www.businessinsider.com/media"
-      },
-      {
-        "text": "Reviews",
-        "href": "https://www.businessinsider.com/guides"
-      }
-    ]
-  },
-  "content": {
-    "headline": "SpaceX's $60 billion bet on Cursor just pulled its 25-year-old CEO into Elon Musk's orbit — and aimed him straight at Anthropic",
-    "deck": "Michael Truell dropped out of MIT and was interning at Google at 18. Now he runs the AI coding company Elon Musk wants most — and insiders say the real target is Anthropic's Claude Code.",
-    "byline": "By Marcus Reilly and Priya Nandakumar",
-    "date": "Updated Jun. 12, 2026, 7:42 AM ET",
-    "categories": [
-      "Tech",
-      "AI"
-    ],
-    "url": "https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6",
-    "heroImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
-    "heroCaption": "Cursor CEO Michael Truell, 25, has turned an AI coding tool into the most fought-over asset in Silicon Valley. Cursor; SpaceX; Business Insider",
-    "paragraphs": [
-      "When SpaceX disclosed that it had secured the right to buy Cursor for $60 billion later this year, the deal instantly made the AI coding startup one of the most valuable private companies in the world — and turned its 25-year-old chief executive, Michael Truell, into Silicon Valley's newest billionaire founder.",
-      "Truell enrolled at MIT, finished a single year, and left to build what would become Cursor with three classmates. At 18 he had already interned at Google, working on the large language models that ranked content in users' feeds. Forbes now pegs his net worth at roughly $1.3 billion.",
-      "The structure of the agreement is unusual: if Elon Musk's rocket company declines to exercise its option, it will still pay Cursor $10 billion for the work the two companies do together — a floor that all but guarantees the startup a windfall either way.",
-      "People close to the talks say the tie-up is really about catching Anthropic. The AI lab's Claude Code product helped push its annualized revenue past $30 billion as of April, and xAI has fallen well behind both Claude Code and OpenAI's Codex in developer tools.",
-      "\"This isn't a rocket story, it's a coding story,\" said one investor briefed on the deal. \"Whoever owns the tool developers live in all day owns the next platform. Musk knows he's behind in that race, and Cursor is the fastest way back into it.\""
-    ]
-  },
-  "related_articles": [
-    {
-      "headline": "Inside Anthropic's race to keep Claude Code ahead of every AI lab in Silicon Valley",
-      "category": "Tech",
-      "href": "https://www.businessinsider.com/tech"
-    },
-    {
-      "headline": "Meet the four MIT dropouts who turned a side project into a $60 billion company",
-      "category": "Strategy",
-      "href": "https://www.businessinsider.com/strategy"
-    },
-    {
-      "headline": "Elon Musk's xAI is quietly losing the coding-tools war. The Cursor deal is his reset.",
-      "category": "Tech",
-      "href": "https://www.businessinsider.com/tech"
-    },
-    {
-      "headline": "What a $60 billion price tag says about the AI bubble — and who's still buying",
-      "category": "Markets",
-      "href": "https://markets.businessinsider.com"
-    },
-    {
-      "headline": "OpenAI's Codex vs. Claude Code vs. Cursor: the developer-tool wars, explained",
-      "category": "Tech",
-      "href": "https://www.businessinsider.com/tech"
-    },
-    {
-      "headline": "The 25-year-old billionaires rewriting Silicon Valley's founder playbook",
-      "category": "Strategy",
-      "href": "https://www.businessinsider.com/strategy"
-    },
-    {
-      "headline": "Why every venture firm suddenly wants a stake in an AI coding startup",
-      "category": "Finance",
-      "href": "https://www.businessinsider.com/finance"
-    },
-    {
-      "headline": "How SpaceX is spending its way into the AI arms race",
-      "category": "Tech",
-      "href": "https://www.businessinsider.com/tech"
+  "buttons": {
+    "primary": {
+      "background_color": "#0A0A0A",
+      "text_color": "#FFFFFF",
+      "border_radius": "4px",
+      "padding": "16.5px 0px",
+      "font_size": "14px",
+      "font_weight": 600,
+      "text_transform": null,
+      "letter_spacing": "0.28px",
+      "source": "extracted"
     }
-  ],
+  },
+  "extraction_quality": {
+    "extracted_token_count": 21,
+    "fallback_token_count": 2,
+    "total_tokens": 23,
+    "extraction_ratio": 0.91,
+    "fallback_tokens": [
+      "fonts.type_scale.article_body",
+      "fonts.type_scale.utility_bar"
+    ]
+  },
   "metadata": {
-    "analysis_date": "2026-06-15",
+    "analysis_date": "2026-06-16",
     "source_url": "https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6",
-    "generator": "brand-kit-generator v2.1.0",
-    "analysis_method": "Automated web crawling with Puppeteer computed-style extraction",
-    "extraction_method": "Visual brand tokens (colors, fonts, logo, buttons, photo style, header) are reconciled from a live Puppeteer crawl of businessinsider.com — primary accent #002AFF (blue, not the legacy orange), Garnett headline/UI type with a Tiempos editorial serif, white masthead, square 0px corners. The article context (headline, deck, byline, hero, body, related cards) is the requested Cursor/Truell story; BI's chrome tokens are publisher-level and apply across articles. A handful of obvious mis-extractions were corrected and noted inline: article_title_hero and buttons font sizes, button horizontal padding, and the graphics badge list (page UI chrome was dropped, keeping the real coloured CTAs and deriving LIVE/BREAKING/VIDEO from content_labels).",
+    "analysis_method": "Multi-page crawl (10 pages) with Puppeteer computed-style extraction, merged by cross-page token frequency",
+    "pages_crawled": [
+      {
+        "url": "https://www.businessinsider.com/cursor-ceo-michael-truell-spacex-elon-musk-anthropic-2026-6",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com",
+        "role": "homepage"
+      },
+      {
+        "url": "https://www.businessinsider.com/subscription",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com/business",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com/strategy",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com/economy",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com/finance",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com/retail",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com/careers",
+        "role": "section"
+      },
+      {
+        "url": "https://www.businessinsider.com/law",
+        "role": "section"
+      }
+    ],
     "extraction_quality": {
-      "extracted_token_count": 17,
-      "fallback_token_count": 4,
-      "total_tokens": 21,
-      "extraction_ratio": 0.81,
+      "extracted_token_count": 21,
+      "fallback_token_count": 2,
+      "total_tokens": 23,
+      "extraction_ratio": 0.91,
       "fallback_tokens": [
-        "colors.backgrounds.section",
-        "fonts.type_scale.article_title_card",
         "fonts.type_scale.article_body",
         "fonts.type_scale.utility_bar"
       ]
