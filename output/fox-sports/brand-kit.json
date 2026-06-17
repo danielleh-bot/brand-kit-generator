@@ -1,0 +1,401 @@
+{
+  "brand": {
+    "name": "FOX Sports",
+    "tagline": "Sports News, Scores, Highlights & Analysis",
+    "website": "https://www.foxsports.com",
+    "description": "FOX Sports is a premier sports media brand covering NFL, MLB, NBA, Soccer, NASCAR, College Football, and more. Part of the Fox Corporation.",
+    "language": "en"
+  },
+  "logos": {
+    "primary": {
+      "type": "text",
+      "text": "FOX SPORTS",
+      "font": "Custom FOX brand typeface (bold condensed uppercase)",
+      "color": "#FFFFFF",
+      "background": "#0B0E1A",
+      "treatment": "FOX wordmark followed by SPORTS in condensed uppercase. White on dark navy header. The FOX text is heavier weight, SPORTS is lighter."
+    },
+    "brand_mark": {
+      "name": "FOX Sports icon",
+      "description": "Stylized bold FOX SPORTS wordmark used as brand identifier across digital and broadcast properties.",
+      "background": "#0B0E1A",
+      "foreground": "#FFFFFF"
+    },
+    "favicon_url": "https://b.fssta.com/uploads/application/fscom/favicons/favicon-32x32.png",
+    "variants": []
+  },
+  "colors": {
+    "primary": {
+      "name": "FOX Blue",
+      "hex": "#003087",
+      "rgb": "rgb(0, 48, 135)",
+      "usage": [
+        "Primary brand accent",
+        "CTA buttons",
+        "Active nav indicators",
+        "Section labels"
+      ],
+      "source": "extracted"
+    },
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#002A78",
+        "rgb": "rgb(0, 42, 120)",
+        "name": "Darker FOX Blue",
+        "usage": "Hover states",
+        "source": "derived"
+      },
+      "darken_10": {
+        "hex": "#002469",
+        "rgb": "rgb(0, 36, 105)",
+        "name": "Deepest FOX Blue",
+        "usage": "Active/pressed states",
+        "source": "derived"
+      }
+    },
+    "secondary": {
+      "name": "FOX Light Blue",
+      "hex": "#1A8CFF",
+      "rgb": "rgb(26, 140, 255)",
+      "usage": [
+        "Links",
+        "Interactive elements",
+        "Score highlights"
+      ],
+      "source": "extracted"
+    },
+    "text": {
+      "primary": {
+        "name": "Near Black",
+        "hex": "#111111",
+        "rgb": "rgb(17, 17, 17)",
+        "usage": [
+          "Headlines",
+          "Article body"
+        ],
+        "source": "extracted"
+      },
+      "secondary": {
+        "name": "Dark Gray",
+        "hex": "#555555",
+        "rgb": "rgb(85, 85, 85)",
+        "usage": [
+          "Subheadlines",
+          "Secondary text"
+        ],
+        "source": "extracted"
+      },
+      "tertiary": {
+        "name": "Medium Gray",
+        "hex": "#888888",
+        "rgb": "rgb(136, 136, 136)",
+        "usage": [
+          "Timestamps",
+          "Meta text",
+          "Bylines"
+        ],
+        "source": "extracted"
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "rgb": "rgb(255, 255, 255)",
+        "usage": [
+          "Page background",
+          "Card backgrounds"
+        ],
+        "source": "extracted"
+      },
+      "section": {
+        "name": "Light Gray",
+        "hex": "#F4F4F4",
+        "rgb": "rgb(244, 244, 244)",
+        "usage": [
+          "Section backgrounds",
+          "Feed background"
+        ],
+        "source": "extracted"
+      },
+      "secondary": {
+        "name": "Lighter Gray",
+        "hex": "#E8E8E8",
+        "rgb": "rgb(232, 232, 232)",
+        "usage": [
+          "Dividers",
+          "Borders"
+        ],
+        "source": "extracted"
+      },
+      "dark": {
+        "name": "FOX Dark Navy",
+        "hex": "#0B0E1A",
+        "rgb": "rgb(11, 14, 26)",
+        "usage": [
+          "Header background",
+          "Footer background",
+          "Dark sections"
+        ],
+        "source": "extracted"
+      }
+    },
+    "accents": {
+      "warning_yellow": {
+        "name": "Score Yellow",
+        "hex": "#FFB800",
+        "rgb": "rgb(255, 184, 0)",
+        "usage": [
+          "Live indicators",
+          "Score alerts"
+        ],
+        "source": "extracted"
+      },
+      "negative_red": {
+        "name": "Live Red",
+        "hex": "#E31837",
+        "rgb": "rgb(227, 24, 55)",
+        "usage": [
+          "Live badges",
+          "Breaking news",
+          "Alerts"
+        ],
+        "source": "extracted"
+      },
+      "positive_green": {
+        "name": "Win Green",
+        "hex": "#00A651",
+        "rgb": "rgb(0, 166, 81)",
+        "usage": [
+          "Positive stats",
+          "Win indicators"
+        ],
+        "source": "extracted"
+      }
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Roboto Condensed",
+      "fallbacks": [
+        "Arial Narrow",
+        "sans-serif"
+      ],
+      "weights": {
+        "regular": 400,
+        "bold": 700
+      },
+      "usage": "Headlines, navigation, section labels, card titles",
+      "source": "extracted",
+      "is_generic": false
+    },
+    "secondary": {
+      "family": "Roboto",
+      "fallbacks": [
+        "Helvetica Neue",
+        "Arial",
+        "sans-serif"
+      ],
+      "weights": {
+        "regular": 400,
+        "medium": 500,
+        "bold": 700
+      },
+      "usage": "Body text, meta text, bylines",
+      "source": "extracted",
+      "is_generic": false
+    },
+    "tertiary": [],
+    "type_scale": {
+      "section_headings": {
+        "size": "24px",
+        "weight": 700,
+        "family": "Roboto Condensed",
+        "source": "extracted",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.02em"
+      },
+      "article_title_hero": {
+        "size": "28px",
+        "weight": 700,
+        "family": "Roboto Condensed",
+        "source": "extracted",
+        "line_height": "1.15"
+      },
+      "article_title_card": {
+        "size": "16px",
+        "weight": 700,
+        "family": "Roboto Condensed",
+        "source": "extracted",
+        "line_height": "1.25"
+      },
+      "article_lead": {
+        "size": "18px",
+        "weight": 400,
+        "family": "Roboto",
+        "source": "extracted"
+      },
+      "article_body": {
+        "size": "17px",
+        "weight": 400,
+        "family": "Roboto",
+        "source": "extracted",
+        "line_height": "1.65"
+      },
+      "navigation": {
+        "size": "13px",
+        "weight": 700,
+        "family": "Roboto Condensed",
+        "source": "extracted",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.05em"
+      },
+      "utility_bar": {
+        "size": "11px",
+        "weight": 400,
+        "family": "Roboto",
+        "source": "extracted"
+      },
+      "category_pills": {
+        "size": "11px",
+        "weight": 700,
+        "family": "Roboto Condensed",
+        "source": "extracted",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.04em"
+      },
+      "buttons": {
+        "size": "14px",
+        "weight": 700,
+        "family": "Roboto Condensed",
+        "source": "extracted"
+      },
+      "meta_text": {
+        "size": "12px",
+        "weight": 400,
+        "family": "Roboto",
+        "source": "extracted"
+      }
+    }
+  },
+  "brand_voice": {
+    "language": "en",
+    "headline_style": {
+      "format": "Title Case",
+      "case": "title case"
+    },
+    "content_labels": {
+      "live": true,
+      "breaking": true,
+      "video": true,
+      "analysis": true
+    },
+    "content_distinction": {
+      "news_opinion_split": true,
+      "opinion_markers": [
+        "Analysis",
+        "Opinion",
+        "Column"
+      ]
+    }
+  },
+  "photo_style": {
+    "thumbnail_format": {
+      "aspect_ratio": "16:9",
+      "border_radius": "0px"
+    },
+    "video_thumbnails": {
+      "indicator": "play-button-overlay",
+      "indicator_color": "#FFFFFF"
+    },
+    "author_photos": {
+      "shape": "circle",
+      "size": "36px"
+    }
+  },
+  "graphics": {
+    "style": "Bold sports photography with strong typography overlays",
+    "elements": [
+      "Score tickers",
+      "Game highlights",
+      "Player stats"
+    ]
+  },
+  "icons": {
+    "style": "SVG-based, minimal line icons",
+    "count_detected": 12,
+    "social_media_icons": {
+      "platforms": [
+        "Facebook",
+        "Twitter",
+        "Instagram",
+        "YouTube"
+      ],
+      "placement": "Footer"
+    }
+  },
+  "layout_patterns": {
+    "grid": "Single column mobile, responsive grid desktop",
+    "header": {
+      "layers": [
+        {
+          "name": "Main nav",
+          "background_color": "#0B0E1A",
+          "is_dark": true
+        }
+      ],
+      "background_color": "#0B0E1A",
+      "is_dark": true,
+      "accent_rule_color": "#003087"
+    },
+    "content_cards": {
+      "border_radius": "0px",
+      "shadow": "none",
+      "border": "1px solid #E8E8E8"
+    },
+    "footer": {
+      "sections": [
+        "About",
+        "Help",
+        "Legal",
+        "Social"
+      ]
+    }
+  },
+  "spacing": {
+    "card_gap": "1px",
+    "section_padding": "16px"
+  },
+  "buttons": {
+    "primary": {
+      "background_color": "#003087",
+      "text_color": "#FFFFFF",
+      "border_radius": "4px",
+      "padding": "10px 20px",
+      "font_size": "14px",
+      "font_weight": 700,
+      "text_transform": "uppercase",
+      "letter_spacing": "0.04em",
+      "source": "extracted"
+    }
+  },
+  "extraction_quality": {
+    "extracted_token_count": 17,
+    "fallback_token_count": 0,
+    "total_tokens": 17,
+    "extraction_ratio": 1,
+    "fallback_tokens": []
+  },
+  "metadata": {
+    "analysis_date": "2026-06-17",
+    "source_url": "https://www.foxsports.com/stories/soccer/usmnt-2026-fifa-world-cup-roster-prediction",
+    "analysis_method": "Automated web crawling with Puppeteer computed style extraction",
+    "extraction_quality": {
+      "extracted_token_count": 17,
+      "fallback_token_count": 0,
+      "total_tokens": 17,
+      "extraction_ratio": 1,
+      "fallback_tokens": []
+    }
+  }
+}
