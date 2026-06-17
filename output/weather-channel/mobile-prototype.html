@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Weather Channel — Mobile TrueNative Feed Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --twc-navy: #0C2340;
+      --twc-blue: #0078D4;
+      --twc-blue-dark: #006CBF;
+      --twc-text: #1B1B1B;
+      --twc-text-secondary: #555555;
+      --twc-text-tertiary: #8B8D8E;
+      --twc-bg: #FFFFFF;
+      --twc-bg-section: #F2F4F4;
+      --twc-border: #E8EAEB;
+      --twc-alert-red: #D72B2B;
+      --twc-alert-yellow: #FFBF00;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --font-serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background: #1a1a2e;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* iPhone 15 Pro frame */
+    .iphone-frame {
+      width: 393px;
+      background: #000;
+      border-radius: 50px;
+      padding: 14px;
+      box-shadow:
+        0 0 0 2px #333,
+        0 40px 80px rgba(0,0,0,0.5),
+        inset 0 0 4px rgba(255,255,255,0.05);
+      position: relative;
+    }
+    .iphone-frame::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 34px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 100;
+    }
+    .iphone-screen {
+      width: 365px;
+      height: 800px;
+      background: var(--twc-bg);
+      border-radius: 38px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+    .iphone-screen::-webkit-scrollbar { display: none; }
+
+    /* Status bar */
+    .status-bar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px 8px;
+      background: var(--twc-navy);
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .status-bar-icons { display: flex; gap: 6px; align-items: center; }
+    .status-bar-icons svg { width: 16px; height: 12px; fill: #fff; }
+
+    /* TWC Mobile Header */
+    .twc-header {
+      background: var(--twc-navy);
+      padding: 0 16px 12px;
+      position: sticky;
+      top: 38px;
+      z-index: 80;
+    }
+    .twc-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+    }
+    .twc-logo {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .twc-header-icons { display: flex; gap: 16px; align-items: center; }
+    .twc-header-icons svg { width: 20px; height: 20px; fill: rgba(255,255,255,0.85); }
+
+    /* Horizontal scroll nav */
+    .twc-nav {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin: 0 -16px;
+      padding: 0 16px;
+    }
+    .twc-nav::-webkit-scrollbar { display: none; }
+    .twc-nav a {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .twc-nav a.active {
+      color: #fff;
+      border-bottom-color: var(--twc-blue);
+    }
+
+    /* Article content */
+    .article-section { padding: 16px 16px 0; }
+
+    .article-category {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--twc-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+    .article-headline {
+      font-family: var(--font-sans);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--twc-text);
+      margin-bottom: 10px;
+    }
+    .article-deck {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--twc-text-secondary);
+      margin-bottom: 14px;
+    }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 0;
+      border-top: 1px solid var(--twc-border);
+      border-bottom: 1px solid var(--twc-border);
+      margin-bottom: 16px;
+    }
+    .article-meta-author {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--twc-text);
+    }
+    .article-meta-date {
+      font-size: 12px;
+      color: var(--twc-text-tertiary);
+    }
+
+    /* Hero image */
+    .article-hero {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      background: var(--twc-bg-section);
+    }
+    .article-hero-caption {
+      font-size: 11px;
+      color: var(--twc-text-tertiary);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    /* Article body */
+    .article-body {
+      padding: 0 16px;
+    }
+    .article-body p {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--twc-text);
+      margin-bottom: 18px;
+    }
+
+    /* Share toolbar */
+    .share-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 16px;
+      border-top: 1px solid var(--twc-border);
+      border-bottom: 1px solid var(--twc-border);
+      margin: 8px 0 0;
+    }
+    .share-toolbar svg { width: 18px; height: 18px; fill: var(--twc-text-tertiary); }
+
+    /* ================================================
+       TABOOLA TRUENATIVE FEED
+       Preserves Weather Channel's existing feed layout:
+       single-column stacked cards on mobile with
+       thumbnail-left / text-right pattern
+       ================================================ */
+    .feed-section {
+      padding: 16px;
+      background: var(--twc-bg-section);
+      margin-top: 0;
+    }
+
+    .feed-divider {
+      height: 3px;
+      background: var(--twc-blue);
+      margin: 0;
+    }
+
+    .feed-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--twc-border);
+    }
+    .feed-header-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--twc-blue);
+      flex-shrink: 0;
+    }
+    .feed-header-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--twc-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Horizontal card (thumbnail left, text right) — TWC mobile pattern */
+    .feed-card-h {
+      display: flex;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--twc-border);
+      background: transparent;
+    }
+    .feed-card-h:last-child { border-bottom: none; }
+
+    .feed-card-h-thumb {
+      flex-shrink: 0;
+      width: 120px;
+      height: 80px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--twc-border);
+      position: relative;
+    }
+    .feed-card-h-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .feed-card-h-thumb .sponsored-badge {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      font-size: 9px;
+      padding: 2px 5px;
+      border-radius: 2px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .feed-card-h-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+    .feed-card-h-headline {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--twc-text);
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .feed-card-h-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--twc-text-tertiary);
+    }
+    .feed-card-h-source {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .feed-card-h-cta {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--twc-blue);
+      margin-left: auto;
+    }
+
+    /* Full-width card — used for first sponsored item in each block */
+    .feed-card-full {
+      margin-bottom: 14px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .feed-card-full-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--twc-border);
+      position: relative;
+    }
+    .feed-card-full-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .feed-card-full-body {
+      padding: 12px 14px;
+    }
+    .feed-card-full-headline {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--twc-text);
+      margin-bottom: 8px;
+    }
+    .feed-card-full-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .feed-card-full-source {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--twc-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .feed-card-full-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--twc-blue);
+      border: 1px solid var(--twc-blue);
+      border-radius: 4px;
+      background: transparent;
+    }
+    .feed-card-full .sponsored-badge-overlay {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 9px;
+      padding: 3px 6px;
+      border-radius: 3px;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .native-category-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 9px;
+      padding: 3px 6px;
+      border-radius: 3px;
+      background: var(--twc-blue);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    /* Taboola attribution */
+    .feed-attribution {
+      text-align: center;
+      padding: 14px 0 8px;
+      font-size: 11px;
+      color: var(--twc-text-tertiary);
+    }
+    .feed-attribution strong { font-weight: 700; }
+
+    /* Home indicator */
+    .home-indicator {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--twc-bg-section);
+    }
+    .home-indicator-bar {
+      width: 134px;
+      height: 5px;
+      background: #1B1B1B;
+      border-radius: 100px;
+      opacity: 0.2;
+    }
+
+    .img-fallback {
+      background: linear-gradient(135deg, var(--twc-blue), var(--twc-navy));
+    }
+  </style>
+</head>
+<body>
+
+<div class="iphone-frame">
+  <div class="iphone-screen">
+
+    <!-- iOS Status Bar -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-bar-icons">
+        <svg viewBox="0 0 17 12"><path d="M1.5 4h1.2c.4 0 .7.3.7.7v6.5c0 .4-.3.8-.7.8H1.5a.7.7 0 01-.7-.8V4.8c0-.4.3-.7.7-.7zm4.2-1.7h1.2c.4 0 .7.3.7.7v8.2c0 .4-.3.8-.7.8H5.7a.7.7 0 01-.7-.8V3c0-.4.3-.7.7-.7zm4.2-1.6h1.2c.4 0 .7.3.7.7v9.8c0 .4-.3.8-.7.8H9.9a.7.7 0 01-.7-.8V1.4c0-.4.3-.7.7-.7zm4-1h1.3c.4 0 .7.4.7.8v10.7c0 .4-.3.8-.7.8h-1.3a.7.7 0 01-.7-.8V1c0-.5.3-.8.7-.8z"/></svg>
+        <svg viewBox="0 0 15 12"><path d="M7.5.8C4.8.8 2.3 1.8.5 3.5l1.2 1.2c1.5-1.4 3.5-2.3 5.8-2.3s4.3.9 5.8 2.3l1.2-1.2C12.7 1.8 10.2.8 7.5.8zm0 3.6c-1.8 0-3.4.7-4.6 1.8L4.1 7.4c.9-.9 2.1-1.4 3.4-1.4 1.3 0 2.5.5 3.4 1.4l1.2-1.2A6.5 6.5 0 007.5 4.4zm0 3.6c-.9 0-1.7.4-2.3 1l2.3 2.6 2.3-2.6c-.6-.6-1.4-1-2.3-1z"/></svg>
+        <svg viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" ry="2" fill="none" stroke="#fff" stroke-width="1.2"/><rect x="22" y="3.5" width="2" height="5" rx="1" fill="#fff" opacity="0.4"/><rect x="1.5" y="2.5" width="16" height="7" rx="1" fill="#fff"/></svg>
+      </div>
+    </div>
+
+    <!-- TWC Header -->
+    <div class="twc-header">
+      <div class="twc-header-top">
+        <div class="twc-logo">The Weather Channel</div>
+        <div class="twc-header-icons">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </div>
+      </div>
+      <div class="twc-nav">
+        <a href="#">Forecasts</a>
+        <a href="#">Radar</a>
+        <a href="#">Severe</a>
+        <a href="#" class="active">News</a>
+        <a href="#">Video</a>
+        <a href="#">Sports</a>
+        <a href="#">Safety</a>
+        <a href="#">Health</a>
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="article-section">
+      <div class="article-category">Sports & Recreation</div>
+      <h1 class="article-headline">Here's where World Cup heat could be the biggest concern</h1>
+      <p class="article-deck">With temperatures expected to soar above 100°F during the 2026 FIFA World Cup, athletes and fans heading to certain host cities face serious heat-related risks.</p>
+      <div class="article-meta">
+        <div>
+          <div class="article-meta-author">Jonathan Erdman and Chris Dolce</div>
+          <div class="article-meta-date">June 2, 2026</div>
+        </div>
+      </div>
+
+      <img class="article-hero" src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="World Cup heat concerns"
+           onerror="this.onerror=null;this.classList.add('img-fallback');this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';" />
+      <p class="article-hero-caption">Extreme heat could pose serious risks at several 2026 World Cup venues across the United States and Mexico.</p>
+    </div>
+
+    <!-- Article Body -->
+    <div class="article-body">
+      <p>The 2026 FIFA World Cup is expected to be the largest sporting event ever held, with matches spread across 16 cities in the United States, Mexico, and Canada this summer. But for several of those host cities, extreme heat will be a major factor for players and the millions of fans attending matches.</p>
+      <p>Dallas, Houston, and several Mexican host cities — including Guadalajara and Monterrey — are forecast to see temperatures well above 100°F during peak tournament days in late June and July. Even with evening kickoff times, heat index values could remain dangerously high.</p>
+      <p>FIFA has built cooling breaks and hydration protocols into match schedules, but sports medicine experts warn that the combination of humidity, sustained physical exertion, and packed stadiums creates compounding risk.</p>
+      <p>Northern venues like Seattle, Vancouver, and Toronto will offer cooler conditions, but organizers aren't taking any chances — mobile cooling stations, misting fans, and extended shade structures are being deployed across all 16 host cities.</p>
+    </div>
+
+    <!-- Share Toolbar -->
+    <div class="share-toolbar">
+      <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 000-6 3 3 0 00-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 000 6c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65a2.93 2.93 0 002.92 2.92A2.93 2.93 0 0021 18.92 2.93 2.93 0 0018 16.08z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M17 3H7a2 2 0 00-2 2v16l7-3 7 3V5a2 2 0 00-2-2z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/></svg>
+    </div>
+
+    <!-- ============================================
+         TABOOLA TRUENATIVE FEED
+         Weather Channel mobile layout: stacked
+         horizontal cards (thumb-left, text-right)
+         with occasional full-width featured cards.
+         This preserves their existing feed pattern.
+         ============================================ -->
+
+    <div class="feed-divider"></div>
+    <div class="feed-section">
+
+      <!-- Sponsored Stories -->
+      <div class="feed-header">
+        <div class="feed-header-dot"></div>
+        <span class="feed-header-label">Sponsored Stories</span>
+      </div>
+
+      <!-- Full-width sponsored card -->
+      <div class="feed-card-full">
+        <div class="feed-card-full-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=225&fit=crop&auto=format&q=75" alt="Lexus RX 500h"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge-overlay">Sponsored</span>
+        </div>
+        <div class="feed-card-full-body">
+          <div class="feed-card-full-headline">Experience Amazing — The All-New RX 500h</div>
+          <div class="feed-card-full-meta">
+            <span class="feed-card-full-source">Lexus</span>
+            <span class="feed-card-full-cta">Build Yours</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontal sponsored cards -->
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=240&h=160&fit=crop&auto=format&q=75" alt="T-Mobile"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge">Ad</span>
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Switch and Save with Our Best Unlimited Plan</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">T-Mobile</span>
+            <span class="feed-card-h-cta">See Plans</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb">
+          <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=240&h=160&fit=crop&auto=format&q=75" alt="SmartAsset"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge">Ad</span>
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Top Financial Advisors Near You — See the List</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">SmartAsset</span>
+            <span class="feed-card-h-cta">Learn More</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=240&h=160&fit=crop&auto=format&q=75" alt="Norton"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge">Ad</span>
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Protect Your Devices — Award-Winning Security</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">Norton</span>
+            <span class="feed-card-h-cta">Download</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- More From The Weather Channel (Native) -->
+      <div class="feed-header" style="margin-top: 20px;">
+        <div class="feed-header-dot"></div>
+        <span class="feed-header-label">More From The Weather Channel</span>
+      </div>
+
+      <!-- Full-width native card -->
+      <div class="feed-card-full">
+        <div class="feed-card-full-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="World Cup heat"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="native-category-badge">Sports & Recreation</span>
+        </div>
+        <div class="feed-card-full-body">
+          <div class="feed-card-full-headline">Here's where World Cup heat could be the biggest concern</div>
+          <div class="feed-card-full-meta">
+            <span class="feed-card-full-source">The Weather Channel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1500740516770-92bd004b996e?w=240&h=160&fit=crop&auto=format&q=75" alt="World Cup forecast"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">World Cup 2026 city-by-city weather forecast: What fans and players can expect</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">The Weather Channel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=240&h=160&fit=crop&auto=format&q=75" alt="Heat dome"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Dangerous heat dome building across the southern US this week</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">The Weather Channel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=240&h=160&fit=crop&auto=format&q=75" alt="Heat safety"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">How to stay safe in extreme heat: tips from emergency experts</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">The Weather Channel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mixed Sponsored -->
+      <div class="feed-header" style="margin-top: 20px;">
+        <div class="feed-header-dot"></div>
+        <span class="feed-header-label">Sponsored Stories</span>
+      </div>
+
+      <div class="feed-card-full">
+        <div class="feed-card-full-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=225&fit=crop&auto=format&q=75" alt="Samsung Galaxy"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge-overlay">Sponsored</span>
+        </div>
+        <div class="feed-card-full-body">
+          <div class="feed-card-full-headline">The New Galaxy S25 Ultra — Pre-Order Today</div>
+          <div class="feed-card-full-meta">
+            <span class="feed-card-full-source">Samsung</span>
+            <span class="feed-card-full-cta">Shop Now</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb">
+          <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=240&h=160&fit=crop&auto=format&q=75" alt="MasterClass"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge">Ad</span>
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Learn from the Best — New Classes Available</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">MasterClass</span>
+            <span class="feed-card-h-cta">Start Now</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending Native -->
+      <div class="feed-header" style="margin-top: 20px;">
+        <div class="feed-header-dot"></div>
+        <span class="feed-header-label">Trending on The Weather Channel</span>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=240&h=160&fit=crop&auto=format&q=75" alt="Summer outlook"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Summer 2026 outlook: Hotter-than-average temperatures expected across most of US</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">The Weather Channel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=240&h=160&fit=crop&auto=format&q=75" alt="Heat illness"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">The most dangerous heat-related illnesses and how to spot them</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">The Weather Channel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb" style="position:relative;">
+          <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=240&h=160&fit=crop&auto=format&q=75" alt="Stadium cooling"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">These outdoor stadiums have the best cooling systems for summer events</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">The Weather Channel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Sponsored -->
+      <div class="feed-card-h" style="margin-top: 10px;">
+        <div class="feed-card-h-thumb">
+          <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=240&h=160&fit=crop&auto=format&q=75" alt="Calm"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge">Ad</span>
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Sleep Better Tonight with Guided Meditations</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">Calm</span>
+            <span class="feed-card-h-cta">Try Free</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feed-card-h">
+        <div class="feed-card-h-thumb">
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=240&h=160&fit=crop&auto=format&q=75" alt="HelloFresh"
+               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <span class="sponsored-badge">Ad</span>
+        </div>
+        <div class="feed-card-h-body">
+          <div class="feed-card-h-headline">Farm-Fresh Meals Delivered to Your Door Weekly</div>
+          <div class="feed-card-h-meta">
+            <span class="feed-card-h-source">HelloFresh</span>
+            <span class="feed-card-h-cta">Get Started</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Taboola Attribution -->
+      <div class="feed-attribution">
+        by <strong>Taboola</strong> | Sponsored Links
+      </div>
+    </div>
+
+    <!-- Home indicator -->
+    <div class="home-indicator">
+      <div class="home-indicator-bar"></div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
