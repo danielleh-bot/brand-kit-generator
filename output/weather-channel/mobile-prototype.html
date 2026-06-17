@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Weather Channel — Mobile TrueNative Feed Prototype</title>
+  <title>The Weather Channel - Mobile TrueNative Feed Prototype</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -266,7 +266,7 @@
       letter-spacing: 0.03em;
     }
 
-    /* Horizontal card (thumbnail left, text right) — TWC mobile pattern */
+    /* Horizontal card (thumbnail left, text right) - TWC mobile pattern */
     .feed-card-h {
       display: flex;
       gap: 12px;
@@ -343,7 +343,7 @@
       margin-left: auto;
     }
 
-    /* Full-width card — used for first sponsored item in each block */
+    /* Full-width card - used for first sponsored item in each block */
     .feed-card-full {
       margin-bottom: 14px;
       border-radius: 6px;
@@ -454,6 +454,24 @@
     .img-fallback {
       background: linear-gradient(135deg, var(--twc-blue), var(--twc-navy));
     }
+
+    .feed-card-h-thumb.img-fallback,
+    .feed-card-full-thumb.img-fallback {
+      background: linear-gradient(135deg, var(--twc-blue) 0%, var(--twc-navy) 100%);
+    }
+    .feed-card-h-thumb.img-fallback::after,
+    .feed-card-full-thumb.img-fallback::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.06) 0px,
+        rgba(255,255,255,0.06) 6px,
+        transparent 6px,
+        transparent 12px
+      );
+    }
   </style>
 </head>
 <body>
@@ -506,16 +524,17 @@
       </div>
 
       <img class="article-hero" src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="World Cup heat concerns"
-           onerror="this.onerror=null;this.classList.add('img-fallback');this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';" />
+           data-fallback="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=80"
+           onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.classList.add('img-fallback');" />
       <p class="article-hero-caption">Extreme heat could pose serious risks at several 2026 World Cup venues across the United States and Mexico.</p>
     </div>
 
     <!-- Article Body -->
     <div class="article-body">
       <p>The 2026 FIFA World Cup is expected to be the largest sporting event ever held, with matches spread across 16 cities in the United States, Mexico, and Canada this summer. But for several of those host cities, extreme heat will be a major factor for players and the millions of fans attending matches.</p>
-      <p>Dallas, Houston, and several Mexican host cities — including Guadalajara and Monterrey — are forecast to see temperatures well above 100°F during peak tournament days in late June and July. Even with evening kickoff times, heat index values could remain dangerously high.</p>
+      <p>Dallas, Houston, and several Mexican host cities, including Guadalajara and Monterrey, are forecast to see temperatures well above 100°F during peak tournament days in late June and July. Even with evening kickoff times, heat index values could remain dangerously high.</p>
       <p>FIFA has built cooling breaks and hydration protocols into match schedules, but sports medicine experts warn that the combination of humidity, sustained physical exertion, and packed stadiums creates compounding risk.</p>
-      <p>Northern venues like Seattle, Vancouver, and Toronto will offer cooler conditions, but organizers aren't taking any chances — mobile cooling stations, misting fans, and extended shade structures are being deployed across all 16 host cities.</p>
+      <p>Northern venues like Seattle, Vancouver, and Toronto will offer cooler conditions, but organizers aren't taking any chances. Mobile cooling stations, misting fans, and extended shade structures are being deployed across all 16 host cities.</p>
     </div>
 
     <!-- Share Toolbar -->
@@ -546,11 +565,12 @@
       <div class="feed-card-full">
         <div class="feed-card-full-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=225&fit=crop&auto=format&q=75" alt="Lexus RX 500h"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&h=225&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge-overlay">Sponsored</span>
         </div>
         <div class="feed-card-full-body">
-          <div class="feed-card-full-headline">Experience Amazing — The All-New RX 500h</div>
+          <div class="feed-card-full-headline">Experience Amazing: The All-New RX 500h</div>
           <div class="feed-card-full-meta">
             <span class="feed-card-full-source">Lexus</span>
             <span class="feed-card-full-cta">Build Yours</span>
@@ -562,7 +582,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb">
           <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=240&h=160&fit=crop&auto=format&q=75" alt="T-Mobile"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge">Ad</span>
         </div>
         <div class="feed-card-h-body">
@@ -577,11 +598,12 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb">
           <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=240&h=160&fit=crop&auto=format&q=75" alt="SmartAsset"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge">Ad</span>
         </div>
         <div class="feed-card-h-body">
-          <div class="feed-card-h-headline">Top Financial Advisors Near You — See the List</div>
+          <div class="feed-card-h-headline">Top Financial Advisors Near You: See the List</div>
           <div class="feed-card-h-meta">
             <span class="feed-card-h-source">SmartAsset</span>
             <span class="feed-card-h-cta">Learn More</span>
@@ -592,11 +614,12 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb">
           <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=240&h=160&fit=crop&auto=format&q=75" alt="Norton"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge">Ad</span>
         </div>
         <div class="feed-card-h-body">
-          <div class="feed-card-h-headline">Protect Your Devices — Award-Winning Security</div>
+          <div class="feed-card-h-headline">Protect Your Devices With Award-Winning Security</div>
           <div class="feed-card-h-meta">
             <span class="feed-card-h-source">Norton</span>
             <span class="feed-card-h-cta">Download</span>
@@ -614,7 +637,8 @@
       <div class="feed-card-full">
         <div class="feed-card-full-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80" alt="World Cup heat"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&h=225&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="native-category-badge">Sports & Recreation</span>
         </div>
         <div class="feed-card-full-body">
@@ -628,7 +652,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1500740516770-92bd004b996e?w=240&h=160&fit=crop&auto=format&q=75" alt="World Cup forecast"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
         </div>
         <div class="feed-card-h-body">
           <div class="feed-card-h-headline">World Cup 2026 city-by-city weather forecast: What fans and players can expect</div>
@@ -641,7 +666,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=240&h=160&fit=crop&auto=format&q=75" alt="Heat dome"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1561553543-e4c7b608b98c?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
         </div>
         <div class="feed-card-h-body">
           <div class="feed-card-h-headline">Dangerous heat dome building across the southern US this week</div>
@@ -654,7 +680,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=240&h=160&fit=crop&auto=format&q=75" alt="Heat safety"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
         </div>
         <div class="feed-card-h-body">
           <div class="feed-card-h-headline">How to stay safe in extreme heat: tips from emergency experts</div>
@@ -672,12 +699,13 @@
 
       <div class="feed-card-full">
         <div class="feed-card-full-thumb" style="position:relative;">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=225&fit=crop&auto=format&q=75" alt="Samsung Galaxy"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+          <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=225&fit=crop&auto=format&q=75" alt="Samsung Galaxy"
+               data-fallback="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=225&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge-overlay">Sponsored</span>
         </div>
         <div class="feed-card-full-body">
-          <div class="feed-card-full-headline">The New Galaxy S25 Ultra — Pre-Order Today</div>
+          <div class="feed-card-full-headline">The New Galaxy S25 Ultra: Pre-Order Today</div>
           <div class="feed-card-full-meta">
             <span class="feed-card-full-source">Samsung</span>
             <span class="feed-card-full-cta">Shop Now</span>
@@ -688,11 +716,12 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb">
           <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=240&h=160&fit=crop&auto=format&q=75" alt="MasterClass"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge">Ad</span>
         </div>
         <div class="feed-card-h-body">
-          <div class="feed-card-h-headline">Learn from the Best — New Classes Available</div>
+          <div class="feed-card-h-headline">Learn from the Best: New Classes Available</div>
           <div class="feed-card-h-meta">
             <span class="feed-card-h-source">MasterClass</span>
             <span class="feed-card-h-cta">Start Now</span>
@@ -709,7 +738,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=240&h=160&fit=crop&auto=format&q=75" alt="Summer outlook"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1530908295418-a12e326966ba?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
         </div>
         <div class="feed-card-h-body">
           <div class="feed-card-h-headline">Summer 2026 outlook: Hotter-than-average temperatures expected across most of US</div>
@@ -722,7 +752,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=240&h=160&fit=crop&auto=format&q=75" alt="Heat illness"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
         </div>
         <div class="feed-card-h-body">
           <div class="feed-card-h-headline">The most dangerous heat-related illnesses and how to spot them</div>
@@ -735,7 +766,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb" style="position:relative;">
           <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=240&h=160&fit=crop&auto=format&q=75" alt="Stadium cooling"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
         </div>
         <div class="feed-card-h-body">
           <div class="feed-card-h-headline">These outdoor stadiums have the best cooling systems for summer events</div>
@@ -749,7 +781,8 @@
       <div class="feed-card-h" style="margin-top: 10px;">
         <div class="feed-card-h-thumb">
           <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=240&h=160&fit=crop&auto=format&q=75" alt="Calm"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge">Ad</span>
         </div>
         <div class="feed-card-h-body">
@@ -764,7 +797,8 @@
       <div class="feed-card-h">
         <div class="feed-card-h-thumb">
           <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=240&h=160&fit=crop&auto=format&q=75" alt="HelloFresh"
-               onerror="this.onerror=null;this.parentElement.classList.add('img-fallback');this.style.display='none';" />
+               data-fallback="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=240&h=160&fit=crop&auto=format&q=75"
+               onerror="var fb=this.getAttribute('data-fallback');if(fb){this.removeAttribute('data-fallback');this.src=fb;return;}this.onerror=null;this.style.opacity='0';this.parentElement.classList.add('img-fallback');" />
           <span class="sponsored-badge">Ad</span>
         </div>
         <div class="feed-card-h-body">
