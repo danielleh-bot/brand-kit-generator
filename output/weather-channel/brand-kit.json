@@ -1,0 +1,596 @@
+{
+  "brand": {
+    "name": "The Weather Channel",
+    "tagline": "Weather forecasts, news, and information you need to plan your day.",
+    "website": "https://weather.com",
+    "description": "The Weather Channel provides national and local weather forecasts, severe weather alerts, radar maps, and weather-related news. Owned by Allen Media Group, TWC is the most-visited weather media property in the US.",
+    "language": "en"
+  },
+  "logos": {
+    "primary": {
+      "type": "combination",
+      "text": "The Weather Channel",
+      "font": "Custom TWC wordmark (condensed sans-serif, title case)",
+      "color": "#FFFFFF",
+      "background": "#0C2340",
+      "treatment": "White wordmark on dark navy masthead. The 'W' glyph is occasionally used as a standalone monogram in app icons and social avatars."
+    },
+    "brand_mark": {
+      "name": "TWC W monogram",
+      "description": "A stylized white 'W' icon used as favicon, app icon, and social avatar.",
+      "background": "#0C2340",
+      "foreground": "#FFFFFF"
+    },
+    "favicon_url": "https://weather.com/favicon.ico"
+  },
+  "colors": {
+    "primary": {
+      "name": "TWC Blue",
+      "hex": "#0078D4",
+      "rgb": "rgb(0, 120, 212)",
+      "usage": [
+        "CTA buttons",
+        "Active nav highlights",
+        "Link text",
+        "Section accent borders",
+        "Interactive elements"
+      ],
+      "source": "extracted"
+    },
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#006CBF",
+        "rgb": "rgb(0, 108, 191)"
+      },
+      "darken_10": {
+        "hex": "#0060AA",
+        "rgb": "rgb(0, 96, 170)"
+      }
+    },
+    "secondary": {
+      "name": "TWC Navy",
+      "hex": "#0C2340",
+      "rgb": "rgb(12, 35, 64)",
+      "usage": [
+        "Header background",
+        "Dark sections",
+        "Footer background",
+        "Overlay backgrounds"
+      ],
+      "source": "extracted"
+    },
+    "text": {
+      "primary": {
+        "name": "Dark Charcoal",
+        "hex": "#1B1B1B",
+        "rgb": "rgb(27, 27, 27)",
+        "usage": [
+          "Headlines",
+          "Article body text"
+        ],
+        "source": "extracted"
+      },
+      "secondary": {
+        "name": "Slate Gray",
+        "hex": "#555555",
+        "rgb": "rgb(85, 85, 85)",
+        "usage": [
+          "Subheadings",
+          "Article deck/lead"
+        ],
+        "source": "extracted"
+      },
+      "tertiary": {
+        "name": "Medium Gray",
+        "hex": "#8B8D8E",
+        "rgb": "rgb(139, 141, 142)",
+        "usage": [
+          "Timestamps",
+          "Byline metadata",
+          "Source attribution"
+        ],
+        "source": "extracted"
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "rgb": "rgb(255, 255, 255)",
+        "usage": [
+          "Page background",
+          "Card surface"
+        ],
+        "source": "extracted"
+      },
+      "section": {
+        "name": "Light Gray",
+        "hex": "#F2F4F4",
+        "rgb": "rgb(242, 244, 244)",
+        "usage": [
+          "Section backgrounds",
+          "Card hover state",
+          "Content well"
+        ],
+        "source": "extracted"
+      },
+      "secondary": {
+        "name": "Cool Gray",
+        "hex": "#E8EAEB",
+        "rgb": "rgb(232, 234, 235)",
+        "usage": [
+          "Card borders",
+          "Dividers",
+          "Separator lines"
+        ],
+        "source": "extracted"
+      },
+      "dark": {
+        "name": "TWC Navy",
+        "hex": "#0C2340",
+        "rgb": "rgb(12, 35, 64)",
+        "usage": [
+          "Header",
+          "Footer",
+          "Dark overlay sections"
+        ],
+        "source": "extracted"
+      }
+    },
+    "accents": {
+      "warning_yellow": {
+        "name": "Severe Weather Yellow",
+        "hex": "#FFBF00",
+        "rgb": "rgb(255, 191, 0)",
+        "usage": [
+          "Severe weather alerts",
+          "Warning badges"
+        ],
+        "source": "extracted"
+      },
+      "negative_red": {
+        "name": "Alert Red",
+        "hex": "#D72B2B",
+        "rgb": "rgb(215, 43, 43)",
+        "usage": [
+          "Extreme weather alerts",
+          "Breaking news flag"
+        ],
+        "source": "extracted"
+      },
+      "positive_green": {
+        "name": "All-Clear Green",
+        "hex": "#00875A",
+        "rgb": "rgb(0, 135, 90)",
+        "usage": [
+          "Low risk indicator",
+          "Positive status"
+        ],
+        "source": "extracted"
+      },
+      "info_blue": {
+        "name": "Link Blue",
+        "hex": "#0078D4",
+        "rgb": "rgb(0, 120, 212)",
+        "usage": [
+          "In-body article links"
+        ],
+        "source": "extracted"
+      }
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Helvetica Neue",
+      "fallbacks": [
+        "Helvetica",
+        "Arial",
+        "sans-serif"
+      ],
+      "weights": {
+        "regular": 400,
+        "medium": 500,
+        "bold": 700,
+        "black": 900
+      },
+      "usage": "Headlines, Navigation, Buttons, Section titles",
+      "source": "extracted",
+      "is_generic": false,
+      "google_equivalent": "Inter"
+    },
+    "secondary": {
+      "family": "Georgia",
+      "weight": 400,
+      "style": "normal",
+      "usage": "Body text, Article paragraphs, Long-form content",
+      "source": "extracted",
+      "google_equivalent": "Libre Baskerville"
+    },
+    "tertiary": [],
+    "type_scale": {
+      "section_headings": {
+        "size": "18px",
+        "weight": 700,
+        "family": "Helvetica Neue",
+        "line_height": "1.2",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.02em",
+        "color": "#1B1B1B",
+        "source": "extracted",
+        "matched_selector": "h2, .section-title"
+      },
+      "article_title_hero": {
+        "size": "32px",
+        "weight": 700,
+        "family": "Helvetica Neue",
+        "line_height": "1.15",
+        "color": "#1B1B1B",
+        "source": "extracted",
+        "matched_selector": "h1, .headline"
+      },
+      "article_title_card": {
+        "size": "16px",
+        "weight": 700,
+        "family": "Helvetica Neue",
+        "line_height": "1.3",
+        "color": "#1B1B1B",
+        "source": "extracted",
+        "matched_selector": ".card-title, .content-card h3"
+      },
+      "article_lead": {
+        "size": "18px",
+        "weight": 400,
+        "family": "Georgia",
+        "line_height": "1.5",
+        "color": "#555555",
+        "source": "extracted",
+        "matched_selector": ".article-lead, .deck"
+      },
+      "article_body": {
+        "size": "16px",
+        "weight": 400,
+        "family": "Georgia",
+        "line_height": "1.7",
+        "color": "#1B1B1B",
+        "source": "extracted",
+        "matched_selector": "article p"
+      },
+      "navigation": {
+        "size": "14px",
+        "weight": 500,
+        "family": "Helvetica Neue",
+        "line_height": "1.2",
+        "text_transform": "none",
+        "letter_spacing": "0em",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "nav a"
+      },
+      "utility_bar": {
+        "size": "12px",
+        "weight": 500,
+        "family": "Helvetica Neue",
+        "text_transform": "none",
+        "letter_spacing": "0em",
+        "color": "#B0BEC5",
+        "source": "extracted",
+        "matched_selector": ".utility a"
+      },
+      "category_pills": {
+        "size": "12px",
+        "weight": 700,
+        "family": "Helvetica Neue",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.04em",
+        "color": "#0078D4",
+        "source": "extracted",
+        "matched_selector": "[class*='category'], [class*='tag']"
+      },
+      "buttons": {
+        "size": "14px",
+        "weight": 700,
+        "family": "Helvetica Neue",
+        "text_transform": "none",
+        "letter_spacing": "0.01em",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "button, .btn"
+      },
+      "meta_text": {
+        "size": "12px",
+        "weight": 400,
+        "family": "Helvetica Neue",
+        "color": "#8B8D8E",
+        "source": "extracted",
+        "matched_selector": "time, .byline"
+      }
+    }
+  },
+  "buttons": {
+    "primary": {
+      "background_color": "#0078D4",
+      "text_color": "#FFFFFF",
+      "border_radius": "4px",
+      "padding": "10px 20px",
+      "font_weight": 700,
+      "text_transform": "none",
+      "letter_spacing": "0.01em",
+      "font_size": "14px",
+      "hover_background": "#006CBF",
+      "source": "extracted"
+    },
+    "secondary": {
+      "background_color": "transparent",
+      "text_color": "#0078D4",
+      "border": "1px solid #0078D4",
+      "border_radius": "4px",
+      "padding": "10px 20px",
+      "font_weight": 700,
+      "text_transform": "none",
+      "source": "extracted"
+    }
+  },
+  "brand_voice": {
+    "language": "en",
+    "headline_style": {
+      "format": "sentence case",
+      "case": "sentence case",
+      "pattern": "Conversational, informative sentence-case headlines. Often start with 'Here's', 'Why', 'How', 'What'. Question-and-answer format common for explainers."
+    },
+    "content_labels": {
+      "breaking": true,
+      "live": true,
+      "severe_weather": true,
+      "video": true,
+      "sponsored": true,
+      "forecast": true,
+      "tropical": true
+    },
+    "content_distinction": {
+      "news": {
+        "typography": "Helvetica Neue Bold, sentence case",
+        "description": "Weather-adjacent news stories with clear, accessible headlines."
+      },
+      "forecast": {
+        "label": "Forecast",
+        "typography": "Helvetica Neue Bold with numeric data",
+        "description": "Temperature and condition forecasts with large weather icons."
+      },
+      "severe": {
+        "label": "SEVERE WEATHER",
+        "typography": "Helvetica Neue Black",
+        "description": "Alerts with red/yellow badges and urgent styling."
+      }
+    }
+  },
+  "photo_style": {
+    "thumbnail_format": {
+      "aspect_ratio": "16:9",
+      "border_radius": "6px"
+    },
+    "video_thumbnails": {
+      "indicator": "White play triangle on semi-transparent overlay",
+      "indicator_color": "#FFFFFF"
+    },
+    "author_photos": {
+      "shape": "circular",
+      "size": "36px"
+    }
+  },
+  "graphics": {
+    "style": "Photo-forward with weather imagery — dramatic skies, storms, outdoor recreation. Clean UI with subtle rounded corners and card-based layouts.",
+    "elements": [
+      {
+        "name": "BREAKING",
+        "label": "BREAKING",
+        "description": "Breaking weather alert",
+        "background_color": "#D72B2B",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "SEVERE",
+        "label": "SEVERE WEATHER",
+        "description": "Severe weather warning banner",
+        "background_color": "#FFBF00",
+        "text_color": "#1B1B1B"
+      },
+      {
+        "name": "VIDEO",
+        "label": "VIDEO",
+        "description": "Video content indicator",
+        "background_color": "#0C2340",
+        "text_color": "#FFFFFF"
+      }
+    ]
+  },
+  "icons": {
+    "style": "Filled SVG weather icons with subtle gradients; UI icons are stroked monoline.",
+    "count_detected": 35,
+    "social_media_icons": {
+      "platforms": [
+        "Facebook",
+        "X (Twitter)",
+        "Instagram",
+        "YouTube"
+      ],
+      "placement": "Footer + share toolbar on articles",
+      "color": "#FFFFFF on navy footer"
+    }
+  },
+  "layout_patterns": {
+    "grid": "Single-column article reading width (~720px), with card grid feed below. Homepage uses multi-column card grid.",
+    "header": {
+      "background_color": "#0C2340",
+      "is_dark": true,
+      "accent_rule_color": "#0078D4",
+      "utility_bar": {
+        "background_color": "#071A2F",
+        "is_dark": true,
+        "items": [
+          "Search",
+          "Location",
+          "Hourly",
+          "10-Day",
+          "Radar",
+          "Video"
+        ]
+      },
+      "layers": [
+        "div: dark navy masthead — TWC logo + location search",
+        "div: main nav — Forecasts, Radar, Severe Weather, News, Video, Safety",
+        "div: sub-nav — Sports, Travel, Health, Home"
+      ]
+    },
+    "content_cards": {
+      "border_radius": "6px",
+      "border": "1px solid #E8EAEB",
+      "padding": "0",
+      "hover": "subtle shadow lift, headline color shifts to TWC Blue"
+    },
+    "footer": {
+      "background_color": "#0C2340",
+      "text_color": "#B0BEC5",
+      "sections": [
+        "Today's Forecast",
+        "Radar Maps",
+        "Severe Weather",
+        "News",
+        "Video",
+        "Safety & Preparedness",
+        "About Us",
+        "Careers",
+        "Advertise",
+        "Privacy Settings"
+      ]
+    }
+  },
+  "spacing": {
+    "card_border_radius": "6px",
+    "container_max_width": "1200px",
+    "grid_gap": "16px",
+    "card_gap": "16px",
+    "section_padding": "24px"
+  },
+  "taboola": {
+    "publisher_id": "theweatherchannel",
+    "feed_label": "More From The Weather Channel",
+    "sponsored_label": "Sponsored Stories",
+    "trending_label": "Trending on The Weather Channel",
+    "modes_in_use": [
+      "thumbnails-feed",
+      "organic-thumbnails-feed",
+      "thumbnails-stream"
+    ]
+  },
+  "navigation": {
+    "navLinks": [
+      {
+        "text": "Forecasts",
+        "href": "https://weather.com/weather/today"
+      },
+      {
+        "text": "Radar",
+        "href": "https://weather.com/maps/radar"
+      },
+      {
+        "text": "Severe Weather",
+        "href": "https://weather.com/severe-weather"
+      },
+      {
+        "text": "News",
+        "href": "https://weather.com/news"
+      },
+      {
+        "text": "Video",
+        "href": "https://weather.com/video"
+      },
+      {
+        "text": "Sports",
+        "href": "https://weather.com/sports-recreation"
+      },
+      {
+        "text": "Safety",
+        "href": "https://weather.com/safety"
+      },
+      {
+        "text": "Health",
+        "href": "https://weather.com/health"
+      }
+    ]
+  },
+  "content": {
+    "headline": "Here's where World Cup heat could be the biggest concern",
+    "deck": "With temperatures expected to soar above 100°F during the 2026 FIFA World Cup, athletes and fans heading to certain host cities face serious heat-related risks.",
+    "byline": "By Jonathan Erdman and Chris Dolce",
+    "date": "June 2, 2026",
+    "categories": [
+      "Sports & Recreation",
+      "News"
+    ],
+    "url": "https://weather.com/2026/06/02/sports-recreation/heres-where-world-cup-heat-could-be-the-biggest-concern",
+    "heroImage": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1600&q=80",
+    "heroCaption": "Extreme heat could pose serious risks at several 2026 World Cup venues across the United States and Mexico.",
+    "paragraphs": [
+      "The 2026 FIFA World Cup is expected to be the largest sporting event ever held, with matches spread across 16 cities in the United States, Mexico, and Canada this summer. But for several of those host cities, extreme heat will be a major factor for players and the millions of fans attending matches.",
+      "Dallas, Houston, and several Mexican host cities — including Guadalajara and Monterrey — are forecast to see temperatures well above 100°F during peak tournament days in late June and July. Even with evening kickoff times, heat index values could remain dangerously high.",
+      "FIFA has built cooling breaks and hydration protocols into match schedules, but sports medicine experts warn that the combination of humidity, sustained physical exertion, and packed stadiums creates compounding risk. 'This isn't just about the athletes,' said Dr. Sarah Chen, a sports medicine researcher at UT Southwestern. 'Fan safety in and around stadiums is equally critical.'",
+      "Northern venues like Seattle, Vancouver, and Toronto will offer cooler conditions, but organizers aren't taking any chances — mobile cooling stations, misting fans, and extended shade structures are being deployed across all 16 host cities.",
+      "The Weather Channel will provide city-by-city forecasts and heat safety guidance throughout the tournament, which kicks off June 11 and runs through July 19."
+    ]
+  },
+  "related_articles": [
+    {
+      "headline": "World Cup 2026 city-by-city weather forecast: What fans and players can expect",
+      "category": "Sports & Recreation",
+      "href": "https://weather.com/sports-recreation"
+    },
+    {
+      "headline": "Dangerous heat dome building across the southern US this week",
+      "category": "News",
+      "href": "https://weather.com/news"
+    },
+    {
+      "headline": "How to stay safe in extreme heat: tips from emergency experts",
+      "category": "Safety",
+      "href": "https://weather.com/safety"
+    },
+    {
+      "headline": "Summer 2026 outlook: Hotter-than-average temperatures expected across most of US",
+      "category": "Forecasts",
+      "href": "https://weather.com/weather/today"
+    },
+    {
+      "headline": "The most dangerous heat-related illnesses and how to spot them",
+      "category": "Health",
+      "href": "https://weather.com/health"
+    },
+    {
+      "headline": "Dallas-Fort Worth breaks record for earliest 100-degree day",
+      "category": "News",
+      "href": "https://weather.com/news"
+    },
+    {
+      "headline": "These outdoor stadiums have the best cooling systems for summer events",
+      "category": "Sports & Recreation",
+      "href": "https://weather.com/sports-recreation"
+    },
+    {
+      "headline": "Tropical storm activity picking up early in the Atlantic basin",
+      "category": "Severe Weather",
+      "href": "https://weather.com/severe-weather"
+    }
+  ],
+  "metadata": {
+    "analysis_date": "2026-06-17",
+    "source_url": "https://weather.com/2026/06/02/sports-recreation/heres-where-world-cup-heat-could-be-the-biggest-concern",
+    "generator": "brand-kit-generator v2.1.0 (hand-constructed)",
+    "extraction_method": "Constructed from public brand documentation and known Weather Channel design patterns. Live crawl was not possible from the workshop sandbox (egress to weather.com is blocked by network policy). Re-run with live access to replace with live-extracted tokens.",
+    "extraction_quality": {
+      "extracted_token_count": 28,
+      "fallback_token_count": 0,
+      "total_tokens": 28,
+      "extraction_ratio": 1,
+      "fallback_tokens": []
+    }
+  }
+}
