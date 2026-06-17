@@ -152,6 +152,7 @@ async function main() {
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu',
+        '--ignore-certificate-errors',
         '--window-size=1440,900',
       ],
     });

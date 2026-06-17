@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FOX Sports — Premium Feed Mobile Prototype (iPhone)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fox-navy: #0B0E1A;
+      --fox-blue: #003087;
+      --fox-blue-hover: #002A78;
+      --fox-light-blue: #1A8CFF;
+      --fox-red: #E31837;
+      --fox-yellow: #FFB800;
+      --fox-green: #00A651;
+      --text-primary: #111111;
+      --text-secondary: #555555;
+      --text-tertiary: #888888;
+      --bg-white: #FFFFFF;
+      --bg-section: #F4F4F4;
+      --bg-divider: #E8E8E8;
+      --font-headline: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+      --font-body: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      --card-radius: 12px;
+      --card-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background: var(--bg-white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      max-width: 414px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* === MOBILE HEADER === */
+    .fox-header {
+      background: var(--fox-navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .fox-header-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      height: 48px;
+    }
+    .fox-hamburger {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .fox-hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #FFFFFF;
+      border-radius: 1px;
+    }
+    .fox-logo {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fox-logo-fox { font-weight: 700; font-size: 22px; }
+    .fox-logo-sports { font-weight: 400; font-size: 18px; opacity: 0.9; }
+    .fox-header-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .fox-header-icon {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: #FFFFFF;
+      stroke-width: 2;
+    }
+    .fox-accent-bar {
+      height: 3px;
+      background: var(--fox-blue);
+    }
+    .fox-sport-tabs {
+      display: flex;
+      overflow-x: auto;
+      background: var(--fox-navy);
+      padding: 0 12px;
+      gap: 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .fox-sport-tabs::-webkit-scrollbar { display: none; }
+    .fox-sport-tab {
+      font-family: var(--font-headline);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.65);
+      padding: 10px 14px;
+      white-space: nowrap;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      flex-shrink: 0;
+    }
+    .fox-sport-tab.active {
+      color: #FFFFFF;
+      border-bottom-color: var(--fox-blue);
+    }
+
+    /* === ARTICLE HERO === */
+    .fox-hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #1a1a2e;
+    }
+    .fox-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .fox-hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding: 40px 16px 12px;
+    }
+    .fox-hero-category {
+      display: inline-block;
+      font-family: var(--font-headline);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #FFFFFF;
+      background: var(--fox-blue);
+      padding: 3px 8px;
+      margin-bottom: 8px;
+    }
+
+    /* === ARTICLE CONTENT === */
+    .fox-article {
+      padding: 16px 16px 24px;
+    }
+    .fox-article-headline {
+      font-family: var(--font-headline);
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .fox-article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0;
+      border-top: 1px solid var(--bg-divider);
+      border-bottom: 1px solid var(--bg-divider);
+      margin-bottom: 20px;
+    }
+    .fox-author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-divider);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .fox-author-info { flex: 1; }
+    .fox-author-name {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .fox-article-date {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .fox-share-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--bg-divider);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .fox-article-body p {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       PREMIUM FEED — Taboola Premium Feed look and feel
+       Rounded cards, footer-aligned CTAs, branding text, premium layouts
+    ═══════════════════════════════════════════════════════════════════ */
+    .premium-feed {
+      background: var(--bg-section);
+      padding: 0 0 8px;
+    }
+
+    /* Feed header */
+    .pf-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 16px 14px;
+    }
+    .pf-header-title {
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text-primary);
+    }
+    .pf-header-branding {
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+    .pf-header-branding strong { color: var(--text-secondary); }
+
+    /* Section labels inside feed */
+    .pf-section-label {
+      padding: 20px 16px 12px;
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pf-section-label::before {
+      content: '';
+      width: 3px;
+      height: 16px;
+      background: var(--fox-blue);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── PREMIUM CARD 1x1 (Full-width single card) ── */
+    .pf-card-1x1 {
+      background: var(--bg-white);
+      border-radius: var(--card-radius);
+      margin: 0 12px 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .pf-card-1x1 .pf-card-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      position: relative;
+      background: #e0e0e0;
+    }
+    .pf-card-1x1 .pf-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pf-card-1x1 .pf-card-content {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .pf-card-1x1 .pf-card-headline {
+      font-family: var(--font-headline);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.22;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .pf-card-1x1 .pf-card-description {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Footer-aligned CTA area — pushed to bottom of card */
+    .pf-card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid var(--bg-divider);
+    }
+    .pf-card-branding {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pf-card-branding-logo {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: var(--bg-divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .pf-card-branding-text {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .pf-card-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: var(--font-headline);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: 1.5px solid var(--fox-blue);
+      color: var(--fox-blue);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pf-card-cta-btn:active {
+      background: var(--fox-blue);
+      color: #fff;
+    }
+
+    /* Native card CTA (text link, no pill) */
+    .pf-card-native-cta {
+      font-family: var(--font-headline);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--fox-blue);
+      letter-spacing: 0.02em;
+      cursor: pointer;
+    }
+
+    /* Sponsored badge overlay */
+    .pf-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-family: var(--font-headline);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #FFFFFF;
+    }
+    .pf-badge-sponsored { background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+    .pf-badge-category { background: var(--fox-blue); }
+    .pf-badge-live { background: var(--fox-red); }
+    .pf-badge-video {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Play button overlay for video cards */
+    .pf-play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pf-play-overlay svg {
+      width: 20px;
+      height: 20px;
+      fill: #FFFFFF;
+      margin-left: 3px;
+    }
+
+    /* ── PREMIUM CARD 2x1 (Two cards side by side) ── */
+    .pf-row-2x1 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 12px;
+      margin-bottom: 12px;
+    }
+    .pf-card-2x1 {
+      background: var(--bg-white);
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .pf-card-2x1 .pf-card-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+      background: #e0e0e0;
+    }
+    .pf-card-2x1 .pf-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pf-card-2x1 .pf-card-content {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .pf-card-2x1 .pf-card-headline {
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .pf-card-2x1 .pf-card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 8px;
+      border-top: 1px solid var(--bg-divider);
+    }
+    .pf-card-2x1 .pf-card-branding-text {
+      font-size: 10px;
+    }
+    .pf-card-2x1 .pf-card-cta-btn {
+      padding: 4px 10px;
+      font-size: 9px;
+      border-radius: 14px;
+    }
+
+    /* ── PREMIUM STREAM CARD 4x1 (Large hero-style stream card) ── */
+    .pf-card-4x1 {
+      background: var(--bg-white);
+      border-radius: var(--card-radius);
+      margin: 0 12px 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+    }
+    .pf-card-4x1 .pf-card-image {
+      width: 100%;
+      aspect-ratio: 2/1;
+      overflow: hidden;
+      position: relative;
+      background: #e0e0e0;
+    }
+    .pf-card-4x1 .pf-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pf-card-4x1 .pf-card-content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pf-card-4x1 .pf-card-headline {
+      font-family: var(--font-headline);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .pf-card-4x1 .pf-card-description {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .pf-card-4x1 .pf-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid var(--bg-divider);
+    }
+
+    /* ── VIDEO REEL CARD (Vertical video preview) ── */
+    .pf-reel-row {
+      display: flex;
+      gap: 10px;
+      padding: 0 12px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .pf-reel-row::-webkit-scrollbar { display: none; }
+    .pf-card-reel {
+      width: 140px;
+      flex-shrink: 0;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+      position: relative;
+      background: #1a1a2e;
+    }
+    .pf-card-reel .pf-reel-image {
+      width: 140px;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    .pf-card-reel .pf-reel-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pf-card-reel .pf-reel-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent 20%, rgba(0,0,0,0.8));
+      padding: 40px 10px 10px;
+    }
+    .pf-card-reel .pf-reel-title {
+      font-family: var(--font-headline);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #FFFFFF;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .pf-card-reel .pf-reel-source {
+      font-family: var(--font-body);
+      font-size: 9px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .pf-card-reel .pf-reel-play {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 28px;
+      height: 28px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pf-card-reel .pf-reel-play svg {
+      width: 12px;
+      height: 12px;
+      fill: #FFFFFF;
+      margin-left: 2px;
+    }
+
+    /* ── COMPACT HORIZONTAL CARD (Thumbnail left, text right — organic) ── */
+    .pf-card-compact {
+      background: var(--bg-white);
+      border-radius: var(--card-radius);
+      margin: 0 12px 10px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: stretch;
+      cursor: pointer;
+    }
+    .pf-card-compact .pf-card-image {
+      width: 120px;
+      min-height: 100px;
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+      background: #e0e0e0;
+    }
+    .pf-card-compact .pf-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pf-card-compact .pf-card-content {
+      flex: 1;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pf-card-compact .pf-card-headline {
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .pf-card-compact .pf-card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ── DISPLAY CARD (Vertical display ad format) ── */
+    .pf-card-display {
+      background: var(--bg-white);
+      border-radius: var(--card-radius);
+      margin: 0 12px 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+    }
+    .pf-card-display .pf-display-creative {
+      width: 100%;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #1a1a3e, #2d1b69);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .pf-card-display .pf-display-brand {
+      font-family: var(--font-headline);
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+    .pf-card-display .pf-display-offer {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 20px;
+    }
+    .pf-card-display .pf-display-cta {
+      padding: 10px 28px;
+      border-radius: 24px;
+      font-family: var(--font-headline);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: none;
+      cursor: pointer;
+      color: #1a1a3e;
+      background: #FFFFFF;
+    }
+    .pf-card-display .pf-card-footer {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--bg-divider);
+    }
+
+    /* Sponsored disclosure */
+    .pf-disclosure {
+      font-size: 9px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* Taboola attribution */
+    .pf-attribution {
+      text-align: center;
+      padding: 14px 16px;
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+    .pf-attribution a {
+      color: var(--text-tertiary);
+      text-decoration: underline;
+    }
+
+    /* Image fallback */
+    .img-fallback {
+      background: linear-gradient(135deg, var(--fox-blue) 0%, var(--fox-navy) 100%);
+    }
+    .img-fallback img { display: none; }
+
+    /* === FOOTER === */
+    .fox-footer {
+      background: var(--fox-navy);
+      padding: 28px 16px 20px;
+      color: rgba(255,255,255,0.5);
+    }
+    .fox-footer-logo {
+      font-family: var(--font-headline);
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .fox-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-bottom: 16px;
+    }
+    .fox-footer-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+    .fox-footer-copyright {
+      font-size: 11px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="fox-header">
+    <div class="fox-header-main">
+      <div class="fox-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <a href="#" class="fox-logo">
+        <span class="fox-logo-fox">FOX</span>
+        <span class="fox-logo-sports">SPORTS</span>
+      </a>
+      <div class="fox-header-actions">
+        <svg class="fox-header-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <svg class="fox-header-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+    </div>
+    <div class="fox-sport-tabs">
+      <a href="#" class="fox-sport-tab">NFL</a>
+      <a href="#" class="fox-sport-tab">MLB</a>
+      <a href="#" class="fox-sport-tab">NBA</a>
+      <a href="#" class="fox-sport-tab active">Soccer</a>
+      <a href="#" class="fox-sport-tab">NASCAR</a>
+      <a href="#" class="fox-sport-tab">CFB</a>
+      <a href="#" class="fox-sport-tab">CBB</a>
+      <a href="#" class="fox-sport-tab">UFC</a>
+      <a href="#" class="fox-sport-tab">Golf</a>
+      <a href="#" class="fox-sport-tab">WWE</a>
+    </div>
+    <div class="fox-accent-bar"></div>
+  </header>
+
+  <!-- ============ HERO IMAGE ============ -->
+  <div class="fox-hero">
+    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&h=450&fit=crop"
+         alt="Messi World Cup"
+         onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+    <div class="fox-hero-overlay">
+      <span class="fox-hero-category">Soccer</span>
+    </div>
+  </div>
+
+  <!-- ============ ARTICLE ============ -->
+  <article class="fox-article">
+    <h1 class="fox-article-headline">World Cup Roundup: Stars Shine Tuesday, Headlined by Lionel Messi Hat Trick</h1>
+
+    <div class="fox-article-meta">
+      <div class="fox-author-avatar">FS</div>
+      <div class="fox-author-info">
+        <div class="fox-author-name">FOX Sports Staff</div>
+        <div class="fox-article-date">June 17, 2026</div>
+      </div>
+      <button class="fox-share-btn">
+        <svg width="16" height="16" fill="none" stroke="var(--text-tertiary)" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      </button>
+    </div>
+
+    <div class="fox-article-body">
+      <p>Tuesday at the 2026 FIFA World Cup was one for the ages. Lionel Messi reminded the world why he's the greatest to ever do it, netting a hat trick as Argentina cruised past their Group C opponents. The 39-year-old magician rolled back the years with three goals of increasing brilliance.</p>
+      <p>But Messi wasn't the only star to shine. Kylian Mbappé scored twice for France, Jude Bellingham orchestrated England's midfield masterclass, and hosts USA got a late equalizer from Christian Pulisic to set up a thrilling group stage finale. Here's everything you need to know from a blockbuster day of World Cup action.</p>
+    </div>
+  </article>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       TABOOLA PREMIUM FEED
+       Premium Feed look and feel: rounded cards, footer-aligned CTAs,
+       branding text, premium layouts (1x1, 2x1, 4x1), video reels,
+       display formats, Card Intelligence
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="premium-feed">
+
+    <!-- Feed Header -->
+    <div class="pf-header">
+      <span class="pf-header-title">Sponsored Stories</span>
+      <span class="pf-header-branding">by <strong>Taboola</strong></span>
+    </div>
+
+    <!-- ── PREMIUM 1x1 CARD — Sponsored ── -->
+    <div class="pf-card-1x1">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=450&fit=crop" alt="Financial planning"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-sponsored">Sponsored</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">Top Financial Advisors Near You — See Who Made the 2026 List</div>
+        <div class="pf-card-description">Compare top-rated advisors in your area. Free matching service with no obligation.</div>
+        <div class="pf-card-footer">
+          <div class="pf-card-branding">
+            <div class="pf-card-branding-logo">SA</div>
+            <span class="pf-card-branding-text">SmartAsset</span>
+          </div>
+          <button class="pf-card-cta-btn">Learn More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PREMIUM 2x1 ROW — Sponsored pair ── -->
+    <div class="pf-row-2x1">
+      <div class="pf-card-2x1">
+        <div class="pf-card-image">
+          <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=300&fit=crop" alt="Savings"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <span class="pf-badge pf-badge-sponsored">Ad</span>
+        </div>
+        <div class="pf-card-content">
+          <div class="pf-card-headline">Best High-Yield Savings Accounts of 2026</div>
+          <div class="pf-card-footer">
+            <span class="pf-card-branding-text">NerdWallet</span>
+            <button class="pf-card-cta-btn">Compare</button>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card-2x1">
+        <div class="pf-card-image">
+          <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=400&h=300&fit=crop" alt="Travel"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <span class="pf-badge pf-badge-sponsored">Ad</span>
+        </div>
+        <div class="pf-card-content">
+          <div class="pf-card-headline">Exclusive Hotel Deals You Won't Find Anywhere Else</div>
+          <div class="pf-card-footer">
+            <span class="pf-card-branding-text">Booking.com</span>
+            <button class="pf-card-cta-btn">Book</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ORGANIC SECTION — More From FOX Sports ── -->
+    <div class="pf-section-label">More From FOX Sports</div>
+
+    <!-- Organic Premium 1x1 -->
+    <div class="pf-card-1x1">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=450&fit=crop" alt="Soccer"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-category">Soccer</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">Messi's World Cup Magic: Every Goal From His Incredible Hat Trick Analyzed</div>
+        <div class="pf-card-description">A closer look at how Argentina's No. 10 dismantled the defense with three world-class finishes.</div>
+        <div class="pf-card-footer">
+          <div class="pf-card-branding">
+            <div class="pf-card-branding-logo" style="background:var(--fox-navy);color:#fff;">F</div>
+            <span class="pf-card-branding-text">FOX Sports</span>
+          </div>
+          <span class="pf-card-native-cta">Read →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Organic compact cards -->
+    <div class="pf-card-compact">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=260&h=180&fit=crop" alt="Stadium"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-category">Soccer</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">Pulisic's Late Equalizer Keeps USMNT's World Cup Dream Alive</div>
+        <div class="pf-card-footer">
+          <span class="pf-card-branding-text">FOX Sports</span>
+          <span class="pf-card-native-cta">Read →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-card-compact">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=260&h=180&fit=crop" alt="Football"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-category">NFL</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">NFL Offseason Power Rankings: Where All 32 Teams Stand Heading Into Camp</div>
+        <div class="pf-card-footer">
+          <span class="pf-card-branding-text">FOX Sports</span>
+          <span class="pf-card-native-cta">Read →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VIDEO REELS — Premium Rich Format ── -->
+    <div class="pf-section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fox-blue)" stroke-width="2.5" style="margin-right:-4px;">
+        <polygon points="5 3 19 12 5 21 5 3"/>
+      </svg>
+      Video Highlights
+    </div>
+
+    <div class="pf-reel-row">
+      <div class="pf-card-reel">
+        <div class="pf-reel-image">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=280&h=400&fit=crop" alt="Messi goal"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <div class="pf-reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="pf-reel-overlay">
+            <div class="pf-reel-title">Messi's 3rd Goal — The Chip That Sealed It</div>
+            <div class="pf-reel-source">FOX Sports</div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card-reel">
+        <div class="pf-reel-image">
+          <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=280&h=400&fit=crop" alt="Mbappé"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <div class="pf-reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="pf-reel-overlay">
+            <div class="pf-reel-title">Mbappé's Brace Powers France to Group Win</div>
+            <div class="pf-reel-source">FOX Sports</div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card-reel">
+        <div class="pf-reel-image">
+          <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=280&h=400&fit=crop" alt="Bellingham"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <div class="pf-reel-play"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div class="pf-reel-overlay">
+            <div class="pf-reel-title">Bellingham Masterclass: Best Moments</div>
+            <div class="pf-reel-source">FOX Sports</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LARGE STREAM CARD 4x1 — Sponsored ── -->
+    <div class="pf-card-4x1">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=400&fit=crop" alt="Volvo"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-sponsored">Sponsored</span>
+        <div class="pf-play-overlay">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">The All-Electric EX90: Scandinavian Design Meets World-Class Safety</div>
+        <div class="pf-card-description">Experience the future of luxury driving with Volvo's most advanced electric SUV yet.</div>
+        <div class="pf-card-footer">
+          <div class="pf-card-branding">
+            <div class="pf-card-branding-logo" style="background:#003057;color:#fff;font-size:8px;">V</div>
+            <div>
+              <span class="pf-card-branding-text">Volvo Cars</span>
+              <span class="pf-disclosure" style="display:block;margin-top:1px;">Sponsored</span>
+            </div>
+          </div>
+          <button class="pf-card-cta-btn">Explore →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DISPLAY CARD — Vertical rich format ── -->
+    <div class="pf-card-display">
+      <div class="pf-display-creative" style="background: linear-gradient(135deg, #0a2239, #003087);">
+        <div class="pf-display-brand">⚡ FanDuel</div>
+        <div class="pf-display-offer">Bet $5 on any World Cup match, Get $150 in Bonus Bets — Guaranteed</div>
+        <button class="pf-display-cta" style="color:#003087;">Claim Offer</button>
+      </div>
+      <div class="pf-card-footer">
+        <div class="pf-card-branding">
+          <div class="pf-card-branding-logo" style="background:#0a2239;color:#fff;font-size:8px;">FD</div>
+          <div>
+            <span class="pf-card-branding-text">FanDuel Sportsbook</span>
+            <span class="pf-disclosure" style="display:block;margin-top:1px;">Sponsored</span>
+          </div>
+        </div>
+        <button class="pf-card-cta-btn">Sign Up</button>
+      </div>
+    </div>
+
+    <!-- ── TRENDING SECTION ── -->
+    <div class="pf-section-label">Trending on FOX Sports</div>
+
+    <!-- Organic 4x1 stream card -->
+    <div class="pf-card-4x1">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=400&fit=crop" alt="Basketball"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-category">NBA</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">NBA Finals: What to Watch as the Series Shifts Home for Game 5</div>
+        <div class="pf-card-description">Can the road team keep their momentum? Our analysts break down the key matchups.</div>
+        <div class="pf-card-footer">
+          <div class="pf-card-branding">
+            <div class="pf-card-branding-logo" style="background:var(--fox-navy);color:#fff;">F</div>
+            <span class="pf-card-branding-text">FOX Sports</span>
+          </div>
+          <span class="pf-card-native-cta">Read →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2x1 Organic pair -->
+    <div class="pf-row-2x1">
+      <div class="pf-card-2x1">
+        <div class="pf-card-image">
+          <img src="https://images.unsplash.com/photo-1567784177427-4e4b02d5e3f5?w=400&h=300&fit=crop" alt="Racing"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <span class="pf-badge pf-badge-category">NASCAR</span>
+        </div>
+        <div class="pf-card-content">
+          <div class="pf-card-headline">NASCAR Cup Preview: This Weekend Could Decide the Playoff Picture</div>
+          <div class="pf-card-footer">
+            <span class="pf-card-branding-text">FOX Sports</span>
+            <span class="pf-card-native-cta" style="font-size:10px;">Read →</span>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card-2x1">
+        <div class="pf-card-image">
+          <img src="https://images.unsplash.com/photo-1461896836934-bd45ba9fc1a3?w=400&h=300&fit=crop" alt="Golf"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <span class="pf-badge pf-badge-category">Golf</span>
+        </div>
+        <div class="pf-card-content">
+          <div class="pf-card-headline">U.S. Open Day 2: Surprise Leaders Shake Up the Leaderboard</div>
+          <div class="pf-card-footer">
+            <span class="pf-card-branding-text">FOX Sports</span>
+            <span class="pf-card-native-cta" style="font-size:10px;">Read →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SPONSORED 1x1 — Another premium card ── -->
+    <div class="pf-card-1x1">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&h=450&fit=crop" alt="Samsung"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-sponsored">Sponsored</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">The New Galaxy S25 Ultra — AI-Powered Performance Meets Pro-Grade Camera</div>
+        <div class="pf-card-description">Capture every World Cup moment in stunning detail with the most advanced Galaxy yet.</div>
+        <div class="pf-card-footer">
+          <div class="pf-card-branding">
+            <div class="pf-card-branding-logo" style="background:#1428A0;color:#fff;font-size:8px;">S</div>
+            <div>
+              <span class="pf-card-branding-text">Samsung</span>
+              <span class="pf-disclosure" style="display:block;margin-top:1px;">Sponsored</span>
+            </div>
+          </div>
+          <button class="pf-card-cta-btn">Shop Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MORE STORIES SECTION ── -->
+    <div class="pf-section-label">More Stories</div>
+
+    <div class="pf-card-compact">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=260&h=180&fit=crop" alt="Soccer training"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-category">Soccer</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">World Cup Group Standings: Who's In, Who's Out After Day 5</div>
+        <div class="pf-card-footer">
+          <span class="pf-card-branding-text">FOX Sports</span>
+          <span class="pf-card-native-cta">Read →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pf-card-compact">
+      <div class="pf-card-image">
+        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=260&h=180&fit=crop" alt="Baseball"
+             onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+        <span class="pf-badge pf-badge-category">MLB</span>
+      </div>
+      <div class="pf-card-content">
+        <div class="pf-card-headline">MLB Midseason Awards: MVP, Cy Young Favorites at the Halfway Mark</div>
+        <div class="pf-card-footer">
+          <span class="pf-card-branding-text">FOX Sports</span>
+          <span class="pf-card-native-cta">Read →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FINAL SPONSORED 2x1 ── -->
+    <div class="pf-row-2x1">
+      <div class="pf-card-2x1">
+        <div class="pf-card-image">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" alt="Fitness"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <span class="pf-badge pf-badge-sponsored">Ad</span>
+        </div>
+        <div class="pf-card-content">
+          <div class="pf-card-headline">Your Best Workout Starts Here — 30 Day Free Trial</div>
+          <div class="pf-card-footer">
+            <span class="pf-card-branding-text">Peloton</span>
+            <button class="pf-card-cta-btn">Try Free</button>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card-2x1">
+        <div class="pf-card-image">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop" alt="Learning"
+               onerror="this.style.display='none';this.parentElement.classList.add('img-fallback');">
+          <span class="pf-badge pf-badge-sponsored">Ad</span>
+        </div>
+        <div class="pf-card-content">
+          <div class="pf-card-headline">Learn From the Best — New MasterClass Sessions Available</div>
+          <div class="pf-card-footer">
+            <span class="pf-card-branding-text">MasterClass</span>
+            <button class="pf-card-cta-btn">Start</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Taboola Attribution -->
+    <div class="pf-attribution">
+      by <strong>Taboola</strong> | <a href="#">Sponsored Links</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="fox-footer">
+    <div class="fox-footer-logo">FOX Sports</div>
+    <div class="fox-footer-links">
+      <a href="#">About</a>
+      <a href="#">Help</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Advertise with Us</a>
+      <a href="#">Closed Captioning</a>
+      <a href="#">Do Not Sell My Info</a>
+    </div>
+    <div class="fox-footer-copyright">
+      &copy; 2026 FOX Sports Interactive Media, LLC. All rights reserved. | Brand Kit Prototype generated by Taboola
+    </div>
+  </footer>
+
+</body>
+</html>
