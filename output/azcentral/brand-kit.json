@@ -1,0 +1,344 @@
+{
+  "brand": {
+    "name": "azcentral",
+    "tagline": "Part of the USA TODAY Network",
+    "website": "https://www.azcentral.com",
+    "description": "Arizona's leading news source, part of the Gannett / USA TODAY Network. Published by The Arizona Republic.",
+    "language": "en"
+  },
+  "logos": {
+    "primary": {
+      "type": "text",
+      "text": "azcentral",
+      "font_family": "Unify Sans",
+      "font_weight": 700,
+      "color": "#FFFFFF"
+    },
+    "variants": [
+      {
+        "type": "text",
+        "text": "azcentral",
+        "context": "dark background header"
+      }
+    ],
+    "brand_mark": {
+      "type": "network-badge",
+      "text": "PART OF THE USA TODAY NETWORK",
+      "color": "#009BFF"
+    }
+  },
+  "colors": {
+    "primary": {
+      "name": "AZ Central Blue",
+      "hex": "#009BFF",
+      "rgb": "rgb(0, 155, 255)",
+      "usage": ["Links", "CTA buttons", "Network branding"],
+      "source": "manual — USA TODAY Network brand blue"
+    },
+    "secondary": {
+      "name": "Republic Red",
+      "hex": "#D32F2F",
+      "rgb": "rgb(211, 47, 47)",
+      "usage": ["Breaking news", "Live updates", "Alerts"],
+      "source": "manual — AZ Republic accent"
+    },
+    "text": {
+      "primary": {
+        "name": "Near Black",
+        "hex": "#1A1A1A",
+        "rgb": "rgb(26, 26, 26)",
+        "usage": ["Headlines", "Body text"],
+        "source": "manual"
+      },
+      "secondary": {
+        "name": "Dark Gray",
+        "hex": "#4E4E4E",
+        "rgb": "rgb(78, 78, 78)",
+        "usage": ["Bylines", "Deck text"],
+        "source": "manual"
+      },
+      "tertiary": {
+        "name": "Medium Gray",
+        "hex": "#8E8E8E",
+        "rgb": "rgb(142, 142, 142)",
+        "usage": ["Timestamps", "Meta text", "Source labels"],
+        "source": "manual"
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "rgb": "rgb(255, 255, 255)",
+        "usage": ["Page background", "Card backgrounds"],
+        "source": "manual"
+      },
+      "section": {
+        "name": "Light Gray",
+        "hex": "#F0F0F0",
+        "rgb": "rgb(240, 240, 240)",
+        "usage": ["Feed section background", "Dividers"],
+        "source": "manual"
+      },
+      "secondary": {
+        "name": "Warm Gray",
+        "hex": "#F5F5F5",
+        "rgb": "rgb(245, 245, 245)",
+        "usage": ["Alternate sections"],
+        "source": "manual"
+      },
+      "dark": {
+        "name": "Charcoal",
+        "hex": "#1A1A2E",
+        "rgb": "rgb(26, 26, 46)",
+        "usage": ["Header background", "Footer"],
+        "source": "manual"
+      }
+    },
+    "accents": {
+      "warning_yellow": {
+        "name": "Alert Gold",
+        "hex": "#F5A623",
+        "source": "manual"
+      },
+      "negative_red": {
+        "name": "Breaking Red",
+        "hex": "#D32F2F",
+        "source": "manual"
+      },
+      "positive_green": {
+        "name": "Subscriber Green",
+        "hex": "#2E7D32",
+        "source": "manual"
+      },
+      "info_blue": {
+        "name": "Network Blue",
+        "hex": "#009BFF",
+        "source": "manual"
+      },
+      "premium_gold": {
+        "name": "Premium Gold",
+        "hex": "#C4942A",
+        "source": "manual — Gannett subscriber premium indicator"
+      }
+    },
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#008AE6",
+        "name": "Darker primary",
+        "usage": "Hover states",
+        "source": "derived"
+      },
+      "darken_10": {
+        "hex": "#0079CC",
+        "name": "Deepest primary",
+        "usage": "Active/pressed states",
+        "source": "derived"
+      }
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Unify Sans",
+      "fallbacks": ["Helvetica Neue", "Arial", "sans-serif"],
+      "weights": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      },
+      "usage": "Headlines, navigation, UI elements",
+      "source": "manual — Gannett/USA TODAY Network custom typeface",
+      "is_generic": false
+    },
+    "secondary": {
+      "family": "Georgia",
+      "fallbacks": ["Times New Roman", "serif"],
+      "weights": {
+        "regular": 400,
+        "bold": 700
+      },
+      "usage": "Article body text, decks",
+      "source": "manual — Gannett editorial serif",
+      "is_generic": false
+    },
+    "tertiary": [],
+    "type_scale": {
+      "section_headings": {
+        "size": "20px",
+        "weight": 700,
+        "family": "Unify Sans",
+        "source": "manual"
+      },
+      "article_title_hero": {
+        "size": "28px",
+        "weight": 700,
+        "family": "Unify Sans",
+        "line_height": "1.2",
+        "source": "manual"
+      },
+      "article_title_card": {
+        "size": "16px",
+        "weight": 700,
+        "family": "Unify Sans",
+        "line_height": "1.3",
+        "source": "manual"
+      },
+      "article_lead": {
+        "size": "17px",
+        "weight": 400,
+        "family": "Georgia",
+        "line_height": "1.5",
+        "source": "manual"
+      },
+      "article_body": {
+        "size": "17px",
+        "weight": 400,
+        "family": "Georgia",
+        "line_height": "1.7",
+        "source": "manual"
+      },
+      "navigation": {
+        "size": "13px",
+        "weight": 600,
+        "family": "Unify Sans",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.02em",
+        "source": "manual"
+      },
+      "utility_bar": {
+        "size": "11px",
+        "weight": 500,
+        "family": "Unify Sans",
+        "source": "manual"
+      },
+      "category_pills": {
+        "size": "11px",
+        "weight": 700,
+        "family": "Unify Sans",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.05em",
+        "source": "manual"
+      },
+      "buttons": {
+        "size": "13px",
+        "weight": 700,
+        "family": "Unify Sans",
+        "source": "manual"
+      },
+      "meta_text": {
+        "size": "12px",
+        "weight": 400,
+        "family": "Unify Sans",
+        "source": "manual"
+      }
+    }
+  },
+  "brand_voice": {
+    "language": "en",
+    "headline_style": {
+      "format": "sentence case",
+      "case": "sentence case"
+    },
+    "content_labels": {
+      "premium": true,
+      "subscriber_only": true,
+      "exclusive": true,
+      "opinion": true,
+      "breaking": true,
+      "live": true,
+      "video": true,
+      "gallery": true,
+      "analysis": true
+    },
+    "content_distinction": {
+      "news_vs_opinion": true,
+      "premium_vs_free": true
+    }
+  },
+  "photo_style": {
+    "thumbnail_format": {
+      "aspect_ratio": "3:2",
+      "border_radius": "0px"
+    },
+    "video_thumbnails": {
+      "indicator": "play-button",
+      "indicator_color": "#FFFFFF"
+    },
+    "author_photos": {
+      "shape": "circular",
+      "size": "32px"
+    }
+  },
+  "graphics": {
+    "style": "Clean editorial with strong typographic hierarchy",
+    "elements": [
+      {"type": "premium-lock-icon", "color": "#C4942A"},
+      {"type": "subscriber-badge", "text": "SUBSCRIBER EXCLUSIVE", "color": "#C4942A"},
+      {"type": "network-bug", "text": "USA TODAY NETWORK", "color": "#009BFF"},
+      {"type": "section-divider", "style": "3px solid primary"}
+    ]
+  },
+  "icons": {
+    "style": "SVG-based, minimal line icons",
+    "count_detected": 12,
+    "social_media_icons": {
+      "platforms": ["facebook", "twitter", "instagram", "email"],
+      "placement": "Header + Footer"
+    }
+  },
+  "layout_patterns": {
+    "grid": "Single-column mobile, responsive desktop",
+    "header": {
+      "layers": ["utility-bar", "main-header", "section-nav"],
+      "background_color": "#1A1A2E",
+      "is_dark": true
+    },
+    "content_cards": {
+      "gannett_card_types": [
+        "standard",
+        "premium-locked",
+        "opinion",
+        "video",
+        "gallery",
+        "breaking",
+        "live-update",
+        "exclusive",
+        "sponsored"
+      ]
+    },
+    "footer": {
+      "sections": ["About", "Support", "Terms", "Network sites"]
+    }
+  },
+  "spacing": {
+    "card_gap": "1px",
+    "section_padding": "16px",
+    "content_padding": "16px"
+  },
+  "buttons": {
+    "primary": {
+      "background_color": "#009BFF",
+      "text_color": "#FFFFFF",
+      "border_radius": "4px",
+      "padding": "8px 16px",
+      "font_size": "13px",
+      "font_weight": 700,
+      "text_transform": "uppercase",
+      "letter_spacing": "0.04em",
+      "source": "manual"
+    }
+  },
+  "metadata": {
+    "analysis_date": "2026-06-17",
+    "source_url": "https://www.azcentral.com/story/money/business/2025/06/04/raytheon-wins-contract-to-expand-missile-production-in-tucson/84036861007/",
+    "analysis_method": "Manual extraction from Gannett/USA TODAY Network design system + web research",
+    "extraction_quality": {
+      "extracted_token_count": 17,
+      "fallback_token_count": 0,
+      "total_tokens": 17,
+      "extraction_ratio": 1.0,
+      "fallback_tokens": []
+    }
+  }
+}

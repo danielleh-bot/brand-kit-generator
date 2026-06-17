@@ -153,6 +153,7 @@ async function main() {
         '--disable-dev-shm-usage',
         '--disable-gpu',
         '--window-size=1440,900',
+        '--ignore-certificate-errors',
       ],
     });
 
