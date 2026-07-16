@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leckerschmecker — Taboola Feed: Before &amp; After Brand Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="icon" href="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/10/leckerschecker-icon-gruen.png">
+<style>
+  /* ============================================
+     RESET & BASE
+     ============================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Jost', 'Helvetica', sans-serif;
+    background: #eee;
+    color: #333;
+    line-height: 1.5;
+  }
+  img { display: block; max-width: 100%; }
+
+  /* ============================================
+     PROTOTYPE TOGGLE BAR (top)
+     ============================================ */
+  .proto-bar {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    height: 44px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .proto-bar .label { opacity: 0.5; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .toggle-group {
+    display: flex;
+    background: rgba(255,255,255,0.1);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  .toggle-btn {
+    padding: 5px 18px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    transition: all 0.2s;
+  }
+  .toggle-btn.active {
+    background: #faeb5b;
+    color: #0e4027;
+    border-radius: 9999px;
+  }
+
+  /* ============================================
+     SPLIT VIEW
+     ============================================ */
+  .split-view {
+    display: flex;
+    gap: 0;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .panel { flex: 1; overflow-y: auto; }
+  .panel-label {
+    position: sticky;
+    top: 44px;
+    z-index: 50;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .panel-before .panel-label { background: #c0392b; color: #fff; }
+  .panel-after .panel-label { background: #0e4027; color: #faeb5b; }
+  .divider { width: 3px; background: linear-gradient(180deg, #0e4027, #faeb5b); flex-shrink: 0; }
+
+  body.view-before .panel-after, body.view-before .divider { display: none; }
+  body.view-after .panel-before, body.view-after .divider { display: none; }
+  body.view-before .panel-before, body.view-after .panel-after { max-width: 800px; margin: 0 auto; }
+
+  /* ============================================
+     SITE SHELL — LECKERSCHMECKER HEADER
+     ============================================ */
+  .site-page { background: #fff; }
+
+  /* Top bar */
+  .ls-topbar {
+    background: #04361d;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 24px;
+    gap: 16px;
+  }
+  .ls-topbar a {
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .ls-topbar a:hover { color: #fff; }
+
+  /* Main header */
+  .ls-header {
+    background: #0e4027;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ls-header-logo img {
+    height: 44px;
+    width: auto;
+  }
+  .ls-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ls-search-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 9999px;
+    color: rgba(255,255,255,0.7);
+    padding: 6px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ls-newsletter-btn {
+    background: #faeb5b;
+    color: #0e4027;
+    border: none;
+    border-radius: 9999px;
+    padding: 7px 16px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Nav bar */
+  .ls-nav {
+    background: #0e4027;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .ls-nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 16px;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .ls-nav a:hover { color: #faeb5b; }
+  .ls-nav a.active {
+    color: #fff;
+    border-bottom: 2px solid #faeb5b;
+  }
+
+  /* ============================================
+     ARTICLE CONTENT
+     ============================================ */
+  .article-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 24px 0;
+  }
+  .article-breadcrumb {
+    font-size: 13px;
+    color: #767676;
+    margin-bottom: 16px;
+  }
+  .article-breadcrumb a { color: #0e4027; text-decoration: none; font-weight: 500; }
+  .article-breadcrumb span { color: #aaa; margin: 0 6px; }
+
+  .article-title {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #111;
+    margin-bottom: 16px;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #767676;
+  }
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .author-name { color: #0e4027; font-weight: 600; }
+
+  .article-hero-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  .article-caption {
+    font-size: 12px;
+    color: #767676;
+    margin-top: -14px;
+    margin-bottom: 20px;
+  }
+  .article-body p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 1.2em;
+  }
+
+  /* Recipe card strip */
+  .recipe-strip {
+    background: #fff;
+    border-top: 2px solid #0e4027;
+    padding: 16px 20px;
+    margin: 24px 0;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .recipe-strip .rs-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .recipe-strip .rs-info {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    color: #444;
+  }
+  .recipe-strip .rs-info strong { color: #0e4027; }
+
+  /* ============================================
+     FEED SEPARATOR
+     ============================================ */
+  .feed-sep {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .feed-sep hr { border: none; border-top: 1px solid #ebebeb; }
+
+  /* ============================================
+     TABOOLA FEED — SHARED
+     ============================================ */
+  .feed-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 24px 40px;
+  }
+
+  /* ============================================
+     BEFORE FEED (Generic/Default Taboola)
+     ============================================ */
+  .panel-before .feed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e5e5e5;
+  }
+  .panel-before .feed-header h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .panel-before .feed-header .tbl-logo {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #bbb;
+  }
+  .panel-before .feed-header .tbl-logo img {
+    height: 14px;
+    display: inline;
+    vertical-align: middle;
+    margin-left: 4px;
+    opacity: 0.4;
+  }
+
+  .panel-before .fc {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+  }
+  .panel-before .fc:hover { background: #fafafa; margin: 0 -8px; padding: 14px 8px; }
+
+  .panel-before .fc-img {
+    width: 148px;
+    height: 100px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 3px;
+    background: #f0f0f0;
+  }
+  .panel-before .fc-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .panel-before .fc-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+  .panel-before .fc-source {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #aaa;
+  }
+  .panel-before .fc-sponsor {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    color: #ccc;
+    margin-top: 3px;
+  }
+  .panel-before .feed-more-btn {
+    display: block;
+    margin: 20px auto 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #777;
+    border: 1px solid #ddd;
+    padding: 8px 36px;
+    font-size: 13px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  /* ============================================
+     AFTER FEED (Brand Kit Applied)
+     ============================================ */
+  .panel-after .feed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #0e4027;
+  }
+  .panel-after .feed-header h3 {
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0e4027;
+  }
+  .panel-after .feed-header .tbl-logo {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    color: #6a8c73;
+    font-weight: 400;
+  }
+
+  /* Hero card */
+  .panel-after .fc-hero {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .panel-after .fc-hero-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    margin-bottom: 10px;
+    background: #f5f5f0;
+  }
+  .panel-after .fc-hero-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    transition: color 0.15s;
+  }
+  .panel-after .fc-hero:hover .fc-hero-title { color: #0e4027; }
+  .panel-after .fc-hero-source {
+    font-size: 12px;
+    color: #767676;
+  }
+  .panel-after .fc-hero-sponsor {
+    display: inline-block;
+    font-size: 10px;
+    color: #0e4027;
+    background: #b2dcc0;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-weight: 500;
+    margin-top: 6px;
+  }
+
+  /* List cards */
+  .panel-after .fc {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #ebebeb;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+  .panel-after .fc:hover {
+    background: #f9f9ed;
+    margin: 0 -12px;
+    padding: 14px 12px;
+    border-radius: 5px;
+  }
+  .panel-after .fc-img {
+    width: 152px;
+    height: 102px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 0;
+    background: #f5f5f0;
+  }
+  .panel-after .fc-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .panel-after .fc-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.3;
+    margin-bottom: 5px;
+    transition: color 0.15s;
+  }
+  .panel-after .fc:hover .fc-title { color: #0e4027; }
+  .panel-after .fc-source {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    color: #767676;
+  }
+  .panel-after .fc-sponsor {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    color: #0e4027;
+    background: #b2dcc0;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-weight: 500;
+    margin-top: 5px;
+    width: fit-content;
+  }
+  .panel-after .fc-time {
+    font-size: 11px;
+    color: #6a8c73;
+    margin-top: 4px;
+  }
+
+  /* Section header */
+  .panel-after .feed-section {
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0e4027;
+    margin-top: 24px;
+    margin-bottom: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #ebebeb;
+  }
+
+  /* Grid */
+  .panel-after .feed-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .panel-after .gc {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s;
+  }
+  .panel-after .gc:hover { transform: translateY(-2px); }
+  .panel-after .gc-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    margin-bottom: 8px;
+    background: #f5f5f0;
+  }
+  .panel-after .gc-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.25;
+    margin-bottom: 3px;
+    transition: color 0.15s;
+  }
+  .panel-after .gc:hover .gc-title { color: #0e4027; }
+  .panel-after .gc-source {
+    font-size: 11px;
+    color: #767676;
+  }
+
+  /* Load more */
+  .panel-after .feed-more-btn {
+    display: block;
+    margin: 24px auto 0;
+    font-family: 'Jost', sans-serif;
+    background: #0e4027;
+    color: #fff;
+    border: none;
+    padding: 10px 40px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .panel-after .feed-more-btn:hover { background: #093b22; }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .ls-footer {
+    background: #fff;
+    border-top: 1px solid #ebebeb;
+    padding: 32px 24px 20px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .ls-footer-logo img { height: 36px; margin-bottom: 16px; }
+  .ls-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .ls-footer-links a { color: #444; text-decoration: none; }
+  .ls-footer-links a:hover { color: #0e4027; }
+  .ls-footer-copy {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 960px) {
+    .split-view { flex-direction: column; }
+    .divider { width: 100%; height: 3px; }
+    .panel { max-width: 100% !important; }
+  }
+</style>
+</head>
+<body class="view-split">
+
+<!-- ========== PROTOTYPE TOGGLE BAR ========== -->
+<div class="proto-bar">
+  <span class="label">Leckerschmecker Feed Prototype</span>
+  <div class="toggle-group">
+    <button class="toggle-btn" onclick="setView('before')">Before</button>
+    <button class="toggle-btn active" onclick="setView('split')">Split</button>
+    <button class="toggle-btn" onclick="setView('after')">After</button>
+  </div>
+<a href="./visual-brand-kit.html" style="color:#fff;font-size:11px;opacity:0.7;margin-left:12px">Visual brand kit ↗</a>
+</div>
+
+<div class="split-view">
+
+<!-- ================================================================
+     PANEL: BEFORE (Generic / Default Taboola Feed)
+     ================================================================ -->
+<div class="panel panel-before">
+  <div class="panel-label">Before &mdash; Generic Default Feed</div>
+  <div class="site-page">
+
+    <!-- Header -->
+    <div class="ls-topbar">
+      <a href="#">Was koche ich heute?</a>
+    </div>
+    <div class="ls-header">
+      <div class="ls-header-logo">
+        <img src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/09/leckerschmecker-logo-main.png" alt="Leckerschmecker" style="filter: brightness(0) invert(1);">
+      </div>
+      <div class="ls-header-right">
+        <button class="ls-search-btn">&#128269; Suche</button>
+      </div>
+    </div>
+    <nav class="ls-nav">
+      <a href="#">Rezepte</a>
+      <a href="#" class="active">Hei&szlig;luftfritteuse</a>
+      <a href="#">Schnelle Rezepte</a>
+      <a href="#">Backen</a>
+      <a href="#">Magazin</a>
+      <a href="#">&Uuml;ber uns</a>
+    </nav>
+
+    <!-- Article -->
+    <div class="article-wrap">
+      <div class="article-breadcrumb">
+        <a href="#">Leckerschmecker</a><span>&rsaquo;</span><a href="#">Hei&szlig;luftfritteuse</a><span>&rsaquo;</span>K&auml;se-Puffs
+      </div>
+      <h1 class="article-title">K&auml;se-Puffs aus dem Airfryer: einfacher Snack f&uuml;r jeden Tag</h1>
+      <div class="article-meta">
+        <img class="author-avatar" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/02/anke-neumann.jpg" alt="Anke">
+        <span>Von <span class="author-name">Anke</span></span>
+        <span>&middot;</span>
+        <span>14.04.2026 - 17:06 Uhr</span>
+      </div>
+      <img class="article-hero-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/kaese-puffs-airfryer-ls.jpg?w=1200&h=900&crop=1" alt="K&auml;se-Puffs aus dem Airfryer">
+      <div class="article-body">
+        <p>Knusprig, k&auml;sig und in nur 30 Minuten fertig: Diese K&auml;se-Puffs aus dem Airfryer sind der perfekte Snack, wenn es schnell gehen muss. Mit Bl&auml;tterteig und w&uuml;rzigem K&auml;se werden sie au&szlig;en goldbraun und innen herrlich fluffig.</p>
+        <p>Egal ob als Partysnack, f&uuml;rs Buffet oder einfach als Nachmittagsleckerei &mdash; diese kleinen Happen machen s&uuml;chtig und lassen sich wunderbar variieren.</p>
+      </div>
+      <div class="recipe-strip">
+        <div class="rs-icon">&#9201;</div>
+        <div class="rs-info">
+          <div><strong>30 Min.</strong><br>Zubereitungszeit</div>
+          <div><strong>4</strong><br>Portionen</div>
+          <div><strong>Einfach</strong><br>Schwierigkeit</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feed separator -->
+    <div class="feed-sep"><hr></div>
+
+    <!-- GENERIC TABOOLA FEED -->
+    <div class="feed-wrap">
+      <div class="feed-header">
+        <h3>Recommended For You</h3>
+        <span class="tbl-logo">by Taboola</span>
+      </div>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/04/schoko-kirsch-kuchen-vom-blech-ls.png?w=480&h=360&crop=1" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Schoko-Kirsch-Kuchen vom Blech: Dieses Rezept gelingt immer</div>
+          <div class="fc-source">leckerschmecker.me</div>
+        </div>
+      </a>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=300&h=200&fit=crop" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Solaranlage f&uuml;r Ihr Dach: Jetzt bis zu 40% sparen</div>
+          <div class="fc-source">solar-vergleich.de</div>
+          <div class="fc-sponsor">Anzeige</div>
+        </div>
+      </a>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/karamellisierte-gruene-spargel-pasta-ls.jpg?w=480&h=360&crop=1" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Karamellisierte Spargel-Pasta: Das Rezept f&uuml;r den Fr&uuml;hling</div>
+          <div class="fc-source">leckerschmecker.me</div>
+        </div>
+      </a>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Zahnzusatzversicherung ab 9,90&euro;/Monat &mdash; Vergleich 2026</div>
+          <div class="fc-source">versicherung-check.de</div>
+          <div class="fc-sponsor">Anzeige</div>
+        </div>
+      </a>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2024/04/rhabarberauflauf.jpeg?w=480&h=360&crop=1" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Rhabarberauflauf: Fruchtiges Rezept f&uuml;r die Saison</div>
+          <div class="fc-source">leckerschmecker.me</div>
+        </div>
+      </a>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/grilled-cheese-sandwich-aus-dem-airfryer-ls.jpg?w=480&h=360&crop=1" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Grilled Cheese Sandwich aus dem Airfryer: So wird es perfekt</div>
+          <div class="fc-source">leckerschmecker.me</div>
+        </div>
+      </a>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&h=200&fit=crop" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Die besten Kreditkarten 2026 im Vergleich</div>
+          <div class="fc-source">finanztipp.net</div>
+          <div class="fc-sponsor">Anzeige</div>
+        </div>
+      </a>
+
+      <button class="feed-more-btn">Show More</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="ls-footer">
+      <div class="ls-footer-logo">
+        <img src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/10/leckerschmecker-logo.png" alt="Leckerschmecker">
+      </div>
+      <div class="ls-footer-links">
+        <a href="#">&Uuml;ber uns</a>
+        <a href="#">Impressum</a>
+        <a href="#">Kooperationen</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">KI bei FUNKE</a>
+      </div>
+      <div class="ls-footer-copy">&copy; 2026 Eine Marke der FUNKE Mediengruppe &mdash; powered by FUNKE Digital</div>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+<!-- ================================================================
+     PANEL: AFTER (Brand Kit Applied)
+     ================================================================ -->
+<div class="panel panel-after">
+  <div class="panel-label">After &mdash; Brand Kit Applied</div>
+  <div class="site-page">
+
+    <!-- Header (identical — this is the publisher's real header) -->
+    <div class="ls-topbar">
+      <a href="#">Was koche ich heute?</a>
+    </div>
+    <div class="ls-header">
+      <div class="ls-header-logo">
+        <img src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/09/leckerschmecker-logo-main.png" alt="Leckerschmecker" style="filter: brightness(0) invert(1);">
+      </div>
+      <div class="ls-header-right">
+        <button class="ls-search-btn">&#128269; Suche</button>
+        <button class="ls-newsletter-btn">&#9993; Newsletter</button>
+      </div>
+    </div>
+    <nav class="ls-nav">
+      <a href="#">Rezepte</a>
+      <a href="#" class="active">Hei&szlig;luftfritteuse</a>
+      <a href="#">Schnelle Rezepte</a>
+      <a href="#">Backen</a>
+      <a href="#">Magazin</a>
+      <a href="#">&Uuml;ber uns</a>
+    </nav>
+
+    <!-- Article (identical content) -->
+    <div class="article-wrap">
+      <div class="article-breadcrumb">
+        <a href="#">Leckerschmecker</a><span>&rsaquo;</span><a href="#">Hei&szlig;luftfritteuse</a><span>&rsaquo;</span>K&auml;se-Puffs
+      </div>
+      <h1 class="article-title">K&auml;se-Puffs aus dem Airfryer: einfacher Snack f&uuml;r jeden Tag</h1>
+      <div class="article-meta">
+        <img class="author-avatar" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/02/anke-neumann.jpg" alt="Anke">
+        <span>Von <span class="author-name">Anke</span></span>
+        <span>&middot;</span>
+        <span>14.04.2026 - 17:06 Uhr</span>
+      </div>
+      <img class="article-hero-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/kaese-puffs-airfryer-ls.jpg?w=1200&h=900&crop=1" alt="K&auml;se-Puffs aus dem Airfryer">
+      <div class="article-body">
+        <p>Knusprig, k&auml;sig und in nur 30 Minuten fertig: Diese K&auml;se-Puffs aus dem Airfryer sind der perfekte Snack, wenn es schnell gehen muss. Mit Bl&auml;tterteig und w&uuml;rzigem K&auml;se werden sie au&szlig;en goldbraun und innen herrlich fluffig.</p>
+        <p>Egal ob als Partysnack, f&uuml;rs Buffet oder einfach als Nachmittagsleckerei &mdash; diese kleinen Happen machen s&uuml;chtig und lassen sich wunderbar variieren.</p>
+      </div>
+      <div class="recipe-strip">
+        <div class="rs-icon">&#9201;</div>
+        <div class="rs-info">
+          <div><strong>30 Min.</strong><br>Zubereitungszeit</div>
+          <div><strong>4</strong><br>Portionen</div>
+          <div><strong>Einfach</strong><br>Schwierigkeit</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feed separator -->
+    <div class="feed-sep"><hr></div>
+
+    <!-- BRANDED TABOOLA FEED -->
+    <div class="feed-wrap">
+      <div class="feed-header">
+        <h3>Mehr entdecken</h3>
+        <span class="tbl-logo">empfohlen von Taboola</span>
+      </div>
+
+      <!-- Hero card (first sponsored item gets premium treatment) -->
+      <a class="fc-hero" href="#">
+        <img class="fc-hero-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/04/schoko-kirsch-kuchen-vom-blech-ls.png?w=1200&h=675&crop=1" alt="">
+        <div class="fc-hero-title">Schoko-Kirsch-Kuchen vom Blech: Dieses Rezept begeistert die ganze Familie</div>
+        <div class="fc-hero-source">leckerschmecker.me</div>
+      </a>
+
+      <!-- Sponsored list card -->
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=300&h=200&fit=crop" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Solaranlage f&uuml;r Ihr Dach: Jetzt bis zu 40% sparen</div>
+          <div class="fc-source">solar-vergleich.de</div>
+          <div class="fc-sponsor">Anzeige</div>
+        </div>
+      </a>
+
+      <!-- Organic -->
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/karamellisierte-gruene-spargel-pasta-ls.jpg?w=480&h=320&crop=1" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Karamellisierte Spargel-Pasta: Das Rezept f&uuml;r den Fr&uuml;hling</div>
+          <div class="fc-source">leckerschmecker.me</div>
+          <div class="fc-time">&#9201; 25 Min.</div>
+        </div>
+      </a>
+
+      <!-- Sponsored -->
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Zahnzusatzversicherung ab 9,90&euro;/Monat &mdash; Vergleich 2026</div>
+          <div class="fc-source">versicherung-check.de</div>
+          <div class="fc-sponsor">Anzeige</div>
+        </div>
+      </a>
+
+      <!-- Section: Mehr von Leckerschmecker -->
+      <div class="feed-section">Mehr von Leckerschmecker</div>
+
+      <div class="feed-grid">
+        <a class="gc" href="#">
+          <img class="gc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2024/04/rhabarberauflauf.jpeg?w=480&h=360&crop=1" alt="">
+          <div class="gc-title">Rhabarberauflauf: Fruchtiges Rezept f&uuml;r die Rhabarber-Saison</div>
+          <div class="gc-source">leckerschmecker.me &middot; 60 Min.</div>
+        </a>
+        <a class="gc" href="#">
+          <img class="gc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/grilled-cheese-sandwich-aus-dem-airfryer-ls.jpg?w=480&h=360&crop=1" alt="">
+          <div class="gc-title">Grilled Cheese aus dem Airfryer: So wird es perfekt knusprig</div>
+          <div class="gc-source">leckerschmecker.me &middot; 15 Min.</div>
+        </a>
+        <a class="gc" href="#">
+          <img class="gc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/baerlauch-tzatziki-ls.jpg?w=480&h=360&crop=1" alt="">
+          <div class="gc-title">B&auml;rlauch-Tzatziki: Der perfekte Fr&uuml;hlingsdip</div>
+          <div class="gc-source">leckerschmecker.me &middot; 10 Min.</div>
+        </a>
+        <a class="gc" href="#">
+          <img class="gc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/rhabarber-polenta-kuchen-ls.jpg?w=480&h=360&crop=1" alt="">
+          <div class="gc-title">Rhabarber-Polenta-Kuchen: Saftig und glutenfrei</div>
+          <div class="gc-source">leckerschmecker.me &middot; 50 Min.</div>
+        </a>
+      </div>
+
+      <!-- Another sponsored card -->
+      <a class="fc" href="#" style="margin-top: 8px;">
+        <img class="fc-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&h=200&fit=crop" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Die besten Kreditkarten 2026 im Vergleich</div>
+          <div class="fc-source">finanztipp.net</div>
+          <div class="fc-sponsor">Anzeige</div>
+        </div>
+      </a>
+
+      <!-- More organic -->
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/08/weisser-grieche-aufstrich-ls.jpg?w=480&h=320&crop=1" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Wei&szlig;er Grieche Aufstrich: Fertig in nur 10 Minuten</div>
+          <div class="fc-source">leckerschmecker.me</div>
+          <div class="fc-time">&#9201; 10 Min.</div>
+        </div>
+      </a>
+
+      <a class="fc" href="#">
+        <img class="fc-img" src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2026/04/gyoza-mit-chinakohl-ls.jpg?w=480&h=320&crop=1" alt="">
+        <div class="fc-body">
+          <div class="fc-title">Gyoza mit Chinakohl: Knusprige japanische Teigtaschen</div>
+          <div class="fc-source">leckerschmecker.me</div>
+          <div class="fc-time">&#9201; 45 Min.</div>
+        </div>
+      </a>
+
+      <button class="feed-more-btn">Mehr Empfehlungen laden</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="ls-footer">
+      <div class="ls-footer-logo">
+        <img src="https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/10/leckerschmecker-logo.png" alt="Leckerschmecker">
+      </div>
+      <div class="ls-footer-links">
+        <a href="#">&Uuml;ber uns</a>
+        <a href="#">Impressum</a>
+        <a href="#">Kooperationen</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">KI bei FUNKE</a>
+      </div>
+      <div class="ls-footer-copy">&copy; 2026 Eine Marke der FUNKE Mediengruppe &mdash; powered by FUNKE Digital</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /split-view -->
+
+<script>
+function setView(mode) {
+  document.body.className = 'view-' + mode;
+  document.querySelectorAll('.toggle-btn').forEach(function(btn) { btn.classList.remove('active'); });
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

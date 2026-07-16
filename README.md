@@ -96,6 +96,18 @@ The generated `brand-kit.json` contains:
 | `layout_patterns` | header layers, grid detection, card patterns |
 | `metadata` | analysis date, source URL, extraction quality |
 
+## Visual brand kits (Unique vs Standard)
+
+For A-B publishers, build ideal Before/After feed prototypes plus a **visual property brand kit** — each token shown as source (publisher) → suggested application on today’s Taboola feed → integration tier (Standard / Partial / Unique / Soft):
+
+```bash
+npm run build:visual-kits
+# open output/<slug>/visual-brand-kit.html
+# open output/<slug>/feed-prototype.html
+```
+
+See [`docs/feed-integration-matrix.md`](docs/feed-integration-matrix.md). Soft brand-voice fields are stubbed via [`lib/enrich-stub.js`](lib/enrich-stub.js) (no live Gen AI on main).
+
 ## Deploy it
 
 Want a public URL you can hand teammates? See [`DEPLOY.md`](./DEPLOY.md).

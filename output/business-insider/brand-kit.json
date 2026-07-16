@@ -607,6 +607,22 @@
       "extraction_ratio": 1,
       "fallback_tokens": [],
       "note": "Token sources are marked 'extracted' to reflect the confidence level of hand-constructed BI brand data (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners are well-documented public knowledge). They will be replaced byte-for-byte when the crawler is re-run with live access."
+    },
+    "enrichment": {
+      "status": "stubbed_not_wired",
+      "reason": "Live Gen AI enrichment is not on main. Soft brand_voice fields are hand-authored in ideal prototypes. See feat/deep-crawl-enrich-feed-mapping lib/enrich.js for the Claude pipeline.",
+      "soft_paths": [
+        "brand_voice.tone",
+        "brand_voice.personality_traits",
+        "brand_voice.headline_style.tone",
+        "brand_voice.headline_style.pattern",
+        "brand_voice.content_distinction",
+        "photo_style.food_photography.style",
+        "photo_style.aesthetic",
+        "logos.primary.description"
+      ],
+      "skipped": true,
+      "noEnrich": true
     }
   }
 }

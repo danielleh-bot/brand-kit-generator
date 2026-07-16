@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weather Channel — Visual Brand Kit (Unique vs Standard)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12141a;
+    --muted: #5c6470;
+    --line: #e4e7ec;
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --primary: #0078D4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 500px at 10% -10%, color-mix(in srgb, var(--primary) 18%, transparent), transparent),
+      linear-gradient(180deg, #fafafa 0%, var(--bg) 40%);
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  .top {
+    position: sticky; top: 0; z-index: 40;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.9);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 28px;
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
+  }
+  .brand-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 28px; letter-spacing: -0.02em;
+  }
+  .brand-title span { color: var(--primary); }
+  .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .summary {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .pill-stat {
+    background: #fff; border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 12px; font-size: 12px; font-weight: 600;
+  }
+  .pill-stat em { font-style: normal; color: var(--primary); }
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn, .filter-all {
+    border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    padding: 6px 12px; font: inherit; font-size: 12px; font-weight: 600;
+    cursor: pointer; color: var(--muted);
+  }
+  .filter-btn.active, .filter-all.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .filter-btn em { font-style: normal; opacity: 0.7; margin-left: 4px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
+  .intro {
+    margin-bottom: 24px; padding: 20px 22px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 12px;
+  }
+  .intro h2 { font-size: 15px; margin-bottom: 8px; }
+  .intro p { font-size: 13px; color: var(--muted); max-width: 70ch; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tier { display: inline-flex; align-items: center; border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em; }
+  .links { margin-top: 12px; font-size: 12px; }
+  .links a { color: var(--primary); margin-right: 14px; }
+  .prop-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 18px 14px; margin-bottom: 18px;
+    box-shadow: 0 1px 0 rgba(16,24,40,0.02);
+  }
+  .prop-card.hidden { display: none; }
+  .prop-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+  .prop-head h3 { font-size: 17px; letter-spacing: -0.01em; }
+  .token-path { font-size: 11px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; margin-top: 3px; }
+  .prop-value { font-size: 13px; color: var(--ink); margin-bottom: 14px; padding: 8px 10px; background: #f8f9fb; border-radius: 8px; }
+  .viz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 760px) { .viz-grid { grid-template-columns: 1fr; } }
+  .col-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .viz { background: #fafbfc; border: 1px solid var(--line); border-radius: 10px; padding: 14px; min-height: 140px; }
+  .viz-cap { font-size: 11px; color: var(--muted); margin-top: 10px; }
+  .trc-label { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #98a2b3; margin-bottom: 8px; }
+  .mock-header { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-radius:8px; color:#fff; }
+  .mock-logo { font-weight: 800; letter-spacing: 0.04em; }
+  .mock-cta { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 999px; font-size: 11px; }
+  .type-spec { font-size: 28px; font-weight: 700; line-height: 1.15; }
+  .radius-demo { display:flex; gap:12px; align-items:center; }
+  .radius-thumb { width: 120px; height: 72px; }
+  .mock-btn { border:0; padding:10px 18px; font-weight:700; font-size:13px; cursor:default; }
+  .mock-badge { display:inline-block; padding:3px 10px; font-size:11px; font-weight:700; }
+  .recipe-strip { display:flex; gap:16px; align-items:center; border-top:2px solid; padding:12px; background:#fff; }
+  .rs-items { display:flex; gap:16px; font-size:12px; color:#444; }
+  .section-lab { font-weight:800; font-size:15px; border-bottom:2px solid; padding-bottom:6px; }
+  .voice-tone { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
+  .voice-sample { font-size:16px; font-weight:600; line-height:1.3; }
+  .accent-dot-row { font-weight:800; letter-spacing:0.06em; display:flex; align-items:center; gap:8px; }
+  .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .kicker-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .live-row { display:flex; gap:12px; align-items:center; }
+  .live-pill { color:#fff; font-size:11px; font-weight:800; padding:4px 8px; border-radius:4px; }
+  .score { font-weight:700; font-size:14px; }
+  .card-types { display:flex; gap:8px; align-items:stretch; }
+  .ct { flex:1; border:2px solid; border-radius:8px; min-height:48px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; background:#fff; }
+  .ct-lg { flex:1.4; min-height:72px; }
+  .ct-sm { flex:0.8; }
+  .phone { width:120px; border:2px solid #222; border-radius:18px; overflow:hidden; background:#fff; margin:0 auto; }
+  .phone-bar { height:22px; }
+  .phone-body { padding:8px; display:flex; flex-direction:column; gap:6px; }
+  .ph-card { height:36px; background:#e8e8e8; border-radius:6px; }
+  .ph-card.branded { border:2px solid; background:#f5f5f5; }
+  .fc { display:flex; gap:12px; align-items:stretch; }
+  .fc-thumb { width:96px; height:68px; flex-shrink:0; background:#ddd; }
+  .fc-title { font-size:14px; font-weight:700; line-height:1.25; margin-bottom:4px; }
+  .fc-source { font-size:11px; }
+  .fc-meta { font-size:12px; font-weight:700; margin-top:4px; }
+  .fc-kicker { font-size:10px; font-weight:800; letter-spacing:0.08em; margin-bottom:4px; }
+  .fc-badge { display:inline-block; margin-top:6px; font-size:10px; font-weight:700; padding:2px 8px; }
+  .hl { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+  .platform-note, .soft-note {
+    margin-top: 10px; font-size: 11px; font-weight: 600; padding: 6px 8px; border-radius: 6px;
+  }
+  .platform-note { background: #fdecea; color: #b42318; }
+  .soft-note { background: #f3e8ff; color: #5b21b6; }
+  .feed-hdr { font-weight:800; font-size:15px; border-top:3px solid; padding-top:10px; display:flex; align-items:center; gap:8px; }
+  .mini-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:10px; }
+  .mg { height:48px; background:linear-gradient(135deg,#ddd,#bbb); border-radius:4px; }
+  .prem-hero { height:64px; border-radius:8px; margin-bottom:6px; opacity:0.85; }
+  .prem-row { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .prem-row div { height:40px; background:#e5e5e5; border-radius:6px; }
+  .prop-foot { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
+  .foot-lab { font-weight: 700; color: var(--ink); margin-right: 6px; }
+  .targets { font-size: 10px; background: #f2f4f7; padding: 2px 6px; border-radius: 4px; }
+  .no-hook { color: #b42318; font-weight: 600; }
+  .mvp-box {
+    margin-top: 28px; padding: 20px; border-radius: 12px; border: 1px solid var(--line); background: #fff;
+  }
+  .mvp-box h2 { font-size: 16px; margin-bottom: 10px; }
+  .mvp-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .mvp-cols { grid-template-columns: 1fr; } }
+  .mvp-cols h3 { font-size: 13px; margin-bottom: 8px; }
+  .mvp-cols ul { padding-left: 18px; font-size: 13px; color: var(--muted); }
+  .mvp-cols li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <div class="brand-title"><span>The Weather Channel</span> Visual Brand Kit</div>
+      <div class="sub">Unique vs Standard — source evidence → suggested feed application → ship tier</div>
+    </div>
+    <div class="summary">
+      <div class="pill-stat">MVP coverage <em>57%</em></div>
+      <div class="pill-stat">Standard <em>4</em></div>
+      <div class="pill-stat">Partial <em>0</em></div>
+      <div class="pill-stat">Unique <em>2</em></div>
+      <div class="pill-stat">Soft <em>1</em></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="intro">
+      <h2>How to read this kit</h2>
+      <p>Each property shows (1) where it appears on the publisher site, (2) how it should apply on <strong>today’s</strong> Taboola feed surface (TRC card anatomy), and (3) whether it ships via loader CSS / <code>__style__</code> (Standard), loses fidelity (Partial), needs platform/card markup (Unique), or needs Gen AI / editorial rewrite (Soft). Source visuals are high-fidelity mocks from the brand kit and ideal prototype — tagged prototype provenance when live capture is unavailable.</p>
+      <div class="legend">
+        <span class="tier" style="background:#e8f7ef;color:#1a7f4b;border:1px solid #1a7f4b33">Standard / MVP</span> <span style="font-size:11px;color:var(--muted);margin-right:8px">Ship today via loader CSS + __style__ on existing TRC selectors.</span><span class="tier" style="background:#fff6e0;color:#9a6b00;border:1px solid #9a6b0033">Partial</span> <span style="font-size:11px;color:var(--muted);margin-right:8px">A knob exists but value space is too narrow — A/B possible with fidelity loss.</span><span class="tier" style="background:#fdecea;color:#b42318;border:1px solid #b4231833">Unique / needs platform</span> <span style="font-size:11px;color:var(--muted);margin-right:8px">Ideal prototype shows it; current feed markup/config has no hook.</span><span class="tier" style="background:#f3e8ff;color:#5b21b6;border:1px solid #5b21b633">Soft / Gen AI</span> <span style="font-size:11px;color:var(--muted);margin-right:8px">Not CSS — content/experience translation (tone, headline rewrite, naming).</span>
+      </div>
+      <div class="links">
+        <a href="./feed-prototype.html">Ideal feed prototype</a>
+        <a href="./brand-kit.json">brand-kit.json</a>
+        <a href="./property-matrix.json">property-matrix.json</a>
+        <a href="./mvp-checklist.md">MVP vs ideal checklist</a>
+      </div>
+      <div class="filters" style="margin-top:14px">
+        <button type="button" class="filter-all active" onclick="filterTier('all')">All</button>
+        <button type="button" class="filter-btn" data-tier="standard" onclick="filterTier('standard')">MVP <em>4</em></button><button type="button" class="filter-btn" data-tier="partial" onclick="filterTier('partial')">Partial <em>0</em></button><button type="button" class="filter-btn" data-tier="unique" onclick="filterTier('unique')">Unique <em>2</em></button><button type="button" class="filter-btn" data-tier="soft" onclick="filterTier('soft')">Gen AI <em>1</em></button>
+      </div>
+    </div>
+
+    <div id="cards"><article class="prop-card" data-tier="standard" style="border-top:3px solid #1a7f4b">
+        <header class="prop-head">
+          <div>
+            <h3>Primary brand color</h3>
+            <div class="token-path">colors.primary.hex</div>
+          </div>
+          <span class="tier" style="background:#e8f7ef;color:#1a7f4b;border:1px solid #1a7f4b33">Standard / MVP</span>
+        </header>
+        <div class="prop-value">#0078D4</div>
+        <div class="viz-grid">
+          <div>
+            <div class="col-label">1 · Source (publisher)</div>
+            <div class="viz source-viz">
+        <div class="mock-header" style="background:#0078D4">
+          <span class="mock-logo">The Weather Channel</span>
+          <span class="mock-cta">CTA</span>
+        </div>
+        <p class="viz-cap">TWC Blue CTAs on navy masthead</p>
+      </div>
+          </div>
+          <div>
+            <div class="col-label">2 · Suggested on current feed</div>
+            <div class="viz feed-viz">
+    <div class="trc-label">Current feed surface (suggested)</div>
+    <div class="fc hl">
+      <div class="fc-thumb" style="border-radius:6px;background:linear-gradient(135deg,#ccc,#999)"></div>
+      <div class="fc-body">
+        
+        <div class="fc-title" style="font-family:Helvetica Neue;color:#1B1B1B;text-decoration:underline;text-decoration-color:#0078D4;text-decoration-thickness:2px">Here's why this weekend's storm risk is rising</div>
+        <div class="fc-source" style="color:#555555">theweatherchannel.com</div>
+        
+        
+      </div>
+    </div>
+    
+  </div>
+          </div>
+        </div>
+        <footer class="prop-foot">
+          <div><span class="foot-lab">Integration</span> <code class="targets">.tbl-feed-card:hover .video-title · .tbl-feed-card .trc-pre-label · .tbl-feed-more-btn · .tbl-feed-header, .tbl-feed-header-text</code></div>
+          <div><span class="foot-lab">A/B</span> MVP paint — measurable CTR/brand-fit lift with zero platform work.</div>
+          <div><span class="foot-lab">Note</span> Maps to CTA, accent rule, title hover underline, pre-label.</div>
+          <div><span class="foot-lab">Provenance</span> prototype visual mock from brand kit / ideal prototype</div>
+        </footer>
+      </article>
+<article class="prop-card" data-tier="standard" style="border-top:3px solid #1a7f4b">
+        <header class="prop-head">
+          <div>
+            <h3>Headline font family</h3>
+            <div class="token-path">fonts.primary.family</div>
+          </div>
+          <span class="tier" style="background:#e8f7ef;color:#1a7f4b;border:1px solid #1a7f4b33">Standard / MVP</span>
+        </header>
+        <div class="prop-value">Helvetica Neue</div>
+        <div class="viz-grid">
+          <div>
+            <div class="col-label">1 · Source (publisher)</div>
+            <div class="viz source-viz">
+        <div class="type-spec" style="font-family:Helvetica Neue;color:#1B1B1B">The Weather Channel</div>
+        <p class="viz-cap">Publisher article / card title type</p>
+      </div>
+          </div>
+          <div>
+            <div class="col-label">2 · Suggested on current feed</div>
+            <div class="viz feed-viz">
+    <div class="trc-label">Current feed surface (suggested)</div>
+    <div class="fc">
+      <div class="fc-thumb" style="border-radius:6px;background:linear-gradient(135deg,#ccc,#999)"></div>
+      <div class="fc-body">
+        
+        <div class="fc-title hl" style="font-family:Helvetica Neue;color:#1B1B1B;">Here's why this weekend's storm risk is rising</div>
+        <div class="fc-source" style="color:#555555">The Weather Channel</div>
+        
+        
+      </div>
+    </div>
+    
+  </div>
+          </div>
+        </div>
+        <footer class="prop-foot">
+          <div><span class="foot-lab">Integration</span> <code class="targets">.tbl-feed-card .video-title, .videoCube .video-title · .tbl-feed-card .branding, .video-label-box .branding</code></div>
+          <div><span class="foot-lab">A/B</span> MVP — largest native-feel lever after colour.</div>
+          
+          <div><span class="foot-lab">Provenance</span> prototype visual mock from brand kit / ideal prototype</div>
+        </footer>
+      </article>
+<article class="prop-card" data-tier="standard" style="border-top:3px solid #1a7f4b">
+        <header class="prop-head">
+          <div>
+            <h3>Card / thumbnail border radius</h3>
+            <div class="token-path">photo_style.thumbnail_format.border_radius</div>
+          </div>
+          <span class="tier" style="background:#e8f7ef;color:#1a7f4b;border:1px solid #1a7f4b33">Standard / MVP</span>
+        </header>
+        <div class="prop-value">6px</div>
+        <div class="viz-grid">
+          <div>
+            <div class="col-label">1 · Source (publisher)</div>
+            <div class="viz source-viz">
+        <div class="radius-demo">
+          <div class="radius-thumb" style="border-radius:6px;background:linear-gradient(135deg,#0078D4,#888)"></div>
+        </div>
+        <p class="viz-cap">Publisher media corners (6px)</p>
+      </div>
+          </div>
+          <div>
+            <div class="col-label">2 · Suggested on current feed</div>
+            <div class="viz feed-viz">
+    <div class="trc-label">Current feed surface (suggested)</div>
+    <div class="fc">
+      <div class="fc-thumb hl" style="border-radius:6px;background:linear-gradient(135deg,#ccc,#999)"></div>
+      <div class="fc-body">
+        
+        <div class="fc-title" style="font-family:Helvetica Neue;color:#1B1B1B;">Here's why this weekend's storm risk is rising</div>
+        <div class="fc-source" style="color:#555555">The Weather Channel</div>
+        
+        
+      </div>
+    </div>
+    
+  </div>
+          </div>
+        </div>
+        <footer class="prop-foot">
+          <div><span class="foot-lab">Integration</span> <code class="targets">.tbl-feed-card .thumbBlock, .videoCube .trc_img · .tbl-feed-card</code></div>
+          <div><span class="foot-lab">A/B</span> MVP — sharp vs rounded reads immediately as brand.</div>
+          
+          <div><span class="foot-lab">Provenance</span> prototype visual mock from brand kit / ideal prototype</div>
+        </footer>
+      </article>
+<article class="prop-card" data-tier="standard" style="border-top:3px solid #1a7f4b">
+        <header class="prop-head">
+          <div>
+            <h3>CTA / See more button</h3>
+            <div class="token-path">buttons.primary</div>
+          </div>
+          <span class="tier" style="background:#e8f7ef;color:#1a7f4b;border:1px solid #1a7f4b33">Standard / MVP</span>
+        </header>
+        <div class="prop-value">#0078D4 · radius 4px</div>
+        <div class="viz-grid">
+          <div>
+            <div class="col-label">1 · Source (publisher)</div>
+            <div class="viz source-viz">
+        <button class="mock-btn" style="background:#0078D4;color:#fff;border-radius:4px;font-family:Helvetica Neue">See Forecast</button>
+        <p class="viz-cap">Publisher primary CTA</p>
+      </div>
+          </div>
+          <div>
+            <div class="col-label">2 · Suggested on current feed</div>
+            <div class="viz feed-viz">
+      <div class="trc-label">Current feed surface (suggested)</div>
+      <button class="mock-btn" style="background:#0078D4;color:#fff;border-radius:4px;font-family:Helvetica Neue">Show more</button>
+      <p class="viz-cap">.tbl-feed-more-btn</p>
+    </div>
+          </div>
+        </div>
+        <footer class="prop-foot">
+          <div><span class="foot-lab">Integration</span> <code class="targets">.tbl-feed-more-btn</code></div>
+          <div><span class="foot-lab">A/B</span> MVP — loader can restyle .tbl-feed-more-btn.</div>
+          
+          <div><span class="foot-lab">Provenance</span> prototype visual mock from brand kit / ideal prototype</div>
+        </footer>
+      </article>
+<article class="prop-card" data-tier="unique" style="border-top:3px solid #b42318">
+        <header class="prop-head">
+          <div>
+            <h3>SEVERE WEATHER / alert badges</h3>
+            <div class="token-path">brand_voice.content_labels.severe_weather</div>
+          </div>
+          <span class="tier" style="background:#fdecea;color:#b42318;border:1px solid #b4231833">Unique / needs platform</span>
+        </header>
+        <div class="prop-value">SEVERE WEATHER</div>
+        <div class="viz-grid">
+          <div>
+            <div class="col-label">1 · Source (publisher)</div>
+            <div class="viz source-viz">
+        <div class="kicker-row"><span class="mock-badge" style="background:#D72B2B;color:#fff;border-radius:2px">SEVERE</span><span class="mock-badge" style="background:#FFBF00;color:#111;border-radius:2px">WATCH</span><span class="mock-badge" style="background:#0078D4;color:#fff;border-radius:2px">FORECAST</span></div>
+        <p class="viz-cap">Alert chips on weather.com</p>
+      </div>
+          </div>
+          <div>
+            <div class="col-label">2 · Suggested on current feed</div>
+            <div class="viz feed-viz">
+    <div class="trc-label">Current feed surface (suggested)</div>
+    <div class="fc">
+      <div class="fc-thumb" style="border-radius:6px;background:linear-gradient(135deg,#ccc,#999)"></div>
+      <div class="fc-body">
+        <div class="fc-kicker hl" style="color:#D72B2B">SEVERE</div>
+        <div class="fc-title" style="font-family:Helvetica Neue;color:#1B1B1B;">Tornado Watch expands across the Midwest tonight</div>
+        <div class="fc-source" style="color:#555555">weather.com</div>
+        <div class="fc-meta" style="color:#0078D4">Until 10 PM CDT</div>
+        
+      </div>
+    </div>
+    <div class="platform-note">Alert meta + multi-badge need custom mode</div>
+  </div>
+          </div>
+        </div>
+        <footer class="prop-foot">
+          <div><span class="foot-lab">Integration</span> <code class="targets">.tbl-feed-card .trc-pre-label</code></div>
+          <div><span class="foot-lab">A/B</span> Unique — alert colour system is weather-native RPM; needs multi-badge + urgency styling.</div>
+          
+          <div><span class="foot-lab">Provenance</span> prototype visual mock from brand kit / ideal prototype</div>
+        </footer>
+      </article>
+<article class="prop-card" data-tier="unique" style="border-top:3px solid #b42318">
+        <header class="prop-head">
+          <div>
+            <h3>TrueNative mobile feed composition</h3>
+            <div class="token-path">layout_patterns</div>
+          </div>
+          <span class="tier" style="background:#fdecea;color:#b42318;border:1px solid #b4231833">Unique / needs platform</span>
+        </header>
+        <div class="prop-value">TrueNative iPhone feed modules</div>
+        <div class="viz-grid">
+          <div>
+            <div class="col-label">1 · Source (publisher)</div>
+            <div class="viz source-viz">
+        <div class="phone">
+          <div class="phone-bar" style="background:#0078D4"></div>
+          <div class="phone-body"><div class="ph-card"></div><div class="ph-card"></div></div>
+        </div>
+        <p class="viz-cap">TWC TrueNative mobile modules</p>
+      </div>
+          </div>
+          <div>
+            <div class="col-label">2 · Suggested on current feed</div>
+            <div class="viz feed-viz">
+      <div class="trc-label">Suggested TrueNative</div>
+      <div class="phone">
+        <div class="phone-bar" style="background:#0078D4"></div>
+        <div class="phone-body"><div class="ph-card branded" style="border-color:#0078D4"></div><div class="ph-card branded" style="border-color:#0078D4"></div></div>
+      </div>
+      <div class="platform-note">TrueNative / custom mobile mode</div>
+    </div>
+          </div>
+        </div>
+        <footer class="prop-foot">
+          <div><span class="foot-lab">Integration</span> <span class="no-hook">No TRC selector hook</span></div>
+          <div><span class="foot-lab">A/B</span> Unique — layout/product mode, not paint on default thumbs.</div>
+          
+          <div><span class="foot-lab">Provenance</span> prototype visual mock from brand kit / ideal prototype</div>
+        </footer>
+      </article>
+<article class="prop-card" data-tier="soft" style="border-top:3px solid #5b21b6">
+        <header class="prop-head">
+          <div>
+            <h3>Conversational forecast voice</h3>
+            <div class="token-path">brand_voice.headline_style</div>
+          </div>
+          <span class="tier" style="background:#f3e8ff;color:#5b21b6;border:1px solid #5b21b633">Soft / Gen AI</span>
+        </header>
+        <div class="prop-value">Conversational, informative sentence-case headlines. Often start with 'Here's', 'Why', 'How', 'What'. Question-and-answer format common for explainers.</div>
+        <div class="viz-grid">
+          <div>
+            <div class="col-label">1 · Source (publisher)</div>
+            <div class="viz source-viz">
+        <div class="voice-box">
+          <div class="voice-tone" style="color:#0078D4">Conversational, informative</div>
+          <div class="voice-sample" style="font-family:Helvetica Neue">“Here's what to expect from this weekend's cold front”</div>
+        </div>
+        <p class="viz-cap">TWC sentence-case explainer style</p>
+      </div>
+          </div>
+          <div>
+            <div class="col-label">2 · Suggested on current feed</div>
+            <div class="viz feed-viz">
+    <div class="trc-label">Current feed surface (suggested)</div>
+    <div class="fc">
+      <div class="fc-thumb" style="border-radius:6px;background:linear-gradient(135deg,#ccc,#999)"></div>
+      <div class="fc-body">
+        
+        <div class="fc-title hl" style="font-family:Helvetica Neue;color:#1B1B1B;">Here's what to expect from this weekend's cold front</div>
+        <div class="fc-source" style="color:#555555">weather.com</div>
+        
+        
+      </div>
+    </div>
+    <div class="soft-note">Suggested copy — Gen AI translation stubbed</div>
+  </div>
+          </div>
+        </div>
+        <footer class="prop-foot">
+          <div><span class="foot-lab">Integration</span> <span class="no-hook">No TRC selector hook</span></div>
+          <div><span class="foot-lab">A/B</span> Soft — Gen AI rewrite into accessible forecast voice.</div>
+          
+          <div><span class="foot-lab">Provenance</span> prototype visual mock from brand kit / ideal prototype</div>
+        </footer>
+      </article></div>
+
+    <div class="mvp-box" id="mvp">
+      <h2>A/B variant framing</h2>
+      <div class="mvp-cols">
+        <div>
+          <h3>Variant A — MVP (loader paint)</h3>
+          <ul>
+            <li><strong>Primary brand color</strong> — MVP paint — measurable CTR/brand-fit lift with zero platform work.</li><li><strong>Headline font family</strong> — MVP — largest native-feel lever after colour.</li><li><strong>Card / thumbnail border radius</strong> — MVP — sharp vs rounded reads immediately as brand.</li><li><strong>CTA / See more button</strong> — MVP — loader can restyle .tbl-feed-more-btn.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Variant B — Ideal subset (platform / Gen AI)</h3>
+          <ul>
+            <li><strong>SEVERE WEATHER / alert badges</strong> — Unique — alert colour system is weather-native RPM; needs multi-badge + urgency styling.</li><li><strong>TrueNative mobile feed composition</strong> — Unique — layout/product mode, not paint on default thumbs.</li><li><strong>Conversational forecast voice</strong> — Soft — Gen AI rewrite into accessible forecast voice.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+function filterTier(tier) {
+  document.querySelectorAll('.prop-card').forEach(function (el) {
+    el.classList.toggle('hidden', tier !== 'all' && el.getAttribute('data-tier') !== tier);
+  });
+  document.querySelectorAll('.filter-btn, .filter-all').forEach(function (btn) {
+    var active = (tier === 'all' && btn.classList.contains('filter-all')) || btn.getAttribute('data-tier') === tier;
+    btn.classList.toggle('active', active);
+  });
+}
+</script>
+</body>
+</html>

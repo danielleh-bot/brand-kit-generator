@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "generate": "node generate.js"
+    "generate": "node generate.js",
+    "build:visual-kits": "node scripts/build-visual-kits.js"
   },
   "keywords": [
     "brand-kit",

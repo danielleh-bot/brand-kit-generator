@@ -99,3 +99,14 @@ and the CSS tokens from the new `brand-kit.json` into `loader.js`'s
 - **No black-box.** Every CSS rule in `loader.js` is human-readable and
   references a token from `brand-kit.json` — BI engineers can audit,
   diff, and modify in version control.
+
+## Visual brand kit (Unique vs Standard)
+
+| File | Purpose |
+|---|---|
+| `visual-brand-kit.html` | Source → suggested feed → tier cards |
+| `feed-prototype.html` | Ideal Before / Split / After native feed |
+| `property-matrix.json` | Machine-readable tiers |
+| `mvp-checklist.md` | Variant A (loader MVP) vs Variant B (ideal) |
+
+Regenerate with `npm run build:visual-kits`.
