@@ -1,0 +1,249 @@
+{
+  "capturedAt": "2026-07-16T14:30:08.377Z",
+  "articleUrl": "https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends",
+  "homeUrl": "https://weather.com/",
+  "chrome": "/usr/bin/google-chrome",
+  "requested": {
+    "publisher": "theweatherchannel",
+    "container": "taboola-below-content-thumbnails-article",
+    "mode": "organic-thumbs-feed-01-c-new",
+    "placement": "Below Content Thumbnails"
+  },
+  "taboola": {
+    "publisherSlug": "theweatherchannel",
+    "loaderUrl": "https://cdn.taboola.com/libtrc/theweatherchannel/loader.js",
+    "mode": null,
+    "placement": null,
+    "container": null,
+    "targetType": null,
+    "containers": [
+      {
+        "id": "tRecs-taboola-choice",
+        "className": null,
+        "childCount": 0
+      },
+      {
+        "id": "tRecs-taboola-choice-popover-container",
+        "className": null,
+        "childCount": 0
+      },
+      {
+        "id": "tRecs-taboola-choice-popover-content",
+        "className": null,
+        "childCount": 0
+      },
+      {
+        "id": "taboola-below-content-thumbnails-article",
+        "className": "bg-none trc_related_container tbl-feed-container render-late-effect tbl-feed-frame-NONE",
+        "childCount": 9
+      },
+      {
+        "id": "taboola-below-content-thumbnails-article-sca1",
+        "className": "trc_related_container tbl-trecs-container trc_spotlight_widget trc_elastic trc_elastic_above-the-feed-premium-card-fp-delta pad-down above-the-feed-placement",
+        "childCount": 0
+      },
+      {
+        "id": "taboola-below-content-thumbnails-article-pl1",
+        "className": "tbl-feed-card trc_related_container tbl-trecs-container trc_spotlight_widget trc_elastic trc_elastic_organic-thumbs-feed-01-c-new",
+        "childCount": 1
+      },
+      {
+        "id": null,
+        "className": "trc_rbox_container",
+        "childCount": 1
+      },
+      {
+        "id": "taboola-below-content-thumbnails-article-pl2",
+        "className": "tbl-feed-card trc_related_container tbl-trecs-container trc_spotlight_widget trc_elastic trc_elastic_thumbs-feed-01-b-new",
+        "childCount": 1
+      },
+      {
+        "id": null,
+        "className": "trc_rbox_container",
+        "childCount": 1
+      },
+      {
+        "id": "taboola-below-content-thumbnails-article-pl3",
+        "className": "tbl-feed-card trc_related_container tbl-trecs-container trc_spotlight_widget trc_elastic trc_elastic_thumbs-feed-01-b-new",
+        "childCount": 1
+      },
+      {
+        "id": null,
+        "className": "trc_rbox_container",
+        "childCount": 1
+      }
+    ],
+    "hasWindowTaboola": true
+  },
+  "feedReady": {
+    "ok": true,
+    "cardCount": 228,
+    "titleCount": 52,
+    "rootId": "taboola-below-content-thumbnails-article",
+    "rootClass": "bg-none trc_related_container tbl-feed-container render-late-effect tbl-feed-frame-NONE tbl-trecs-container trc_spotlight_widget trc_elastic trc_elastic_organic-thumbs-feed-01-c-new"
+  },
+  "feedCardCount": 25,
+  "networkHits": [
+    {
+      "url": "https://c2.taboola.com/nr/theweatherchannel/newsroom.js",
+      "status": 200
+    },
+    {
+      "url": "https://cdn.taboola.com/libtrc/theweatherchannel/loader.js",
+      "status": 200
+    },
+    {
+      "url": "https://nr-events.taboola.com/newsroom/1.0/theweatherchannel/get-action?page.url=https%3A%2F%2Fweather.com%2F&view.id=104744216838718871&page.template=homepage_r2&page.dashboard=homepage_r2",
+      "status": 200,
+      "json": null
+    },
+    {
+      "url": "https://nr-events.taboola.com/newsroom/1.0/theweatherchannel/notify-impression?page.url=https%3A%2F%2Fweather.com%2F&view.id=104744216838718871&page.template=homepage_r2&page.dashboard=homepage_r2",
+      "status": 204
+    },
+    {
+      "url": "https://display.bidder.taboola.com/OpenRTB/TaboolaHB/auction?publisher=1566460",
+      "status": 204
+    },
+    {
+      "url": "https://cdn.taboola.com/libtrc/tr5?type=loaderpixel&publisher=theweatherchannel",
+      "status": 200
+    },
+    {
+      "url": "https://pm-widget.taboola.com/theweatherchannel/load.js",
+      "status": 200
+    },
+    {
+      "url": "https://trc.taboola.com/sg/theweatherchannel/1/consent-check",
+      "status": 200
+    },
+    {
+      "url": "https://pm-widget.taboola.com/theweatherchannel/pmk-20220605.43.js",
+      "status": 200
+    },
+    {
+      "url": "https://trc.taboola.com/theweatherchannel/trc/3/json?llvl=2&tim=14%3A30%3A10.332&lti=default&pubit=i&t=1&data=%7B%22id%22%3A%2236044%22%2C%22sd%22%3A%22%22%2C%22ui%22%3A%22%22%2C%22ii%22%3A%22%2F%22%2C%22it%22%3A%22category%22%2C%22vi%22%3A1784212210332%2C%22cv%22%3A%2220260716-7-RELEASE%22%2C%22uiv",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/c_crop%2Cf_jpg%2Cq_auto%2Ce_sharpen%2Car_1.7778%2Cw_1024%2Cx_0%2Cy_353/c_fill%2Cw_460%2Ch_256/https%3A//cdn.taboola.com/libtrc/static/thumbnails/134374c65b892e7b8343a91bfa479dd0.png",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Ch_167%2Cw_300%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A//cdn.taboola.com/libtrc/static/thumbnails/23ac042a27ebedf64679b4d9ffa63369.png",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Ch_167%2Cw_300%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A//cdn.taboola.com/libtrc/static/thumbnails/eb5ddbd252039d25368591291562065e.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Ch_256%2Cw_460%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A//cdn.taboola.com/libtrc/static/thumbnails/4d0ee9d47f531febb9bea0fc702c2341.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://cdn.taboola.com/scripts/firstid.es5.js",
+      "status": 200
+    },
+    {
+      "url": "https://cdn.taboola.com/scripts/fraud-detect.js",
+      "status": 200
+    },
+    {
+      "url": "https://cdn.taboola.com/scripts/cds-pips.js?dc=us&d=d",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Ch_167%2Cw_300%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A//cdn.taboola.com/libtrc/static/thumbnails/8aa6774d5908e3e831f0f2337fae819a.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/c_crop%2Cf_jpg%2Cq_auto%2Ce_sharpen%2Car_1.7778%2Cw_1080%2Cx_0%2Cy_163/c_fill%2Cw_300%2Ch_167/https%3A//cdn.taboola.com/libtrc/static/thumbnails/bc759302c15b666dcc9676f7ceb696bf.png",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Ch_167%2Cw_300%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A//cdn.taboola.com/libtrc/static/thumbnails/e3add16360b28e2e3802116ca0c666b7.png",
+      "status": 200
+    },
+    {
+      "url": "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Ch_167%2Cw_300%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https%3A//cdn.taboola.com/libtrc/static/thumbnails/5dcc2d979e71cf3b5a355ba4fe3bea57.jpg",
+      "status": 200
+    },
+    {
+      "url": "https://vidstat.taboola.com/lite-unit/5.7.4/UnitFeedManagerDesktop.min.js",
+      "status": 200
+    },
+    {
+      "url": "https://trc.taboola.com/theweatherchannel/trc/3/json?llvl=2&tim=14%3A30%3A11.006&lti=default&pubit=i&t=1&data=%7B%22id%22%3A%2270903%22%2C%22sd%22%3A%22v2_f859fbf0e0b070e1f1e8a982eb410976_7cfc5086-2ca9-418c-800b-447ed39095b3-tuct11527072_1784212210_1784212210_CNawjgYQowkYnIXX2vYzIAEoATDhATiRpA5AsOUP",
+      "status": 200
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/2/debug?type=warn&msg=adgb%20-%20not%20initialized.&lt=default&tim=14%3A30%3A10.910&id=91214&cv=20260716-7-RELEASE&llvl=2",
+      "status": 204
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/2/debug?type=warn&msg=Invalid%20policy%20position%3A%20auto%20-%20thumbnails-d-1x1&lt=default&tim=14%3A30%3A10.908&id=61973&cv=20260716-7-RELEASE&llvl=2",
+      "status": 204
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/2/debug?type=warn&msg=publisher-end%20divID%3A%20%23internal_trc_trc_803725737%3A%20not%20found&lt=default&tim=14%3A30%3A10.987&id=8800&cv=20260716-7-RELEASE&llvl=2",
+      "status": 204
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/2/debug?type=warn&msg=publisher-end%20divID%3A%20%23internal_trc_trc_753099167%3A%20not%20found&lt=default&tim=14%3A30%3A10.989&id=80021&cv=20260716-7-RELEASE&llvl=2",
+      "status": 204
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/2/debug?type=warn&msg=publisher-end%20divID%3A%20%23internal_trc_trc_488388297%3A%20not%20found&lt=default&tim=14%3A30%3A10.994&id=75648&cv=20260716-7-RELEASE&llvl=2",
+      "status": 204
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/2/debug?type=warn&msg=publisher-end%20divID%3A%20%23internal_trc_trc_6807670051%3A%20not%20found&lt=default&tim=14%3A30%3A10.999&id=33397&cv=20260716-7-RELEASE&llvl=2",
+      "status": 204
+    },
+    {
+      "url": "https://trc.taboola.com/sg/google-authorized-buyers/1/um?gdpr=0&gdpr_consent=&ui=7cfc5086-2ca9-418c-800b-447ed39095b3-tuct11527072&google_gid=CAESEKDpKDY2AHfOgurBwPnGk18&google_cver=1",
+      "status": 200
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/2/debug?type=warn&msg=Placements%20With%20no%20Content%3A%20Below%20Content%20Thumbnails%20-%20today%20%7C%20Lazy%20Injected%201&lt=default&tim=14%3A30%3A11.178&id=39492&cv=20260716-7-RELEASE&llvl=2",
+      "status": 204
+    },
+    {
+      "url": "https://cds.taboola.com/?uid=7cfc5086-2ca9-418c-800b-447ed39095b3-tuct11527072&mbl=ZmFsc2U=&dc=us",
+      "status": 204
+    },
+    {
+      "url": "https://cdn.taboola.com/libtrc/static/thumbnails/f539211219b796ffbb49949997c764f0.png",
+      "status": 200
+    },
+    {
+      "url": "https://trc.taboola.com/theweatherchannel/log/3/bulk?route=US%3AUS%3AV&lti=default&cv=20260716-7-RELEASE&bulkSize=5",
+      "status": 204
+    },
+    {
+      "url": "https://display.bidder.taboola.com/OpenRTB/TaboolaHB/auction?publisher=1566460",
+      "status": 200
+    },
+    {
+      "url": "https://securepubads.g.doubleclick.net/gampad/ads?pvsid=8461019003360632&correlator=3043106982419719&eid=31099269%2C31099680&output=ldjh&gdfp_req=1&vrg=202607130101&ptt=17&impl=fifs&iu_parts=7646%2Cweb_weather_us%2Chome%2Cpromo&enc_prev_ius=%2F0%2F1%2F2%2C%2F0%2F1%2F2%2C%2F0%2F1%2F2%2C%2F0%2F1%2F2%2",
+      "status": 200
+    },
+    {
+      "url": "https://cdn.taboola.com/scripts/prebid_iframe_sync.html?us_privacy=1YNN",
+      "status": 200
+    },
+    {
+      "url": "https://cdn.taboola.com/scripts/ifs.js",
+      "status": 200
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/3/supply-feature?lti=default&ri=e27be03d56ce725393ed02fc21acf3f8&sd=v2_f859fbf0e0b070e1f1e8a982eb410976_7cfc5086-2ca9-418c-800b-447ed39095b3-tuct11527072_1784212210_1784212211_CNawjgYQowkYnIXX2vYzIAEoATDhATiRpA5AsOUPSKTL2QNQ_wNYAGAAaI_ahYf0__-C",
+      "status": 204
+    },
+    {
+      "url": "https://us-trc-events.taboola.com/theweatherchannel/log/3/supply-feature?lti=default&ri=e27be03d56ce725393ed02fc21acf3f8&sd=v2_f859fbf0e0b070e1f1e8a982eb410976_7cfc5086-2ca9-418c-800b-447ed39095b3-tuct11527072_1784212210_1784212211_CNawjgYQowkYnIXX2vYzIAEoATDhATiRpA5AsOUPSKTL2QNQ_wNYAGAAaI_ahYf0__-C",
+      "status": 204
+    }
+  ]
+}

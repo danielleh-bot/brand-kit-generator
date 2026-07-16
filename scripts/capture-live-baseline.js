@@ -4,9 +4,12 @@
  *
  * Usage:
  *   node scripts/capture-live-baseline.js \
- *     --url "https://www.businessinsider.com/..." \
- *     --slug business-insider \
- *     [--home "https://www.businessinsider.com/"]
+ *     --url "https://weather.com/news/..." \
+ *     --slug weather-channel \
+ *     [--home "https://weather.com/"] \
+ *     [--publisher theweatherchannel] \
+ *     [--container taboola-below-content-thumbnails-article] \
+ *     [--mode organic-thumbs-feed-01-c-new]
  */
 const fs = require('fs');
 const path = require('path');
@@ -93,38 +96,45 @@ async function extractTaboolaMeta(page) {
   });
 }
 
-async function waitForFeed(page, timeoutMs = 45000) {
+function feedRootSelector(containerId) {
+  const id = containerId || 'taboola-below-main-column';
+  return `#${id}, [id*="taboola-below"], [id*="taboola-below-content"], .trc_rbox_container, .tbl-feed-container`;
+}
+
+async function waitForFeed(page, containerId, timeoutMs = 45000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
-    const ready = await page.evaluate(() => {
+    const ready = await page.evaluate((cid) => {
       const root =
-        document.querySelector('#taboola-below-main-column') ||
+        document.querySelector(`#${cid}`) ||
         document.querySelector('[id*="taboola-below"]') ||
+        document.querySelector('[id*="taboola-below-content"]') ||
         document.querySelector('.trc_rbox_container') ||
         document.querySelector('[data-mode]');
       if (!root) return { ok: false, reason: 'no-container' };
       const cards = root.querySelectorAll(
-        '.tbl-feed-card, .videoCube, [data-item-type], .trcItem, a.item-label-href, .thumbBlock'
+        '.tbl-feed-card, .videoCube, [data-item-type], .trcItem, a.item-label-href, .thumbBlock, .video-title'
       );
-      const titles = root.querySelectorAll('.video-title, .thumbBlock + *, [class*="title"]');
+      const titles = root.querySelectorAll('.video-title, [class*="title"]');
       return {
-        ok: cards.length >= 2 || titles.length >= 2,
+        ok: cards.length >= 2 || titles.length >= 2 || root.children.length >= 3,
         cardCount: cards.length,
         titleCount: titles.length,
         rootId: root.id || null,
         rootClass: root.className || null,
       };
-    });
+    }, containerId || 'taboola-below-main-column');
     if (ready.ok) return ready;
     await sleep(1000);
   }
   return { ok: false, reason: 'timeout' };
 }
 
-async function extractFeedDom(page) {
-  return page.evaluate(() => {
+async function extractFeedDom(page, containerId) {
+  return page.evaluate((cid) => {
     const root =
-      document.querySelector('#taboola-below-main-column') ||
+      document.querySelector(`#${cid}`) ||
+      document.querySelector('[id*="taboola-below-content"]') ||
       document.querySelector('[id*="taboola-below"]') ||
       document.querySelector('.trc_rbox_container') ||
       document.querySelector('.tbl-feed-container');
@@ -167,7 +177,7 @@ async function extractFeedDom(page) {
       cards,
       htmlSnippet: root.outerHTML.slice(0, 5000),
     };
-  });
+  }, containerId || 'taboola-below-main-column');
 }
 
 async function extractCssVars(page) {
@@ -214,6 +224,10 @@ async function main() {
   const url = arg('url');
   const home = arg('home', 'https://www.businessinsider.com/');
   const slug = arg('slug', 'business-insider');
+  const publisher = arg('publisher', 'businessinsider');
+  const container = arg('container', 'taboola-below-main-column');
+  const mode = arg('mode', 'thumbs-1r');
+  const placement = arg('placement', 'below-main-column');
   if (!url) {
     console.error('Missing --url');
     process.exit(1);
@@ -252,6 +266,7 @@ async function main() {
     articleUrl: url,
     homeUrl: home,
     chrome,
+    requested: { publisher, container, mode, placement },
   };
 
   try {
@@ -299,32 +314,36 @@ async function main() {
 
     await page.screenshot({ path: path.join(outDir, 'article-chrome.png'), fullPage: false });
 
-    // BI often delays Taboola until after hydration — bootstrap loader + placement
-    await page.evaluate(() => {
+    // Bootstrap loader + placement when the publisher delays Taboola hydration
+    await page.evaluate(({ publisher, container, mode, placement }) => {
       window._taboola = window._taboola || [];
       window._taboola.push({ article: 'auto', url: location.href });
       window._taboola.push({
-        mode: 'thumbs-1r',
-        container: 'taboola-below-main-column',
-        placement: 'below-main-column',
+        mode,
+        container,
+        placement,
         target_type: 'mix',
       });
-      if (![...document.scripts].some((s) => (s.src || '').includes('/libtrc/') && s.src.includes('loader.js'))) {
+      const hasLoader = [...document.scripts].some(
+        (s) => (s.src || '').includes('/libtrc/') && s.src.includes('loader.js')
+      );
+      if (!hasLoader) {
         const s = document.createElement('script');
-        s.src = 'https://cdn.taboola.com/libtrc/businessinsider/loader.js';
+        s.src = `https://cdn.taboola.com/libtrc/${publisher}/loader.js`;
         s.async = true;
         document.body.appendChild(s);
       }
-    });
+    }, { publisher, container, mode, placement });
 
     // Scroll to feed to trigger lazy load
-    await page.evaluate(async () => {
+    await page.evaluate((cid) => {
       const el =
-        document.querySelector('#taboola-below-main-column') ||
+        document.querySelector(`#${cid}`) ||
+        document.querySelector('[id*="taboola-below"]') ||
         document.querySelector('[id*="taboola"]');
       if (el) el.scrollIntoView({ behavior: 'instant', block: 'center' });
       else window.scrollTo(0, document.body.scrollHeight * 0.7);
-    });
+    }, container);
     await sleep(2000);
     // Nudge scroll
     for (let i = 0; i < 6; i++) {
@@ -332,11 +351,16 @@ async function main() {
       await sleep(800);
     }
 
-    const feedReady = await waitForFeed(page);
+    const feedReady = await waitForFeed(page, container);
     meta.feedReady = feedReady;
     console.log('Feed ready', feedReady);
 
-    const feedDom = await extractFeedDom(page);
+    const feedDom = await extractFeedDom(page, container);
+    feedDom.mode = mode;
+    feedDom.placement = placement;
+    feedDom.publisher = publisher;
+    feedDom.container = container;
+    feedDom.source = feedDom.source || 'live-capture';
     meta.feedCardCount = feedDom.cards.length;
     fs.writeFileSync(path.join(outDir, 'feed-dom.json'), JSON.stringify(feedDom, null, 2));
 
@@ -366,23 +390,27 @@ async function main() {
       }
     }
 
-    // Crop feed region if visible; otherwise page screenshot near bottom
+    // Prefer viewport shot with feed in view (tall element screenshots often blank)
+    await page.evaluate((cid) => {
+      document.querySelector(`#${cid}`)?.scrollIntoView({ block: 'start' });
+    }, container);
+    await sleep(1500);
+    await page.screenshot({ path: path.join(outDir, 'current-feed-viewport.png') });
+    fs.copyFileSync(path.join(outDir, 'current-feed-viewport.png'), path.join(outDir, 'current-feed.png'));
+
+    // Also try element crop when height is reasonable
     let feedShot = false;
-    for (const sel of ['#taboola-below-main-column', '[id*="taboola-below"]', '.trc_rbox_container', '.post-bottom-taboola']) {
+    for (const sel of [`#${container}`, '[id*="taboola-below-content"]', '[id*="taboola-below"]', '.trc_rbox_container', '.post-bottom-taboola']) {
       const handle = await page.$(sel);
       if (!handle) continue;
       const box = await handle.boundingBox();
-      if (box && box.height > 40) {
-        await handle.screenshot({ path: path.join(outDir, 'current-feed.png') });
+      if (box && box.height > 40 && box.height < 2500) {
+        await handle.screenshot({ path: path.join(outDir, 'current-feed-element.png') });
         feedShot = true;
         break;
       }
     }
-    if (!feedShot) {
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight * 0.85));
-      await sleep(500);
-      await page.screenshot({ path: path.join(outDir, 'current-feed.png'), fullPage: false });
-    }
+    console.log('feed screenshot viewport ok; element crop', feedShot);
 
     // Full page for context
     await page.screenshot({ path: path.join(outDir, 'article-full.png'), fullPage: true });

@@ -36,4 +36,9 @@ From the Business Insider production-shaped loader:
 
 ## Live BI baseline
 
-Business Insider was rebuilt from the live article + Taboola `thumbs-1r` capture and the designer PDF [`brand-kit-mapping-bi.pdf`](./brand-kit-mapping-bi.pdf). FOX Sports and Weather Channel are **not** live-sourced yet.
+Business Insider was rebuilt from the live article + Taboola `thumbs-1r` capture and the designer PDF [`brand-kit-mapping-bi.pdf`](./brand-kit-mapping-bi.pdf). The Weather Channel was rebuilt from the live North Dakota EF5 article + Taboola below-content capture. FOX Sports is **not** live-sourced yet.
+
+
+## Live TWC baseline
+
+The Weather Channel was rebuilt from the live North Dakota EF5 article + Taboola `organic-thumbs-feed-01-c-new` / `thumbs-feed-01-b-new` capture (`theweatherchannel` / `taboola-below-content-thumbnails-article`).

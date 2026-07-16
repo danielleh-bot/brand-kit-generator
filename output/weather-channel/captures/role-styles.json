@@ -1,0 +1,38 @@
+{
+  "h1": {
+    "selector": "h1",
+    "fontFamily": "Inter, \"Inter Fallback\"",
+    "fontSize": "40px",
+    "fontWeight": "800",
+    "color": "rgb(37, 36, 34)",
+    "lineHeight": "44px",
+    "text": "North Dakota Tornado Upgraded To EF5, Ending Over Decade-Long Drought"
+  },
+  "subscribe": {
+    "selector": "a[href*=\"subscribe\"], a[href*=\"Subscribe\"]",
+    "fontFamily": "Inter, \"Inter Fallback\"",
+    "fontSize": "16px",
+    "fontWeight": "600",
+    "color": "rgb(255, 255, 255)",
+    "lineHeight": "16px",
+    "text": "lightningGet PremiumUpgradeChevron Right"
+  },
+  "navLink": {
+    "selector": "nav a, header a",
+    "fontFamily": "Inter, \"Inter Fallback\"",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "color": "lab(2.75381 0 0)",
+    "lineHeight": "16px",
+    "text": "The Weather Company"
+  },
+  "body": {
+    "selector": "article p, [class*=\"content\"] p",
+    "fontFamily": "Inter, \"Inter Fallback\"",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "color": "rgb(37, 36, 34)",
+    "lineHeight": "14px",
+    "text": "Forecasts"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "header": "You May Like",
+  "rootId": "taboola-below-content-thumbnails-article",
+  "mode": "organic-thumbs-feed-01-c-new",
+  "modes": [
+    "organic-thumbs-feed-01-c-new",
+    "above-the-feed-premium-card-fp-delta",
+    "thumbs-feed-01-b-new"
+  ],
+  "placement": "Below Content Thumbnails",
+  "publisher": "theweatherchannel",
+  "container": "taboola-below-content-thumbnails-article",
+  "source": "live-capture",
+  "cards": [
+    {
+      "index": 0,
+      "title": "Which Wealth Management Firms Ranked Highest in 2026?",
+      "branding": "SmartAsset",
+      "href": "https://insights.smartasset.com/2026-top-10-wealth-management-firms",
+      "thumbnail": null,
+      "sponsored": true,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_1_child syndicatedItem trc-first-recommendation trc-spotlight-f"
+    },
+    {
+      "index": 1,
+      "title": "'Stranded dog' rescued by Florida firefighters is not a dog",
+      "branding": "The Weather Channel",
+      "href": "https://weather.com/2026/06/25/nature-wild-animals/stranded-dog-rescued-by-florida-firefighters-is-not-a-dog",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_1_child trc-first-recommendation trc-spotlight-first-recommenda"
+    },
+    {
+      "index": 2,
+      "title": "It's The Perfect Time to Plan Your Garden | Weather.com",
+      "branding": "The Weather Channel",
+      "href": "https://weather.com/atmosphere/reviews/april-gardening-and-planting-guide?utm_source=taboola&utm_medium=exchange#tblciGiC86AWObkNKbwezMWFNbjkX_3O0e6qe58jlEmSX_qY7ZiD5lj8ostvy3_mSyqsSMKMJ",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default videoItem thumbnail_top videoCube_2_child inNetworkItem syndicatedItem trc_excludable"
+    },
+    {
+      "index": 3,
+      "title": "Side Sleepers Get Achy Shoulders, Few Know This \"Side Sleeper\" Trick",
+      "branding": "Sleep Digest Publication",
+      "href": "https://papersvehaust.com/7da8c071-9826-4623-8202-32f4dd76bed7",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_1_child syndicatedItem trc-first-recommendation trc-spotlight-f"
+    },
+    {
+      "index": 4,
+      "title": "Always Pour Olive Oil On Watermelon (Yes, It Works)",
+      "branding": "Life Hacks",
+      "href": "https://curatedly.co/lists/life-hacks",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_2_child syndicatedItem trc_excludable"
+    },
+    {
+      "index": 5,
+      "title": "Why Bread Never Went Stale in the 1950s",
+      "branding": "EverLoaf",
+      "href": "https://rt.everloaf.com/6a16bc50db037f5ce53f66ed",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_3_child syndicatedItem trc_excludable"
+    },
+    {
+      "index": 6,
+      "title": "Where Did Your Name Come From?",
+      "branding": "FamFinder",
+      "href": "https://www.famfinder.com/",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_1_child syndicatedItem trc-first-recommendation trc-spotlight-f"
+    },
+    {
+      "index": 7,
+      "title": "12 Expenses Retirees Are Quietly Dropping",
+      "branding": "Greensprout",
+      "href": "https://greensprout.com/15tips/v15/mobile/taboola",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_2_child syndicatedItem trc_excludable"
+    },
+    {
+      "index": 8,
+      "title": "Always Put Olive Oil on Watermelon, Here's Why",
+      "branding": "Life Hacks",
+      "href": "https://curatedly.co/lists/life-hacks",
+      "thumbnail": null,
+      "sponsored": false,
+      "classes": "videoCube trc_spotlight_item origin-default textItem thumbnail_top videoCube_3_child syndicatedItem trc_excludable"
+    }
+  ]
+}

@@ -1,42 +1,34 @@
-# The Weather Channel — MVP vs Ideal checklist
+# The Weather Channel — MVP vs Ideal (live baseline)
 
-Generated from the visual brand kit property matrix.
+Source: https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends
+Taboola: `theweatherchannel` · `organic-thumbs-feed-01-c-new` · `taboola-below-content-thumbnails-article`
 
-## Variant A — MVP via loader.js / `__style__`
+## Variant A — MVP via loader CSS
 
-Ship with today's TRC selectors only (CSS paint + existing mode overrides).
+- [ ] **Feed container / placement** (`standard`) — `taboola.container` → #taboola-below-content-thumbnails-article
+- [ ] **Mode composition (organic + thumbs mix)** (`partial`) — `taboola.modes_in_use` → Mode-owned card geometry; CSS can paint within mode
+- [ ] **Divider / border** (`standard`) — `colors.css_variables.--border / --dd-border-color` → .tbl-feed-card border-bottom
+- [ ] **Font family** (`standard`) — `fonts.primary.family` → .video-title, .branding
+- [ ] **Article / section title** (`standard`) — `fonts.type_scale / h1` → .tbl-feed-header-text
+- [ ] **Card title** (`standard`) — `fonts.type_scale.article_title_card` → .video-title
+- [ ] **Meta / secondary label** (`standard`) — `colors.text.secondary` → .branding
+- [ ] **Accent / link blue** (`standard`) — `colors.primary.hex` → title hover, CTA, pre-label
+- [ ] **Masthead navy** (`partial`) — `colors.masthead` → Feed header dark variant / sponsored overlay
+- [ ] **Primary text** (`standard`) — `colors.text.primary` → .video-title color
+- [ ] **Thumbnail border radius** (`standard`) — `photo_style.thumbnail_format.border_radius` → .thumbBlock img / .trc_img
+- [ ] **Aspect ratio** (`partial`) — `photo_style.thumbnail_format.aspect_ratio` → Mode-controlled; CSS object-fit can approximate
+- [ ] **Video play indicator** (`partial`) — `photo_style.video_thumbnails` → .trc-video-play-icon
+- [ ] **Sponsored label** (`standard`) — `badges / sponsored` → .trc_sponsored_overlay
+- [ ] **See more / CTA button** (`standard`) — `buttons.primary` → .tbl-feed-more-btn
 
-- [ ] **Primary brand color** (`standard`) — `colors.primary.hex` → .tbl-feed-card:hover .video-title, .tbl-feed-card .trc-pre-label, .tbl-feed-more-btn, .tbl-feed-header, .tbl-feed-header-text
-  - MVP paint — measurable CTR/brand-fit lift with zero platform work.
+## Variant B — Unique / Soft
 
-- [ ] **Headline font family** (`standard`) — `fonts.primary.family` → .tbl-feed-card .video-title, .videoCube .video-title, .tbl-feed-card .branding, .video-label-box .branding
-  - MVP — largest native-feel lever after colour.
+- [ ] **TrueNative / mobile composition** — Keep mobile-prototype.html as ideal Unique composition reference.
+- [ ] **Alert / severe accents** — Highest weather-vertical unique gap vs current thumbs modes.
+- [ ] **Conversational forecast voice** — Soft/Gen AI tier — hand-authored in ideal copy; enrich stub on main.
 
-- [ ] **Card / thumbnail border radius** (`standard`) — `photo_style.thumbnail_format.border_radius` → .tbl-feed-card .thumbBlock, .videoCube .trc_img, .tbl-feed-card
-  - MVP — sharp vs rounded reads immediately as brand.
-
-- [ ] **CTA / See more button** (`standard`) — `buttons.primary` → .tbl-feed-more-btn
-  - MVP — loader can restyle .tbl-feed-more-btn.
-
-## Variant B — Ideal subset (platform + soft)
-
-Requires custom UI mode / new card fields and/or Gen AI brand-voice translation.
-
-- [ ] **SEVERE WEATHER / alert badges** (`unique`) — `brand_voice.content_labels.severe_weather`
-  - Unique — alert colour system is weather-native RPM; needs multi-badge + urgency styling.
-
-- [ ] **TrueNative mobile feed composition** (`unique`) — `layout_patterns`
-  - Unique — layout/product mode, not paint on default thumbs.
-
-- [ ] **Conversational forecast voice** (`soft`) — `brand_voice.headline_style`
-  - Soft — Gen AI rewrite into accessible forecast voice.
-
-## Loader capability baseline
-
-**Can do today:** inject CSS for `.video-title`, `.branding`, `.tbl-feed-more-btn`, `.trc-pre-label`, sponsored overlay, thumbnail radius, feed header accent.
-
-**Cannot do without platform work:** new DOM fields (cook time, scores, alert windows), multi-badge inventories, section composition ("Mehr von…"), headline rewrite from brand voice.
-
-## Gen AI
-
-Soft-tier fields are hand-authored in ideal prototypes. Live enrichment is stubbed — see `lib/enrich-stub.js` and unmerged `feat/deep-crawl-enrich-feed-mapping`.
+## Captures
+- `captures/homepage-chrome.png`
+- `captures/article-chrome.png`
+- `captures/current-feed.png`
+- `captures/feed-dom.json`

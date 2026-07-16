@@ -1,120 +1,188 @@
 {
   "slug": "weather-channel",
   "brand": "The Weather Channel",
-  "generatedAt": "2026-07-16",
+  "baseline": "live",
+  "sourceArticle": "https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends",
+  "taboola": {
+    "publisher_id": "theweatherchannel",
+    "loader_url": "https://cdn.taboola.com/libtrc/theweatherchannel/loader.js",
+    "mode": "organic-thumbs-feed-01-c-new",
+    "modes_in_use": [
+      "organic-thumbs-feed-01-c-new",
+      "above-the-feed-premium-card-fp-delta",
+      "thumbs-feed-01-b-new"
+    ],
+    "placement": "Below Content Thumbnails",
+    "container": "taboola-below-content-thumbnails-article",
+    "feed_label": "You May Like",
+    "capture_note": "Feed captured live from weather.com article page."
+  },
   "counts": {
-    "standard": 4,
-    "partial": 0,
+    "standard": 11,
+    "partial": 4,
     "unique": 2,
     "soft": 1
   },
-  "mvpCoveragePct": 57,
-  "properties": [
+  "domains": [
     {
-      "id": "primary-color",
-      "label": "Primary brand color",
-      "tokenPath": "colors.primary.hex",
-      "value": "#0078D4",
-      "tier": "standard",
-      "trcTargets": [
-        ".tbl-feed-card:hover .video-title",
-        ".tbl-feed-card .trc-pre-label",
-        ".tbl-feed-more-btn",
-        ".tbl-feed-header, .tbl-feed-header-text"
-      ],
-      "abImplication": "MVP paint — measurable CTR/brand-fit lift with zero platform work.",
-      "notes": "Maps to CTA, accent rule, title hover underline, pre-label.",
-      "provenance": "prototype",
-      "hasSourceVisual": true,
-      "hasFeedVisual": true
+      "id": "layout",
+      "title": "Layout & Grid",
+      "props": [
+        {
+          "name": "Feed container / placement",
+          "token": "taboola.container",
+          "value": "taboola-below-content-thumbnails-article",
+          "tier": "standard",
+          "trc": "#taboola-below-content-thumbnails-article",
+          "note": "Live placement: Below Content Thumbnails on article pages"
+        },
+        {
+          "name": "Mode composition (organic + thumbs mix)",
+          "token": "taboola.modes_in_use",
+          "value": "organic-thumbs-feed-01-c-new, above-the-feed-premium-card-fp-delta, thumbs-feed-01-b-new",
+          "tier": "partial",
+          "trc": "Mode-owned card geometry; CSS can paint within mode"
+        },
+        {
+          "name": "TrueNative / mobile composition",
+          "token": "layout_patterns (mobile)",
+          "value": "TrueNative iPhone modules (existing mobile-prototype reference)",
+          "tier": "unique",
+          "trc": "Not expressible as paint on desktop thumbs modes alone",
+          "note": "Keep mobile-prototype.html as ideal Unique composition reference."
+        },
+        {
+          "name": "Divider / border",
+          "token": "colors.css_variables.--border / --dd-border-color",
+          "value": "#e5e5e5",
+          "tier": "standard",
+          "trc": ".tbl-feed-card border-bottom"
+        }
+      ]
     },
     {
-      "id": "headline-font",
-      "label": "Headline font family",
-      "tokenPath": "fonts.primary.family",
-      "value": "Helvetica Neue",
-      "tier": "standard",
-      "trcTargets": [
-        ".tbl-feed-card .video-title, .videoCube .video-title",
-        ".tbl-feed-card .branding, .video-label-box .branding"
-      ],
-      "abImplication": "MVP — largest native-feel lever after colour.",
-      "notes": "",
-      "provenance": "prototype",
-      "hasSourceVisual": true,
-      "hasFeedVisual": true
+      "id": "type",
+      "title": "Typography",
+      "props": [
+        {
+          "name": "Font family",
+          "token": "fonts.primary.family",
+          "value": "Inter",
+          "tier": "standard",
+          "trc": ".video-title, .branding"
+        },
+        {
+          "name": "Article / section title",
+          "token": "fonts.type_scale / h1",
+          "value": "Inter 800 · ~40px · #252422",
+          "tier": "standard",
+          "trc": ".tbl-feed-header-text"
+        },
+        {
+          "name": "Card title",
+          "token": "fonts.type_scale.article_title_card",
+          "value": "Inter 700 · ~16px · #252422",
+          "tier": "standard",
+          "trc": ".video-title"
+        },
+        {
+          "name": "Meta / secondary label",
+          "token": "colors.text.secondary",
+          "value": "#8c8c8c",
+          "tier": "standard",
+          "trc": ".branding"
+        }
+      ]
     },
     {
-      "id": "card-radius",
-      "label": "Card / thumbnail border radius",
-      "tokenPath": "photo_style.thumbnail_format.border_radius",
-      "value": "6px",
-      "tier": "standard",
-      "trcTargets": [
-        ".tbl-feed-card .thumbBlock, .videoCube .trc_img",
-        ".tbl-feed-card"
-      ],
-      "abImplication": "MVP — sharp vs rounded reads immediately as brand.",
-      "notes": "",
-      "provenance": "prototype",
-      "hasSourceVisual": true,
-      "hasFeedVisual": true
+      "id": "color",
+      "title": "Colors",
+      "props": [
+        {
+          "name": "Accent / link blue",
+          "token": "colors.primary.hex",
+          "value": "#3A61CC",
+          "tier": "standard",
+          "trc": "title hover, CTA, pre-label"
+        },
+        {
+          "name": "Masthead navy",
+          "token": "colors.masthead",
+          "value": "#0C2340",
+          "tier": "partial",
+          "trc": "Feed header dark variant / sponsored overlay"
+        },
+        {
+          "name": "Primary text",
+          "token": "colors.text.primary",
+          "value": "#252422",
+          "tier": "standard",
+          "trc": ".video-title color"
+        },
+        {
+          "name": "Alert / severe accents",
+          "token": "colors.accents / brand_voice.content_labels.severe_weather",
+          "value": "SEVERE / WATCH / FORECAST multi-badge system",
+          "tier": "unique",
+          "trc": "Single .trc-pre-label today — not multi-alert inventory",
+          "note": "Highest weather-vertical unique gap vs current thumbs modes."
+        }
+      ]
     },
     {
-      "id": "cta-button",
-      "label": "CTA / See more button",
-      "tokenPath": "buttons.primary",
-      "value": "#0078D4 · radius 4px",
-      "tier": "standard",
-      "trcTargets": [
-        ".tbl-feed-more-btn"
-      ],
-      "abImplication": "MVP — loader can restyle .tbl-feed-more-btn.",
-      "notes": "",
-      "provenance": "prototype",
-      "hasSourceVisual": true,
-      "hasFeedVisual": true
+      "id": "images",
+      "title": "Images",
+      "props": [
+        {
+          "name": "Thumbnail border radius",
+          "token": "photo_style.thumbnail_format.border_radius",
+          "value": "0px",
+          "tier": "standard",
+          "trc": ".thumbBlock img / .trc_img"
+        },
+        {
+          "name": "Aspect ratio",
+          "token": "photo_style.thumbnail_format.aspect_ratio",
+          "value": "16:9",
+          "tier": "partial",
+          "trc": "Mode-controlled; CSS object-fit can approximate"
+        },
+        {
+          "name": "Video play indicator",
+          "token": "photo_style.video_thumbnails",
+          "value": "Play button icon",
+          "tier": "partial",
+          "trc": ".trc-video-play-icon"
+        }
+      ]
     },
     {
-      "id": "severe-badge",
-      "label": "SEVERE WEATHER / alert badges",
-      "tokenPath": "brand_voice.content_labels.severe_weather",
-      "value": "SEVERE WEATHER",
-      "tier": "unique",
-      "trcTargets": [
-        ".tbl-feed-card .trc-pre-label"
-      ],
-      "abImplication": "Unique — alert colour system is weather-native RPM; needs multi-badge + urgency styling.",
-      "notes": "",
-      "provenance": "prototype",
-      "hasSourceVisual": true,
-      "hasFeedVisual": true
-    },
-    {
-      "id": "truenative-layout",
-      "label": "TrueNative mobile feed composition",
-      "tokenPath": "layout_patterns",
-      "value": "TrueNative iPhone feed modules",
-      "tier": "unique",
-      "trcTargets": [],
-      "abImplication": "Unique — layout/product mode, not paint on default thumbs.",
-      "notes": "",
-      "provenance": "prototype",
-      "hasSourceVisual": true,
-      "hasFeedVisual": true
-    },
-    {
-      "id": "brand-voice-twc",
-      "label": "Conversational forecast voice",
-      "tokenPath": "brand_voice.headline_style",
-      "value": "Conversational, informative sentence-case headlines. Often start with 'Here's', 'Why', 'How', 'What'. Question-and-answer format common for explainers.",
-      "tier": "soft",
-      "trcTargets": [],
-      "abImplication": "Soft — Gen AI rewrite into accessible forecast voice.",
-      "notes": "",
-      "provenance": "prototype",
-      "hasSourceVisual": true,
-      "hasFeedVisual": true
+      "id": "ui",
+      "title": "UI Elements",
+      "props": [
+        {
+          "name": "Sponsored label",
+          "token": "badges / sponsored",
+          "value": "Sponsored overlay on mixed feed",
+          "tier": "standard",
+          "trc": ".trc_sponsored_overlay"
+        },
+        {
+          "name": "See more / CTA button",
+          "token": "buttons.primary",
+          "value": "#3A61CC fill · Inter bold · modest radius",
+          "tier": "standard",
+          "trc": ".tbl-feed-more-btn"
+        },
+        {
+          "name": "Conversational forecast voice",
+          "token": "brand_voice.headline_style",
+          "value": "Here’s / Why / How explainers + urgent severe headlines",
+          "tier": "soft",
+          "trc": "Content rewrite — not loader CSS",
+          "note": "Soft/Gen AI tier — hand-authored in ideal copy; enrich stub on main."
+        }
+      ]
     }
   ]
 }

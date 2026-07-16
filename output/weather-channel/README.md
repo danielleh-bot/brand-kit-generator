@@ -1,13 +1,29 @@
-# The Weather Channel — Brand kit package
+# The Weather Channel — Taboola Brand Kit
 
-| Artifact | Purpose |
+## Live baseline
+
+Rebuilt from the **live publisher** and **live Taboola feed** (same method as Business Insider).
+
+| Item | Value |
 |---|---|
-| `brand-kit.json` | Source of truth tokens |
-| `feed-prototype.html` | Ideal native Before / Split / After feed |
-| `visual-brand-kit.html` | **Unique vs Standard** — source visual → suggested feed → tier |
-| `property-matrix.json` | Machine-readable tier matrix |
-| `mvp-checklist.md` | Variant A (loader MVP) vs Variant B (ideal/platform) |
+| Article | https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends |
+| Publisher slug | `theweatherchannel` |
+| Primary mode | `organic-thumbs-feed-01-c-new` |
+| Modes seen | `organic-thumbs-feed-01-c-new`, `above-the-feed-premium-card-fp-delta`, `thumbs-feed-01-b-new` |
+| Container | `taboola-below-content-thumbnails-article` |
+| Font | Inter |
+| Accent | #3A61CC |
 
-Open `visual-brand-kit.html` first for stakeholder review.
+Open first:
+- [`visual-brand-kit.html`](./visual-brand-kit.html)
+- [`feed-prototype.html`](./feed-prototype.html) (Before = live feed PNG)
+- [`mobile-prototype.html`](./mobile-prototype.html) (TrueNative ideal / Unique reference)
 
-> **Not yet live-sourced.** Visual kit / feed-prototype on this slug may include synthetic samples. BI is the live baseline reference.
+```bash
+node generate.js --url "https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends" --slug weather-channel
+xvfb-run -a node scripts/capture-live-baseline.js \
+  --url "https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends" --slug weather-channel --home "https://weather.com/" \
+  --publisher theweatherchannel --container taboola-below-content-thumbnails-article \
+  --mode organic-thumbs-feed-01-c-new --placement "Below Content Thumbnails"
+node scripts/build-twc-live-kit.js
+```

@@ -108,6 +108,15 @@ npm run build:visual-kits
 
 See [`docs/feed-integration-matrix.md`](docs/feed-integration-matrix.md). Soft brand-voice fields are stubbed via [`lib/enrich-stub.js`](lib/enrich-stub.js) (no live Gen AI on main).
 
+Live baselines (publisher site + current Taboola feed PNG):
+
+```bash
+npm run capture:bi && npm run build:bi-live
+npm run capture:twc && npm run build:twc-live
+# open output/business-insider/feed-prototype.html
+# open output/weather-channel/feed-prototype.html
+```
+
 ## Deploy it
 
 Want a public URL you can hand teammates? See [`DEPLOY.md`](./DEPLOY.md).
