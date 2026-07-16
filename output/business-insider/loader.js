@@ -96,8 +96,7 @@
   // styles with Business Insider brand tokens.
   var brandCSS = [
 
-    // ── Google Fonts import (Manrope = Brother 1816 visual equivalent) ──
-    "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;700&display=swap');",
+    // Garnett is BI's live face; no public @import. Rely on publisher-hosted font or fallbacks.
 
     // ── Feed container ──
     ".tbl-feed-card {",
