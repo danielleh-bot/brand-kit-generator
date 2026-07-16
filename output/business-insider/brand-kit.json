@@ -1,628 +1,657 @@
 {
   "brand": {
     "name": "Business Insider",
-    "tagline": "Business news, analysis, and insights — covering markets, tech, leadership, and the global economy.",
+    "tagline": "",
     "website": "https://www.businessinsider.com",
-    "description": "Business Insider is a global business news website covering technology, finance, markets, strategy, retail, real estate, and the people shaping the economy. Owned by Axel Springer.",
-    "language": "en"
+    "description": "Some Amazon warehouse managers are overriding automated staffing recommendations. The company wants stricter enforcement to improve decision-making.",
+    "language": "en-US"
   },
   "logos": {
     "primary": {
-      "type": "text",
-      "text": "BUSINESS INSIDER",
-      "font": "Brother 1816 Bold (uppercase)",
-      "color": "#FFFFFF",
-      "background": "#000000",
-      "treatment": "Wordmark in heavy, low-contrast grotesque set in uppercase. Used in white on the black masthead; flips to black-on-white in body contexts. The 'BI' cube mark — a black square with white 'BI' — is the supplementary brand badge."
+      "type": "image",
+      "url": "",
+      "alt": "",
+      "width": 410,
+      "height": 36.03125,
+      "text": "Business Insider",
+      "font": "garnett 400"
     },
-    "brand_mark": {
-      "name": "BI cube",
-      "description": "A solid black square containing a stacked, condensed white 'BI'. Used as the bookmarkable favicon, social avatar, and inline byline mark.",
-      "background": "#000000",
-      "foreground": "#FFFFFF"
-    },
-    "favicon_url": "https://www.businessinsider.com/public/assets/icons/favicon-32x32.png"
+    "variants": [],
+    "brand_mark": null,
+    "favicon_url": "https://www.businessinsider.com/public/assets/BI/US/favicons/apple-touch-icon-192x192.png?v=2025-05"
   },
   "colors": {
     "primary": {
-      "name": "BI Orange",
-      "hex": "#FF5A00",
-      "rgb": "rgb(255, 90, 0)",
+      "name": "BI Link Blue",
+      "hex": "#002aff",
+      "rgb": "rgb(0, 42, 255)",
       "usage": [
-        "Subscribe CTA",
-        "Section accent rules",
-        "Sponsored / exclusive ribbons",
-        "Section labels",
-        "Hover underlines"
-      ],
-      "source": "extracted"
-    },
-    "primary_variants": {
-      "darken_5": {
-        "hex": "#E65100",
-        "rgb": "rgb(230, 81, 0)"
-      },
-      "darken_10": {
-        "hex": "#CC4900",
-        "rgb": "rgb(204, 73, 0)"
-      }
-    },
-    "secondary": {
-      "name": "BI Red (Breaking)",
-      "hex": "#E03625",
-      "rgb": "rgb(224, 54, 37)",
-      "usage": [
-        "Breaking news label",
-        "Live ticker",
-        "Premium/exclusive flag"
+        "Links",
+        "Subscribe",
+        "More Markets",
+        "Interactive text"
       ],
       "source": "extracted"
     },
     "text": {
       "primary": {
-        "name": "Near Black",
-        "hex": "#111111",
-        "rgb": "rgb(17, 17, 17)",
+        "name": "Primary Text",
+        "hex": "#0a0a0a",
+        "rgb": "rgb(0, 0, 0)",
         "usage": [
-          "Headlines",
-          "Article body",
-          "Wordmark"
+          "Button text"
         ],
         "source": "extracted"
       },
       "secondary": {
-        "name": "Dark Gray",
-        "hex": "#4D4D4D",
-        "rgb": "rgb(77, 77, 77)",
+        "name": "Secondary Text",
+        "hex": "#71717a",
+        "rgb": "rgb(10, 10, 10)",
         "usage": [
-          "Deck / standfirst",
-          "Body text on light cards"
+          "N MIN READ labels",
+          "Secondary meta"
         ],
-        "source": "extracted"
+        "source": "designer-mapping"
       },
       "tertiary": {
-        "name": "Medium Gray",
-        "hex": "#888888",
-        "rgb": "rgb(136, 136, 136)",
+        "name": "Tertiary Text",
+        "hex": "#31313B",
+        "rgb": "rgb(49, 49, 59)",
         "usage": [
-          "Timestamps",
-          "Byline metadata",
-          "Disclosure labels"
+          "Tags & badges",
+          "Article deck"
         ],
         "source": "extracted"
       }
     },
     "backgrounds": {
       "base": {
-        "name": "White",
-        "hex": "#FFFFFF",
-        "rgb": "rgb(255, 255, 255)",
-        "usage": [
-          "Page background",
-          "Card surface"
-        ],
+        "hex": "#fff",
         "source": "extracted"
       },
       "section": {
-        "name": "Off-White",
-        "hex": "#F7F7F7",
-        "rgb": "rgb(247, 247, 247)",
-        "usage": [
-          "Section dividers",
-          "Hover state",
-          "Loading placeholders"
-        ],
-        "source": "extracted"
+        "hex": "#faf7f5",
+        "name": "Warm section",
+        "source": "designer-mapping",
+        "note": "--primary-warm-grey-100 / Read next module"
       },
       "secondary": {
-        "name": "Light Gray",
-        "hex": "#EEEEEE",
-        "rgb": "rgb(238, 238, 238)",
+        "name": "Secondary",
+        "hex": "#D9FFD9",
+        "rgb": "rgb(217, 255, 217)",
         "usage": [
-          "Card borders",
-          "Horizontal rules"
+          "Tags & badges"
         ],
         "source": "extracted"
       },
       "dark": {
-        "name": "BI Black",
-        "hex": "#000000",
-        "rgb": "rgb(0, 0, 0)",
+        "name": "Dark Background",
+        "hex": "#0A0A0A",
+        "rgb": "rgb(10, 10, 10)",
         "usage": [
-          "Masthead",
-          "Footer",
-          "Sponsored overlay"
+          "Links",
+          "Buttons",
+          "Button text",
+          "Navigation",
+          "Headlines",
+          "Body text",
+          "Timestamps",
+          "Tags & badges",
+          "Article deck"
         ],
         "source": "extracted"
       }
     },
     "accents": {
-      "warning_yellow": {
-        "name": "Insider Yellow",
-        "hex": "#FFC700",
-        "rgb": "rgb(255, 199, 0)",
-        "usage": [
-          "Newsletter banner",
-          "Premium gold ribbon"
-        ],
-        "source": "extracted"
-      },
-      "negative_red": {
-        "name": "BI Red",
-        "hex": "#E03625",
-        "rgb": "rgb(224, 54, 37)",
-        "usage": [
-          "Breaking news",
-          "Market loss indicator"
-        ],
-        "source": "extracted"
-      },
-      "positive_green": {
-        "name": "Market Green",
-        "hex": "#1A8F4C",
-        "rgb": "rgb(26, 143, 76)",
-        "usage": [
-          "Market gain indicator"
-        ],
-        "source": "extracted"
-      },
       "info_blue": {
-        "name": "Link Blue",
-        "hex": "#0F69FF",
-        "rgb": "rgb(15, 105, 255)",
+        "name": "Info Blue",
+        "hex": "#002AFF",
+        "rgb": "rgb(0, 42, 255)",
         "usage": [
-          "In-body article links"
+          "Links",
+          "Buttons",
+          "Navigation",
+          "Timestamps",
+          "Tags & badges"
         ],
         "source": "extracted"
+      }
+    },
+    "secondary": {
+      "name": "Secondary Accent",
+      "hex": "#D9FFD9",
+      "rgb": "rgb(217, 255, 217)",
+      "usage": [
+        "Tags & badges"
+      ],
+      "source": "extracted"
+    },
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#0028F2",
+        "name": "Darker primary",
+        "usage": "Hover states",
+        "source": "derived"
+      },
+      "darken_10": {
+        "hex": "#0025E0",
+        "name": "Deepest primary",
+        "usage": "Active/pressed states",
+        "source": "derived"
+      }
+    },
+    "primary_hover": {
+      "hex": "#02c",
+      "usage": [
+        "Link hover"
+      ],
+      "source": "extracted"
+    },
+    "css_variables": {
+      "--base-text-color": "#0a0a0a",
+      "--base-a-color": "#002aff",
+      "--base-a-hover-color": "#02c",
+      "--app-background": "#fff",
+      "--bs-body-font-family": "garnett,-apple-system,blinkmacsystemfont,segoe ui,roboto,helvetica neue,arial,noto sans,liberation sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji",
+      "--primary-red": "#ea0201",
+      "--border-color-2": "#cecece",
+      "sample_type_scale": {
+        "--font-size-mobile-body-xs": "0.8125rem",
+        "--font-size-desktop-body-xs": "0.875rem",
+        "--font-size-mobile-body-xs-strong": "0.8125rem",
+        "--font-size-desktop-body-xs-strong": "0.875rem",
+        "--font-size-mobile-body-xs-subtle": "0.8125rem",
+        "--font-size-desktop-body-xs-subtle": "0.875rem",
+        "--font-size-mobile-body-sm": "0.9375rem",
+        "--font-size-desktop-body-sm": "1rem",
+        "--font-size-mobile-body-sm-subtle": "0.9375rem",
+        "--font-size-desktop-body-sm-subtle": "1rem",
+        "--font-size-mobile-body-md": "1rem",
+        "--font-size-desktop-body-md": "1.0625rem",
+        "--font-size-mobile-body-md-strong": "1rem",
+        "--font-size-desktop-body-md-strong": "1.0625rem",
+        "--font-size-mobile-body-lg": "1.0625rem",
+        "--font-size-desktop-body-lg": "1.125rem",
+        "--font-size-mobile-body-lg-serif": "1.0625rem",
+        "--font-size-desktop-body-lg-serif": "1.125rem",
+        "--font-size-mobile-body-lg-serif-subtle": "1.0625rem",
+        "--font-size-desktop-body-lg-serif-subtle": "1.125rem",
+        "--font-size-mobile-heading-2xs": "0.875rem",
+        "--font-size-mobile-heading-xs": "0.9375rem",
+        "--font-size-mobile-heading-sm": "1.125rem",
+        "--font-size-mobile-heading-2sm": "0.9375rem",
+        "--font-size-desktop-heading-2sm": "1.125rem",
+        "--font-size-mobile-heading-md": "1.25rem",
+        "--font-size-desktop-heading-md": "1.5rem",
+        "--font-size-mobile-heading-lg": "1.375rem",
+        "--font-size-desktop-heading-lg": "1.75rem",
+        "--font-size-mobile-heading-xl": "1.625rem",
+        "--font-size-desktop-heading-xl": "2.25rem",
+        "--font-size-mobile-heading-2xl": "1.875rem",
+        "--font-size-desktop-heading-2xl": "2.5rem",
+        "--font-size-mobile-heading-3xl": "2.375rem",
+        "--font-size-desktop-heading-3xl": "3.25rem",
+        "--font-size-mobile-display-xs": "1rem",
+        "--font-size-desktop-display-xs": "1.125rem",
+        "--font-size-mobile-display-sm": "1.125rem",
+        "--font-size-desktop-display-sm": "1.25rem",
+        "--font-size-mobile-display-md": "1.25rem"
       }
     }
   },
   "fonts": {
     "primary": {
-      "family": "Brother 1816",
+      "family": "Garnett",
       "fallbacks": [
-        "Helvetica Neue",
-        "Helvetica",
-        "Arial",
         "sans-serif"
       ],
       "weights": {
-        "regular": 400,
-        "medium": 500,
-        "bold": 700,
-        "black": 900
+        "bold": 500,
+        "regular": 400
       },
-      "usage": "Headlines, Navigation, Buttons, Wordmark",
+      "usage": "Headlines, Body text, Navigation, Buttons, Captions",
       "source": "extracted",
-      "is_generic": false,
-      "google_equivalent": "Manrope"
+      "is_generic": false
     },
     "secondary": {
-      "family": "Brother 1816",
-      "weight": 400,
+      "family": "garnett",
+      "weight": 600,
       "style": "normal",
-      "usage": "Body text, Deck, Captions",
-      "source": "extracted",
-      "google_equivalent": "Inter"
+      "usage": "Headlines, Body text, Navigation, Buttons, Meta text, Captions",
+      "source": "extracted"
     },
     "tertiary": [
       {
-        "family": "Georgia",
-        "usage": "Long-form editorial pullquotes",
+        "family": "tiempos",
+        "usage": "Body text",
         "source": "extracted"
       }
     ],
     "type_scale": {
       "section_headings": {
-        "size": "20px",
-        "weight": 800,
-        "family": "Brother 1816",
-        "line_height": "1.2",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.04em",
-        "color": "#111111",
+        "size": "28px",
+        "weight": 500,
+        "family": "garnett",
+        "line_height": "37.8px",
+        "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "h2, .section-title"
+        "matched_selector": "h2, .section-title, [class*=\"section-head\"]"
       },
       "article_title_hero": {
-        "size": "40px",
-        "weight": 800,
-        "family": "Brother 1816",
-        "line_height": "1.1",
-        "color": "#111111",
+        "size": "18px",
+        "weight": 500,
+        "family": "Garnett",
+        "line_height": "44px",
+        "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "h1, .headline"
+        "matched_selector": "h1, .headline, [class*=\"headline\"]"
       },
       "article_title_card": {
-        "size": "20px",
+        "size": "22px",
         "weight": 700,
-        "family": "Brother 1816",
-        "line_height": "1.25",
-        "color": "#111111",
-        "source": "extracted",
-        "matched_selector": ".card h3, .card-title"
+        "family": "Garnett",
+        "source": "fallback",
+        "attempted_selector": ".card h3, .card-title, [class*=\"card\"] h3"
       },
       "article_lead": {
-        "size": "20px",
-        "weight": 500,
-        "family": "Brother 1816",
-        "line_height": "1.4",
-        "color": "#4D4D4D",
+        "size": "14px",
+        "weight": 400,
+        "family": "garnett",
+        "line_height": "21px",
+        "color": "#31313B",
         "source": "extracted",
-        "matched_selector": ".deck, .standfirst"
+        "matched_selector": ".lead, .deck, .article-lead, [class*=\"subtitle\"]"
       },
       "article_body": {
         "size": "18px",
         "weight": 400,
-        "family": "Brother 1816",
-        "line_height": "1.6",
-        "color": "#111111",
-        "source": "extracted",
-        "matched_selector": "article p"
+        "family": "Garnett",
+        "source": "fallback",
+        "attempted_selector": "article p, .article-body p, .story-body p"
       },
       "navigation": {
-        "size": "13px",
-        "weight": 700,
-        "family": "Brother 1816",
-        "line_height": "1.2",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.06em",
-        "color": "#FFFFFF",
+        "size": "16px",
+        "weight": 400,
+        "family": "garnett",
+        "line_height": "24px",
+        "color": "#002AFF",
         "source": "extracted",
-        "matched_selector": "nav a"
+        "matched_selector": "nav a, [role=\"navigation\"] a"
       },
       "utility_bar": {
-        "size": "11px",
-        "weight": 600,
-        "family": "Brother 1816",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.08em",
-        "color": "#FFFFFF",
-        "source": "extracted",
-        "matched_selector": ".utility a"
+        "size": "13px",
+        "weight": 400,
+        "family": "Garnett",
+        "source": "fallback",
+        "attempted_selector": ".utility a, .topbar a, [class*=\"utility\"] a"
       },
       "category_pills": {
-        "size": "11px",
-        "weight": 700,
-        "family": "Brother 1816",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.08em",
-        "color": "#FF5A00",
+        "size": "20px",
+        "weight": 400,
+        "family": "garnett",
+        "line_height": "30px",
+        "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "[class*='category'], [class*='kicker']"
+        "matched_selector": "[class*=\"pill\"], [class*=\"chip\"], [class*=\"tag\"], [class*=\"filter\"] a"
       },
       "buttons": {
-        "size": "13px",
-        "weight": 700,
-        "family": "Brother 1816",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.06em",
+        "size": "20px",
+        "weight": 400,
+        "family": "garnett",
+        "line_height": "16px",
         "color": "#FFFFFF",
         "source": "extracted",
-        "matched_selector": "button, .btn"
+        "matched_selector": "button, .btn, [role=\"button\"]"
       },
       "meta_text": {
         "size": "12px",
-        "weight": 500,
-        "family": "Brother 1816",
-        "color": "#888888",
+        "weight": 600,
+        "family": "garnett",
+        "line_height": "16.8px",
+        "color": "#0A0A0A",
         "source": "extracted",
-        "matched_selector": "time, .byline"
+        "matched_selector": "time, .date, [class*=\"meta\"], [class*=\"timestamp\"], figcaption"
       }
-    }
-  },
-  "buttons": {
-    "primary": {
-      "background_color": "#FF5A00",
-      "text_color": "#FFFFFF",
-      "border_radius": "2px",
-      "padding": "10px 20px",
-      "font_weight": 700,
-      "text_transform": "uppercase",
-      "letter_spacing": "0.06em",
-      "font_size": "13px",
-      "hover_background": "#E65100",
-      "source": "extracted"
-    },
-    "secondary": {
-      "background_color": "transparent",
-      "text_color": "#111111",
-      "border": "1px solid #111111",
-      "border_radius": "2px",
-      "padding": "10px 20px",
-      "font_weight": 700,
-      "text_transform": "uppercase",
-      "source": "extracted"
     }
   },
   "brand_voice": {
-    "language": "en",
+    "language": "en-US",
     "headline_style": {
       "format": "sentence case",
-      "case": "sentence case",
-      "pattern": "Plain editorial sentence-case; occasional 'BREAKING:' or category colon prefix for live coverage."
+      "case": "sentence case"
     },
     "content_labels": {
-      "breaking": true,
       "live": true,
-      "exclusive": true,
-      "opinion": true,
+      "breaking": true,
       "video": true,
-      "premium": true,
-      "sponsored": true,
-      "analysis": true
+      "sponsored": true
     },
-    "content_distinction": {
-      "news": {
-        "typography": "Brother 1816 Bold, uppercase kickers",
-        "description": "Factual reporting with clean sans-serif headlines and short, scannable decks."
-      },
-      "opinion": {
-        "label": "Opinion",
-        "typography": "Brother 1816 Italic 500",
-        "description": "Editorial commentary signposted with an 'OPINION' kicker in BI Orange."
-      },
-      "premium": {
-        "label": "BI PREMIUM",
-        "typography": "Brother 1816 Black",
-        "description": "Subscriber-only content marked with a yellow padlock badge and BI PREMIUM kicker."
-      }
-    }
+    "content_distinction": {}
   },
   "photo_style": {
     "thumbnail_format": {
-      "aspect_ratio": "16:9",
-      "border_radius": "0px"
+      "aspect_ratio": "4:3",
+      "border_radius": "0px",
+      "sizes": {
+        "large": "400x300",
+        "small": "100x75"
+      },
+      "source": "designer-mapping+live",
+      "note": "From Brand Kit mapping BI.pdf — no border radius; 4:3 thumbs"
     },
     "video_thumbnails": {
-      "indicator": "Solid circle with white play triangle",
-      "indicator_color": "#FF5A00"
+      "indicator": "Play button icon",
+      "indicator_color": "#0A0A0A"
     },
     "author_photos": {
-      "shape": "circular",
-      "size": "32px"
+      "shape": "square",
+      "size": "40px"
     }
   },
   "graphics": {
-    "style": "Editorial — relies on photography, sharp corners, and bold typography. Almost no decorative illustration in the news flow.",
+    "style": "Minimal — relies on photography and typography",
     "elements": [
       {
-        "name": "BREAKING",
-        "label": "BREAKING",
-        "description": "Live news label",
-        "background_color": "#E03625",
-        "text_color": "#FFFFFF"
-      },
-      {
         "name": "EXCLUSIVE",
-        "label": "EXCLUSIVE",
-        "description": "Original reporting flag",
-        "background_color": "#111111",
+        "description": "Badge/label element",
+        "background_color": "#002AFF",
         "text_color": "#FFFFFF"
       },
       {
-        "name": "BI PREMIUM",
-        "label": "BI PREMIUM",
-        "description": "Paywalled / subscriber content",
-        "background_color": "#FFC700",
-        "text_color": "#111111"
+        "name": "NEW",
+        "description": "Badge/label element",
+        "background_color": "#D9FFD9",
+        "text_color": "#0A0A0A"
       },
       {
-        "name": "OPINION",
-        "label": "OPINION",
-        "description": "Editorial commentary kicker",
+        "name": "Subscribe",
+        "description": "Badge/label element",
         "background_color": "transparent",
-        "text_color": "#FF5A00"
+        "text_color": "#002AFF"
+      },
+      {
+        "name": "Newsletters",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Today's Briefing",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Exclusive",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Follow",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Bloomberg/Getty Images",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#71717A"
+      },
+      {
+        "name": "Jul 16, 2026, 9:00 AM UTC",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Read in app",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Share",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Copy link",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Email",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Facebook",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "WhatsApp",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "X",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "LinkedIn",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Bluesky",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Threads",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Impact Link",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Listen to this story",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Play now",
+        "description": "Badge/label element",
+        "background_color": "#0A0A0A",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Eugene Kim",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Enter your email",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Sign up",
+        "description": "Badge/label element",
+        "background_color": "#002AFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "More stories by",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "More stories from",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "Amazon",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "automation",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
+      },
+      {
+        "name": "More",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#0A0A0A"
       }
     ]
   },
   "icons": {
-    "style": "Stroked monoline SVG — 1.5px stroke, square caps, no fills.",
-    "count_detected": 48,
+    "style": "SVG-based",
+    "count_detected": 60,
     "social_media_icons": {
       "platforms": [
-        "X (Twitter)",
         "Facebook",
-        "Instagram",
+        "X (Twitter)",
         "LinkedIn",
         "YouTube",
-        "TikTok"
+        "Instagram"
       ],
-      "placement": "Footer + share rail on articles",
-      "color": "#FFFFFF on black footer; #111111 in body"
+      "placement": "Footer"
     }
   },
   "layout_patterns": {
-    "grid": "Two-column at desktop (main + sidebar), single-column at mobile, 760px article reading width.",
+    "grid": "Two-column layout (main content + sidebar)",
     "header": {
-      "background_color": "#000000",
-      "is_dark": true,
-      "accent_rule_color": "#FF5A00",
-      "utility_bar": {
-        "background_color": "#000000",
-        "is_dark": true,
-        "items": [
-          "Subscribe",
-          "Newsletters",
-          "Account",
-          "Search"
-        ]
-      },
       "layers": [
-        "div: utility bar — Subscribe / Account / Search",
-        "div: masthead — wordmark + main nav",
-        "div: section sub-nav — Tech, Markets, Finance, Strategy, Politics",
-        "div: 3px orange accent rule"
-      ]
+        "section: (visual element)",
+        "section: Business Insider\n          \n            \n         ",
+        "section: Today's Briefing\n                        \n        "
+      ],
+      "background_color": "#FFFFFF",
+      "is_dark": false
     },
-    "content_cards": {
-      "border_radius": "0px",
-      "border": "1px solid #EEEEEE",
-      "padding": "16px",
-      "hover": "background shifts to #F7F7F7, headline picks up underline in BI Orange"
-    },
+    "content_cards": {},
     "footer": {
-      "background_color": "#000000",
-      "text_color": "#FFFFFF",
-      "sections": [
-        "About",
-        "Newsletters",
-        "Subscribe",
-        "Reprints & Permissions",
-        "Advertise",
-        "Sitemap",
-        "Contact Us",
-        "Masthead"
-      ]
+      "sections": []
     }
   },
   "spacing": {
     "card_border_radius": "0px",
-    "container_max_width": "1200px",
-    "grid_gap": "16px",
-    "card_gap": "20px",
-    "section_padding": "32px"
+    "grid_gap": "8px normal"
+  },
+  "buttons": {
+    "primary": {
+      "background_color": "#0A0A0A",
+      "text_color": "#FFFFFF",
+      "border_radius": "4px",
+      "padding": "16px 6px",
+      "font_size": "14px",
+      "font_weight": 600,
+      "text_transform": null,
+      "letter_spacing": null,
+      "source": "extracted"
+    }
+  },
+  "extraction_quality": {
+    "extracted_token_count": 20,
+    "fallback_token_count": 3,
+    "total_tokens": 23,
+    "extraction_ratio": 0.87,
+    "fallback_tokens": [
+      "fonts.type_scale.article_title_card",
+      "fonts.type_scale.article_body",
+      "fonts.type_scale.utility_bar"
+    ]
+  },
+  "metadata": {
+    "analysis_date": "2026-07-16",
+    "source_url": "https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7",
+    "analysis_method": "Automated web crawling with Puppeteer computed style extraction",
+    "extraction_quality": {
+      "extracted_token_count": 20,
+      "fallback_token_count": 3,
+      "total_tokens": 23,
+      "extraction_ratio": 0.87,
+      "fallback_tokens": [
+        "fonts.type_scale.article_title_card",
+        "fonts.type_scale.article_body",
+        "fonts.type_scale.utility_bar"
+      ]
+    },
+    "home_url": "https://www.businessinsider.com/",
+    "capture_at": "2026-07-16T14:16:27.572Z",
+    "baseline": "live-publisher-and-taboola-feed"
   },
   "taboola": {
-    "publisher_id": "axelspringer-businessinsider",
-    "publisher_id_note": "Confirm with AdOps — Axel Springer-owned BI uses an Axel-Springer-prefixed publisher slug on the TRC engine. Replace before pushing to production.",
-    "feed_label": "More From Business Insider",
-    "sponsored_label": "Sponsored Stories",
-    "trending_label": "Trending on Business Insider",
-    "modes_in_use": [
-      "alternating-thumbnails-a",
-      "organic-thumbs-feed-01",
-      "organic-thumbnails-feed-stream",
-      "organic-thumbnails-feed-3x1-with-header-editorial",
-      "exchange-thumbnails-feed-with-header"
-    ]
-  },
-  "navigation": {
-    "navLinks": [
-      {
-        "text": "Tech",
-        "href": "https://www.businessinsider.com/tech"
-      },
-      {
-        "text": "Markets",
-        "href": "https://markets.businessinsider.com"
-      },
-      {
-        "text": "Finance",
-        "href": "https://www.businessinsider.com/finance"
-      },
-      {
-        "text": "Strategy",
-        "href": "https://www.businessinsider.com/strategy"
-      },
-      {
-        "text": "Retail",
-        "href": "https://www.businessinsider.com/retail"
-      },
-      {
-        "text": "Politics",
-        "href": "https://www.businessinsider.com/politics"
-      },
-      {
-        "text": "Media",
-        "href": "https://www.businessinsider.com/media"
-      },
-      {
-        "text": "Reviews",
-        "href": "https://www.businessinsider.com/guides"
-      }
-    ]
+    "publisher_id": "businessinsider",
+    "loader_url": "https://cdn.taboola.com/libtrc/businessinsider/loader.js",
+    "mode": "thumbs-1r",
+    "placement": "below-main-column",
+    "container": "taboola-below-main-column",
+    "target_type": "mix",
+    "feed_label": "You May Like",
+    "capture_note": "Feed DOM captured by bootstrapping loader.js in headed Chrome (xvfb)."
   },
   "content": {
-    "headline": "Inside the boardroom shake-up that is quietly reshaping America's biggest tech companies",
-    "deck": "A handful of activist investors are pushing for sharper governance, leaner org charts, and a return to founder-mode decision making — and Silicon Valley is paying attention.",
-    "byline": "By Madeline Berg and Reed Albergotti",
-    "date": "Updated Jun. 8, 2026, 6:30 AM ET",
-    "categories": [
-      "Tech",
-      "Strategy"
-    ],
-    "url": "https://www.businessinsider.com/",
-    "heroImage": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80",
-    "heroCaption": "Boards of directors at six of the seven largest US tech companies have replaced at least one member in the last 12 months. Getty Images / iStock",
+    "title": "'Please turn it off.' Amazon's push to automate warehouse staffing runs into human resistance.",
+    "deck": "Amazon is testing software to decide where warehouse workers should go. Some managers keep ignoring it.",
+    "heroImage": "https://i.insider.com/69e26ce5367066d7c296e092?width=1000&format=jpeg&auto=webp",
     "paragraphs": [
-      "When the proxy fight at one of Silicon Valley's biggest names quietly settled last month — without a press conference, without a public shareholder vote, and without a single tweet from the CEO — it marked something that observers say has been building for nearly two years: a generational shift in how America's most valuable technology companies are governed.",
-      "Interviews with 14 current and former directors, four activist fund partners, and a half-dozen advisers reveal a coordinated push to flatten executive teams, reinstate dual-class founder voting at companies where it was watered down in the 2010s, and tie a larger share of CEO compensation to medium-term operating metrics rather than stock price.",
-      "\"It's not that the founders were always right,\" said one director who has served on three FAANG-adjacent boards. \"It's that the committees got so layered that nobody could remember who had decision rights anymore. Activists are arbitraging that confusion.\"",
-      "The shift is showing up in compensation filings, too. Median CEO pay across the seven largest US tech companies fell 11% last year, while operating-metric-linked equity rose to its highest share in a decade. Several boards have introduced \"founder veto\" clauses on org-design decisions — a structure unheard of even three years ago.",
-      "Business Insider has reviewed internal memos from two of the companies described in this story. Both declined to comment on the record."
+      "Amazon is testing software to decide where warehouse workers should go. Some managers keep ignoring it.",
+      "Internal planning documents show the tech giant intends to expand these labor-management systems across dozens of its North American fulfillment centers and sort centers, where they could save hundreds of millions of dollars a year.",
+      "However, some warehouse managers have been overriding the software recommendations, asking engineers to disable automated features, and finding other ways around the systems, according to internal Slack conversations and the documents from earlier this year."
     ]
   },
-  "related_articles": [
-    {
-      "headline": "Wall Street's quiet rebellion against return-to-office mandates",
-      "category": "Finance",
-      "href": "https://www.businessinsider.com/finance"
-    },
-    {
-      "headline": "The 30-under-30 founders who turned down a billion-dollar acquisition — and what they did next",
-      "category": "Strategy",
-      "href": "https://www.businessinsider.com/strategy"
-    },
-    {
-      "headline": "Why every retail CFO is suddenly obsessed with the same Korean logistics startup",
-      "category": "Retail",
-      "href": "https://www.businessinsider.com/retail"
-    },
-    {
-      "headline": "Inside Anthropic's push to put a Claude agent on every desktop by 2027",
-      "category": "Tech",
-      "href": "https://www.businessinsider.com/tech"
-    },
-    {
-      "headline": "Markets snapshot: Why the bond market is whispering 'soft landing' again",
-      "category": "Markets",
-      "href": "https://markets.businessinsider.com"
-    },
-    {
-      "headline": "The CMO playbook for an AI-first ad-buying world",
-      "category": "Media",
-      "href": "https://www.businessinsider.com/media"
-    },
-    {
-      "headline": "I've reviewed 200 robot vacuums. These three are the only ones I'd buy in 2026.",
-      "category": "Reviews",
-      "href": "https://www.businessinsider.com/guides"
-    },
-    {
-      "headline": "How Washington's new tech tariffs are quietly reshaping the laptop you'll buy next",
-      "category": "Politics",
-      "href": "https://www.businessinsider.com/politics"
-    }
-  ],
-  "metadata": {
-    "analysis_date": "2026-06-08",
-    "source_url": "https://www.businessinsider.com/",
-    "generator": "brand-kit-generator v2.1.0 (hand-constructed)",
-    "extraction_method": "Constructed from public brand documentation. Live crawl was not possible from the workshop sandbox (egress to businessinsider.com is blocked). Re-run `node generate.js --url <BI article URL> --slug business-insider` from a machine with network access to BI to replace this file with live-extracted tokens. See README.md in this directory.",
-    "extraction_quality": {
-      "extracted_token_count": 28,
-      "fallback_token_count": 0,
-      "total_tokens": 28,
-      "extraction_ratio": 1,
-      "fallback_tokens": [],
-      "note": "Token sources are marked 'extracted' to reflect the confidence level of hand-constructed BI brand data (Brother 1816 wordmark, BI Orange #FF5A00, black masthead, sharp 0px corners are well-documented public knowledge). They will be replaced byte-for-byte when the crawler is re-run with live access."
-    },
-    "enrichment": {
-      "status": "stubbed_not_wired",
-      "reason": "Live Gen AI enrichment is not on main. Soft brand_voice fields are hand-authored in ideal prototypes. See feat/deep-crawl-enrich-feed-mapping lib/enrich.js for the Claude pipeline.",
-      "soft_paths": [
-        "brand_voice.tone",
-        "brand_voice.personality_traits",
-        "brand_voice.headline_style.tone",
-        "brand_voice.headline_style.pattern",
-        "brand_voice.content_distinction",
-        "photo_style.food_photography.style",
-        "photo_style.aesthetic",
-        "logos.primary.description"
+  "designer_mapping": {
+    "source": "docs/brand-kit-mapping-bi.pdf",
+    "domains": [
+      "layout_grid",
+      "typography",
+      "colors",
+      "images",
+      "ui_elements"
+    ],
+    "key_tokens": {
+      "font": "Garnett",
+      "link": "#002aff",
+      "link_hover": "#02c",
+      "text_primary": "#0a0a0a",
+      "text_secondary": "#71717a",
+      "thumb_radius": "0px",
+      "thumb_sizes": [
+        "400x300",
+        "100x75"
       ],
-      "skipped": true,
-      "noEnrich": true
+      "meta_label": "N MIN READ",
+      "button_note": "Map border-radius + font style, not necessarily fill color"
     }
   }
 }

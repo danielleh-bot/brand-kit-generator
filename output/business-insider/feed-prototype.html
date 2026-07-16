@@ -3,230 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Business Insider — Taboola Feed: Before &amp; After Brand Kit</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Business Insider — Live feed baseline (Before / After)</title>
 <style>
+  @font-face { font-family: 'Garnett'; src: local('Garnett'), local('Helvetica Neue'); }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', Arial, sans-serif; background: #eee; color: #333; line-height: 1.5; }
+  body { font-family: 'Garnett', 'Helvetica Neue', Arial, sans-serif; background: #e8e8e8; color: #0a0a0a; }
   .proto-bar {
-    position: sticky; top: 0; z-index: 200; background: #111; color: #fff;
-    display: flex; align-items: center; justify-content: center; gap: 16px; height: 44px; font-size: 13px;
+    position: sticky; top: 0; z-index: 50; background: #111; color: #fff;
+    display: flex; gap: 12px; align-items: center; justify-content: center; height: 48px; font-size: 12px;
   }
-  .proto-bar .label { opacity: 0.5; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
-  .toggle-group { display: flex; background: rgba(255,255,255,0.1); border-radius: 9999px; overflow: hidden; }
-  .toggle-btn {
-    padding: 5px 18px; font-family: inherit; font-size: 12px; font-weight: 600; border: none; cursor: pointer;
-    background: transparent; color: rgba(255,255,255,0.5);
-  }
-  .toggle-btn.active { background: #FF5A00; color: #fff; border-radius: 9999px; }
-  .split-view { display: flex; max-width: 1440px; margin: 0 auto; }
-  .panel { flex: 1; overflow-y: auto; }
-  .panel-label {
-    position: sticky; top: 44px; z-index: 50; text-align: center; padding: 8px 16px;
-    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
-  }
-  .panel-before .panel-label { background: #c0392b; color: #fff; }
-  .panel-after .panel-label { background: #FF5A00; color: #fff; }
-  .divider { width: 3px; background: linear-gradient(180deg, #FF5A00, #999); flex-shrink: 0; }
+  .proto-bar a { color: #9cf; }
+  .toggle-group { display: flex; background: #333; border-radius: 999px; overflow: hidden; }
+  .toggle-btn { border: 0; background: transparent; color: #aaa; padding: 6px 14px; font: inherit; font-weight: 700; cursor: pointer; }
+  .toggle-btn.active { background: #002aff; color: #fff; border-radius: 999px; }
+  .split { display: flex; max-width: 1480px; margin: 0 auto; }
+  .panel { flex: 1; background: #fff; min-height: 100vh; }
+  .panel-label { position: sticky; top: 48px; z-index: 40; text-align: center; padding: 8px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .panel-before .panel-label { background: #b42318; color: #fff; }
+  .panel-after .panel-label { background: #002aff; color: #fff; }
+  .divider { width: 3px; background: linear-gradient(#002aff, #111); }
   body.view-before .panel-after, body.view-before .divider { display: none; }
   body.view-after .panel-before, body.view-after .divider { display: none; }
-  body.view-before .panel-before, body.view-after .panel-after { max-width: 800px; margin: 0 auto; }
-  .site-page { background: #fff; min-height: 100vh; }
-  .site-header { background: #000000; color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
-  .site-logo { font-weight: 800; letter-spacing: 0.04em; font-size: 18px; }
-  .site-nav { display: flex; gap: 14px; padding: 10px 24px; border-bottom: 1px solid #eee; font-size: 13px; font-weight: 600; overflow-x: auto; }
-  .site-nav a { color: #555; text-decoration: none; white-space: nowrap; }
-  .site-nav a.active { color: #FF5A00; }
-  .article-wrap { max-width: 720px; margin: 0 auto; padding: 28px 24px 8px; }
-  .article-title { font-size: 32px; line-height: 1.15; font-weight: 800; color: #111111; margin-bottom: 10px; font-family: Brother 1816, 'DM Sans', sans-serif; }
-  .article-deck { color: #555; font-size: 16px; margin-bottom: 18px; }
-  .article-hero { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #bbb, #777); border-radius: 0; margin-bottom: 16px; }
-  .feed-wrap { max-width: 720px; margin: 0 auto; padding: 12px 24px 48px; }
-  .feed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e5e5e5; }
-  .panel-after .feed-header { border-bottom-color: #FF5A00; }
-  .feed-header h3 { font-size: 13px; font-weight: 700; color: #777; text-transform: uppercase; letter-spacing: 0.04em; }
-  .panel-after .feed-header h3 { font-size: 16px; color: #FF5A00; text-transform: none; letter-spacing: 0; font-family: Brother 1816, 'DM Sans', sans-serif; }
-  .tbl-logo { font-size: 11px; color: #bbb; }
-  .fc { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; text-decoration: none; color: inherit; }
-  .fc-img { width: 148px; height: 100px; flex-shrink: 0; object-fit: cover; border-radius: 3px; background: linear-gradient(135deg, #d0d0d0, #9a9a9a); }
-  .panel-before .fc-title { font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; color: #333; line-height: 1.3; margin-bottom: 5px; }
-  .panel-before .fc-source { font-family: Arial, sans-serif; font-size: 11px; color: #aaa; }
-  .panel-before .fc-sponsor { font-family: Arial, sans-serif; font-size: 10px; color: #ccc; margin-top: 3px; }
-  .panel-after .fc-title { font-size: 16px; font-weight: 700; line-height: 1.25; margin-bottom: 4px; }
-  .panel-after .fc-source { font-size: 12px; }
-  .panel-after .fc-kicker { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .panel-after .fc-sponsor.branded {
-    display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 700;
-    background: #FF5A00; color: #fff; padding: 2px 8px; border-radius: 2px;
+  body.view-before .panel-before, body.view-after .panel-after { max-width: 820px; margin: 0 auto; }
+  .chrome { border-bottom: 1px solid #cecece; }
+  .chrome img { width: 100%; display: block; }
+  .article { max-width: 720px; margin: 0 auto; padding: 28px 24px 12px; }
+  .article h1 { font-size: 34px; line-height: 1.15; font-weight: 700; margin-bottom: 12px; }
+  .article .deck { color: #71717a; font-size: 16px; margin-bottom: 16px; }
+  .article .hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #eee; margin-bottom: 12px; }
+  .provenance {
+    max-width: 720px; margin: 0 auto 12px; padding: 10px 12px; font-size: 12px; background: #f5f5f5; border-left: 3px solid #666;
   }
-  .feed-more-btn {
-    display: block; margin: 20px auto 0; font-family: Arial, sans-serif; background: #f5f5f5; color: #777;
-    border: 1px solid #ddd; padding: 8px 36px; font-size: 13px; border-radius: 3px; cursor: pointer;
+  .panel-after .provenance { border-left-color: #002aff; background: #eef2ff; }
+  .live-feed-shot { max-width: 720px; margin: 0 auto 24px; padding: 0 16px; }
+  .live-feed-shot img { width: 100%; border: 1px solid #ddd; display: block; }
+  .feed { max-width: 720px; margin: 0 auto; padding: 8px 16px 48px; }
+  .tbl-feed-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e5e5; padding-bottom: 8px; margin-bottom: 12px; }
+  .panel-after .tbl-feed-header { border-bottom: 2px solid #002aff; }
+  .tbl-feed-header-text { font-size: 13px; font-weight: 700; color: #777; text-transform: uppercase; }
+  .panel-after .tbl-feed-header-text { font-size: 16px; color: #0a0a0a; text-transform: none; }
+  .tbl-feed-card { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .panel-after .tbl-feed-card { border-bottom-color: #cecece; }
+  .tbl-feed-card a { display: flex; gap: 14px; text-decoration: none; color: inherit; width: 100%; }
+  .thumbBlock { width: 148px; flex-shrink: 0; position: relative; }
+  .trc_img, .placeholder { width: 148px; height: 111px; object-fit: cover; background: linear-gradient(135deg,#ddd,#bbb); display: block; border-radius: 0; }
+  .video-title { font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; color: #333; line-height: 1.3; margin-bottom: 6px; }
+  .panel-after .video-title { font-family: 'Garnett', 'Helvetica Neue', Arial, sans-serif; font-size: 18px; font-weight: 500; color: #0a0a0a; line-height: 25px; }
+  .panel-after .tbl-feed-card:hover .video-title {
+    text-decoration: underline; text-decoration-color: #002aff; text-decoration-thickness: 2px; text-underline-offset: 3px;
   }
-  .panel-after .feed-more-btn {
-    background: #FF5A00; color: #fff; border: none; border-radius: 2px;
-    font-family: Brother 1816, 'DM Sans', sans-serif; font-weight: 700;
+  .branding { font-family: Arial, sans-serif; font-size: 11px; color: #aaa; }
+  .panel-after .branding { font-family: 'Garnett', 'Helvetica Neue', Arial, sans-serif; color: #71717a; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  .trc_sponsored_overlay {
+    position: absolute; left: 6px; bottom: 6px; background: #f3f4f6; color: #666; font-size: 10px; padding: 2px 6px; border-radius: 3px;
   }
-  .site-footer { border-top: 1px solid #eee; padding: 24px; text-align: center; font-size: 12px; color: #888; }
-  .unique-callout {
-    margin: 8px 24px 0; max-width: 720px; margin-left: auto; margin-right: auto;
-    font-size: 11px; color: #b42318; background: #fdecea; padding: 8px 10px; border-radius: 6px;
+  .panel-after .trc_sponsored_overlay { background: #111; color: #fff; border-radius: 0; font-family: 'Garnett', 'Helvetica Neue', Arial, sans-serif; font-weight: 700; text-transform: uppercase; }
+  .tbl-feed-more-btn {
+    display: block; margin: 20px auto 0; border: 1px solid #ddd; background: #f5f5f5; color: #777; padding: 10px 28px; font-size: 13px; cursor: pointer;
   }
-  .panel-before .unique-callout { display: none; }
+  .panel-after .tbl-feed-more-btn {
+    background: #002aff; color: #fff; border: 0; border-radius: 4px; font-family: 'Garnett', 'Helvetica Neue', Arial, sans-serif; font-weight: 700;
+  }
+  .meta { max-width: 720px; margin: 0 auto 24px; padding: 0 16px; font-size: 11px; color: #666; }
 </style>
 </head>
 <body class="view-split">
 <div class="proto-bar">
-  <span class="label">Business Insider Feed Prototype</span>
+  <span>BI live baseline · thumbs-1r · businessinsider</span>
   <div class="toggle-group">
     <button class="toggle-btn" onclick="setView('before')">Before</button>
     <button class="toggle-btn active" onclick="setView('split')">Split</button>
     <button class="toggle-btn" onclick="setView('after')">After</button>
   </div>
-  <a href="./visual-brand-kit.html" style="color:#fff;font-size:11px;opacity:0.7;margin-left:12px">Visual brand kit ↗</a>
+  <a href="./visual-brand-kit.html">Visual brand kit</a>
+  <a href="./captures/current-feed.png" target="_blank">Raw feed PNG</a>
 </div>
 
-<div class="split-view">
+<div class="split">
   <div class="panel panel-before">
-    <div class="panel-label">Before — Generic Default Feed</div>
-    <div class="site-page">
-      <div class="site-header"><div class="site-logo">Business Insider</div></div>
-      <nav class="site-nav"><a href="#" class="active">Markets</a><a href="#" class="">Tech</a><a href="#" class="">Strategy</a><a href="#" class="">Politics</a><a href="#" class="">Reviews</a></nav>
-      <div class="article-wrap">
-        <h1 class="article-title">Markets are bracing for a pivotal Fed decision this week</h1>
-        <p class="article-deck">Investors are positioning for volatility as rate-cut odds shift and earnings season accelerates.</p>
-        <div class="article-hero"></div>
-      </div>
-      <div class="feed-wrap">
-        <div class="feed-header"><h3>You May Like</h3><span class="tbl-logo">by Taboola</span></div>
-        <a class="fc" href="#">
-        <div class="fc-img"></div>
-        <div class="fc-body">
-          <div class="fc-title">Apple is preparing a major AI overhaul for the iPhone</div>
-          <div class="fc-source">businessinsider.com</div>
-          
-        </div>
-      </a>
-<a class="fc" href="#">
-        <div class="fc-img"></div>
-        <div class="fc-body">
-          <div class="fc-title">These high-yield accounts are beating most savings rates</div>
-          <div class="fc-source">finance-partner.com</div>
-          <div class="fc-sponsor">Sponsored</div>
-        </div>
-      </a>
-<a class="fc" href="#">
-        <div class="fc-img"></div>
-        <div class="fc-body">
-          <div class="fc-title">Why this market rally may not last</div>
-          <div class="fc-source">businessinsider.com</div>
-          
-        </div>
-      </a>
-<a class="fc" href="#">
-        <div class="fc-img"></div>
-        <div class="fc-body">
-          <div class="fc-title">Compare business credit cards for 2026</div>
-          <div class="fc-source">cards-compare.com</div>
-          <div class="fc-sponsor">Sponsored</div>
-        </div>
-      </a>
-<a class="fc" href="#">
-        <div class="fc-img"></div>
-        <div class="fc-body">
-          <div class="fc-title">Inside the startup quietly powering enterprise AI</div>
-          <div class="fc-source">businessinsider.com</div>
-          
-        </div>
-      </a>
-<a class="fc" href="#">
-        <div class="fc-img"></div>
-        <div class="fc-body">
-          <div class="fc-title">Remote work is changing again — here is the new playbook</div>
-          <div class="fc-source">businessinsider.com</div>
-          
-        </div>
-      </a>
-        <button class="feed-more-btn">Show more</button>
-      </div>
-      <div class="site-footer">© Generic Taboola defaults — Arial / #333 / 6px radius</div>
+    <div class="panel-label">Before — Current live Taboola feed (captured)</div>
+    <div class="chrome"><img src="./captures/article-chrome.png" alt="Live BI article chrome"></div>
+    <div class="article">
+      <h1>'Please turn it off.' Amazon's push to automate warehouse staffing runs into human resistance.</h1>
+      <p class="deck">Amazon is testing software to decide where warehouse workers should go. Some managers keep ignoring it.</p>
+      <img class="hero" src="https://i.insider.com/69e26ce5367066d7c296e092?width=1000&amp;format=jpeg&amp;auto=webp" alt="">
     </div>
+    <div class="provenance">
+      <strong>Source of truth:</strong> screenshot of <code>#taboola-below-main-column</code> after loading
+      <code>https://cdn.taboola.com/libtrc/businessinsider/loader.js</code> · mode <code>thumbs-1r</code> ·
+      placement <code>below-main-column</code> · captured 2026-07-16T14:16:27.572Z
+    </div>
+    <div class="live-feed-shot">
+      <img src="./captures/current-feed.png" alt="Current live Taboola feed screenshot">
+    </div>
+    <p class="meta">This panel is the actual feed as rendered on businessinsider.com — not a reconstructed mock.</p>
   </div>
 
   <div class="divider"></div>
 
   <div class="panel panel-after">
-    <div class="panel-label">After — Brand Kit Applied (Ideal Native)</div>
-    <div class="site-page">
-      <div class="site-header"><div class="site-logo">Business Insider</div></div>
-      <nav class="site-nav"><a href="#" class="active">Markets</a><a href="#" class="">Tech</a><a href="#" class="">Strategy</a><a href="#" class="">Politics</a><a href="#" class="">Reviews</a></nav>
-      <div class="article-wrap">
-        <h1 class="article-title">Markets are bracing for a pivotal Fed decision this week</h1>
-        <p class="article-deck">Investors are positioning for volatility as rate-cut odds shift and earnings season accelerates.</p>
-        <div class="article-hero" style="border-radius:0px"></div>
-      </div>
-      <div class="unique-callout">Ideal After includes unique card meta (kickers / LIVE / alerts) that today’s default thumbs mode cannot paint via loader alone — see visual-brand-kit.html.</div>
-      <div class="feed-wrap">
-        <div class="feed-header"><h3>More From Business Insider</h3><span class="tbl-logo">recommended by Taboola</span></div>
-        <a class="fc" href="#">
-        <div class="fc-img" style="border-radius:0px"></div>
-        <div class="fc-body">
-          <div class="fc-kicker" style="color:#FF5A00">TECH</div>
-          <div class="fc-title" style="font-family:Brother 1816;color:#111111">Apple is preparing a major AI overhaul for the iPhone</div>
-          <div class="fc-source" style="color:#4D4D4D">businessinsider.com</div>
-        </div>
-      </a>
-<a class="fc" href="#">
-          <div class="fc-img" style="border-radius:0px"></div>
-          <div class="fc-body">
-            <div class="fc-title" style="font-family:Brother 1816;color:#111111">These high-yield accounts are beating most savings rates</div>
-            <div class="fc-source" style="color:#4D4D4D">finance-partner.com</div>
-            <div class="fc-sponsor branded">Sponsored</div>
-          </div>
-        </a>
-<a class="fc" href="#">
-        <div class="fc-img" style="border-radius:0px"></div>
-        <div class="fc-body">
-          <div class="fc-kicker" style="color:#FF5A00">OPINION</div>
-          <div class="fc-title" style="font-family:Brother 1816;color:#111111">Why this market rally may not last</div>
-          <div class="fc-source" style="color:#4D4D4D">businessinsider.com</div>
-        </div>
-      </a>
-<a class="fc" href="#">
-          <div class="fc-img" style="border-radius:0px"></div>
-          <div class="fc-body">
-            <div class="fc-title" style="font-family:Brother 1816;color:#111111">Compare business credit cards for 2026</div>
-            <div class="fc-source" style="color:#4D4D4D">cards-compare.com</div>
-            <div class="fc-sponsor branded">Sponsored</div>
-          </div>
-        </a>
-<a class="fc" href="#">
-        <div class="fc-img" style="border-radius:0px"></div>
-        <div class="fc-body">
-          <div class="fc-kicker" style="color:#FF5A00">EXCLUSIVE</div>
-          <div class="fc-title" style="font-family:Brother 1816;color:#111111">Inside the startup quietly powering enterprise AI</div>
-          <div class="fc-source" style="color:#4D4D4D">businessinsider.com</div>
-        </div>
-      </a>
-<a class="fc" href="#">
-        <div class="fc-img" style="border-radius:0px"></div>
-        <div class="fc-body">
-          <div class="fc-kicker" style="color:#FF5A00">STRATEGY</div>
-          <div class="fc-title" style="font-family:Brother 1816;color:#111111">Remote work is changing again — here is the new playbook</div>
-          <div class="fc-source" style="color:#4D4D4D">businessinsider.com</div>
-        </div>
-      </a>
-        <button class="feed-more-btn">Show more</button>
-      </div>
-      <div class="site-footer">Ideal native experience from Business Insider brand kit — not all properties ship via MVP loader</div>
+    <div class="panel-label">After — Same feed anatomy + live brand kit (loader paint)</div>
+    <div class="chrome"><img src="./captures/article-chrome.png" alt="Live BI article chrome"></div>
+    <div class="article">
+      <h1>'Please turn it off.' Amazon's push to automate warehouse staffing runs into human resistance.</h1>
+      <p class="deck">Amazon is testing software to decide where warehouse workers should go. Some managers keep ignoring it.</p>
+      <img class="hero" src="https://i.insider.com/69e26ce5367066d7c296e092?width=1000&amp;format=jpeg&amp;auto=webp" alt="">
     </div>
+    <div class="provenance">
+      Same card list from live capture, restyled with extracted tokens (Garnett, #002aff, 0px radius, hover underline)
+      the way <code>loader.js</code> targets <code>.video-title</code> / <code>.branding</code> / <code>.tbl-feed-more-btn</code>.
+      Unique properties (category icons, MIN READ meta) are <strong>not</strong> invented here — see visual kit Unique tier.
+    </div>
+    <div class="feed" id="taboola-below-main-column">
+      <div class="tbl-feed-header">
+        <div class="tbl-feed-header-text">More From Business Insider</div>
+        <div style="font-size:11px;color:#888">recommended by Taboola</div>
+      </div>
+      <div class="tbl-feed-card videoCube trc-content-sponsored">
+        <a class="item-label-href" href="https://www.wellnesstodaybetter.site/cyjiu7ydvn">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div><div class="trc_sponsored_overlay">Sponsored</div></div>
+          <div class="video-label-box">
+            <div class="video-title">Japan's Oldest Doctors Say Cog​nitive Decline Isn't Age: Just Stop Eating These 3 Foods</div>
+            <div class="branding">NeuroBloom</div>
+          </div>
+        </a>
+      </div>
+<div class="tbl-feed-card videoCube trc-content-sponsored">
+        <a class="item-label-href" href="https://www.mindhealthyagain.site/3kf5nj0cbg">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div><div class="trc_sponsored_overlay">Sponsored</div></div>
+          <div class="video-label-box">
+            <div class="video-title">Japan's Oldest Doctors Say Cognitive Decline Isn't Age: Just Stop Eating These 3 Foods</div>
+            <div class="branding">ClearMind Wellness</div>
+          </div>
+        </a>
+      </div>
+<div class="tbl-feed-card videoCube trc-content-sponsored">
+        <a class="item-label-href" href="https://crisprootmatrix.com/">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div><div class="trc_sponsored_overlay">Sponsored</div></div>
+          <div class="video-label-box">
+            <div class="video-title">MDs: Burning, Tingling Feet Linked to This Common Habit. You Probably Do It.</div>
+            <div class="branding">Neuropathy Research</div>
+          </div>
+        </a>
+      </div>
+<div class="tbl-feed-card videoCube ">
+        <a class="item-label-href" href="https://www.businessinsider.com/shared-hotel-room-kids-parents-multigenerational-family-trip-worth-it-2026-7">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div></div>
+          <div class="video-label-box">
+            <div class="video-title">We shared a hotel room with 3 generations for 10 days. I thought it would be a nightmare, but it brought us closer than ever.</div>
+            <div class="branding">Business Insider</div>
+          </div>
+        </a>
+      </div>
+<div class="tbl-feed-card videoCube ">
+        <a class="item-label-href" href="https://www.businessinsider.com/lincoln-memorial-reflecting-pool-visit-photos-what-it-looks-like-2026-6">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div></div>
+          <div class="video-label-box">
+            <div class="video-title">Everyone's talking about the Lincoln Memorial Reflecting Pool. I visited to see it for myself.</div>
+            <div class="branding">Business Insider</div>
+          </div>
+        </a>
+      </div>
+<div class="tbl-feed-card videoCube trc-content-sponsored">
+        <a class="item-label-href" href="https://ultranutritionsecrets.com/defender-ig">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div><div class="trc_sponsored_overlay">Sponsored</div></div>
+          <div class="video-label-box">
+            <div class="video-title">After 60, Leg Strength Comes From One Simple Daily Move</div>
+            <div class="branding">Ultra Nutrition Secrets</div>
+          </div>
+        </a>
+      </div>
+<div class="tbl-feed-card videoCube trc-content-sponsored">
+        <a class="item-label-href" href="https://trvl.tryledisa.com/f58a679a-50f2-4c4e-b8ad-c3815368e4c1">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div><div class="trc_sponsored_overlay">Sponsored</div></div>
+          <div class="video-label-box">
+            <div class="video-title">Costco Shoppers Say This Fat-Burning Patch Triggers Weight Loss &quot;Unlike Any Other&quot;</div>
+            <div class="branding">Diet-masters</div>
+          </div>
+        </a>
+      </div>
+<div class="tbl-feed-card videoCube trc-content-sponsored">
+        <a class="item-label-href" href="https://cos-rd.com/18/14714">
+          <div class="thumbBlock"><div class="trc_img placeholder"></div><div class="trc_sponsored_overlay">Sponsored</div></div>
+          <div class="video-label-box">
+            <div class="video-title">Seniors Above 55 Years Of Age Can Now Fly Business Class For The Price of Economy</div>
+            <div class="branding">Smart Travel Tips</div>
+          </div>
+        </a>
+      </div>
+      <button class="tbl-feed-more-btn">Show more</button>
+    </div>
+    <p class="meta">8 cards from live feed-dom.json · publisher businessinsider</p>
   </div>
 </div>
-
 <script>
-function setView(mode) {
+function setView(mode){
   document.body.className = 'view-' + mode;
-  document.querySelectorAll('.toggle-btn').forEach(function (btn) {
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
     btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === mode);
   });
 }

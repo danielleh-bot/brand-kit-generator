@@ -10,7 +10,9 @@
     "start": "node server.js",
     "dev": "node server.js",
     "generate": "node generate.js",
-    "build:visual-kits": "node scripts/build-visual-kits.js"
+    "build:visual-kits": "node scripts/build-visual-kits.js",
+    "build:bi-live": "node scripts/build-bi-live-kit.js",
+    "capture:bi": "xvfb-run -a node scripts/capture-live-baseline.js --url \"https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7\" --slug business-insider --home \"https://www.businessinsider.com/\""
   },
   "keywords": [
     "brand-kit",

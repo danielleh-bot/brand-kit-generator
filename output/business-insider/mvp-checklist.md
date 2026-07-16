@@ -1,43 +1,38 @@
-# Business Insider — MVP vs Ideal checklist
+# Business Insider — MVP vs Ideal (live baseline)
 
-Generated from the visual brand kit property matrix.
+Source article: https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7
+Taboola: `businessinsider` · `thumbs-1r` · `below-main-column`
+Designer mapping: `docs/brand-kit-mapping-bi.pdf`
 
-## Variant A — MVP via loader.js / `__style__`
+## Variant A — MVP via loader.js
 
-Ship with today's TRC selectors only (CSS paint + existing mode overrides).
+- [ ] **Card gutter / spacing** (`partial`) — `spacing.card_gap` → .tbl-feed-card margin/padding via loader CSS
+- [ ] **Container max width** (`partial`) — `spacing.container_max_width` → Placement width owned by publisher page / mode
+- [ ] **Border / divider** (`standard`) — `colors.css_variables.--border-color-2` → .tbl-feed-card border-bottom-color
+- [ ] **Font family** (`standard`) — `fonts.primary.family` → .video-title, .branding { font-family }
+- [ ] **Section title** (`standard`) — `fonts.type_scale.section_headings` → .tbl-feed-header-text
+- [ ] **Text link** (`standard`) — `colors.primary.hex` → link color / hover on titles via loader
+- [ ] **Card title** (`standard`) — `fonts.type_scale.article_title_card` → .video-title
+- [ ] **Brand / link primary** (`standard`) — `--base-a-color` → title hover underline, CTA, pre-label
+- [ ] **Brand hover** (`standard`) — `--base-a-hover-color` → link/CTA hover
+- [ ] **Primary text** (`standard`) — `--base-text-color` → .video-title color
+- [ ] **Secondary text** (`standard`) — `secondary #71717a` → .branding / meta
+- [ ] **Bg section** (`partial`) — `colors.backgrounds.section` → No first-class section band on thumbs-1r
+- [ ] **Thumbnail border radius** (`standard`) — `photo_style.thumbnail_format.border_radius` → .thumbBlock img / .trc_img
+- [ ] **Aspect / sizes** (`partial`) — `photo_style.thumbnail_format.sizes` → Mode controls thumb geometry; CSS can force object-fit
+- [ ] **Video icon + duration** (`partial`) — `photo_style.video_thumbnails` → .trc-video-play-icon color; duration not a free field
+- [ ] **Button radius + font style** (`standard`) — `buttons.primary` → .tbl-feed-more-btn
 
-- [ ] **Primary brand color** (`standard`) — `colors.primary.hex` → .tbl-feed-card:hover .video-title, .tbl-feed-card .trc-pre-label, .tbl-feed-more-btn, .tbl-feed-header, .tbl-feed-header-text
-  - MVP paint — measurable CTR/brand-fit lift with zero platform work.
+## Variant B — Unique / platform
 
-- [ ] **Headline font family** (`standard`) — `fonts.primary.family` → .tbl-feed-card .video-title, .videoCube .video-title, .tbl-feed-card .branding, .video-label-box .branding
-  - MVP — largest native-feel lever after colour.
+- [ ] **Grid / column structure (context)** — Designer mapped BI homepage modules. Current article feed is linear thumbs-1r — composition is Unique.
+- [ ] **Label (N MIN READ)** — Designer mapped MIN READ on BI modules — Unique for current feed mode.
+- [ ] **Article category icon + label** — .trc-pre-label color only today — not icon system
 
-- [ ] **Card / thumbnail border radius** (`standard`) — `photo_style.thumbnail_format.border_radius` → .tbl-feed-card .thumbBlock, .videoCube .trc_img, .tbl-feed-card
-  - MVP — sharp vs rounded reads immediately as brand.
+## Captures
 
-- [ ] **CTA / See more button** (`standard`) — `buttons.primary` → .tbl-feed-more-btn
-  - MVP — loader can restyle .tbl-feed-more-btn.
-
-- [ ] **Section accent orange dot** (`partial`) — `colors.primary.hex` → .tbl-feed-header, .tbl-feed-header-text
-  - Partial — can fake with ::before on header text in loader; not a first-class Transformer prop.
-
-## Variant B — Ideal subset (platform + soft)
-
-Requires custom UI mode / new card fields and/or Gen AI brand-voice translation.
-
-- [ ] **BREAKING / LIVE / OPINION kickers** (`unique`) — `brand_voice.content_labels`
-  - Unique inventory — one pre-label colour exists; multi-label system needs platform.
-  - Note: BI red BREAKING vs orange OPINION vs yellow PREMIUM.
-
-- [ ] **Editorial voice / sentence-case news** (`soft`) — `brand_voice.headline_style`
-  - Soft — Gen AI or editorial rewrite of feed headlines.
-
-## Loader capability baseline
-
-**Can do today:** inject CSS for `.video-title`, `.branding`, `.tbl-feed-more-btn`, `.trc-pre-label`, sponsored overlay, thumbnail radius, feed header accent.
-
-**Cannot do without platform work:** new DOM fields (cook time, scores, alert windows), multi-badge inventories, section composition ("Mehr von…"), headline rewrite from brand voice.
-
-## Gen AI
-
-Soft-tier fields are hand-authored in ideal prototypes. Live enrichment is stubbed — see `lib/enrich-stub.js` and unmerged `feat/deep-crawl-enrich-feed-mapping`.
+- `captures/homepage-chrome.png`
+- `captures/article-chrome.png`
+- `captures/current-feed.png` (live Taboola)
+- `captures/feed-dom.json`
+- `captures/css-vars.json`

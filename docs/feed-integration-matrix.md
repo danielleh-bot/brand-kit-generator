@@ -32,3 +32,8 @@ From the Business Insider production-shaped loader:
 **Can paint today:** `.video-title`, `.branding`, `.tbl-feed-more-btn`, `.trc-pre-label`, sponsored overlay, thumbnail radius, feed header accent/dot.
 
 **Cannot without platform:** cook time / scores / alert windows as card fields, multi-badge inventories, “Mehr von…” section composition, brand-voice headline rewrite.
+
+
+## Live BI baseline
+
+Business Insider was rebuilt from the live article + Taboola `thumbs-1r` capture and the designer PDF [`brand-kit-mapping-bi.pdf`](./brand-kit-mapping-bi.pdf). FOX Sports and Weather Channel are **not** live-sourced yet.

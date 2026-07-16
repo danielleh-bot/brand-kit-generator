@@ -9,3 +9,5 @@
 | `mvp-checklist.md` | Variant A (loader MVP) vs Variant B (ideal/platform) |
 
 Open `visual-brand-kit.html` first for stakeholder review.
+
+> **Not yet live-sourced.** Visual kit / feed-prototype on this slug may include synthetic samples. BI is the live baseline reference.
