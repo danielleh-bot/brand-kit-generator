@@ -1,0 +1,32 @@
+{
+  "brand": { "name": "Glasgow Live", "website": "https://www.glasgowlive.co.uk", "language": "en", "direction": "ltr" },
+  "logos": { "primary": { "type": "text", "text": "Glasgow Live" }, "favicon_url": "https://www.glasgowlive.co.uk/nav-web-static/main-9ec427153cd0034fbc97a0d45a42d278b1644ac0/public/assets/glasgowlive/favicon.ico" },
+  "colors": {
+    "primary": { "hex": "#0000EE", "source": "extracted" },
+    "text": { "primary": { "hex": "#111211", "count": 524 }, "secondary": { "hex": "#000000", "count": 114 }, "tertiary": { "hex": "#0000EE", "count": 34 } },
+    "backgrounds": { "base": { "hex": "#FFFFFF" }, "section": { "hex": "#EBEBEB" }, "dark": { "hex": "#141515" } },
+    "top_text_colors": [{"hex":"#111211","count":524},{"hex":"#000000","count":114},{"hex":"#0000EE","count":34},{"hex":"#141515","count":28},{"hex":"#882276","count":24},{"hex":"#FAFAFA","count":24}],
+    "top_bg_colors": [{"hex":"#EBEBEB","count":110},{"hex":"#888888","count":15},{"hex":"#9B2687","count":8},{"hex":"#FAFAFA","count":7}],
+    "top_link_colors": [{"hex":"#0000EE","count":34},{"hex":"#FAFAFA","count":24},{"hex":"#882276","count":18}]
+  },
+  "fonts": {
+    "primary": { "family": "Open Sans", "fallbacks": ["sans-serif"], "weights": { "regular": 400, "bold": 600 }, "usage_count": 783, "is_generic": false },
+    "secondary": { "family": "Signika Negative", "usage_count": 1 },
+    "type_scale": {
+      "section_headings": { "size": "16px", "weight": 600, "family": "Open Sans", "line_height": "25.6px", "color": "#141515" },
+      "article_title_hero": { "size": "41px", "weight": 700, "family": "Signika Negative", "line_height": "49.2px", "color": "#141515", "letter_spacing": "-0.41px" },
+      "article_title_card": { "source": "fallback" },
+      "article_lead": { "source": "fallback" },
+      "article_body": { "size": "16px", "weight": 600, "family": "Open Sans", "line_height": "25.6px", "color": "#111211" },
+      "navigation": { "size": "13px", "weight": 600, "family": "Open Sans", "line_height": "20.8px", "color": "#FFFFFF", "text_transform": "uppercase" },
+      "buttons": { "size": "13px", "weight": 600, "family": "Open Sans", "line_height": "20.8px", "color": "#FFFFFF", "text_transform": "uppercase" },
+      "meta_text": { "size": "16px", "weight": 400, "family": "Open Sans", "line_height": "18.4px", "color": "#111211" }
+    },
+    "all_fonts": [{"family":"Open Sans","count":783,"weights":[100,400,600,700]},{"family":"Signika Negative","count":1,"weights":[700]}]
+  },
+  "photo_style": { "thumbnail_format": { "aspect_ratio": "3:2", "border_radius": "0px" } },
+  "buttons": { "primary": { "background_color": null, "text_color": "#FFFFFF", "border_radius": "0px", "padding": "1px 6px", "font_size": "13px", "font_weight": 600, "text_transform": "uppercase" } },
+  "header": { "background_color": "#9B2687", "is_dark": true },
+  "extraction_quality": { "extracted_token_count": 16, "fallback_token_count": 2, "total_tokens": 18, "extraction_ratio": 0.89 },
+  "metadata": { "analysis_date": "2026-07-30", "source_url": "https://www.glasgowlive.co.uk/news/glasgow-news/glasgow-central-low-level-services-34328324" }
+}
