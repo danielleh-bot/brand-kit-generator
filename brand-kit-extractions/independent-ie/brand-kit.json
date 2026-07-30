@@ -1,0 +1,522 @@
+{
+  "brand": {
+    "name": "Irish Independent",
+    "tagline": "",
+    "website": "https://www.independent.ie",
+    "description": "Query: Dear Mary Frances, my father has received a letter from a solicitor acting on behalf of a new landowner who has purchased lands surrounding his property.",
+    "language": "en-IE"
+  },
+  "logos": {
+    "primary": {},
+    "variants": [],
+    "brand_mark": null,
+    "favicon_url": "https://www.independent.ie/favicon.svg"
+  },
+  "colors": {
+    "primary": {
+      "name": "Primary Accent",
+      "hex": "#04847F",
+      "rgb": "rgb(4, 132, 127) rgb(128, 128, 128) rgb(128, 128, 128)",
+      "usage": [
+        "Separators"
+      ],
+      "source": "extracted"
+    },
+    "text": {
+      "primary": {
+        "name": "Primary Text",
+        "hex": "#000000",
+        "rgb": "rgb(0, 0, 0)",
+        "usage": [
+          "Links",
+          "Button text",
+          "Navigation",
+          "Footer background"
+        ],
+        "source": "extracted"
+      },
+      "secondary": {
+        "name": "Secondary Text",
+        "hex": "#020202",
+        "rgb": "rgb(2, 2, 2)",
+        "usage": [
+          "Header background",
+          "Page background",
+          "Section background"
+        ],
+        "source": "extracted"
+      },
+      "tertiary": {
+        "name": "Tertiary Text",
+        "hex": "#666666",
+        "rgb": "rgb(102, 102, 102) rgb(128, 128, 128) rgb(128, 128, 128)",
+        "usage": [
+          "Separators"
+        ],
+        "source": "extracted"
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "rgb": "rgb(255, 255, 255)",
+        "usage": [
+          "Links",
+          "Buttons",
+          "Button text",
+          "Navigation",
+          "Timestamps",
+          "Section background",
+          "Separators",
+          "Tags & badges",
+          "Article deck"
+        ],
+        "source": "extracted"
+      },
+      "section": {
+        "name": "Off-White",
+        "hex": "#F7F9FC",
+        "rgb": "rgb(247, 249, 252)",
+        "usage": [
+          "Section backgrounds"
+        ],
+        "source": "fallback"
+      },
+      "secondary": {
+        "name": "Secondary",
+        "hex": "#E6E6E6",
+        "rgb": "rgb(230, 230, 230)",
+        "usage": [
+          "Body text"
+        ],
+        "source": "extracted"
+      },
+      "dark": {
+        "name": "Dark Background",
+        "hex": "#000000",
+        "rgb": "rgb(0, 0, 0)",
+        "usage": [
+          "Links",
+          "Button text",
+          "Navigation",
+          "Footer background"
+        ],
+        "source": "extracted"
+      }
+    },
+    "accents": {},
+    "secondary": {
+      "name": "Secondary Accent",
+      "hex": "#D2DB5C",
+      "rgb": "rgb(210, 219, 92)",
+      "usage": [
+        "Buttons"
+      ],
+      "source": "extracted"
+    },
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#047D79",
+        "name": "Darker primary",
+        "usage": "Hover states",
+        "source": "derived"
+      },
+      "darken_10": {
+        "hex": "#047470",
+        "name": "Deepest primary",
+        "usage": "Active/pressed states",
+        "source": "derived"
+      }
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Nuacht Sans WEB",
+      "fallbacks": [
+        "system-ui"
+      ],
+      "weights": {
+        "bold": 700,
+        "regular": 700
+      },
+      "usage": "Body text, Buttons, Meta text",
+      "source": "extracted",
+      "is_generic": false
+    },
+    "secondary": {
+      "family": "Times",
+      "weight": 600,
+      "style": "italic",
+      "usage": "Body text, Navigation, Buttons, Meta text",
+      "source": "extracted"
+    },
+    "tertiary": [
+      {
+        "family": "Nuacht Serif Text WEBX",
+        "usage": "Headlines, Body text",
+        "source": "extracted"
+      }
+    ],
+    "type_scale": {
+      "section_headings": {
+        "size": "32px",
+        "weight": 700,
+        "family": "Nuacht Serif Text WEBX",
+        "line_height": "36.8px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "h2, .section-title, [class*=\"section-head\"]"
+      },
+      "article_title_hero": {
+        "size": "34px",
+        "weight": 700,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": "h1, .headline, [class*=\"headline\"]"
+      },
+      "article_title_card": {
+        "size": "22px",
+        "weight": 700,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": ".card h3, .card-title, [class*=\"card\"] h3"
+      },
+      "article_lead": {
+        "size": "18px",
+        "weight": 700,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": ".lead, .deck, .article-lead, [class*=\"subtitle\"]"
+      },
+      "article_body": {
+        "size": "18px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": "article p, .article-body p, .story-body p, .text-content p, [class*=\"article-content\"] p, [class*=\"story-content\"] p"
+      },
+      "navigation": {
+        "size": "14px",
+        "weight": 400,
+        "family": "system-ui",
+        "line_height": "16.1px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "nav a, [role=\"navigation\"] a"
+      },
+      "utility_bar": {
+        "size": "13px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": ".utility a, .topbar a, [class*=\"utility\"] a"
+      },
+      "category_pills": {
+        "size": "14px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": "[class*=\"pill\"], [class*=\"chip\"], [class*=\"tag\"], [class*=\"filter\"] a"
+      },
+      "buttons": {
+        "size": "14px",
+        "weight": 500,
+        "family": "Nuacht Sans WEB",
+        "line_height": "16px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "button, .btn, [role=\"button\"]"
+      },
+      "meta_text": {
+        "size": "14px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "line_height": "16.1px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "time, .date, [class*=\"meta\"], [class*=\"timestamp\"], figcaption"
+      }
+    }
+  },
+  "brand_voice": {
+    "language": "en-IE",
+    "headline_style": {
+      "format": "sentence case",
+      "case": "sentence case"
+    },
+    "content_labels": {
+      "opinion": true,
+      "live": true,
+      "breaking": true,
+      "video": true,
+      "gallery": true,
+      "analysis": true,
+      "sponsored": true
+    },
+    "content_distinction": {
+      "news": {
+        "typography": "Nuacht Sans WEB Bold, sans-serif",
+        "description": "Factual, objective reporting"
+      },
+      "opinion": {
+        "label": "Opinion/Editorial",
+        "typography": "Times italic",
+        "description": "Editorial content with distinct serif-italic styling"
+      }
+    }
+  },
+  "photo_style": {
+    "thumbnail_format": {
+      "aspect_ratio": "4:3",
+      "border_radius": "0px"
+    },
+    "video_thumbnails": {
+      "indicator": "Play button icon",
+      "indicator_color": "#FFFFFF"
+    },
+    "author_photos": {
+      "shape": null,
+      "size": null
+    }
+  },
+  "graphics": {
+    "style": "Minimal — relies on photography and typography",
+    "elements": [
+      {
+        "name": "Most Read",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Irish News",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Westmeath",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Irish Business",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Latest Podcasts",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Money Talks",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "The Big Tech Show",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Editor's choice",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "World Cup 2026",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Dublin",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Books",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Comment",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Farming",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Seachtain",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "The Indo Daily",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Real Health",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Latest Video",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Premier League",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Courts",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Waterford",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Kerry",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Search for articles…",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Newspaper Archives",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Light",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Dark",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Auto",
+        "description": "Badge/label element",
+        "background_color": "#00605C",
+        "text_color": "#5CAFAA"
+      }
+    ]
+  },
+  "icons": {
+    "style": "SVG-based",
+    "count_detected": 77,
+    "social_media_icons": {
+      "platforms": [
+        "Facebook",
+        "Instagram",
+        "X (Twitter)",
+        "YouTube"
+      ],
+      "placement": "Footer"
+    }
+  },
+  "layout_patterns": {
+    "grid": "Two-column layout (main content + sidebar)",
+    "header": {
+      "layers": [],
+      "background_color": "#000000",
+      "is_dark": true
+    },
+    "content_cards": {},
+    "footer": {
+      "sections": []
+    }
+  },
+  "spacing": {
+    "card_border_radius": "0px",
+    "container_max_width": "1312px",
+    "grid_gap": "16px"
+  },
+  "buttons": {
+    "primary": {
+      "background_color": null,
+      "text_color": null,
+      "border_radius": "6px",
+      "padding": "10px 18px",
+      "font_size": "14px",
+      "font_weight": 700,
+      "text_transform": null,
+      "letter_spacing": null,
+      "source": "fallback"
+    }
+  },
+  "extraction_quality": {
+    "extracted_token_count": 15,
+    "fallback_token_count": 7,
+    "total_tokens": 22,
+    "extraction_ratio": 0.68,
+    "fallback_tokens": [
+      "colors.backgrounds.section",
+      "fonts.type_scale.article_title_hero",
+      "fonts.type_scale.article_title_card",
+      "fonts.type_scale.article_lead",
+      "fonts.type_scale.article_body",
+      "fonts.type_scale.utility_bar",
+      "fonts.type_scale.category_pills"
+    ]
+  },
+  "metadata": {
+    "analysis_date": "2026-07-30",
+    "source_url": "https://www.independent.ie/farming/weve-used-this-laneway-for-60-years.-can-a-new-landowner-put-up-a-gate/a/158755617.html",
+    "analysis_method": "Automated web crawling with Puppeteer computed style extraction",
+    "extraction_quality": {
+      "extracted_token_count": 15,
+      "fallback_token_count": 7,
+      "total_tokens": 22,
+      "extraction_ratio": 0.68,
+      "fallback_tokens": [
+        "colors.backgrounds.section",
+        "fonts.type_scale.article_title_hero",
+        "fonts.type_scale.article_title_card",
+        "fonts.type_scale.article_lead",
+        "fonts.type_scale.article_body",
+        "fonts.type_scale.utility_bar",
+        "fonts.type_scale.category_pills"
+      ]
+    }
+  }
+}
