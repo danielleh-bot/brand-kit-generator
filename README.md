@@ -57,6 +57,19 @@ Output in `./output/example/`:
 --list              List previously generated publishers
 ```
 
+## Publisher-native feed prototypes (agent skill)
+
+Hand-built, publisher-tailored standalone HTML mocks (nav + article + native
+feed) are produced via the Cursor skill
+[`.cursor/skills/publisher-brand-kit-prototype/`](.cursor/skills/publisher-brand-kit-prototype/SKILL.md).
+
+**Inputs:** brand-kit JSON + publisher article URL.  
+**Output:** `output/<slug>/mobile-prototype.html` (tailor-fit per publisher —
+never a font/color reskin of the previous one).
+
+Invoke with `/publisher-brand-kit-prototype` or by pasting a kit + URL. See
+the skill’s phases, token matrix, anti-reskin rules, and QA script.
+
 ## Project Structure
 
 ```
@@ -66,6 +79,8 @@ Output in `./output/example/`:
 │   ├── index.html
 │   ├── wizard.css
 │   └── wizard.js
+├── .cursor/skills/
+│   └── publisher-brand-kit-prototype/  Agent skill: kit JSON + URL → native feed HTML
 ├── lib/
 │   ├── crawler.js              Puppeteer-based page crawler (7 extractors)
 │   ├── defaults.js             Generic Taboola baseline for "before" comparison
