@@ -70,6 +70,11 @@ discovers:
 **Output:** `output/<slug>/mobile-prototype.html` (tailor-fit per publisher —
 never a font/color reskin of the previous one).
 
+Uploaded crawl kits used for the cross-publisher feed mapping live under
+[`brand-kit-extractions/`](brand-kit-extractions/) (BelTel, Crime World,
+Independent.ie, Goal, Glasgow Live, OK!). Mapping table:
+[`feed-field-mapping.md`](.claude/skills/publisher-brand-kit-prototype/references/feed-field-mapping.md).
+
 **Invoke**
 - Claude Code: `/publisher-brand-kit-prototype` (or paste kit + URL)
 - Cursor: `/publisher-brand-kit-prototype` or paste kit + URL (loads `.claude/skills/`)
