@@ -9,9 +9,14 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer-core');
 
-const { extractBrandKit, extractContent, extractNavigation, extractRelatedArticles } = require('./lib/crawler');
+const {
+  extractBrandKit, extractContent, extractNavigation, extractRelatedArticles,
+  extractResponsiveBreakpoints, installBehaviorObservers, extractInteractionBehaviors,
+} = require('./lib/crawler');
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
+const { enrichBrandKit } = require('./lib/enrich');
+const { buildLoaderArtifacts } = require('./lib/loader-build');
 const { generateFeedContent } = require('./lib/feed-content');
 const { brandKitToCss } = require('./lib/css-export');
 const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
@@ -30,6 +35,12 @@ program
   .option('--brand-kit <path>', 'Use existing brand-kit.json instead of crawling')
   .option('--chrome <path>', 'Path to Chrome/Chromium executable')
   .option('--accept-low-quality', 'Allow generating output from a brand kit where most tokens are fallbacks (default: refuse)')
+  .option('--no-behaviors', 'Skip interaction-behavior extraction (hover/focus probes, keyframes, scroll reveal)')
+  .option('--no-enrich', 'Skip Layer-2 LLM enrichment (brand voice, colour names, descriptions)')
+  .option('--re-enrich', 'Run enrichment against a kit loaded via --brand-kit (resume path)')
+  .option('--enrich-model <name>', 'Override the enrichment model (default: claude-sonnet-4-6)')
+  .option('--no-loader', 'Skip Layer-3 loader artifacts (loader.js, loader.css, feed-mapping-report.html)')
+  .option('--validate-render', 'Run static render checks on the generated loader CSS')
   .option('--list', 'List previously generated publishers')
   .parse();
 
@@ -108,6 +119,7 @@ async function main() {
   let content = {};
   let navigation = {};
   let relatedArticles = [];
+  let pageHtml = '';
 
   // Use existing brand kit or crawl
   if (opts.brandKit) {
@@ -162,6 +174,13 @@ async function main() {
       await page.setViewport({ width: 1440, height: 900 });
       await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
 
+      // Behavior observers MUST be installed before goto() — they capture
+      // Web-Animations calls and IntersectionObserver registrations that
+      // fire during page load.
+      if (opts.behaviors !== false) {
+        await installBehaviorObservers(page);
+      }
+
       console.log('   Navigating to page...');
       await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
@@ -171,6 +190,16 @@ async function main() {
       console.log('   Extracting brand kit...');
       brandKit = await extractBrandKit(page, url);
       console.log('   ✓ Brand kit extracted');
+
+      if (opts.behaviors !== false) {
+        console.log('   Observing interactions (hover/focus/scroll)...');
+        brandKit.behaviors = await extractInteractionBehaviors(page);
+        console.log(`   ✓ ${brandKit.behaviors.transitions.length} transitions, ${brandKit.behaviors.hover_states.length} hover states, ${brandKit.behaviors.keyframes.length} keyframes`);
+      }
+
+      console.log('   Probing responsive breakpoints...');
+      brandKit.layout_patterns.breakpoints = await extractResponsiveBreakpoints(page);
+      console.log(`   ✓ Breakpoints (${brandKit.layout_patterns.breakpoints.source})`);
 
       console.log('   Extracting article content...');
       content = await extractContent(page);
@@ -183,9 +212,38 @@ async function main() {
       console.log('   Extracting related articles for feed...');
       relatedArticles = await extractRelatedArticles(page, url);
       console.log(`   ✓ ${relatedArticles.length} related articles extracted\n`);
+
+      // Capture a copy of the rendered HTML for Layer-2 enrichment context.
+      try { pageHtml = await page.content(); } catch { pageHtml = ''; }
     } finally {
       await browser.close();
     }
+  }
+
+  // ---- Layer 2: LLM enrichment ----
+  // Runs after the browser is closed. Skips silently with no API key, on
+  // --no-enrich, or (for the --brand-kit resume path) unless --re-enrich is set.
+  const wantEnrich = opts.enrich !== false && (!opts.brandKit || opts.reEnrich);
+  if (wantEnrich) {
+    console.log('🧠 Enriching with AI (brand voice, colour names, descriptions)...');
+    const { metadata: enrichMeta } = await enrichBrandKit(brandKit, {
+      url,
+      pageHtml,
+      options: { noEnrich: false, model: opts.enrichModel },
+    });
+    const tag = {
+      enriched: `✓ enriched (+${(enrichMeta.fields_added || []).length} fields, ${(enrichMeta.fields_refined || []).length} refined, ${enrichMeta.latency_ms}ms)`,
+      partial: '⚠ partial enrichment',
+      skipped_no_key: '○ skipped — no ANTHROPIC_API_KEY set',
+      skipped_opt_out: '○ skipped (opt-out)',
+      failed: `✗ failed — ${enrichMeta.error || 'unknown'} (crawler output kept)`,
+    }[enrichMeta.status] || enrichMeta.status;
+    console.log(`   ${tag}\n`);
+  } else if (opts.brandKit && !opts.reEnrich) {
+    // resume without re-enrich: leave the loaded kit untouched
+  } else {
+    brandKit.metadata = brandKit.metadata || {};
+    brandKit.metadata.enrichment = { status: 'skipped_opt_out', model: opts.enrichModel || 'claude-sonnet-4-6' };
   }
 
   // Loud warning when extraction quality is poor — surfaces silent failures the
@@ -217,6 +275,19 @@ async function main() {
   fs.writeFileSync(brandKitCssPath, brandKitToCss(brandKit));
   console.log(`🎨 Brand kit CSS saved: ${brandKitCssPath}`);
 
+  // ---- Layer 3: token→feed mapping + generated loader ----
+  let mappingSummary = null;
+  if (opts.loader !== false) {
+    console.log('🧩 Building feed loader + mapping report...');
+    const built = buildLoaderArtifacts(brandKit, { slug, outputDir, validateRender: opts.validateRender });
+    mappingSummary = built.summary;
+    console.log(`   ✓ ${built.summary.applied_count} applied, ${built.summary.gap_count} gaps, ${built.summary.safe_ignored_count} safe-ignored (${built.summary.css_bytes}B CSS)`);
+    if (built.validation) {
+      console.log(`   ${built.validation.ok ? '✓ render checks passed' : '⚠ render issues: ' + built.validation.issues.join('; ')}`);
+    }
+    console.log('   → loader.js, loader.css, feed-mapping-report.html');
+  }
+
   // Resolve fonts
   const resolvedFonts = resolveAllFonts(brandKit);
   const googleFontsUrl = buildGoogleFontsUrl(brandKit);
@@ -226,8 +297,8 @@ async function main() {
   // related content.
   const feedContent = generateFeedContent(brandKit, navigation, { content, relatedArticles });
 
-  // Compute analysis
-  const analysis = computeAnalysis(brandKit, defaults);
+  // Compute analysis (threads Layer-3 mapping confidence when the loader ran)
+  const analysis = computeAnalysis(brandKit, defaults, { mappingSummary });
 
   // Initialize template engine
   engine.init();

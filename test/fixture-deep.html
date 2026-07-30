@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deep Extraction Fixture | TestPub</title>
+<meta property="og:site_name" content="TestPub">
+<meta property="og:description" content="A fixture page for deep-extraction smoke tests">
+<meta name="theme-color" content="#E20074">
+<style>
+:root {
+  --brand-magenta: #E20074;
+  --brand-deep-blue: #003366;
+  --spacing-base: 8px;
+  --spacing-small: 12px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+  --gap-grid: 20px;
+  --radius-card: 5px;
+  --shadow-natural: 0 2px 8px rgba(0,0,0,0.12);
+  --duration-fast: 120ms;
+}
+body { margin: 0; font-family: Arial, sans-serif; color: #1A1A2E; background: #FFFFFF; }
+header { background: #003366; }
+header .utility { height: 32px; background: #00254d; color: #fff; font-size: 13px; }
+header .main-bar { height: 64px; display: flex; align-items: center; }
+header .accent-rule { height: 3px; background: #E20074; }
+h1 { font-size: 34px; color: #111118; }
+h2 { font-size: 26px; }
+h3 { font-size: 20px; }
+p { font-size: 17px; color: #4A4A5A; }
+figcaption { font-size: 13px; color: #8A8A9A; }
+a { color: #E20074; transition: color 160ms ease-out, text-decoration-color 160ms ease-out; }
+a:hover { color: #B8005D; text-decoration: underline; }
+.card { border-radius: 5px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); transition: box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1); background: #fff; padding: 16px; width: 300px; }
+.card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.18); transform: translateY(-2px); }
+.btn-primary { background: #E20074; color: #fff; border: none; border-radius: 9999px; padding: 10px 22px; font-size: 15px; font-weight: 700; }
+.btn-outline { background: #fff; color: #003366; border: 2px solid #003366; border-radius: 9999px; padding: 10px 22px; }
+.btn-soft { background: #7BC9A4; color: #0B3D2C; border: none; border-radius: 9999px; padding: 10px 22px; }
+.pill { border-radius: 9999px; background: #F0F0F4; padding: 3px 12px; font-size: 12px; }
+.divider { border-top: 1px solid #EBEBEB; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(16,16,16,0.65); display: none; }
+.badge-live { background: #D7000F; color: #fff; padding: 2px 8px; font-size: 11px; animation: pulse 1200ms ease-in-out infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.55; } 100% { opacity: 1; } }
+section.show-mornings { background: #F2730A; min-height: 120px; padding: 24px; }
+section.show-sixty { background: #8C1515; min-height: 120px; padding: 24px; color: #fff; }
+main { max-width: 1200px; margin: 0 auto; }
+.narrow-col { max-width: 720px; }
+aside h3 { font-size: 16px; }
+.byline { font-size: 14px; color: #6A6A7A; }
+.kicker { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #E20074; }
+footer { background: #111118; color: #ddd; padding: 32px; }
+footer a { color: #bbb; font-size: 13px; }
+@media (max-width: 1024px) { main { max-width: 96vw; } }
+@media (max-width: 768px) { .card { width: 100%; } }
+@media (max-width: 480px) { h1 { font-size: 26px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="utility">Utility strip</div>
+  <div class="main-bar">
+    <a href="/" class="logo-link"><svg width="120" height="36" viewBox="0 0 120 36" aria-label="TestPub logo"><rect width="36" height="36" fill="#E20074"/><text x="44" y="24" fill="#003366" font-size="18">TestPub</text></svg></a>
+    <nav><ul><li><a href="/news">News</a></li><li><a href="/sport">Sport</a></li><li><a href="/culture">Culture</a></li></ul></nav>
+    <button aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7" fill="none" stroke="#003366" stroke-width="2"/><line x1="15" y1="15" x2="21" y2="21" stroke="#003366" stroke-width="2"/></svg></button>
+    <button aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="#003366" stroke-width="2"/></svg></button>
+  </div>
+  <div class="accent-rule"></div>
+</header>
+<main>
+  <article class="narrow-col">
+    <div class="kicker">Politics</div>
+    <h1>Fixture headline for the deep extraction smoke test of the crawler</h1>
+    <p class="deck">A deck paragraph that summarizes the fixture article for testing purposes only.</p>
+    <div class="byline">By Fixture Author</div>
+    <time datetime="2026-06-01">June 1, 2026</time>
+    <figure>
+      <figcaption>A caption describing the missing hero image in this fixture.</figcaption>
+    </figure>
+    <p>First body paragraph with enough characters to be picked up by the paragraph extractor of the crawler module.</p>
+    <p>Second body paragraph, also long enough to be included in the extracted content for this fixture page.</p>
+    <span class="badge-live">LIVE</span>
+    <span class="pill">Analysis</span>
+    <hr>
+    <div class="divider"></div>
+    <button class="btn-primary">Subscribe now</button>
+    <button class="btn-outline">Sign in</button>
+    <button class="btn-soft">Try free</button>
+  </article>
+  <section class="show-mornings"><h2>Mornings Show</h2><div class="card"><h3>Card headline inside the mornings band section</h3><p>Card body text fixture.</p></div></section>
+  <section class="show-sixty"><h2>Sixty Minutes</h2><div class="card"><h3>Another card headline within the sixty band</h3><p>Card body text fixture two.</p></div></section>
+  <aside><h3>Right rail headline</h3><a class="more-link" href="/more">See all stories</a></aside>
+</main>
+<div class="modal-backdrop"></div>
+<footer>
+  <h3>Sections</h3>
+  <a href="/news">News</a> <a href="/sport">Sport</a>
+  <a href="https://facebook.com/testpub">Facebook</a>
+  <a href="https://x.com/testpub">X</a>
+  <svg width="100" height="30" viewBox="0 0 100 30" aria-label="TestPub footer logo"><rect width="30" height="30" fill="#fff"/></svg>
+</footer>
+<script>
+  // Fixture entry animation + IntersectionObserver for Phase 2 behavior capture.
+  document.addEventListener('DOMContentLoaded', () => {
+    const card = document.querySelector('.card');
+    if (card && card.animate) {
+      card.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 420, easing: 'ease-out' });
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('section').forEach(s => io.observe(s));
+  });
+</script>
+</body>
+</html>
