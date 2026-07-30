@@ -132,13 +132,17 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   height: 800px;
   background: var(--ok-bg);
   border-radius: 42px;
+  overflow: hidden; /* must clip rounded frame; scroll lives on .iphone-scroll */
+  position: relative;
+}
+.iphone-scroll {
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  position: relative;
   scrollbar-width: none;
 }
-.iphone-screen::-webkit-scrollbar { display: none; }
+.iphone-scroll::-webkit-scrollbar { display: none; }
 
 .status-bar {
   position: sticky;
@@ -177,6 +181,9 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
 
 .ok-page {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
   background: var(--ok-bg);
   position: relative;
   padding-bottom: 4px;
@@ -226,11 +233,18 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
 .ok-nav {
   background: var(--ok-primary);
   border-top: 1px solid rgba(255,255,255,0.18);
-  overflow-x: auto;
-  scrollbar-width: none;
   display: flex;
-  gap: 18px;
-  padding: 0 var(--ok-pad) 10px;
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  padding: 0 16px 10px;
+  scroll-padding-inline: 16px;
 }
 .ok-nav::-webkit-scrollbar { display: none; }
 .ok-nav a {
@@ -244,6 +258,9 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   border-bottom: 2px solid transparent;
   white-space: nowrap;
 }
+.ok-nav a:last-child {
+  margin-right: 8px;
+}
 .ok-nav a.is-active,
 .ok-nav a:hover {
   border-bottom-color: #fff;
@@ -252,9 +269,16 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
 .ok-topics {
   display: flex;
   gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 10px var(--ok-pad);
+  overscroll-behavior-x: contain;
+  padding: 10px 16px;
+  scroll-padding-inline: 16px;
   background: var(--ok-bg-subtle);
   border-bottom: 1px solid #D4D5D5;
 }
@@ -270,6 +294,9 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   background: #fff;
   color: var(--ok-text-default);
   border-radius: 2px;
+}
+.ok-chip:last-child {
+  margin-right: 8px;
 }
 .ok-chip.is-active {
   background: var(--ok-tv);
@@ -632,6 +659,7 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   <span class="iphone-frame__btn iphone-frame__btn--power" aria-hidden="true"></span>
   <div class="iphone-island" aria-hidden="true"></div>
   <div class="iphone-screen">
+    <div class="iphone-scroll">
     <div class="status-bar">
       <span>9:41</span>
       <div class="status-bar__icons">
@@ -669,9 +697,6 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
     <a class="is-active" href="https://www.ok.co.uk/tv/">TV</a>
     <a href="https://www.ok.co.uk/celebrity-pictures/">Pictures</a>
     <a href="https://www.ok.co.uk/lifestyle/">Lifestyle</a>
-    <a href="https://www.ok.co.uk/latest/fashion">Fashion</a>
-    <a href="https://www.ok.co.uk/latest/beauty">Beauty</a>
-    <a href="https://www.ok.co.uk/latest/celebrity-weddings">Weddings</a>
   </nav>
 
   <div class="ok-topics" aria-label="TV topics">
@@ -874,6 +899,7 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
 </div>
     <div class="home-indicator" aria-hidden="true">
       <div class="home-indicator__bar"></div>
+    </div>
     </div>
   </div>
 </div>
