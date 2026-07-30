@@ -1,0 +1,621 @@
+{
+  "brand": {
+    "name": "OK! Magazine",
+    "website": "https://www.ok.co.uk",
+    "language": "en",
+    "direction": "ltr"
+  },
+  "logos": {
+    "primary": {
+      "type": "svg",
+      "text": "OK!",
+      "url": "https://www.ok.co.uk/nav-web-static/main-9ec427153cd0034fbc97a0d45a42d278b1644ac0/public/assets/ok/logos/masthead-ok-default.svg",
+      "treatment": "White OK! wordmark on red (#BE1F24) masthead; SVG asset includes #C30000 plate which is logo art, header chrome uses #BE1F24",
+      "source": "live-observed"
+    },
+    "favicon_url": "https://www.ok.co.uk/nav-web-static/main-9ec427153cd0034fbc97a0d45a42d278b1644ac0/public/assets/ok/favicon.ico"
+  },
+  "colors": {
+    "primary": {
+      "hex": "#BE1F24",
+      "source": "extracted",
+      "usage": [
+        "masthead",
+        "cta",
+        "active_nav",
+        "section_labels",
+        "links"
+      ]
+    },
+    "text": {
+      "primary": {
+        "hex": "#111211",
+        "count": 608
+      },
+      "secondary": {
+        "hex": "#5F6263",
+        "source": "live-observed",
+        "note": "color-sem-text-neutral-subdue"
+      },
+      "tertiary": {
+        "hex": "#141515",
+        "count": 38
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "hex": "#FFFFFF"
+      },
+      "section": {
+        "hex": "#ECECEC",
+        "source": "live-observed",
+        "note": "color-sem-surface-neutral-subdue (was #EBEBEB)"
+      },
+      "dark": {
+        "hex": "#141515"
+      },
+      "subtle": {
+        "hex": "#FAFAFA",
+        "source": "live-observed"
+      }
+    },
+    "top_text_colors": [
+      {
+        "hex": "#111211",
+        "count": 608
+      },
+      {
+        "hex": "#000000",
+        "count": 117
+      },
+      {
+        "hex": "#141515",
+        "count": 38
+      },
+      {
+        "hex": "#FAFAFA",
+        "count": 38
+      },
+      {
+        "hex": "#0000EE",
+        "count": 30
+      },
+      {
+        "hex": "#BE1F24",
+        "count": 27
+      }
+    ],
+    "top_bg_colors": [
+      {
+        "hex": "#EBEBEB",
+        "count": 110
+      },
+      {
+        "hex": "#888888",
+        "count": 16
+      },
+      {
+        "hex": "#BE1F24",
+        "count": 13
+      },
+      {
+        "hex": "#FAFAFA",
+        "count": 8
+      }
+    ],
+    "top_link_colors": [
+      {
+        "hex": "#FAFAFA",
+        "count": 38
+      },
+      {
+        "hex": "#0000EE",
+        "count": 30
+      },
+      {
+        "hex": "#BE1F24",
+        "count": 21
+      }
+    ],
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#9A191D",
+        "source": "live-observed",
+        "note": "color-ref-primary-700 / surface-primary-hovered"
+      },
+      "darken_10": {
+        "hex": "#6B1114",
+        "source": "live-observed",
+        "note": "color-ref-primary-800 / surface-primary-pressed"
+      },
+      "lighten": {
+        "hex": "#F4D9DA",
+        "source": "live-observed"
+      }
+    },
+    "secondary": {
+      "hex": "#C9AD00",
+      "source": "live-observed",
+      "note": "OK secondary gold from design tokens (color-ref-secondary-400)"
+    },
+    "section_accents": {
+      "tv": {
+        "hex": "#E605BA",
+        "source": "live-observed",
+        "note": "color-sem-text-tv-default"
+      },
+      "celebrity": {
+        "hex": "#BE1F24",
+        "source": "live-observed"
+      },
+      "royals": {
+        "hex": "#A326DF",
+        "source": "live-observed",
+        "note": "showbiz purple used for royals/showbiz chips"
+      },
+      "lifestyle": {
+        "hex": "#2FC42B",
+        "source": "live-observed"
+      }
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Open Sans",
+      "fallbacks": [
+        "sans-serif"
+      ],
+      "weights": {
+        "regular": 400,
+        "bold": 600
+      },
+      "usage_count": 909,
+      "is_generic": false
+    },
+    "secondary": {
+      "family": "Signika Negative",
+      "google_equivalent": "Signika Negative",
+      "usage_count": 1,
+      "source": "extracted",
+      "live_token_family": "Signika",
+      "note": "Live design tokens list Signika; kit extracted Signika Negative. Prototype loads Signika Negative from Google Fonts."
+    },
+    "type_scale": {
+      "section_headings": {
+        "size": "16px",
+        "weight": 600,
+        "family": "Open Sans",
+        "line_height": "25.6px",
+        "color": "#141515"
+      },
+      "article_title_hero": {
+        "size": "41px",
+        "weight": 700,
+        "family": "Signika Negative",
+        "line_height": "49.2px",
+        "color": "#141515",
+        "letter_spacing": "-0.41px"
+      },
+      "article_title_card": {
+        "size": "16px",
+        "weight": 700,
+        "family": "Signika Negative",
+        "line_height": "120%",
+        "color": "#141515",
+        "source": "live-observed",
+        "note": "typography-teaser-heading-primary-small"
+      },
+      "article_lead": {
+        "size": "18px",
+        "weight": 400,
+        "family": "Open Sans",
+        "line_height": "140%",
+        "color": "#141515",
+        "source": "live-observed"
+      },
+      "article_body": {
+        "size": "16px",
+        "weight": 400,
+        "family": "Open Sans",
+        "line_height": "160%",
+        "color": "#111211",
+        "source": "live-observed",
+        "note": "Corrected from extracted weight 600 which matched bold UI chrome, not body copy"
+      },
+      "navigation": {
+        "size": "13px",
+        "weight": 600,
+        "family": "Open Sans",
+        "color": "#FFFFFF",
+        "text_transform": "uppercase"
+      },
+      "buttons": {
+        "size": "16px",
+        "weight": 600,
+        "family": "Open Sans",
+        "color": "#FFFFFF",
+        "text_transform": "none",
+        "source": "live-observed",
+        "note": "typography-sem-cta-label; corrected kit uppercase/13px"
+      },
+      "meta_text": {
+        "size": "16px",
+        "weight": 400,
+        "family": "Open Sans",
+        "line_height": "18.4px",
+        "color": "#111211"
+      },
+      "article_title_card_featured": {
+        "size": "26px",
+        "weight": 700,
+        "family": "Signika Negative",
+        "line_height": "120%",
+        "color": "#141515",
+        "source": "live-observed"
+      },
+      "category_pills": {
+        "size": "11px",
+        "weight": 700,
+        "family": "Open Sans",
+        "text_transform": "uppercase",
+        "letter_spacing": "0.06em",
+        "source": "live-observed"
+      }
+    },
+    "all_fonts": [
+      {
+        "family": "Open Sans",
+        "count": 909,
+        "weights": [
+          100,
+          400,
+          600,
+          700
+        ]
+      },
+      {
+        "family": "Signika Negative",
+        "count": 1,
+        "weights": [
+          700
+        ]
+      }
+    ]
+  },
+  "photo_style": {
+    "thumbnail_format": {
+      "aspect_ratio": "3:2",
+      "border_radius": "0px"
+    }
+  },
+  "buttons": {
+    "primary": {
+      "background_color": "#BE1F24",
+      "text_color": "#FFFFFF",
+      "border_radius": "32px",
+      "font_size": "16px",
+      "font_weight": 600,
+      "text_transform": "none",
+      "padding": "10px 16px",
+      "hover_background": "#9A191D",
+      "source": "live-observed",
+      "note": "CTA radius 32px from --border-radius-com-cta-radius; kit had 0px"
+    },
+    "secondary": {
+      "background_color": "transparent",
+      "text_color": "#9A191D",
+      "border": "1px solid #BE1F24",
+      "border_radius": "32px",
+      "font_size": "14px",
+      "font_weight": 600,
+      "source": "live-observed"
+    }
+  },
+  "header": {
+    "background_color": "#BE1F24",
+    "is_dark": true,
+    "accent_rule_color": "#BE1F24",
+    "layers": [
+      {
+        "name": "utility",
+        "items": [
+          "Horoscopes",
+          "Competitions",
+          "Newsletter Signup"
+        ]
+      },
+      {
+        "name": "masthead",
+        "logo": "white OK! wordmark SVG on red"
+      },
+      {
+        "name": "primary_nav",
+        "style": "uppercase white links, horizontal scroll"
+      },
+      {
+        "name": "topic_chips",
+        "style": "TV show / celebrity topic scroller under nav on article pages"
+      }
+    ],
+    "source": "live-observed"
+  },
+  "extraction_quality": {
+    "extracted_token_count": 16,
+    "fallback_token_count": 0,
+    "live_observed_additions": true,
+    "notes": "Original crawl was thin; prototype kit enriched with live-observed tokens before build."
+  },
+  "metadata": {
+    "analysis_date": "2026-07-30",
+    "source_url": "https://www.ok.co.uk/tv/love-island-finalist-reveals-sad-37458508",
+    "slug": "ok-magazine",
+    "enrichment": "Patched from live OK! page + Reach design tokens (s-v2.css) on 2026-07-30. Primary #BE1F24 confirmed; CTA radius corrected 0\u219232px; body weight corrected 600\u2192400; nav/topics/taboola/related filled from live DOM.",
+    "logo_plate_note": "Masthead SVG art uses #C30000 fill; chrome/header background uses semantic #BE1F24 from color-sem-surface-primary-default."
+  },
+  "layout_patterns": {
+    "header": {
+      "background_color": "#BE1F24",
+      "is_dark": true,
+      "accent_rule_color": "#BE1F24",
+      "layers": [
+        {
+          "name": "utility",
+          "items": [
+            "Horoscopes",
+            "Competitions",
+            "Newsletter Signup"
+          ]
+        },
+        {
+          "name": "masthead",
+          "logo": "white OK! wordmark SVG on red"
+        },
+        {
+          "name": "primary_nav",
+          "style": "uppercase white links, horizontal scroll"
+        },
+        {
+          "name": "topic_chips",
+          "style": "TV show / celebrity topic scroller under nav on article pages"
+        }
+      ],
+      "source": "live-observed"
+    },
+    "content_cards": {
+      "border_radius": "2px",
+      "border": "none",
+      "shadow": "none",
+      "padding": "12px",
+      "hover": {
+        "description": "Headline color shifts to primary-700 (#9A191D); no card lift or drop shadow",
+        "headline_color": "#9A191D",
+        "transform": "none",
+        "shadow": "none"
+      },
+      "source": "live-observed"
+    },
+    "grid": {
+      "mobile": "single-column",
+      "feed_mix": [
+        "featured_full",
+        "compact_horizontal",
+        "two_up",
+        "partner_strip"
+      ]
+    }
+  },
+  "spacing": {
+    "card_border_radius": "2px",
+    "card_gap": "0px",
+    "grid_gap": "8px",
+    "section_padding": "16px",
+    "container_max_width": "414px",
+    "source": "live-observed",
+    "note": "Reach/OK mobile teasers stack with hairline dividers (tight), not airy 16px gaps"
+  },
+  "navigation": {
+    "navLinks": [
+      {
+        "label": "Celebrity",
+        "href": "https://www.ok.co.uk/celebrity-news/"
+      },
+      {
+        "label": "Royals",
+        "href": "https://www.ok.co.uk/royal/"
+      },
+      {
+        "label": "TV",
+        "href": "https://www.ok.co.uk/tv/"
+      },
+      {
+        "label": "Pictures",
+        "href": "https://www.ok.co.uk/celebrity-pictures/"
+      },
+      {
+        "label": "Lifestyle",
+        "href": "https://www.ok.co.uk/lifestyle/"
+      },
+      {
+        "label": "Fashion",
+        "href": "https://www.ok.co.uk/latest/fashion"
+      },
+      {
+        "label": "Beauty",
+        "href": "https://www.ok.co.uk/latest/beauty"
+      },
+      {
+        "label": "Weddings",
+        "href": "https://www.ok.co.uk/latest/celebrity-weddings"
+      }
+    ],
+    "utilityLinks": [
+      {
+        "label": "Horoscopes",
+        "href": "https://www.ok.co.uk/horoscopes/"
+      },
+      {
+        "label": "Competitions",
+        "href": "https://www.ok.co.uk/competition/"
+      },
+      {
+        "label": "Newsletter",
+        "href": "https://www.ok.co.uk/newsletter-preference-centre/"
+      }
+    ],
+    "topicChips": [
+      "Love Island",
+      "EastEnders",
+      "Emmerdale",
+      "Coronation Street",
+      "Strictly Come Dancing",
+      "I'm A Celebrity"
+    ],
+    "source": "live-observed"
+  },
+  "brand_voice": {
+    "headline_style": {
+      "case": "sentence-ish celebrity",
+      "note": "OK headlines often mix title fragments with quotes; not strict Title Case"
+    },
+    "content_labels": {
+      "sections": [
+        "TV",
+        "Celebrity",
+        "Royals",
+        "Lifestyle"
+      ],
+      "sponsored": "Sponsored",
+      "partner": "Partner Stories",
+      "exclusive": "EXCLUSIVE"
+    },
+    "content_distinction": {
+      "organic": "OK! section kicker + Signika teaser heading",
+      "sponsored": "Sponsored pill + advertiser name + pill CTA",
+      "partner": "Partner Stories mid-article horizontal strip"
+    },
+    "source": "live-observed"
+  },
+  "icons": {
+    "style": "stroked monoline utility icons (search, menu, share)",
+    "social_media_icons": [
+      "facebook",
+      "x",
+      "whatsapp",
+      "instagram"
+    ],
+    "source": "live-observed"
+  },
+  "content": {
+    "headline": "Love Island finalist reveals sad Casa Amor reality fans don't realise",
+    "deck": "Love Island fans look forward to the Casa Amor twist every year, but it can be difficult for some Islanders",
+    "byline": "Kimberly Nhundu",
+    "date": "21 July 2026",
+    "category": "TV",
+    "topic": "Love Island",
+    "hero_image": "https://i2-prod.ok.co.uk/article37459016.ece/ALTERNATES/s1200d/0_Love-Island-TV-Show-Series-13-Episode-44-Mallorca-Spain-14-Jul-2026.jpg",
+    "hero_alt": "Julia Majchrzak on Love Island",
+    "source_url": "https://www.ok.co.uk/tv/love-island-finalist-reveals-sad-37458508",
+    "paragraphs": [
+      "The new arrivals must find a solid connection to secure a spot in the main villa, which often means breaking up long-standing couples. Just weeks after this year's dramatic Casa Amor, finalist Julia Majchrzak is opening up about the twist fans rarely see.",
+      "Fans at home instantly noticed that Julia was the only one trying to keep Martha in the villa out of solidarity, and it seems they were spot on.",
+      "She explained that Casa girls often stick together because they know how hard it is to walk into an established villa and find safety in each other.",
+      "Throughout their various tiffs in the house, the Casa girls stuck closely together. But Julia is the only one that has survived the evictions."
+    ]
+  },
+  "related_articles": [
+    {
+      "title": "EastEnders star sent 'red alert' death threats as BBC warned her 'don't go out'",
+      "url": "https://www.ok.co.uk/tv/eastenders-star-sent-red-alert-37494445",
+      "image": "https://i2-prod.mirror.co.uk/incoming/article37490629.ece/ALTERNATES/s1200/0_Eastenders-logo.jpg",
+      "section": "TV",
+      "description": "As Aunt Babe on BBC soap opera EastEnders, Annette Badland was the character that fans loved to hate - but one viewer lost sight of the line between fact and fiction"
+    },
+    {
+      "title": "Emmerdale Ross actor's love life including heartbreaking split from soap co-star",
+      "url": "https://www.ok.co.uk/tv/emmerdale-ross-actors-love-life-37492609",
+      "image": "https://i2-prod.mirror.co.uk/incoming/article35693197.ece/ALTERNATES/s1200/1_DSC04239a.jpg",
+      "section": "TV",
+      "description": "Away from the TV sets and soap, Emmerdale star Michael Parr\u2019s love life has often made the headlines."
+    },
+    {
+      "title": "Baffled Corrie fans distracted by David Platt's baby 'it doesn\u2019t add up'",
+      "url": "https://www.ok.co.uk/tv/baffled-coronation-street-fans-distracted-37492125",
+      "image": "https://i2-prod.dailystar.co.uk/incoming/article37492504.ece/ALTERNATES/s1200/0_Screenshot-2026-07-29-at-194255.png",
+      "section": "TV",
+      "description": "Coronation Street's David Platt brought his baby daughter Harper back from the hospital this week but it's fair to say fans were left distracted"
+    },
+    {
+      "title": "EastEnders fans slam 'unrealistic' detail as Ian Beale faces Gray in prison",
+      "url": "https://www.ok.co.uk/tv/eastenders-fans-slam-unrealistic-detail-37492433",
+      "image": "https://i2-prod.ok.co.uk/article37492431.ece/ALTERNATES/s1200d/1_568603.jpg",
+      "section": "TV",
+      "description": "EastEnders fans have been left baffled by an 'unrealistic' detail in recent episodes as Ian Beale's prison sentence sees him come face-to-face with Gray Atkins"
+    },
+    {
+      "title": "Strictly's Neil Jones and Love Island's Chyna Mills marry in Italy - see pics",
+      "url": "https://www.ok.co.uk/celebrity-news/strictlys-neil-jones-love-island-37448109",
+      "image": "https://i2-prod.ok.co.uk/article37448100.ece/ALTERNATES/s1200d/1_JS412826664.jpg",
+      "section": "Celebrity",
+      "description": "EXCLUSIVE: After marrying in the UK earlier this month, Strictly Come Dancing\u2019s Neil Jones and bride, Love Islander, Chyna Mills tied the knot again in a stunning Florence wedding"
+    },
+    {
+      "title": "Victoria Beckham 'humiliated' over 'cry for help' to son Brooklyn",
+      "url": "https://www.ok.co.uk/celebrity-news/victoria-beckham-humiliated-over-secret-37447646",
+      "image": "https://i2-prod.ok.co.uk/article37447630.ece/ALTERNATES/s1200d/2_JS412823142.jpg",
+      "section": "Celebrity",
+      "description": "EXCLUSIVE: Victoria Beckham was trolled after she failed to show any expression during England's match v Norway at the World Cup, but a source tells new magazine it\u2019s a cry for help"
+    },
+    {
+      "title": "Cher Lloyd sparks marriage split speculation saying wedding ring is 'in the bin'",
+      "url": "https://www.ok.co.uk/celebrity-news/cher-lloyd-sparks-marriage-split-37457603",
+      "image": "https://i2-prod.ok.co.uk/article30915243.ece/ALTERNATES/s1200d/4_Cher-Lloyd-shows-off-baby-bump-for-first-time-since-announcing-shes-pregnant-with-second-child.jpg",
+      "section": "Celebrity",
+      "description": "Former X Factor star Cher Lloyd has sparked speculation of a split from husband Craig Monk as she told fans that her wedding ring is 'in the bin'"
+    },
+    {
+      "title": "Inside supermodel Eva Herzigova's romantic Italian wedding to partner of 25 yrs",
+      "url": "https://www.ok.co.uk/celebrity-news/inside-supermodel-eva-herzigovas-romantic-37447402",
+      "image": "https://i2-prod.ok.co.uk/article37447314.ece/ALTERNATES/s1200d/1_JS412818571.jpg",
+      "section": "Celebrity",
+      "description": "Wonderbra model Eva Herzigova finally tied the knot with her partner of 25 years, Italian businessman, Gregorio Marsiaj, in an intimate Italian ceremony, accompanied by their three sons"
+    },
+    {
+      "title": "Hear'Say's Suzanne Shaw introduces baby grandson who brought 'love and light'",
+      "url": "https://www.ok.co.uk/celebrity-news/exclusive-suzanne-shaw-introduces-grandson-37313824",
+      "image": "https://i2-prod.ok.co.uk/article37337581.ece/ALTERNATES/s1200d/0_MBP_CHP_Suzanne-Shaw-introduces-grandson_1344JPG.jpg",
+      "section": "Celebrity",
+      "description": "EXCLUSIVE: Former HearSay singer Suzanne Shaw invites us into her Somerset home as she introduces the latest member of the family, baby Colton, and talks becoming a grandma at 44"
+    },
+    {
+      "title": "Kate 'grateful to be here' and 'strong enough' as she completes Three Peaks trek",
+      "url": "https://www.ok.co.uk/royal/princess-kate-grateful-here-strong-37361131",
+      "image": "https://i2-prod.ok.co.uk/article37359527.ece/ALTERNATES/s1200d/3_KATE.jpg",
+      "section": "Royals",
+      "description": "Princess Kate climbed the highest mountains in Scotland, England and Wales - Ben Nevis, Scafell Pike and Snowdon - within 24 hours to raise money for a cancer charity and 'explore life beyond diagnosis'"
+    }
+  ],
+  "taboola": {
+    "publisher": "tmg-network",
+    "loader": "//cdn.taboola.com/libtrc/tmg-network/loader.js",
+    "feed_label": "Recommended for you",
+    "sponsored_label": "Sponsored",
+    "modes": [
+      {
+        "mode": "thumbnails-feed",
+        "placement": "Below Article Thumbnails Responsive Feed",
+        "container": "taboola-feed"
+      },
+      {
+        "mode": "thumbnails-m",
+        "placement": "Mid Article Thumbnails",
+        "container": "taboola-mobile-mid-article-thumbnails-1"
+      },
+      {
+        "mode": "thumbnails-b",
+        "placement": "Perform Mid Article"
+      }
+    ],
+    "partner_label": "Partner Stories",
+    "source": "live-observed"
+  }
+}

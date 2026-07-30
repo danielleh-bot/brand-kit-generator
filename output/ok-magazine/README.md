@@ -1,0 +1,30 @@
+# OK! Magazine — mobile feed prototype
+
+## Source
+
+- Article: https://www.ok.co.uk/tv/love-island-finalist-reveals-sad-37458508
+- Brand kit: `brand-kit.json` (crawl + live-observed enrichment from OK! DOM and Reach `s-v2.css` tokens)
+
+## Composition one-liner
+
+**Bare 414px OK! red masthead + Love Island topic chips + mid-article Partner Stories strip + Recommended TrueNative mix (featured, compact stack, sponsored pill CTA, 2-up grid).**
+
+## How to open
+
+Open `mobile-prototype.html` in a browser (or serve the folder). Best viewed at ~414px width.
+
+```bash
+python3 -m http.server 8765 --directory output/ok-magazine
+# then visit http://localhost:8765/mobile-prototype.html
+```
+
+## Kit corrections applied from live site
+
+- CTA `border_radius` 0px → **32px** (Reach `--border-radius-com-cta-radius`)
+- Body weight 600 → **400**
+- Filled nav, topic chips, Taboola modes (`tmg-network` / `thumbnails-feed`), related articles, hover = headline → `#9A191D` (no card lift)
+- Section accents: TV `#E605BA`, Royals/showbiz `#A326DF`
+
+## Regenerate notes
+
+Hand-authored per `publisher-brand-kit-prototype` skill. Do not reskin another publisher prototype.

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Love Island finalist reveals sad Casa Amor reality fans don't realise - OK! Magazine</title>
+<link rel="icon" href="https://www.ok.co.uk/nav-web-static/main-9ec427153cd0034fbc97a0d45a42d278b1644ac0/public/assets/ok/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Fonts: Open Sans (primary) + Signika Negative (kit secondary; live tokens list Signika) -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Signika+Negative:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+/*
+  Composition Spec — OK! Magazine (ok-magazine)
+  ---------------------------------------------
+  Viewport: bare mobile max-width 414px (UK celeb magazine web, not device chrome).
+  Feed intent: TrueNative thumbnails-feed (tmg-network) + mid-article Partner Stories strip.
+  Card inventory:
+    1) Partner Stories horizontal scroller (mid-article)
+    2) Featured full-bleed organic teaser
+    3) Compact thumb-left stack with hairline dividers
+    4) Sponsored card + pill CTA
+    5) Two-up picture grid
+  Interaction: headline → #9A191D on hover; CTA bg → #9A191D; NO card translateY lift.
+  Anti-clone vs Fox/TWC/BI:
+    - Red OK! masthead + white wordmark SVG (not navy sports / weather / BI white)
+    - Mid-article Partner strip + Recommended mix (featured + compact + 2-up), not Premium 1x1/2x1/4x1
+    - Pill 32px CTAs + 0px photo radius + section kickers (TV magenta / Celebrity red / Royals purple)
+*/
+
+:root {
+  --ok-primary: #BE1F24;
+  --ok-primary-hover: #9A191D;
+  --ok-primary-pressed: #6B1114;
+  --ok-primary-subtle: #F4D9DA;
+  --ok-secondary: #C9AD00;
+  --ok-text: #111211;
+  --ok-text-default: #141515;
+  --ok-text-subdue: #5F6263;
+  --ok-text-inv: #FFFFFF;
+  --ok-bg: #FFFFFF;
+  --ok-bg-section: #ECECEC;
+  --ok-bg-subtle: #FAFAFA;
+  --ok-dark: #141515;
+  --ok-tv: #E605BA;
+  --ok-royals: #A326DF;
+  --ok-lifestyle: #2FC42B;
+  --ok-celebrity: #BE1F24;
+  --ok-font: "Open Sans", sans-serif;
+  --ok-display: "Signika Negative", "Signika", sans-serif;
+  --ok-radius-img: 0px;
+  --ok-radius-card: 2px;
+  --ok-radius-cta: 32px;
+  --ok-gap-tight: 0px;
+  --ok-gap-grid: 8px;
+  --ok-pad: 16px;
+  --ok-shell: 414px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--ok-font);
+  color: var(--ok-text);
+  background: #2a2a2a;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font: inherit; border: 0; background: none; cursor: pointer; }
+
+.ok-page {
+  max-width: var(--ok-shell);
+  margin: 0 auto;
+  background: var(--ok-bg);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ----- Header ----- */
+.ok-utility {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 6px var(--ok-pad);
+  background: var(--ok-dark);
+  color: #FAFAFA;
+  font-size: 11px;
+  font-weight: 600;
+}
+.ok-utility a:hover { color: var(--ok-primary-subtle); }
+
+.ok-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--ok-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px var(--ok-pad);
+  min-height: 56px;
+}
+.ok-masthead__menu,
+.ok-masthead__search {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.ok-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.ok-logo svg { height: 34px; width: auto; }
+
+.ok-nav {
+  background: var(--ok-primary);
+  border-top: 1px solid rgba(255,255,255,0.18);
+  overflow-x: auto;
+  scrollbar-width: none;
+  display: flex;
+  gap: 18px;
+  padding: 0 var(--ok-pad) 10px;
+}
+.ok-nav::-webkit-scrollbar { display: none; }
+.ok-nav a {
+  flex: 0 0 auto;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 6px 0 8px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.ok-nav a.is-active,
+.ok-nav a:hover {
+  border-bottom-color: #fff;
+}
+
+.ok-topics {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 10px var(--ok-pad);
+  background: var(--ok-bg-subtle);
+  border-bottom: 1px solid #D4D5D5;
+}
+.ok-topics::-webkit-scrollbar { display: none; }
+.ok-chip {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 6px 10px;
+  border: 1px solid #D4D5D5;
+  background: #fff;
+  color: var(--ok-text-default);
+  border-radius: 2px;
+}
+.ok-chip.is-active {
+  background: var(--ok-tv);
+  border-color: var(--ok-tv);
+  color: #fff;
+}
+
+/* ----- Article ----- */
+.ok-article { padding: 16px var(--ok-pad) 8px; }
+.ok-breadcrumb {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ok-text-subdue);
+  margin-bottom: 10px;
+}
+.ok-breadcrumb a { color: var(--ok-primary); }
+.ok-breadcrumb a:hover { color: var(--ok-primary-hover); text-decoration: underline; }
+.ok-kicker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ok-tv);
+  margin-bottom: 8px;
+}
+.ok-headline {
+  font-family: var(--ok-display);
+  font-size: 41px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.41px;
+  color: var(--ok-text-default);
+  margin: 0 0 12px;
+}
+.ok-deck {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ok-text-default);
+  margin: 0 0 14px;
+}
+.ok-byline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--ok-text);
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ECECEC;
+}
+.ok-byline strong { font-weight: 700; }
+.ok-byline span { color: var(--ok-text-subdue); font-size: 13px; }
+
+.ok-hero {
+  margin: 0 calc(-1 * var(--ok-pad)) 12px;
+  background: linear-gradient(135deg, #BE1F24 0%, #3E0A0C 100%);
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  border-radius: var(--ok-radius-img);
+}
+.ok-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--ok-radius-img);
+}
+.ok-caption {
+  font-size: 13px;
+  color: var(--ok-text-subdue);
+  margin: 0 0 18px;
+  line-height: 1.35;
+}
+
+.ok-share {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.ok-share button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ok-bg-section);
+  color: var(--ok-text-default);
+}
+.ok-share button:hover { background: var(--ok-primary); color: #fff; }
+
+.ok-body p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ok-text);
+  margin: 0 0 16px;
+}
+
+/* ----- Partner Stories (mid-article) ----- */
+.ok-partner {
+  margin: 8px calc(-1 * var(--ok-pad)) 20px;
+  padding: 14px 0 16px;
+  background: var(--ok-bg-subtle);
+  border-top: 1px solid #D4D5D5;
+  border-bottom: 1px solid #D4D5D5;
+}
+.ok-partner__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 var(--ok-pad) 10px;
+}
+.ok-partner__label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ok-text-default);
+}
+.ok-partner__attr {
+  font-size: 11px;
+  color: var(--ok-text-subdue);
+}
+.ok-partner__rail {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 var(--ok-pad);
+}
+.ok-partner__rail::-webkit-scrollbar { display: none; }
+.ok-partner-card {
+  flex: 0 0 168px;
+  background: #fff;
+  border-radius: var(--ok-radius-card);
+  overflow: hidden;
+}
+.ok-partner-card__media {
+  aspect-ratio: 3/2;
+  background: linear-gradient(135deg, #BE1F24, #6B1114);
+  border-radius: var(--ok-radius-img);
+  overflow: hidden;
+}
+.ok-partner-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ok-partner-card__meta {
+  padding: 8px 4px 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ok-text-subdue);
+}
+.ok-partner-card__title {
+  padding: 4px 4px 0;
+  font-family: var(--ok-display);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ok-text-default);
+}
+.ok-partner-card:hover .ok-partner-card__title {
+  color: var(--ok-primary-hover);
+}
+
+/* ----- Feed ----- */
+.ok-feed {
+  background: var(--ok-bg);
+  padding: 8px 0 28px;
+  border-top: 4px solid var(--ok-primary);
+}
+.ok-feed__head {
+  padding: 14px var(--ok-pad) 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ok-feed__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ok-text-default);
+}
+.ok-feed__attr {
+  font-size: 11px;
+  color: var(--ok-text-subdue);
+  white-space: nowrap;
+}
+
+/* Featured */
+.ok-featured {
+  display: block;
+  padding: 0 var(--ok-pad) 16px;
+  border-bottom: 1px solid #ECECEC;
+}
+.ok-featured__media {
+  aspect-ratio: 3/2;
+  background: linear-gradient(135deg, #A326DF, #3E0A0C);
+  overflow: hidden;
+  border-radius: var(--ok-radius-img);
+  margin-bottom: 10px;
+}
+.ok-featured__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ok-sec {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.ok-sec--tv { color: var(--ok-tv); }
+.ok-sec--celebrity { color: var(--ok-celebrity); }
+.ok-sec--royals { color: var(--ok-royals); }
+.ok-sec--lifestyle { color: var(--ok-lifestyle); }
+.ok-featured__title {
+  margin: 0;
+  font-family: var(--ok-display);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ok-text-default);
+}
+.ok-featured:hover .ok-featured__title { color: var(--ok-primary-hover); }
+
+/* Compact stack */
+.ok-stack { padding: 0 var(--ok-pad); }
+.ok-compact {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid #ECECEC;
+}
+.ok-compact__media {
+  aspect-ratio: 3/2;
+  background: linear-gradient(135deg, #BE1F24, #141515);
+  overflow: hidden;
+  border-radius: var(--ok-radius-img);
+}
+.ok-compact__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ok-compact__title {
+  margin: 0;
+  font-family: var(--ok-display);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ok-text-default);
+}
+.ok-compact:hover .ok-compact__title { color: var(--ok-primary-hover); }
+.ok-compact__brand {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ok-text-subdue);
+}
+
+/* Sponsored */
+.ok-sponsored {
+  margin: 14px var(--ok-pad);
+  padding: 14px;
+  background: var(--ok-bg-subtle);
+  border: 1px solid #D4D5D5;
+  border-radius: var(--ok-radius-card);
+}
+.ok-sponsored__badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ok-primary);
+  border: 1px solid var(--ok-primary);
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.ok-sponsored__layout {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 12px;
+  align-items: start;
+}
+.ok-sponsored__title {
+  margin: 0 0 6px;
+  font-family: var(--ok-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ok-text-default);
+}
+.ok-sponsored:hover .ok-sponsored__title { color: var(--ok-primary-hover); }
+.ok-sponsored__brand {
+  font-size: 13px;
+  color: var(--ok-text-subdue);
+  margin-bottom: 12px;
+}
+.ok-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ok-primary);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: none;
+  padding: 10px 16px;
+  border-radius: var(--ok-radius-cta);
+  min-height: 36px;
+}
+.ok-cta:hover,
+.ok-cta:focus-visible {
+  background: var(--ok-primary-hover);
+}
+.ok-cta:active { background: var(--ok-primary-pressed); }
+.ok-sponsored__media {
+  aspect-ratio: 3/2;
+  background: linear-gradient(135deg, #C9AD00, #BE1F24);
+  overflow: hidden;
+  border-radius: var(--ok-radius-img);
+}
+.ok-sponsored__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Two-up grid */
+.ok-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ok-gap-grid);
+  padding: 8px var(--ok-pad) 4px;
+}
+.ok-tile {
+  display: block;
+}
+.ok-tile__media {
+  aspect-ratio: 3/2;
+  background: linear-gradient(135deg, #E605BA, #141515);
+  overflow: hidden;
+  margin-bottom: 8px;
+  border-radius: var(--ok-radius-img);
+}
+.ok-tile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ok-tile__title {
+  margin: 0;
+  font-family: var(--ok-display);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ok-text-default);
+}
+.ok-tile:hover .ok-tile__title { color: var(--ok-primary-hover); }
+
+.ok-more-label {
+  margin: 18px var(--ok-pad) 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ok-text-default);
+}
+
+.ok-feed-foot {
+  padding: 16px var(--ok-pad) 8px;
+  font-size: 11px;
+  color: var(--ok-text-subdue);
+  text-align: center;
+}
+
+.ok-site-foot {
+  background: var(--ok-dark);
+  color: #FAFAFA;
+  padding: 20px var(--ok-pad) 28px;
+  font-size: 12px;
+}
+.ok-site-foot strong {
+  font-family: var(--ok-display);
+  font-size: 22px;
+  display: block;
+  margin-bottom: 8px;
+}
+.ok-site-foot a { color: #FAFAFA; text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="ok-page">
+
+  <div class="ok-utility">
+    <a href="https://www.ok.co.uk/horoscopes/">Horoscopes</a>
+    <a href="https://www.ok.co.uk/competition/">Competitions</a>
+    <a href="https://www.ok.co.uk/newsletter-preference-centre/">Newsletter</a>
+  </div>
+
+  <header class="ok-masthead">
+    <button class="ok-masthead__menu" aria-label="Menu" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="ok-logo" href="https://www.ok.co.uk/" aria-label="OK! Magazine">
+      <!-- White OK! wordmark (masthead path); header chrome uses --ok-primary -->
+      <svg width="86" height="36" viewBox="0 0 115 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#FFFFFF" d="M27.7832 0C42.2749 0.0001 51.8232 9.2011 51.8232 22.2666L51.8193 22.2627C51.8193 29.3291 49.5496 35.663 45.208 40.6641C40.0015 46.7323 32.7233 50 24.04 50C17.1626 50 11.62 48.1349 7.27832 44.4014C2.73619 40.4675 0 34.3336 0 27.668C9.70928e-06 20.6018 2.20346 14.3332 6.54492 9.2666C11.62 3.3331 19.1691 0 27.7832 0ZM108.389 36.7998C112.063 36.7998 115 39.6669 115 43.4004C115 47.1337 112.062 50 108.389 50C104.715 49.9999 101.844 47.068 101.844 43.4004C101.844 39.8017 104.715 36.8 108.389 36.7998ZM66.3809 20.999L84.543 1.0635H101.037L77.5342 24.5977L93.7588 48.7324H78.6689L65.3115 27.7334L61.9727 48.7324H49.2842L56.8291 1.0635H69.584L66.3809 20.999ZM26.9805 11.6631C19.0998 11.6631 13.2218 18.0665 13.2217 26.2656C13.2217 33.5978 17.7642 38.3328 24.7764 38.333C32.4563 38.333 38.535 31.7332 38.5352 23.3994C38.5352 16.4643 33.5915 11.6631 26.9805 11.6631ZM114.467 1.0635V32.8662H102.38V1.0635H114.467Z"/>
+      </svg>
+    </a>
+    <button class="ok-masthead__search" aria-label="Search" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    </button>
+  </header>
+
+  <nav class="ok-nav" aria-label="Primary">
+    <a href="https://www.ok.co.uk/celebrity-news/">Celebrity</a>
+    <a href="https://www.ok.co.uk/royal/">Royals</a>
+    <a class="is-active" href="https://www.ok.co.uk/tv/">TV</a>
+    <a href="https://www.ok.co.uk/celebrity-pictures/">Pictures</a>
+    <a href="https://www.ok.co.uk/lifestyle/">Lifestyle</a>
+    <a href="https://www.ok.co.uk/latest/fashion">Fashion</a>
+    <a href="https://www.ok.co.uk/latest/beauty">Beauty</a>
+    <a href="https://www.ok.co.uk/latest/celebrity-weddings">Weddings</a>
+  </nav>
+
+  <div class="ok-topics" aria-label="TV topics">
+    <a class="ok-chip is-active" href="https://www.ok.co.uk/latest/love-island">Love Island</a>
+    <a class="ok-chip" href="https://www.ok.co.uk/latest/eastenders">EastEnders</a>
+    <a class="ok-chip" href="https://www.ok.co.uk/latest/emmerdale">Emmerdale</a>
+    <a class="ok-chip" href="https://www.ok.co.uk/latest/coronation-street">Coronation Street</a>
+    <a class="ok-chip" href="https://www.ok.co.uk/latest/strictly-come-dancing">Strictly</a>
+    <a class="ok-chip" href="https://www.ok.co.uk/latest/im-a-celebrity-get-me-out-of-here">I'm A Celebrity</a>
+  </div>
+
+  <article class="ok-article">
+    <div class="ok-breadcrumb">
+      <a href="https://www.ok.co.uk/tv/">TV</a> / <a href="https://www.ok.co.uk/latest/love-island">Love Island</a>
+    </div>
+    <div class="ok-kicker">TV · Love Island</div>
+    <h1 class="ok-headline">Love Island finalist reveals sad Casa Amor reality fans don't realise</h1>
+    <p class="ok-deck">Love Island fans look forward to the Casa Amor twist every year, but it can be difficult for some Islanders</p>
+    <div class="ok-byline">
+      <div>
+        <strong>Kimberly Nhundu</strong><br />
+        <span>21 July 2026</span>
+      </div>
+    </div>
+
+    <div class="ok-hero" data-fallback="gradient">
+      <img
+        src="https://i2-prod.ok.co.uk/article37459016.ece/ALTERNATES/s1200d/0_Love-Island-TV-Show-Series-13-Episode-44-Mallorca-Spain-14-Jul-2026.jpg"
+        alt="Julia Majchrzak on Love Island"
+        loading="eager"
+        onerror="this.style.display='none'" />
+    </div>
+    <p class="ok-caption">Julia Majchrzak opens up about the Casa Amor twist fans rarely see from outside the villa</p>
+
+    <div class="ok-share" aria-label="Share">
+      <button type="button" aria-label="Share on Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></button>
+      <button type="button" aria-label="Share on X"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7.5 8.6L22 22h-6.2l-4.9-6.4L5.4 22H2.3l8-9.1L2 2h6.3l4.4 5.8L18 2z"/></svg></button>
+      <button type="button" aria-label="Share on WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.7 14.9L2 22l5.3-1.4A10 10 0 1012 2zm0 2a8 8 0 01.1 16 7.9 7.9 0 01-3.7-.9l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 0112 4zm4.4 10.7c-.2-.1-1.3-.6-1.5-.7-.2-.1-.4-.1-.5.1-.2.2-.6.7-.7.8-.1.1-.3.2-.5.1s-1-.4-1.9-1.2c-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.3.1-.4l.4-.5c.1-.1.2-.3.2-.4 0-.1 0-.3-.1-.4-.1-.1-.5-1.3-.7-1.8-.2-.5-.4-.4-.5-.4h-.4c-.1 0-.4.1-.6.3s-.8.8-.8 1.9.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.4 2.3.9 2.3.6 2.7.6.4 0 1.3-.5 1.5-1 .2-.5.2-.9.1-1z"/></svg></button>
+    </div>
+
+    <div class="ok-body">
+      <p>The new arrivals must find a solid connection to secure a spot in the main villa, which often means breaking up long-standing couples. Just weeks after this year's dramatic Casa Amor, finalist Julia Majchrzak is opening up about the twist fans rarely see.</p>
+      <p>Fans at home instantly noticed that Julia was the only one trying to keep Martha in the villa out of solidarity, and it seems they were spot on.</p>
+    </div>
+
+    <!-- Mid-article Partner Stories (Taboola mid-article / partner placement) -->
+    <section class="ok-partner" aria-label="Partner Stories">
+      <div class="ok-partner__head">
+        <div class="ok-partner__label">Partner Stories</div>
+        <div class="ok-partner__attr">by Taboola</div>
+      </div>
+      <div class="ok-partner__rail">
+        <a class="ok-partner-card" href="#">
+          <div class="ok-partner-card__media">
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <div class="ok-partner-card__meta">Boots Beauty</div>
+          <div class="ok-partner-card__title">Summer glow edits the villa girls actually wear</div>
+        </a>
+        <a class="ok-partner-card" href="#">
+          <div class="ok-partner-card__media">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <div class="ok-partner-card__meta">Very</div>
+          <div class="ok-partner-card__title">Holiday outfits under £40 for your next girls' trip</div>
+        </a>
+        <a class="ok-partner-card" href="#">
+          <div class="ok-partner-card__media">
+            <img src="https://images.unsplash.com/photo-1607083206869-4c79715e2270?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+          </div>
+          <div class="ok-partner-card__meta">Sky Mobile</div>
+          <div class="ok-partner-card__title">Stream every episode on the go without buffering</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="ok-body">
+      <p>She explained that Casa girls often stick together because they know how hard it is to walk into an established villa and find safety in each other.</p>
+      <p>Throughout their various tiffs in the house, the Casa girls stuck closely together. But Julia is the only one that has survived the evictions.</p>
+    </div>
+  </article>
+
+  <!-- Below-article Taboola thumbnails-feed -->
+  <section class="ok-feed" aria-label="Recommended for you">
+    <div class="ok-feed__head">
+      <h2 class="ok-feed__title">Recommended for you</h2>
+      <div class="ok-feed__attr">by Taboola</div>
+    </div>
+
+    <a class="ok-featured" href="https://www.ok.co.uk/celebrity-news/strictlys-neil-jones-love-island-37448109">
+      <div class="ok-featured__media">
+        <img src="https://i2-prod.ok.co.uk/article37448100.ece/ALTERNATES/s1200d/1_JS412826664.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+      </div>
+      <div class="ok-sec ok-sec--celebrity">Celebrity</div>
+      <h3 class="ok-featured__title">Strictly's Neil Jones and Love Island's Chyna Mills marry in Italy - see pics</h3>
+    </a>
+
+    <div class="ok-stack">
+      <a class="ok-compact" href="https://www.ok.co.uk/tv/eastenders-star-sent-red-alert-37494445">
+        <div class="ok-compact__media">
+          <img src="https://i2-prod.mirror.co.uk/incoming/article37490629.ece/ALTERNATES/s1200/0_Eastenders-logo.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-sec ok-sec--tv">TV</div>
+          <h3 class="ok-compact__title">EastEnders star sent 'red alert' death threats as BBC warned her 'don't go out'</h3>
+          <div class="ok-compact__brand">OK! Magazine</div>
+        </div>
+      </a>
+
+      <a class="ok-compact" href="https://www.ok.co.uk/royal/princess-kate-grateful-here-strong-37361131">
+        <div class="ok-compact__media">
+          <img src="https://i2-prod.ok.co.uk/article37359527.ece/ALTERNATES/s1200d/3_KATE.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-sec ok-sec--royals">Royals</div>
+          <h3 class="ok-compact__title">Kate 'grateful to be here' and 'strong enough' as she completes Three Peaks trek</h3>
+          <div class="ok-compact__brand">OK! Magazine</div>
+        </div>
+      </a>
+
+      <a class="ok-compact" href="https://www.ok.co.uk/celebrity-news/victoria-beckham-humiliated-over-secret-37447646">
+        <div class="ok-compact__media">
+          <img src="https://i2-prod.ok.co.uk/article37447630.ece/ALTERNATES/s1200d/2_JS412823142.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-sec ok-sec--celebrity">Celebrity</div>
+          <h3 class="ok-compact__title">Victoria Beckham 'humiliated' over 'cry for help' to son Brooklyn</h3>
+          <div class="ok-compact__brand">OK! Magazine</div>
+        </div>
+      </a>
+
+      <a class="ok-compact" href="https://www.ok.co.uk/tv/emmerdale-ross-actors-love-life-37492609">
+        <div class="ok-compact__media">
+          <img src="https://i2-prod.mirror.co.uk/incoming/article35693197.ece/ALTERNATES/s1200/1_DSC04239a.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-sec ok-sec--tv">TV</div>
+          <h3 class="ok-compact__title">Emmerdale Ross actor's love life including heartbreaking split from soap co-star</h3>
+          <div class="ok-compact__brand">OK! Magazine</div>
+        </div>
+      </a>
+    </div>
+
+    <aside class="ok-sponsored">
+      <div class="ok-sponsored__badge">Sponsored</div>
+      <div class="ok-sponsored__layout">
+        <div>
+          <h3 class="ok-sponsored__title">Find your next holiday glow with Superdrug's summer edit</h3>
+          <div class="ok-sponsored__brand">Superdrug</div>
+          <a class="ok-cta" href="#">Shop the edit</a>
+        </div>
+        <div class="ok-sponsored__media">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=360&h=240&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+      </div>
+    </aside>
+
+    <div class="ok-more-label">More from OK!</div>
+    <div class="ok-grid2">
+      <a class="ok-tile" href="https://www.ok.co.uk/celebrity-news/cher-lloyd-sparks-marriage-split-37457603">
+        <div class="ok-tile__media">
+          <img src="https://i2-prod.ok.co.uk/article30915243.ece/ALTERNATES/s1200d/4_Cher-Lloyd-shows-off-baby-bump-for-first-time-since-announcing-shes-pregnant-with-second-child.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="ok-sec ok-sec--celebrity">Celebrity</div>
+        <h3 class="ok-tile__title">Cher Lloyd sparks marriage split speculation saying wedding ring is 'in the bin'</h3>
+      </a>
+      <a class="ok-tile" href="https://www.ok.co.uk/tv/eastenders-fans-slam-unrealistic-detail-37492433">
+        <div class="ok-tile__media">
+          <img src="https://i2-prod.ok.co.uk/article37492431.ece/ALTERNATES/s1200d/1_568603.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="ok-sec ok-sec--tv">TV</div>
+        <h3 class="ok-tile__title">EastEnders fans slam 'unrealistic' detail as Ian Beale faces Gray in prison</h3>
+      </a>
+      <a class="ok-tile" href="https://www.ok.co.uk/celebrity-news/amanda-holden-shares-passionate-kiss-37366460">
+        <div class="ok-tile__media">
+          <img src="https://i2-prod.ok.co.uk/article37366522.ece/ALTERNATES/s1200d/0_GettyImages-2283872259.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="ok-sec ok-sec--celebrity">Celebrity</div>
+        <h3 class="ok-tile__title">Amanda Holden shares passionate kiss with husband Chris Hughes at Wimbledon</h3>
+      </a>
+      <a class="ok-tile" href="https://www.ok.co.uk/celebrity-news/inside-supermodel-eva-herzigovas-romantic-37447402">
+        <div class="ok-tile__media">
+          <img src="https://i2-prod.ok.co.uk/article37447314.ece/ALTERNATES/s1200d/1_JS412818571.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="ok-sec ok-sec--celebrity">Celebrity</div>
+        <h3 class="ok-tile__title">Inside supermodel Eva Herzigova's romantic Italian wedding to partner of 25 yrs</h3>
+      </a>
+    </div>
+
+    <div class="ok-feed-foot">Recommended content powered by Taboola · tmg-network · thumbnails-feed</div>
+  </section>
+
+  <footer class="ok-site-foot">
+    <strong>OK!</strong>
+    Celebrity news, royals, TV and lifestyle from OK! Magazine.
+    <div style="margin-top:10px"><a href="https://www.ok.co.uk/">ok.co.uk</a></div>
+  </footer>
+</div>
+</body>
+</html>
