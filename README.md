@@ -57,18 +57,23 @@ Output in `./output/example/`:
 --list              List previously generated publishers
 ```
 
-## Publisher-native feed prototypes (agent skill)
+## Publisher-native feed prototypes (Claude skill / workflow)
 
 Hand-built, publisher-tailored standalone HTML mocks (nav + article + native
-feed) are produced via the Cursor skill
-[`.cursor/skills/publisher-brand-kit-prototype/`](.cursor/skills/publisher-brand-kit-prototype/SKILL.md).
+feed) live as a **Claude Code skill** (Agent Skills format) that Cursor also
+discovers:
+
+- Skill: [`.claude/skills/publisher-brand-kit-prototype/`](.claude/skills/publisher-brand-kit-prototype/SKILL.md)
+- Slash-command workflow: [`.claude/commands/publisher-brand-kit-prototype.md`](.claude/commands/publisher-brand-kit-prototype.md)
 
 **Inputs:** brand-kit JSON + publisher article URL.  
 **Output:** `output/<slug>/mobile-prototype.html` (tailor-fit per publisher —
 never a font/color reskin of the previous one).
 
-Invoke with `/publisher-brand-kit-prototype` or by pasting a kit + URL. See
-the skill’s phases, token matrix, anti-reskin rules, and QA script.
+**Invoke**
+- Claude Code: `/publisher-brand-kit-prototype` (or paste kit + URL)
+- Cursor: `/publisher-brand-kit-prototype` or paste kit + URL (loads `.claude/skills/`)
+- Claude.ai: zip the `publisher-brand-kit-prototype` skill folder → Settings → Capabilities → Skills
 
 ## Project Structure
 
@@ -79,8 +84,9 @@ the skill’s phases, token matrix, anti-reskin rules, and QA script.
 │   ├── index.html
 │   ├── wizard.css
 │   └── wizard.js
-├── .cursor/skills/
-│   └── publisher-brand-kit-prototype/  Agent skill: kit JSON + URL → native feed HTML
+├── .claude/
+│   ├── skills/publisher-brand-kit-prototype/  Claude skill: kit JSON + URL → native feed HTML
+│   └── commands/publisher-brand-kit-prototype.md  Slash-command workflow entry point
 ├── lib/
 │   ├── crawler.js              Puppeteer-based page crawler (7 extractors)
 │   ├── defaults.js             Generic Taboola baseline for "before" comparison

@@ -1,17 +1,18 @@
 ---
 name: publisher-brand-kit-prototype
 description: >-
-  Build a publisher-tailored, standalone HTML mobile feed prototype from a
-  brand-kit JSON plus a live publisher article/feed URL. Use when the user
-  provides brand-kit JSON (or a path under output/<slug>/) and a publisher
-  site URL, or asks for a mobile-prototype.html, TrueNative/Premium Feed
-  mock, native feed prototype, brand-kit feed prototype, or "do the same
-  for <publisher>" as Fox Sports / Weather Channel / AZ Central / Business
-  Insider. Do NOT use the Handlebars generator templates as a shortcut —
-  hand-build a tailor-fit prototype per publisher.
+  Build a publisher-tailored standalone HTML mobile feed prototype from brand-kit
+  JSON plus a live publisher article/feed URL. Use when given a brand kit and
+  publisher URL, or asked for mobile-prototype.html, TrueNative/Premium Feed mock,
+  native feed prototype, or "do the same for <publisher>" (Fox Sports / Weather
+  Channel / AZ Central / BI). Hand-build per publisher — never reskin the last one.
 ---
 
 # Publisher Brand Kit → Standalone HTML Feed Prototype
+
+> **Claude Code skill** (also discovered by Cursor via `.claude/skills/`).
+> Slash command: `/publisher-brand-kit-prototype`
+> Zip this folder to upload as a Claude.ai skill if needed.
 
 **MANDATORY:** Follow every phase below in order. Do not skip phases. Do not
 copy a previous publisher's `mobile-prototype.html` and re-skin fonts/colors.
@@ -289,7 +290,7 @@ Run the checklist in [`references/qa-checklist.md`](references/qa-checklist.md).
 At minimum:
 
 ```bash
-python3 .cursor/skills/publisher-brand-kit-prototype/scripts/qa-prototype.py \
+python3 .claude/skills/publisher-brand-kit-prototype/scripts/qa-prototype.py \
   --kit output/<slug>/brand-kit.json \
   --html output/<slug>/mobile-prototype.html
 ```

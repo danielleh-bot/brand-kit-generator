@@ -56,7 +56,7 @@ agent's working notes / PR test plan.
 ## G. Automated harness
 
 ```bash
-python3 .cursor/skills/publisher-brand-kit-prototype/scripts/qa-prototype.py \
+python3 .claude/skills/publisher-brand-kit-prototype/scripts/qa-prototype.py \
   --kit output/<slug>/brand-kit.json \
   --html output/<slug>/mobile-prototype.html
 ```
