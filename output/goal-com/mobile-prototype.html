@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Lionel Messi's post-World Cup final tears… | Goal.com UK</title>
+<link rel="icon" href="https://www.goal.com/favicon.ico?v=1.1477.1" />
+<!-- Fonts: Satoshi + Clash Grotesk via Fontshare (live Goal.com stacks; not Google proxies) -->
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&f[]=clash-grotesk@600,700&display=swap" rel="stylesheet" />
+<style>
+/*
+  COMPOSITION SPEC - Goal.com mobile feed prototype
+  -------------------------------------------------
+  Viewport shell: bare max-width 390px (no iPhone bezel; sports-news mobile)
+  Feed product:   TrueNative stacked thumbnail_top (matches live Taboola
+                  organic-thumbs-feed / thumbs-feed) + Goal-unique modules
+  Card inventory: (1) organic stacked 16:9 (2) sponsored stacked + tomato CTA
+                  (3) Most Read numbered ranking (4) Ask Beta tomato module
+                  (5) Live / transfer kicker chips
+  Interaction:    headline → #FF6347 on hover/focus; CTA → #E5533A; Live pulse
+  Anti-clone vs Fox/TWC/BI:
+    1. Tomato Most Read numerals (not Fox Premium 1×1/2×1, not TWC thumb-left)
+    2. Black GOAL masthead with 4px tomato inset top accent + Live blue pill
+    3. Want to go deeper / Ask Beta module below article
+*/
+
+:root {
+  --goal-tomato: #FF6347;
+  --goal-tomato-hover: #E5533A;
+  --goal-tomato-active: #CC4A34;
+  --goal-live-blue: #2196F3;
+  --goal-black: #000000;
+  --goal-ink: #1A1A1A;
+  --goal-meta: #666666;
+  --goal-muted: #DFDFDF;
+  --goal-page: #F5F5F5;
+  --goal-card: #FFFFFF;
+  --goal-border: #E5E5E5;
+  --goal-font-body: "Satoshi", system-ui, sans-serif;
+  --goal-font-display: "Clash Grotesk", "Satoshi", system-ui, sans-serif;
+  --goal-header-h: 60px;
+  --goal-radius-pill: 22px;
+  --goal-thumb-radius: 0px;
+  --goal-card-gap: 12px;
+  --goal-section-pad: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--goal-font-body);
+  background: #111;
+  color: var(--goal-ink);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: 0; background: none; }
+
+/* -- Stage -- */
+.goal-stage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 24px 12px 48px;
+  background:
+    radial-gradient(ellipse at 50% 0%, #2a2a2a 0%, #111 55%);
+}
+.goal-phone {
+  width: 100%;
+  max-width: 390px;
+  background: var(--goal-page);
+  box-shadow: 0 24px 64px rgba(0,0,0,.45);
+  position: relative;
+  overflow: hidden;
+}
+
+/* -- Sticky masthead -- */
+.goal-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: var(--goal-header-h);
+  background: var(--goal-black);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 10px;
+  /* Live chrome: tomato inset top accent (box-shadow 0 -4px 0 inset) */
+  box-shadow: var(--goal-tomato) 0 -4px 0 0 inset;
+}
+.goal-logo {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 28px;
+}
+.goal-logo svg { height: 28px; width: auto; }
+.goal-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: .02em;
+}
+.goal-live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--goal-live-blue);
+  box-shadow: 0 0 0 0 rgba(33,150,243,.7);
+  animation: goal-pulse 1.6s ease-out infinite;
+}
+@keyframes goal-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(33,150,243,.55); }
+  70% { box-shadow: 0 0 0 8px rgba(33,150,243,0); }
+  100% { box-shadow: 0 0 0 0 rgba(33,150,243,0); }
+}
+.goal-header-spacer { flex: 1; }
+.goal-promo {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--goal-tomato);
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.goal-icon-btn {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  color: #fff;
+  border-radius: 50%;
+}
+.goal-icon-btn:hover { background: rgba(255,255,255,.08); }
+.goal-icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+/* Secondary nav strip */
+.goal-subnav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: var(--goal-black);
+  padding: 0 8px 10px;
+  border-bottom: 1px solid #222;
+}
+.goal-subnav::-webkit-scrollbar { display: none; }
+.goal-subnav a {
+  flex: 0 0 auto;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-transform: none;
+}
+.goal-subnav a:hover,
+.goal-subnav a.is-active {
+  color: var(--goal-tomato);
+}
+.goal-subnav a.is-active {
+  background: rgba(255,99,71,.12);
+}
+
+/* -- Article -- */
+.goal-article {
+  background: var(--goal-card);
+  padding-bottom: 8px;
+}
+.goal-hero {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #0b1c3d 0%, #1a3a6b 40%, #ff6347 100%);
+  overflow: hidden;
+  border-radius: var(--goal-thumb-radius);
+}
+.goal-hero img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.goal-hero-fallback {
+  position: absolute; inset: 0;
+  display: none;
+  align-items: flex-end;
+  padding: 16px;
+  color: #fff;
+  font-family: var(--goal-font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #0b1c3d 0%, #1a3a6b 45%, #ff6347 100%);
+}
+.goal-hero.is-fallback .goal-hero-fallback { display: flex; }
+.goal-hero.is-fallback img { display: none; }
+.goal-article-body { padding: 16px var(--goal-section-pad) 8px; }
+.goal-kicker {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--goal-tomato);
+  margin-bottom: 8px;
+}
+.goal-headline {
+  font-family: var(--goal-font-display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--goal-ink);
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+.goal-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--goal-meta);
+  margin-bottom: 14px;
+}
+.goal-meta-row .by { font-weight: 700; color: var(--goal-ink); }
+.goal-meta-row .by:hover { color: var(--goal-tomato); }
+.goal-share {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.goal-share button {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--goal-page);
+  display: grid; place-items: center;
+  color: var(--goal-ink);
+  transition: background .15s, color .15s;
+}
+.goal-share button:hover {
+  background: var(--goal-tomato);
+  color: #fff;
+}
+.goal-share svg { width: 16px; height: 16px; }
+.goal-deck {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--goal-ink);
+  margin: 0 0 16px;
+}
+.goal-article-body p {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--goal-ink);
+  margin: 0 0 16px;
+}
+.goal-list-label {
+  font-family: var(--goal-font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin: 20px 0 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--goal-border);
+}
+
+/* -- Ask Beta -- */
+.goal-ask {
+  margin: 8px var(--goal-section-pad) 20px;
+  padding: 16px;
+  background: var(--goal-page);
+  border: 1px solid var(--goal-border);
+}
+.goal-ask-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--goal-meta);
+  margin-bottom: 8px;
+}
+.goal-ask h3 {
+  font-family: var(--goal-font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+.goal-ask-row {
+  display: flex;
+  gap: 8px;
+}
+.goal-ask input {
+  flex: 1;
+  border: 1px solid var(--goal-border);
+  background: #fff;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: var(--goal-font-body);
+  border-radius: 4px;
+  outline: none;
+}
+.goal-ask input:focus { border-color: var(--goal-tomato); }
+.goal-btn-tomato {
+  background: var(--goal-tomato);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 28px;
+  height: 42px;
+  border-radius: var(--goal-radius-pill);
+  transition: background .15s;
+  white-space: nowrap;
+}
+.goal-btn-tomato:hover { background: var(--goal-tomato-hover); }
+.goal-btn-tomato:active { background: var(--goal-tomato-active); }
+
+/* -- Most Read -- */
+.goal-most-read {
+  background: var(--goal-card);
+  margin: 0 0 8px;
+  padding: 20px var(--goal-section-pad) 8px;
+  border-top: 8px solid var(--goal-page);
+}
+.goal-most-read h2 {
+  font-family: var(--goal-font-display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 32px;
+  margin: 0 0 16px;
+}
+.goal-mr-list { list-style: none; margin: 0; padding: 0; }
+.goal-mr-list li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--goal-border);
+}
+.goal-mr-list li:last-child { border-bottom: 0; }
+.goal-mr-num {
+  font-family: var(--goal-font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--goal-tomato);
+  line-height: 1;
+  padding-top: 2px;
+}
+.goal-mr-list a {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--goal-ink);
+  transition: color .15s;
+}
+.goal-mr-list a:hover { color: var(--goal-tomato); }
+.goal-see-more {
+  display: block;
+  width: 100%;
+  margin: 12px 0 8px;
+  background: var(--goal-tomato);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  height: 44px;
+  border-radius: var(--goal-radius-pill);
+  transition: background .15s;
+}
+.goal-see-more:hover { background: var(--goal-tomato-hover); }
+
+/* -- Feed -- */
+.goal-feed {
+  background: var(--goal-page);
+  padding: 20px var(--goal-section-pad) 32px;
+  border-top: 8px solid #ececec;
+}
+.goal-feed-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.goal-feed-head h2 {
+  font-family: var(--goal-font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.1;
+}
+.goal-feed-head .taboola-attr {
+  font-size: 10px;
+  color: var(--goal-meta);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* Stacked thumbnail_top card */
+.goal-card {
+  background: var(--goal-card);
+  margin-bottom: var(--goal-card-gap);
+  overflow: hidden;
+  border-radius: 0;
+}
+.goal-card-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #1a1a1a 0%, #333 50%, #ff6347 140%);
+  overflow: hidden;
+  border-radius: var(--goal-thumb-radius);
+}
+.goal-card-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.goal-card-thumb.is-fallback img { display: none; }
+.goal-play {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  display: grid; place-items: center;
+  color: #fff;
+  pointer-events: none;
+}
+.goal-play svg { width: 18px; height: 18px; margin-left: 2px; fill: currentColor; }
+.goal-card-body { padding: 12px 14px 16px; }
+.goal-card-kicker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--goal-tomato);
+  margin-bottom: 6px;
+}
+.goal-card-kicker.is-sponsored {
+  color: var(--goal-meta);
+  background: #eee;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: .04em;
+}
+.goal-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22.4px;
+  color: var(--goal-ink);
+  margin: 0 0 6px;
+  transition: color .15s;
+}
+.goal-card:hover .goal-card-title,
+.goal-card:focus-within .goal-card-title {
+  color: var(--goal-tomato);
+}
+.goal-card-deck {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--goal-meta);
+  margin: 0 0 12px;
+}
+.goal-card-brand {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--goal-meta);
+  margin-bottom: 10px;
+}
+.goal-card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--goal-tomato);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  height: 40px;
+  padding: 0 36px;
+  border-radius: var(--goal-radius-pill);
+  transition: background .15s;
+}
+.goal-card-cta:hover { background: var(--goal-tomato-hover); }
+.goal-card-cta:active { background: var(--goal-tomato-active); }
+.goal-card.is-sponsored .goal-card-body {
+  border-top: 0;
+}
+
+/* Compact transfer chip row */
+.goal-chip-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 14px;
+}
+.goal-chip-row::-webkit-scrollbar { display: none; }
+.goal-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--goal-card);
+  border: 1px solid var(--goal-border);
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: border-color .15s, color .15s;
+}
+.goal-chip:hover { border-color: var(--goal-tomato); color: var(--goal-tomato); }
+.goal-chip .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--goal-tomato);
+}
+
+/* Footer */
+.goal-footer {
+  background: var(--goal-ink);
+  color: var(--goal-muted);
+  padding: 24px var(--goal-section-pad) 40px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.goal-footer strong {
+  display: block;
+  color: #fff;
+  font-family: var(--goal-font-display);
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.goal-footer a { color: var(--goal-muted); }
+.goal-footer a:hover { color: var(--goal-tomato); }
+
+/* Reveal motion */
+@keyframes goal-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.goal-article-body, .goal-ask, .goal-most-read, .goal-feed {
+  animation: goal-fade-up .45s ease-out both;
+}
+.goal-ask { animation-delay: .08s; }
+.goal-most-read { animation-delay: .12s; }
+.goal-feed { animation-delay: .18s; }
+</style>
+</head>
+<body>
+<div class="goal-stage">
+  <div class="goal-phone" id="goal-app">
+
+    <!-- Masthead -->
+    <header class="goal-header" role="banner">
+      <a class="goal-logo" href="https://www.goal.com/en-gb" aria-label="Goal.com home">
+        <!-- Inline white GOAL wordmark (from live /img/logo.svg) -->
+        <svg width="80" height="28" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M79.3275 0H1.01902C0.456097 0 0 0.454835 0 1.01658V28H5.24094V5.10915H74.7646V28H80V0.67053C79.9991 0.300097 79.6981 0 79.3275 0Z" fill="white"/>
+          <path d="M21.8121 22.1168L24.1753 22.1234L24.1697 24.1987C24.1697 24.3019 24.1214 24.4004 24.0369 24.4595C23.2659 25.0034 22.3797 25.2782 21.3978 25.2753C18.9139 25.2688 17.0458 23.3857 17.0523 20.8949C17.0589 18.4453 18.9278 16.5313 21.3068 16.5378C22.4586 16.5406 23.5575 17.0095 24.4038 17.8583C24.4892 17.9445 24.6295 17.9427 24.7131 17.8545L26.3824 16.1017C26.4641 16.0164 26.4613 15.8804 26.3768 15.7988C25.0652 14.5244 23.2742 13.8191 21.3328 13.8135C19.2836 13.8079 17.4174 14.5356 16.0798 15.8607C14.7672 17.1615 14.0417 18.9461 14.0362 20.8864C14.025 24.9293 17.161 27.9875 21.3319 27.9987C23.695 28.0053 25.8102 27.0478 27.1348 25.3719C27.1654 25.2613 27.1812 25.1478 27.1822 25.0324L27.197 19.6213C27.197 19.5022 27.1004 19.4056 26.9815 19.4047L21.8186 19.3906C21.6997 19.3906 21.6022 19.4872 21.6022 19.6063L21.5957 21.8983C21.5957 22.0193 21.6923 22.1168 21.8121 22.1168Z" fill="white"/>
+          <path d="M35.7801 13.8125C31.6752 13.8125 28.5801 16.8613 28.5801 20.9051C28.5801 24.948 31.6752 27.9977 35.7801 27.9977C39.885 27.9977 42.9801 24.9489 42.9801 20.9051C42.9801 16.8622 39.885 13.8125 35.7801 13.8125ZM35.7801 25.2743C33.4337 25.2743 31.5953 23.3556 31.5953 20.906C31.5953 18.4565 33.4337 16.5378 35.7801 16.5378C38.1265 16.5378 39.9649 18.4565 39.9649 20.906C39.9649 23.3546 38.1265 25.2743 35.7801 25.2743Z" fill="white"/>
+          <path d="M48.199 14.1352L42.4258 27.5814C42.3803 27.6883 42.4583 27.8065 42.5744 27.8065H45.3546C45.441 27.8065 45.52 27.7549 45.5534 27.6752L46.7322 24.9115C46.7489 24.8721 46.788 24.8458 46.8316 24.8458H51.7799C51.8227 24.8458 51.8626 24.8721 51.8793 24.9115L53.0581 27.6752C53.0916 27.7549 53.1705 27.8065 53.2569 27.8065H55.9545C56.1096 27.8065 56.2146 27.648 56.1533 27.5054L50.4126 14.1342C50.3782 14.0554 50.3002 14.0029 50.2138 14.0029H48.3959C48.3114 14.0039 48.2324 14.0554 48.199 14.1352ZM50.5891 22.1224H48.0039C47.9649 22.1224 47.9389 22.083 47.9537 22.0474L49.2468 19.0464C49.2654 19.0033 49.3276 19.0033 49.3462 19.0464L50.6392 22.0474C50.6541 22.0821 50.6281 22.1224 50.5891 22.1224Z" fill="white"/>
+          <path d="M60.2977 25.0831V14.2196C60.2977 14.1005 60.2011 14.0039 60.0812 14.0039H57.4979C57.379 14.0039 57.2815 14.1005 57.2815 14.2196V27.5908C57.2815 27.7099 57.3781 27.8065 57.4979 27.8065H65.7263C65.8461 27.8065 65.9427 27.7099 65.9427 27.5908V25.191C65.9427 25.1309 65.8944 25.0831 65.8349 25.0831H60.2977Z" fill="white"/>
+          <path d="M71.4376 11.2705C71.4376 9.75872 70.2393 8.52832 68.7688 8.52832C67.2956 8.52832 66.0991 9.75872 66.0991 11.2705C66.0991 12.7822 67.2956 14.0126 68.7688 14.0126C70.2393 14.0126 71.4376 12.7822 71.4376 11.2705Z" fill="white"/>
+        </svg>
+      </a>
+      <a class="goal-live" href="https://www.goal.com/en-gb/live-scores" aria-label="Live scores">
+        <span class="goal-live-dot" aria-hidden="true"></span> Live
+      </a>
+      <div class="goal-header-spacer"></div>
+      <span class="goal-promo" aria-hidden="true">£50</span>
+      <button class="goal-icon-btn" aria-label="Account" type="button">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+      </button>
+      <button class="goal-icon-btn" aria-label="Open menu" type="button" id="goal-menu-btn">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </header>
+
+    <nav class="goal-subnav" aria-label="Sections">
+      <a class="is-active" href="https://www.goal.com/en-gb/news">News</a>
+      <a href="https://www.goal.com/en-gb/live-scores">SCORES</a>
+      <a href="https://www.goal.com/en-gb/category/transfers/1/k94w8e1yy9ch14mllpf4srnks">Transfers</a>
+      <a href="https://www.goal.com/en-gb/category/opinion/1/bltda2eefda7fac61db">Opinion</a>
+      <a href="https://www.goal.com/en-gb/category/analysis/1/blt0e4843c7e245b533">Analysis</a>
+      <a href="https://www.goal.com/en-gb/category/player-ratings/1/blt9e3963966f918671">Player Ratings</a>
+      <a href="https://www.goal.com/en-gb/premier-league/2kwbbcootiqqgmrzs6o5inle5">Premier League</a>
+      <a href="https://www.goal.com/en-gb/champions-league/4oogyu6o156iphvdvphwpck10">Champions League</a>
+    </nav>
+
+    <!-- Article -->
+    <article class="goal-article">
+      <div class="goal-hero" data-fallback>
+        <img
+          src="https://assets.goal.com/images/v3/blt581a1495bfb7c0be/Messi's%20Argentina%20journey%20(1).jpg?auto=webp&format=pjpg&width=640&quality=60"
+          alt="Lionel Messi Argentina GFX"
+          data-fallback="https://assets.goal.com/images/v3/blt581a1495bfb7c0be/Messi's%20Argentina%20journey%20(1).jpg"
+          loading="eager"
+        />
+        <div class="goal-hero-fallback">GOAL · Argentina</div>
+      </div>
+      <div class="goal-article-body">
+        <span class="goal-kicker">World Cup</span>
+        <h1 class="goal-headline">Lionel Messi's post-World Cup final tears illustrate the belated but beautiful bond Argentina's icon discovered with his homeland</h1>
+        <div class="goal-meta-row">
+          <a class="by" href="https://www.goal.com/en-gb">Krishan Davis</a>
+          <span>·</span>
+          <time datetime="2026-07-21">21 Jul 2026 03:00-04:00</time>
+        </div>
+        <div class="goal-share" aria-label="Share">
+          <button type="button" aria-label="Share on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg></button>
+          <button type="button" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4l6.5 8.2L4.3 20H6l5.2-6.2L16.5 20H20l-6.7-8.5L19.5 4H17.8l-4.9 5.9L8 4H4z"/></svg></button>
+          <button type="button" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.5.5l2-2a5 5 0 00-7-7l-1.2 1.2"/><path d="M14 11a5 5 0 00-7.5-.5l-2 2a5 5 0 007 7l1.2-1.2"/></svg></button>
+        </div>
+        <p class="goal-deck">Lionel Messi didn't always have a great relationship with the Argentina national team, but the tears that followed Sunday's defeat in the World Cup final highlighted the beautiful bond he has found with the Albiceleste in recent years.</p>
+        <p>There is a sense that we are awaiting the inevitable after Argentina were downed by Spain in the 2026 World Cup final. The tears rolling down Lionel Messi's face after the full-time whistle in New Jersey suggested he may well be about to call time on his glittering international career, having powered his country through the tournament in North America at the age of 39.</p>
+        <h2 class="goal-list-label">Beginning of the end</h2>
+        <p>For once, Messi was peripheral, with his team-mates adopting an uber-physical approach in a failed attempt to rattle La Roja, rather than trying to play to his strengths. Given the defeat, and the nature of it, this would undoubtedly be a sad end to an incredibly special symbiosis between player and country.</p>
+        <p>Defeat in Sunday's final hurt him a lot, as Messi described the pain caused by the result as "immense, and it will take time for this wound to heal", but whatever he decides to do next, he can take solace in the fact his legacy has been secure for some time.</p>
+        <p>It's always worth remembering that things could have panned out very differently for Messi, and indeed the rest of the football world; in an alternate timeline, his international career ended a decade ago.</p>
+      </div>
+
+      <!-- Ask Beta (live Goal module) -->
+      <section class="goal-ask" aria-label="Ask Beta">
+        <div class="goal-ask-label">Want to go deeper? Ask Beta</div>
+        <h3>How did Lionel Messi honor Diego Maradona after reaching the final?</h3>
+        <div class="goal-ask-row">
+          <input type="text" placeholder="Ask GOAL anything…" aria-label="Ask GOAL" />
+          <button class="goal-btn-tomato" type="button">Ask</button>
+        </div>
+      </section>
+    </article>
+
+    <!-- Most Read -->
+    <section class="goal-most-read" aria-label="Most Read">
+      <h2>Most Read</h2>
+      <ol class="goal-mr-list">
+        <li><span class="goal-mr-num">1</span><a href="#">Messi &amp; Mbappe beaten to World Cup Goal of the Tournament award</a></li>
+        <li><span class="goal-mr-num">2</span><a href="#">Man Utd told to replace Lammens</a></li>
+        <li><span class="goal-mr-num">3</span><a href="#">Arsenal in advanced talks with Newcastle over Guimaraes transfer</a></li>
+        <li><span class="goal-mr-num">4</span><a href="#">RANKED: Arsenal's Vini Jr transfer alternatives</a></li>
+        <li><span class="goal-mr-num">5</span><a href="#">Lacroix the leader Chelsea's defence has been desperate for</a></li>
+      </ol>
+      <button class="goal-see-more" type="button">See more</button>
+    </section>
+
+    <!-- Native / Taboola-style feed -->
+    <section class="goal-feed" aria-label="More from Goal">
+      <div class="goal-feed-head">
+        <h2>More from Goal</h2>
+        <span class="taboola-attr">by Taboola</span>
+      </div>
+
+      <div class="goal-chip-row" aria-label="Trending topics">
+        <a class="goal-chip" href="#"><span class="dot"></span> Transfers</a>
+        <a class="goal-chip" href="#"><span class="dot"></span> Premier League</a>
+        <a class="goal-chip" href="#"><span class="dot"></span> World Cup</a>
+        <a class="goal-chip" href="#"><span class="dot"></span> Champions League</a>
+      </div>
+
+      <!-- Organic 1 -->
+      <a class="goal-card" href="https://www.goal.com/en-gb/lists/eddie-howe-leave-newcastle-al-ahli-matthias-jaissle/">
+        <div class="goal-card-thumb" data-fallback>
+          <img src="https://assets.goal.com/images/v3/blte61ccee2bb2f2bf6/Howe%20leaves%20Newcastle.jpg?auto=webp&format=pjpg&width=640&quality=60" alt="" loading="lazy" />
+        </div>
+        <div class="goal-card-body">
+          <span class="goal-card-kicker">Transfers</span>
+          <h3 class="goal-card-title">Eddie Howe to leave Newcastle as Al Ahli manager prepares to take charge at St James' Park</h3>
+          <p class="goal-card-deck">Howe's Newcastle exit gathers pace as the Saudi club lines up a move for the Magpies boss.</p>
+        </div>
+      </a>
+
+      <!-- Sponsored -->
+      <a class="goal-card is-sponsored" href="#">
+        <div class="goal-card-thumb" data-fallback style="background:linear-gradient(135deg,#0d2a1a,#1a5c38 50%,#ff6347);">
+          <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=60" alt="" loading="lazy" />
+        </div>
+        <div class="goal-card-body">
+          <span class="goal-card-kicker is-sponsored">Sponsored</span>
+          <h3 class="goal-card-title">Build matchday rituals that actually stick this season</h3>
+          <div class="goal-card-brand">FanFuel Hub</div>
+          <span class="goal-card-cta">Learn More</span>
+        </div>
+      </a>
+
+      <!-- Organic 2 with video -->
+      <a class="goal-card" href="https://www.goal.com/en-gb/lists/john-stones-excited-man-city-inter-milan-transfer/blt490a0f2f6ca656f1">
+        <div class="goal-card-thumb" data-fallback>
+          <img src="https://assets.goal.com/images/v3/blt1cdebcf4a73d942c/crop/MM5DKMBQGQ5DEOBRGU5G433XMU5DAORRGU3A====/GettyImages-2271524899.jpg?auto=webp&format=pjpg&width=640&quality=60" alt="" loading="lazy" />
+          <span class="goal-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+        <div class="goal-card-body">
+          <span class="goal-card-kicker">Transfers</span>
+          <h3 class="goal-card-title">John Stones excited by Man City future amid Inter Milan transfer interest</h3>
+          <p class="goal-card-deck">The England centre-back opens the door to a new chapter while staying calm on City talks.</p>
+        </div>
+      </a>
+
+      <!-- Organic 3 -->
+      <a class="goal-card" href="https://www.goal.com/en-gb/lists/roberto-de-zerbi-tottenham-transfer-240m/blt7d05b1254f5d8ffa">
+        <div class="goal-card-thumb" data-fallback>
+          <img src="https://assets.goal.com/images/v3/blt55594cec0034aef9/De%20Zerbi%20Tottenham.jpg?auto=webp&format=pjpg&width=640&quality=60" alt="" loading="lazy" />
+        </div>
+        <div class="goal-card-body">
+          <span class="goal-card-kicker">Transfers</span>
+          <h3 class="goal-card-title">De Zerbi to Tottenham: Spurs circle as summer rebuild gathers pace</h3>
+          <p class="goal-card-deck">A £240m project starts with the dugout. Why De Zerbi is on Spurs' shortlist.</p>
+        </div>
+      </a>
+
+      <!-- Sponsored 2 -->
+      <a class="goal-card is-sponsored" href="#">
+        <div class="goal-card-thumb" data-fallback style="background:linear-gradient(135deg,#1a1a1a,#333 40%,#2196F3);">
+          <img src="https://images.unsplash.com/photo-1461897104016-0b3b00cc81ee?auto=format&fit=crop&w=800&q=60" alt="" loading="lazy" />
+        </div>
+        <div class="goal-card-body">
+          <span class="goal-card-kicker is-sponsored">Sponsored</span>
+          <h3 class="goal-card-title">Track every Premier League minute without missing a beat</h3>
+          <div class="goal-card-brand">ScorePulse</div>
+          <span class="goal-card-cta">Get App</span>
+        </div>
+      </a>
+
+      <!-- Organic 4 -->
+      <a class="goal-card" href="https://www.goal.com/en-gb/lists/maxence-lacroix-chelsea-transfer-crystal-palace-xabi-alonso/blte63b5b3741ff60c2">
+        <div class="goal-card-thumb" data-fallback>
+          <img src="https://assets.goal.com/images/v3/blt5d12504708e94f7d/crop/MM5DINBXGQ5DENJRG45G433XMU5DAORSGMZQ====/GettyImages-2270760287.jpg?auto=webp&format=pjpg&width=640&quality=60" alt="" loading="lazy" />
+        </div>
+        <div class="goal-card-body">
+          <span class="goal-card-kicker">Analysis</span>
+          <h3 class="goal-card-title">Maxence Lacroix to Chelsea: why Palace's defender fits Xabi Alonso's plan</h3>
+          <p class="goal-card-deck">Pace, recovery runs, and progressive passing. The case for Lacroix at Stamford Bridge.</p>
+        </div>
+      </a>
+
+      <!-- Organic 5 -->
+      <a class="goal-card" href="https://www.goal.com/en-gb/lists/fermin-lopez-barcelona-spain-world-cup-injury/blt292b1148536ec5a6">
+        <div class="goal-card-thumb" data-fallback>
+          <img src="https://assets.goal.com/images/v3/blt1f4c99ae1b496378/16-9%20(67).jpg?auto=webp&format=pjpg&width=640&quality=60" alt="" loading="lazy" />
+        </div>
+        <div class="goal-card-body">
+          <span class="goal-card-kicker">News</span>
+          <h3 class="goal-card-title">Fermin Lopez injury blow for Barcelona after Spain's World Cup run</h3>
+          <p class="goal-card-deck">Barça assess the midfielder as Flick plots a congested club calendar.</p>
+        </div>
+      </a>
+    </section>
+
+    <footer class="goal-footer">
+      <strong>GOAL</strong>
+      Football news, live scores &amp; transfers.<br />
+      <a href="https://www.goal.com/en-gb">goal.com</a> · Prototype for Taboola brand-kit workshop<br />
+      Source article: Messi World Cup final listicle (Jul 2026)
+    </footer>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Image fallback chain: primary → data-fallback URL → branded gradient container
+  function armFallbacks(root) {
+    root.querySelectorAll('[data-fallback]').forEach(function (wrap) {
+      var img = wrap.querySelector('img');
+      if (!img) return;
+      var triedAlt = false;
+      function fail() {
+        if (!triedAlt && img.getAttribute('data-fallback')) {
+          triedAlt = true;
+          img.src = img.getAttribute('data-fallback');
+          return;
+        }
+        wrap.classList.add('is-fallback');
+      }
+      img.addEventListener('error', fail);
+      if (img.complete && img.naturalWidth === 0) fail();
+    });
+  }
+  armFallbacks(document);
+
+  // Subnav active underline via tomato color (kit hover language)
+  document.querySelectorAll('.goal-subnav a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      // keep in-prototype for demo taps on hashless links
+      if (a.getAttribute('href') === '#') e.preventDefault();
+      document.querySelectorAll('.goal-subnav a').forEach(function (x) { x.classList.remove('is-active'); });
+      a.classList.add('is-active');
+    });
+  });
+
+  // Minimal menu affordance
+  var btn = document.getElementById('goal-menu-btn');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      btn.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', btn.classList.contains('is-open') ? 'true' : 'false');
+    });
+  }
+})();
+</script>
+</body>
+</html>

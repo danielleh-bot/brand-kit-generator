@@ -1,0 +1,122 @@
+{
+  "schema": "publisher-brand-kit.base@1.0.0",
+  "brand": {
+    "name": "Goal.com",
+    "website": "https://www.goal.com",
+    "language": "en-GB",
+    "tagline": "Football news, live scores & transfers"
+  },
+  "logos": {
+    "masthead": {
+      "type": "svg",
+      "text": "GOAL",
+      "url": "https://www.goal.com/img/logo.svg",
+      "color": "#FFFFFF",
+      "background": "#000000"
+    },
+    "favicon_url": "https://www.goal.com/favicon.ico?v=1.1477.1"
+  },
+  "colors": {
+    "page_background": "#F5F5F5",
+    "card_surface": "#FFFFFF",
+    "feed_well": "#F5F5F5",
+    "border": "#E5E5E5",
+    "text_headline": "#1A1A1A",
+    "text_body": "#1A1A1A",
+    "text_meta": "#666666",
+    "link": "#FF6347",
+    "feed_accent": "#FF6347",
+    "nav_active": "#FF6347"
+  },
+  "chrome": {
+    "header": {
+      "background": "#000000",
+      "is_dark": true,
+      "accent_rule": "#FF6347"
+    },
+    "nav_links": ["SCORES", "News", "Transfers", "Opinion", "Analysis", "Player Ratings", "Premier League", "Champions League"],
+    "icon_style": "stroked monoline white on black",
+    "footer": {
+      "background": "#1A1A1A",
+      "text": "#DFDFDF"
+    }
+  },
+  "typography": {
+    "headline": { "family": "Clash Grotesk", "cdn": "fontshare" },
+    "body": { "family": "Satoshi", "cdn": "fontshare" },
+    "headline_case": "sentence case",
+    "feed_section_label": { "size": "32px", "weight": 700, "family": "Clash Grotesk", "line_height": "32px", "color": "#1A1A1A" },
+    "card_title": { "size": "16px", "weight": 700, "family": "Satoshi", "line_height": "22.4px", "color": "#1A1A1A" },
+    "kicker": { "size": "12px", "weight": 700, "family": "Satoshi", "text_transform": "uppercase", "color": "#FF6347" },
+    "meta": { "size": "14px", "weight": 400, "family": "Satoshi", "color": "#666666" },
+    "cta_label": { "size": "14px", "weight": 700, "family": "Satoshi", "color": "#FFFFFF" },
+    "article_title": { "size": "32px", "weight": 700, "family": "Clash Grotesk", "line_height": "32px", "color": "#1A1A1A" },
+    "article_body": { "size": "20px", "weight": 600, "family": "Satoshi", "line_height": "32px", "color": "#1A1A1A" }
+  },
+  "cta": {
+    "sponsored": {
+      "background": "#FF6347",
+      "text": "#FFFFFF",
+      "border_radius": "22px",
+      "padding": "10px 36px",
+      "font_weight": 700,
+      "hover_background": "#E5533A",
+      "active_background": "#CC4A34"
+    },
+    "organic": {
+      "background": "transparent",
+      "text": "#FF6347",
+      "border": "1px solid #FF6347",
+      "border_radius": "22px"
+    }
+  },
+  "card": {
+    "border_radius": "0px",
+    "border": "none",
+    "shadow": "none",
+    "padding": "12px 0",
+    "gap": "12px",
+    "thumbnail": { "aspect_ratio": "16:9", "border_radius": "0px" },
+    "hover": {
+      "type": "headline_color",
+      "headline_color": "#FF6347",
+      "lift": false,
+      "shadow": false
+    },
+    "video_play": { "indicator": true, "color": "#FFFFFF" }
+  },
+  "feed": {
+    "composition": "stacked-full",
+    "section_padding": "16px",
+    "labels": {
+      "organic": "More from Goal",
+      "sponsored": "Sponsored",
+      "trending": "Most Read"
+    },
+    "taboola": {
+      "modes": ["thumbs-feed-01-delta", "organic-thumbs-feed-01-delta"]
+    }
+  },
+  "badges": {
+    "enabled": ["live", "sponsored", "transfer", "most_read"],
+    "styles": {
+      "live": { "background": "#000000", "dot": "#2196F3", "text": "#FFFFFF", "label": "Live" },
+      "sponsored": { "background": "#EEEEEE", "text": "#666666", "label": "Sponsored" },
+      "transfer": { "background": "#FF6347", "text": "#FFFFFF", "label": "Transfers" },
+      "most_read": { "color": "#FF6347", "label": "Most Read" }
+    }
+  },
+  "article": {
+    "headline": "Lionel Messi's post-World Cup final tears illustrate the belated but beautiful bond Argentina's icon discovered with his homeland",
+    "deck": "Lionel Messi didn't always have a great relationship with the Argentina national team, but the tears that followed Sunday's defeat in the World Cup final highlighted the beautiful bond he has found with the Albiceleste in recent years.",
+    "byline": "Krishan Davis",
+    "date": "21 Jul 2026 03:00-04:00",
+    "category": "World Cup",
+    "hero_image": "https://assets.goal.com/images/v3/blt581a1495bfb7c0be/Messi's%20Argentina%20journey%20(1).jpg?auto=webp&format=pjpg&width=640&quality=60"
+  },
+  "metadata": {
+    "migrated_from": "output/goal-com/brand-kit.json",
+    "source_url": "https://www.goal.com/en-gb/lists/lionel-messi-world-cup-final-tears-belated-beautiful-bond-argentina-icon/blt34c70d4d893d1687",
+    "analysis_date": "2026-07-30"
+  }
+}

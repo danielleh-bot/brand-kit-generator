@@ -1,0 +1,69 @@
+/* Goal.com brand-kit.css — drop-in tokens from output/goal-com/brand-kit.json */
+:root {
+  --brand-name: "Goal.com";
+  --color-primary: #FF6347;
+  --color-primary-hover: #E5533A;
+  --color-primary-active: #CC4A34;
+  --color-live: #2196F3;
+  --color-text: #1A1A1A;
+  --color-text-meta: #666666;
+  --color-text-on-dark: #FFFFFF;
+  --color-bg-page: #F5F5F5;
+  --color-bg-card: #FFFFFF;
+  --color-bg-header: #000000;
+  --color-bg-dark: #1A1A1A;
+  --color-border: #E5E5E5;
+  --font-body: "Satoshi", system-ui, sans-serif;
+  --font-display: "Clash Grotesk", "Satoshi", system-ui, sans-serif;
+  --type-hero-size: 32px;
+  --type-hero-weight: 700;
+  --type-hero-line: 32px;
+  --type-body-size: 20px;
+  --type-body-weight: 600;
+  --type-body-line: 32px;
+  --type-card-title-size: 16px;
+  --type-card-title-weight: 700;
+  --type-card-title-line: 22.4px;
+  --type-meta-size: 14px;
+  --btn-bg: #FF6347;
+  --btn-color: #FFFFFF;
+  --btn-radius: 22px;
+  --btn-padding-x: 36px;
+  --btn-weight: 700;
+  --thumb-aspect: 16 / 9;
+  --thumb-radius: 0px;
+  --card-radius: 0px;
+  --card-gap: 12px;
+  --header-accent: #FF6347;
+}
+
+.brand-headline {
+  font-family: var(--font-display);
+  font-size: var(--type-hero-size);
+  font-weight: var(--type-hero-weight);
+  line-height: var(--type-hero-line);
+  color: var(--color-text);
+}
+
+.brand-body {
+  font-family: var(--font-body);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line);
+  color: var(--color-text);
+}
+
+.brand-button {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border-radius: var(--btn-radius);
+  padding: 10px var(--btn-padding-x);
+  font-weight: var(--btn-weight);
+  font-family: var(--font-body);
+  border: 0;
+}
+
+.brand-button:hover { background: var(--color-primary-hover); }
+.brand-button:active { background: var(--color-primary-active); }
+
+.brand-card-title:hover { color: var(--color-primary); }
