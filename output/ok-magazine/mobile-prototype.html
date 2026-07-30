@@ -14,17 +14,16 @@
   Composition Spec — OK! Magazine (ok-magazine)
   ---------------------------------------------
   Viewport: bare mobile max-width 414px (UK celeb magazine web, not device chrome).
-  Feed intent: TrueNative thumbnails-feed (tmg-network) + mid-article Partner Stories strip.
+  Feed intent: TrueNative thumbnails-feed (tmg-network) below article.
   Card inventory:
-    1) Partner Stories horizontal scroller (mid-article)
-    2) Featured full-bleed organic teaser
-    3) Compact thumb-left stack with hairline dividers
-    4) Sponsored card + pill CTA
-    5) Two-up picture grid
+    1) Featured full-bleed organic teaser
+    2) Compact thumb-left stack with hairline dividers
+    3) Sponsored card + pill CTA
+    4) Two-up picture grid
   Interaction: headline → #9A191D on hover; CTA bg → #9A191D; NO card translateY lift.
   Anti-clone vs Fox/TWC/BI:
     - Red OK! masthead + white wordmark SVG (not navy sports / weather / BI white)
-    - Mid-article Partner strip + Recommended mix (featured + compact + 2-up), not Premium 1x1/2x1/4x1
+    - Recommended mix (featured + compact + 2-up), not Premium 1x1/2x1/4x1
     - Pill 32px CTAs + 0px photo radius + section kickers (TV magenta / Celebrity red / Royals purple)
 */
 
@@ -262,74 +261,6 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   line-height: 1.6;
   color: var(--ok-text);
   margin: 0 0 16px;
-}
-
-/* ----- Partner Stories (mid-article) ----- */
-.ok-partner {
-  margin: 8px calc(-1 * var(--ok-pad)) 20px;
-  padding: 14px 0 16px;
-  background: var(--ok-bg-subtle);
-  border-top: 1px solid #D4D5D5;
-  border-bottom: 1px solid #D4D5D5;
-}
-.ok-partner__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 0 var(--ok-pad) 10px;
-}
-.ok-partner__label {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ok-text-default);
-}
-.ok-partner__attr {
-  font-size: 11px;
-  color: var(--ok-text-subdue);
-}
-.ok-partner__rail {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 0 var(--ok-pad);
-}
-.ok-partner__rail::-webkit-scrollbar { display: none; }
-.ok-partner-card {
-  flex: 0 0 168px;
-  background: #fff;
-  border-radius: var(--ok-radius-card);
-  overflow: hidden;
-}
-.ok-partner-card__media {
-  aspect-ratio: 3/2;
-  background: linear-gradient(135deg, #BE1F24, #6B1114);
-  border-radius: var(--ok-radius-img);
-  overflow: hidden;
-}
-.ok-partner-card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.ok-partner-card__meta {
-  padding: 8px 4px 0;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--ok-text-subdue);
-}
-.ok-partner-card__title {
-  padding: 4px 4px 0;
-  font-family: var(--ok-display);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--ok-text-default);
-}
-.ok-partner-card:hover .ok-partner-card__title {
-  color: var(--ok-primary-hover);
 }
 
 /* ----- Feed ----- */
@@ -640,40 +571,6 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
     <div class="ok-body">
       <p>The new arrivals must find a solid connection to secure a spot in the main villa, which often means breaking up long-standing couples. Just weeks after this year's dramatic Casa Amor, finalist Julia Majchrzak is opening up about the twist fans rarely see.</p>
       <p>Fans at home instantly noticed that Julia was the only one trying to keep Martha in the villa out of solidarity, and it seems they were spot on.</p>
-    </div>
-
-    <!-- Mid-article Partner Stories (Taboola mid-article / partner placement) -->
-    <section class="ok-partner" aria-label="Partner Stories">
-      <div class="ok-partner__head">
-        <div class="ok-partner__label">Partner Stories</div>
-        <div class="ok-partner__attr">by Taboola</div>
-      </div>
-      <div class="ok-partner__rail">
-        <a class="ok-partner-card" href="#">
-          <div class="ok-partner-card__media">
-            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
-          </div>
-          <div class="ok-partner-card__meta">Boots Beauty</div>
-          <div class="ok-partner-card__title">Summer glow edits the villa girls actually wear</div>
-        </a>
-        <a class="ok-partner-card" href="#">
-          <div class="ok-partner-card__media">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
-          </div>
-          <div class="ok-partner-card__meta">Very</div>
-          <div class="ok-partner-card__title">Holiday outfits under £40 for your next girls' trip</div>
-        </a>
-        <a class="ok-partner-card" href="#">
-          <div class="ok-partner-card__media">
-            <img src="https://images.unsplash.com/photo-1607083206869-4c79715e2270?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
-          </div>
-          <div class="ok-partner-card__meta">Sky Mobile</div>
-          <div class="ok-partner-card__title">Stream every episode on the go without buffering</div>
-        </a>
-      </div>
-    </section>
-
-    <div class="ok-body">
       <p>She explained that Casa girls often stick together because they know how hard it is to walk into an established villa and find safety in each other.</p>
       <p>Throughout their various tiffs in the house, the Casa girls stuck closely together. But Julia is the only one that has survived the evictions.</p>
     </div>

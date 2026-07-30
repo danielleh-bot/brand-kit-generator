@@ -7,7 +7,7 @@
 
 ## Composition one-liner
 
-**Bare 414px OK! red masthead + Love Island topic chips + mid-article Partner Stories strip + Recommended TrueNative mix (featured, compact stack, sponsored pill CTA, 2-up grid).**
+**Bare 414px OK! red masthead + Love Island topic chips + Recommended TrueNative mix (featured, compact stack, sponsored pill CTA, 2-up grid).**
 
 ## How to open
 

@@ -399,8 +399,7 @@
       "feed_mix": [
         "featured_full",
         "compact_horizontal",
-        "two_up",
-        "partner_strip"
+        "two_up"
       ]
     }
   },
