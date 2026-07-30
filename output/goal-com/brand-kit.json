@@ -1,0 +1,336 @@
+{
+  "brand": {
+    "name": "Goal.com",
+    "tagline": "Football news, live scores & transfers",
+    "website": "https://www.goal.com",
+    "description": "Lionel Messi's post-World Cup final tears illustrate the belated but beautiful bond Argentina's icon discovered with his homeland.",
+    "language": "en-GB",
+    "direction": "ltr"
+  },
+  "logos": {
+    "primary": {
+      "type": "svg",
+      "text": "GOAL",
+      "url": "https://www.goal.com/img/logo.svg",
+      "color": "#FFFFFF",
+      "background": "#000000",
+      "treatment": "White GOAL wordmark SVG on black sticky header; 80×28 intrinsic."
+    },
+    "favicon_url": "https://www.goal.com/favicon.ico?v=1.1477.1"
+  },
+  "colors": {
+    "primary": {
+      "name": "GOAL Tomato",
+      "hex": "#FF6347",
+      "usage": ["CTA fills", "Most Read numerals", "Header top accent rule", "Ask Beta button"],
+      "source": "extracted"
+    },
+    "secondary": {
+      "name": "Live Blue",
+      "hex": "#2196F3",
+      "usage": ["Live pill indicator"],
+      "source": "live-observed"
+    },
+    "text": {
+      "primary": { "hex": "#1A1A1A", "source": "live-observed", "note": "Uploaded kit had #FFFFFF from dark surfaces; live article chrome is light." },
+      "secondary": { "hex": "#FF6347", "source": "extracted" },
+      "tertiary": { "hex": "#666666", "source": "live-observed" }
+    },
+    "backgrounds": {
+      "base": { "hex": "#F5F5F5", "source": "live-observed", "note": "Uploaded kit #1A1A1A contradicted live page well." },
+      "section": { "hex": "#FFFFFF", "source": "live-observed" },
+      "card": { "hex": "#FFFFFF", "source": "live-observed" },
+      "dark": { "hex": "#000000", "source": "live-observed", "usage": ["Sticky masthead"] }
+    },
+    "top_text_colors": [
+      { "hex": "#FFFFFF", "count": 360 },
+      { "hex": "#FF6347", "count": 8 },
+      { "hex": "#DFDFDF", "count": 6 },
+      { "hex": "#1A1A1A", "count": 200 }
+    ],
+    "top_bg_colors": [
+      { "hex": "#000000", "count": 20 },
+      { "hex": "#F5F5F5", "count": 40 },
+      { "hex": "#FFFFFF", "count": 30 },
+      { "hex": "#252525", "count": 17 },
+      { "hex": "#FF6347", "count": 4 }
+    ]
+  },
+  "fonts": {
+    "primary": {
+      "family": "Satoshi",
+      "fallbacks": ["sans-serif"],
+      "weights": { "regular": 400, "medium": 500, "bold": 600, "heavy": 700 },
+      "usage_count": 358,
+      "source": "extracted",
+      "is_generic": false,
+      "cdn": "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+    },
+    "secondary": {
+      "family": "Clash Grotesk",
+      "usage_count": 30,
+      "source": "extracted",
+      "cdn": "https://api.fontshare.com/v2/css?f[]=clash-grotesk@600,700&display=swap"
+    },
+    "tertiary": null,
+    "type_scale": {
+      "section_headings": {
+        "size": "32px",
+        "weight": 700,
+        "family": "Clash Grotesk",
+        "line_height": "32px",
+        "color": "#1A1A1A",
+        "source": "live-observed"
+      },
+      "article_title_hero": {
+        "size": "32px",
+        "weight": 700,
+        "family": "Clash Grotesk",
+        "line_height": "32px",
+        "color": "#1A1A1A",
+        "source": "live-observed",
+        "note": "Uploaded kit listed 16px Satoshi; live h1 is 32px Clash Grotesk."
+      },
+      "article_title_card": {
+        "size": "16px",
+        "weight": 700,
+        "family": "Satoshi",
+        "line_height": "22.4px",
+        "color": "#1A1A1A",
+        "source": "extracted"
+      },
+      "article_lead": {
+        "size": "18px",
+        "weight": 600,
+        "family": "Satoshi",
+        "line_height": "28px",
+        "color": "#1A1A1A",
+        "source": "derived"
+      },
+      "article_body": {
+        "size": "20px",
+        "weight": 600,
+        "family": "Satoshi",
+        "line_height": "32px",
+        "color": "#1A1A1A",
+        "source": "extracted"
+      },
+      "navigation": {
+        "size": "14px",
+        "weight": 700,
+        "family": "Satoshi",
+        "line_height": "19.6px",
+        "color": "#FFFFFF",
+        "text_transform": "none",
+        "source": "live-observed"
+      },
+      "utility_bar": {
+        "size": "16px",
+        "weight": 400,
+        "family": "Satoshi",
+        "line_height": "19.2px",
+        "color": "#FFFFFF",
+        "source": "extracted"
+      },
+      "category_pills": {
+        "size": "12px",
+        "weight": 700,
+        "family": "Satoshi",
+        "line_height": "16px",
+        "color": "#FFFFFF",
+        "text_transform": "uppercase",
+        "source": "live-observed"
+      },
+      "buttons": {
+        "size": "14px",
+        "weight": 700,
+        "family": "Satoshi",
+        "line_height": "18px",
+        "color": "#FFFFFF",
+        "source": "live-observed"
+      },
+      "meta_text": {
+        "size": "14px",
+        "weight": 400,
+        "family": "Satoshi",
+        "line_height": "18px",
+        "color": "#666666",
+        "source": "live-observed"
+      }
+    },
+    "all_fonts": [
+      { "family": "Satoshi", "count": 358, "weights": [400, 500, 600, 700] },
+      { "family": "Clash Grotesk", "count": 30, "weights": [600, 700] }
+    ]
+  },
+  "brand_voice": {
+    "language": "en-GB",
+    "headline_style": { "case": "sentence case", "format": "sentence case" },
+    "content_labels": {
+      "live": true,
+      "sponsored": true,
+      "transfer": true,
+      "opinion": true,
+      "analysis": true,
+      "video": true
+    },
+    "content_distinction": {
+      "news": { "description": "Football news listicles and transfer scoops" },
+      "most_read": { "label": "Most Read", "accent": "#FF6347" },
+      "ask_beta": { "label": "WANT TO GO DEEPER? ASK BETA", "cta": "Ask" }
+    }
+  },
+  "photo_style": {
+    "thumbnail_format": { "aspect_ratio": "16:9", "border_radius": "0px" },
+    "video_thumbnails": { "indicator": "Play button overlay", "indicator_color": "#FFFFFF" }
+  },
+  "spacing": {
+    "grid_gap": "12px",
+    "card_gap": "12px",
+    "section_padding": "16px",
+    "card_border_radius": "0px"
+  },
+  "buttons": {
+    "primary": {
+      "background_color": "#FF6347",
+      "text_color": "#FFFFFF",
+      "border_radius": "22px",
+      "padding": "0px 36px",
+      "font_size": "14px",
+      "font_weight": 700,
+      "hover_background": "#E5533A",
+      "source": "extracted"
+    },
+    "secondary": {
+      "background_color": "#1A1A1A",
+      "text_color": "#FFFFFF",
+      "border_radius": "999px",
+      "padding": "8px 16px",
+      "font_size": "14px",
+      "font_weight": 700,
+      "source": "live-observed"
+    }
+  },
+  "layout_patterns": {
+    "header": {
+      "background_color": "#000000",
+      "is_dark": true,
+      "accent_rule_color": "#FF6347",
+      "accent_rule": "4px inset top box-shadow in GOAL Tomato",
+      "layers": [
+        "Black sticky masthead (60px) with white GOAL SVG",
+        "Live pill with blue pulse + promo chip + account + burger",
+        "4px tomato inset accent along top edge"
+      ]
+    },
+    "content_cards": {
+      "border_radius": "0px",
+      "border": "none",
+      "shadow": "none",
+      "padding": "12px 0",
+      "hover": "headline color shifts to GOAL Tomato (#FF6347); no card lift"
+    },
+    "grid": "Single-column mobile; stacked thumbnail_top Taboola cards"
+  },
+  "header": {
+    "background_color": "#000000",
+    "is_dark": true,
+    "accent_rule_color": "#FF6347"
+  },
+  "navigation": {
+    "navLinks": [
+      { "text": "SCORES", "href": "https://www.goal.com/en-gb/live-scores" },
+      { "text": "News", "href": "https://www.goal.com/en-gb/news" },
+      { "text": "Transfers", "href": "https://www.goal.com/en-gb/category/transfers/1/k94w8e1yy9ch14mllpf4srnks" },
+      { "text": "Opinion", "href": "https://www.goal.com/en-gb/category/opinion/1/bltda2eefda7fac61db" },
+      { "text": "Analysis", "href": "https://www.goal.com/en-gb/category/analysis/1/blt0e4843c7e245b533" },
+      { "text": "Player Ratings", "href": "https://www.goal.com/en-gb/category/player-ratings/1/blt9e3963966f918671" },
+      { "text": "Premier League", "href": "https://www.goal.com/en-gb/premier-league/2kwbbcootiqqgmrzs6o5inle5" },
+      { "text": "Champions League", "href": "https://www.goal.com/en-gb/champions-league/4oogyu6o156iphvdvphwpck10" }
+    ]
+  },
+  "content": {
+    "headline": "Lionel Messi's post-World Cup final tears illustrate the belated but beautiful bond Argentina's icon discovered with his homeland",
+    "deck": "Lionel Messi didn't always have a great relationship with the Argentina national team, but the tears that followed Sunday's defeat in the World Cup final highlighted the beautiful bond he has found with the Albiceleste in recent years.",
+    "byline": "Krishan Davis",
+    "date": "21 Jul 2026 03:00-04:00",
+    "category": "World Cup",
+    "heroImage": "https://assets.goal.com/images/v3/blt581a1495bfb7c0be/Messi's%20Argentina%20journey%20(1).jpg?auto=webp&format=pjpg&width=640&quality=60",
+    "heroCaption": "Lionel Messi Argentina GFX",
+    "paragraphs": [
+      "There is a sense that we are awaiting the inevitable after Argentina were downed by Spain in the 2026 World Cup final. The tears rolling down Lionel Messi's face after the full-time whistle in New Jersey suggested he may well be about to call time on his glittering international career, having powered his country through the tournament in North America at the age of 39.",
+      "For once, Messi was peripheral, with his team-mates adopting an uber-physical approach in a failed attempt to rattle La Roja, rather than trying to play to his strengths. Given the defeat, and the nature of it, this would undoubtedly be a sad end to an incredibly special symbiosis between player and country.",
+      "Defeat in Sunday's final hurt him a lot, as Messi described the pain caused by the result as \"immense, and it will take time for this wound to heal\", but whatever he decides to do next, he can take solace in the fact his legacy has been secure for some time.",
+      "It's always worth remembering that things could have panned out very differently for Messi, and indeed the rest of the football world; in an alternate timeline, his international career ended a decade ago."
+    ]
+  },
+  "related_articles": [
+    {
+      "headline": "Eddie Howe to leave Newcastle as Al Ahli manager prepares to take charge at St James' Park",
+      "href": "https://www.goal.com/en-gb/lists/eddie-howe-leave-newcastle-al-ahli-matthias-jaissle/",
+      "thumbnail": "https://assets.goal.com/images/v3/blte61ccee2bb2f2bf6/Howe%20leaves%20Newcastle.jpg?auto=webp&format=pjpg&width=640&quality=60",
+      "category": "Transfers",
+      "source": "live-observed"
+    },
+    {
+      "headline": "John Stones excited by Man City future amid Inter Milan transfer interest",
+      "href": "https://www.goal.com/en-gb/lists/john-stones-excited-man-city-inter-milan-transfer/blt490a0f2f6ca656f1",
+      "thumbnail": "https://assets.goal.com/images/v3/blt1cdebcf4a73d942c/crop/MM5DKMBQGQ5DEOBRGU5G433XMU5DAORRGU3A====/GettyImages-2271524899.jpg?auto=webp&format=pjpg&width=640&quality=60",
+      "category": "Transfers",
+      "source": "live-observed"
+    },
+    {
+      "headline": "De Zerbi to Tottenham: Spurs circle as summer rebuild gathers pace",
+      "href": "https://www.goal.com/en-gb/lists/roberto-de-zerbi-tottenham-transfer-240m/blt7d05b1254f5d8ffa",
+      "thumbnail": "https://assets.goal.com/images/v3/blt55594cec0034aef9/De%20Zerbi%20Tottenham.jpg?auto=webp&format=pjpg&width=640&quality=60",
+      "category": "Transfers",
+      "source": "live-observed"
+    },
+    {
+      "headline": "Maxence Lacroix to Chelsea: why Palace's defender fits Xabi Alonso's plan",
+      "href": "https://www.goal.com/en-gb/lists/maxence-lacroix-chelsea-transfer-crystal-palace-xabi-alonso/blte63b5b3741ff60c2",
+      "thumbnail": "https://assets.goal.com/images/v3/blt5d12504708e94f7d/crop/MM5DINBXGQ5DENJRG45G433XMU5DAORSGMZQ====/GettyImages-2270760287.jpg?auto=webp&format=pjpg&width=640&quality=60",
+      "category": "Analysis",
+      "source": "live-observed"
+    },
+    {
+      "headline": "Selling Alexander Isak: Newcastle's year of discontent and Eddie Howe's impossible position",
+      "href": "https://www.goal.com/en-gb/lists/selling-alexander-isak-transfer-failures-newcastle-year-discontent-eddie-howe-impossible-position/bltd4bbcdb82ebf0f6f",
+      "thumbnail": "https://assets.goal.com/images/v3/blt67c193c6744b6ff5/221223_Eddie_Howe_Manager_of_Newcastle_United_1920.jpg?auto=webp&format=pjpg&width=640&quality=60",
+      "category": "Opinion",
+      "source": "live-observed"
+    },
+    {
+      "headline": "Fermin Lopez injury blow for Barcelona after Spain's World Cup run",
+      "href": "https://www.goal.com/en-gb/lists/fermin-lopez-barcelona-spain-world-cup-injury/blt292b1148536ec5a6",
+      "thumbnail": "https://assets.goal.com/images/v3/blt1f4c99ae1b496378/16-9%20(67).jpg?auto=webp&format=pjpg&width=640&quality=60",
+      "category": "News",
+      "source": "live-observed"
+    }
+  ],
+  "taboola": {
+    "feed_label": "More from Goal",
+    "sponsored_label": "Sponsored",
+    "modes_in_use": ["thumbs-feed-01-delta", "organic-thumbs-feed-01-delta", "above-the-feed-premium-card"],
+    "container": "taboola-below-article-thumbnails"
+  },
+  "extraction_quality": {
+    "extracted_token_count": 17,
+    "fallback_token_count": 1,
+    "total_tokens": 18,
+    "extraction_ratio": 0.94,
+    "fallback_tokens": ["fonts.type_scale.article_lead"],
+    "live_corrections": [
+      "colors.backgrounds.base #1A1A1A → #F5F5F5 (live page well)",
+      "colors.text.primary #FFFFFF → #1A1A1A (live article text)",
+      "layout_patterns.header.background_color set to #000000 with tomato inset accent",
+      "type_scale.article_title_hero corrected to 32px Clash Grotesk from live h1"
+    ]
+  },
+  "metadata": {
+    "analysis_date": "2026-07-30",
+    "source_url": "https://www.goal.com/en-gb/lists/lionel-messi-world-cup-final-tears-belated-beautiful-bond-argentina-icon/blt34c70d4d893d1687",
+    "analysis_method": "Uploaded Playwright extraction reconciled with live Puppeteer inspection (mobile 390×844)",
+    "schema_note": "Legacy crawl shape retained for qa-prototype.py; see brand-kit.base.json for canonical one-field-per-mapping kit."
+  }
+}
