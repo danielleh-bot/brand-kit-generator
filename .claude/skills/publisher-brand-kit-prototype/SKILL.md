@@ -291,7 +291,10 @@ Run the checklist in [`references/qa-checklist.md`](references/qa-checklist.md).
 At minimum:
 
 ```bash
-python3 .claude/skills/publisher-brand-kit-prototype/scripts/qa-prototype.py \
+SKILL_ROOT="${CLAUDE_SKILL_ROOT:-$HOME/.claude/skills/publisher-brand-kit-prototype}"
+[ -d .claude/skills/publisher-brand-kit-prototype ] && SKILL_ROOT=".claude/skills/publisher-brand-kit-prototype"
+
+python3 "$SKILL_ROOT/scripts/qa-prototype.py" \
   --kit output/<slug>/brand-kit.json \
   --html output/<slug>/mobile-prototype.html
 ```

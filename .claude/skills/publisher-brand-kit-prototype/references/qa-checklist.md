@@ -56,7 +56,10 @@ agent's working notes / PR test plan.
 ## G. Automated harness
 
 ```bash
-python3 .claude/skills/publisher-brand-kit-prototype/scripts/qa-prototype.py \
+SKILL_ROOT="${CLAUDE_SKILL_ROOT:-$HOME/.claude/skills/publisher-brand-kit-prototype}"
+[ -d .claude/skills/publisher-brand-kit-prototype ] && SKILL_ROOT=".claude/skills/publisher-brand-kit-prototype"
+
+python3 "$SKILL_ROOT/scripts/qa-prototype.py" \
   --kit output/<slug>/brand-kit.json \
   --html output/<slug>/mobile-prototype.html
 ```

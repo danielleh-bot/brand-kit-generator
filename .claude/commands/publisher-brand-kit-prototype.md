@@ -5,7 +5,14 @@ argument-hint: [path-to-brand-kit.json] [publisher-article-url]
 
 # Publisher brand-kit feed prototype
 
-You are running the **publisher-brand-kit-prototype** Claude skill / workflow.
+You are running the **publisher-brand-kit-prototype** Claude skill / workflow (global install).
+
+## Skill location
+
+Prefer project-local if present, else the global install:
+
+- Project: `.claude/skills/publisher-brand-kit-prototype/`
+- Global: `~/.claude/skills/publisher-brand-kit-prototype/`
 
 ## Inputs
 
@@ -14,18 +21,22 @@ You are running the **publisher-brand-kit-prototype** Claude skill / workflow.
 
 ## Instructions
 
-1. **Load and follow every phase** in `.claude/skills/publisher-brand-kit-prototype/SKILL.md` without skipping.
-2. Load supporting refs as needed:
-   - `.claude/skills/publisher-brand-kit-prototype/references/feed-field-mapping.md`
-   - `.claude/skills/publisher-brand-kit-prototype/references/token-application-matrix.md`
-   - `.claude/skills/publisher-brand-kit-prototype/references/anti-generic-rules.md`
-   - `.claude/skills/publisher-brand-kit-prototype/references/qa-checklist.md`
-   - `.claude/skills/publisher-brand-kit-prototype/references/publisher-composition-examples.md`
+1. **Load and follow every phase** in the skill `SKILL.md` without skipping.
+2. Load supporting refs as needed from the skill's `references/` folder:
+   - `feed-field-mapping.md`
+   - `token-application-matrix.md`
+   - `anti-generic-rules.md`
+   - `qa-checklist.md`
+   - `publisher-composition-examples.md`
 3. Deliver `output/<slug>/mobile-prototype.html` (or desktop `index.html` when the brief requires it).
-4. Run QA before finishing:
+4. Run QA before finishing (use whichever skill root you loaded):
 
 ```bash
-python3 .claude/skills/publisher-brand-kit-prototype/scripts/qa-prototype.py \
+SKILL_ROOT="${CLAUDE_SKILL_ROOT:-$HOME/.claude/skills/publisher-brand-kit-prototype}"
+# if project has the skill, prefer it:
+[ -d .claude/skills/publisher-brand-kit-prototype ] && SKILL_ROOT=".claude/skills/publisher-brand-kit-prototype"
+
+python3 "$SKILL_ROOT/scripts/qa-prototype.py" \
   --kit output/<slug>/brand-kit.json \
   --html output/<slug>/mobile-prototype.html
 ```
