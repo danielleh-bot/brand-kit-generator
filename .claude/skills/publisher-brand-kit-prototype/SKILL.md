@@ -30,7 +30,7 @@ Canonical prior deliverables in this repo (study for fidelity, never clone):
 
 Supporting references (load on demand):
 
-- [`references/feed-field-mapping.md`](references/feed-field-mapping.md) — **common kit fields → feed/card intended use** (cross BI / Fox / TWC)
+- [`references/feed-field-mapping.md`](references/feed-field-mapping.md) — **common kit fields → feed/card use** across `output/*` **and** `brand-kit-extractions/*` (9 publishers)
 - [`references/token-application-matrix.md`](references/token-application-matrix.md) — every JSON field → CSS/HTML mapping
 - [`references/anti-generic-rules.md`](references/anti-generic-rules.md) — hard bans against reskinning
 - [`references/qa-checklist.md`](references/qa-checklist.md) — mandatory QA before ship

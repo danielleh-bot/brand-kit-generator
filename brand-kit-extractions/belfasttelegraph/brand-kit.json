@@ -1,0 +1,472 @@
+{
+  "brand": {
+    "name": "Belfast Telegraph",
+    "tagline": "",
+    "website": "https://www.belfasttelegraph.co.uk",
+    "description": "Prosecution advises of further delay due to discovery, with judge ‘not understanding why this evidence was only recently presented’, more than three years after attack",
+    "language": "en-GB"
+  },
+  "logos": {
+    "primary": {},
+    "variants": [],
+    "brand_mark": null,
+    "favicon_url": "https://www.belfasttelegraph.co.uk/favicon.svg"
+  },
+  "colors": {
+    "primary": {
+      "name": "Primary Accent",
+      "hex": "#00778B",
+      "rgb": "rgb(0, 119, 139)",
+      "usage": [
+        "Header background",
+        "Section background"
+      ],
+      "source": "extracted"
+    },
+    "text": {
+      "primary": {
+        "name": "Primary Text",
+        "hex": "#000000",
+        "rgb": "rgb(0, 0, 0)",
+        "usage": [
+          "Links",
+          "Button text",
+          "Navigation"
+        ],
+        "source": "extracted"
+      },
+      "secondary": {
+        "name": "Secondary Text",
+        "hex": "#1A1A1A",
+        "rgb": "rgb(26, 26, 26)",
+        "usage": [
+          "Footer background"
+        ],
+        "source": "extracted"
+      },
+      "tertiary": {
+        "name": "Tertiary Text",
+        "hex": "#666666",
+        "rgb": "rgb(102, 102, 102) rgb(128, 128, 128) rgb(128, 128, 128)",
+        "usage": [
+          "Separators"
+        ],
+        "source": "extracted"
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "rgb": "rgb(255, 255, 255)",
+        "usage": [
+          "Links",
+          "Buttons",
+          "Button text",
+          "Navigation",
+          "Timestamps",
+          "Section background",
+          "Separators",
+          "Tags & badges",
+          "Article deck"
+        ],
+        "source": "extracted"
+      },
+      "section": {
+        "name": "Off-White",
+        "hex": "#F7F9FC",
+        "rgb": "rgb(247, 249, 252)",
+        "usage": [
+          "Section backgrounds"
+        ],
+        "source": "fallback"
+      },
+      "secondary": null,
+      "dark": {
+        "name": "Dark Background",
+        "hex": "#000000",
+        "rgb": "rgb(0, 0, 0)",
+        "usage": [
+          "Links",
+          "Button text",
+          "Navigation"
+        ],
+        "source": "extracted"
+      }
+    },
+    "accents": {},
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#007184",
+        "name": "Darker primary",
+        "usage": "Hover states",
+        "source": "derived"
+      },
+      "darken_10": {
+        "hex": "#00697A",
+        "name": "Deepest primary",
+        "usage": "Active/pressed states",
+        "source": "derived"
+      }
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Nuacht Sans WEB",
+      "fallbacks": [
+        "system-ui"
+      ],
+      "weights": {
+        "bold": 700,
+        "regular": 700
+      },
+      "usage": "Body text, Buttons, Meta text",
+      "source": "extracted",
+      "is_generic": false
+    },
+    "secondary": {
+      "family": "Nuacht Serif Text WEBX",
+      "weight": 600,
+      "style": "italic",
+      "usage": "Headlines, Body text",
+      "source": "extracted"
+    },
+    "tertiary": [
+      {
+        "family": "Times",
+        "usage": "Body text, Navigation, Buttons, Meta text",
+        "source": "extracted"
+      }
+    ],
+    "type_scale": {
+      "section_headings": {
+        "size": "32px",
+        "weight": 700,
+        "family": "Nuacht Serif Text WEBX",
+        "line_height": "36.8px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "h2, .section-title, [class*=\"section-head\"]"
+      },
+      "article_title_hero": {
+        "size": "34px",
+        "weight": 700,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": "h1, .headline, [class*=\"headline\"]"
+      },
+      "article_title_card": {
+        "size": "22px",
+        "weight": 700,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": ".card h3, .card-title, [class*=\"card\"] h3"
+      },
+      "article_lead": {
+        "size": "18px",
+        "weight": 700,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": ".lead, .deck, .article-lead, [class*=\"subtitle\"]"
+      },
+      "article_body": {
+        "size": "18px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": "article p, .article-body p, .story-body p, .text-content p, [class*=\"article-content\"] p, [class*=\"story-content\"] p"
+      },
+      "navigation": {
+        "size": "14px",
+        "weight": 400,
+        "family": "system-ui",
+        "line_height": "16.1px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "nav a, [role=\"navigation\"] a"
+      },
+      "utility_bar": {
+        "size": "13px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": ".utility a, .topbar a, [class*=\"utility\"] a"
+      },
+      "category_pills": {
+        "size": "14px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "source": "fallback",
+        "attempted_selector": "[class*=\"pill\"], [class*=\"chip\"], [class*=\"tag\"], [class*=\"filter\"] a"
+      },
+      "buttons": {
+        "size": "14px",
+        "weight": 500,
+        "family": "Nuacht Sans WEB",
+        "line_height": "16px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "button, .btn, [role=\"button\"]"
+      },
+      "meta_text": {
+        "size": "14px",
+        "weight": 400,
+        "family": "Nuacht Sans WEB",
+        "line_height": "16.1px",
+        "color": "#FFFFFF",
+        "source": "extracted",
+        "matched_selector": "time, .date, [class*=\"meta\"], [class*=\"timestamp\"], figcaption"
+      }
+    }
+  },
+  "brand_voice": {
+    "language": "en-GB",
+    "headline_style": {
+      "format": "sentence case",
+      "case": "sentence case"
+    },
+    "content_labels": {
+      "opinion": true,
+      "live": true,
+      "breaking": true,
+      "video": true,
+      "analysis": true,
+      "sponsored": true
+    },
+    "content_distinction": {
+      "news": {
+        "typography": "Nuacht Sans WEB Bold, sans-serif",
+        "description": "Factual, objective reporting"
+      },
+      "opinion": {
+        "label": "Opinion/Editorial",
+        "typography": "Nuacht Serif Text WEBX italic",
+        "description": "Editorial content with distinct serif-italic styling"
+      }
+    }
+  },
+  "photo_style": {
+    "thumbnail_format": {
+      "aspect_ratio": "4:3",
+      "border_radius": "0px"
+    },
+    "video_thumbnails": {
+      "indicator": "Play button icon",
+      "indicator_color": "#FFFFFF"
+    },
+    "author_photos": {
+      "shape": null,
+      "size": null
+    }
+  },
+  "graphics": {
+    "style": "Minimal — relies on photography and typography",
+    "elements": [
+      {
+        "name": "Most Read",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Northern Ireland",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "News",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Courts",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Crime",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "The BelTel",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Podcast",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Explore More",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Republic of Ireland",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Film and TV",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "South Belfast News",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "More in Courts",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Latest",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "UK",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Search for articles…",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Donaldson Trial",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Newspaper Archives",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "My Area",
+        "description": "Badge/label element",
+        "background_color": "transparent",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Light",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Dark",
+        "description": "Badge/label element",
+        "background_color": "#FFFFFF",
+        "text_color": "#FFFFFF"
+      },
+      {
+        "name": "Auto",
+        "description": "Badge/label element",
+        "background_color": "#00778B",
+        "text_color": "#8CC9D3"
+      }
+    ]
+  },
+  "icons": {
+    "style": "SVG-based",
+    "count_detected": 83,
+    "social_media_icons": {
+      "platforms": [
+        "X (Twitter)",
+        "Instagram",
+        "Facebook",
+        "YouTube",
+        "LinkedIn"
+      ],
+      "placement": "Footer"
+    }
+  },
+  "layout_patterns": {
+    "grid": "Two-column layout (main content + sidebar)",
+    "header": {
+      "layers": [],
+      "background_color": "#000000",
+      "is_dark": true
+    },
+    "content_cards": {},
+    "footer": {
+      "sections": []
+    }
+  },
+  "spacing": {
+    "card_border_radius": "0px",
+    "container_max_width": "1312px",
+    "grid_gap": "16px"
+  },
+  "buttons": {
+    "primary": {
+      "background_color": null,
+      "text_color": null,
+      "border_radius": "6px",
+      "padding": "10px 18px",
+      "font_size": "14px",
+      "font_weight": 700,
+      "text_transform": null,
+      "letter_spacing": null,
+      "source": "fallback"
+    }
+  },
+  "extraction_quality": {
+    "extracted_token_count": 13,
+    "fallback_token_count": 7,
+    "total_tokens": 20,
+    "extraction_ratio": 0.65,
+    "fallback_tokens": [
+      "colors.backgrounds.section",
+      "fonts.type_scale.article_title_hero",
+      "fonts.type_scale.article_title_card",
+      "fonts.type_scale.article_lead",
+      "fonts.type_scale.article_body",
+      "fonts.type_scale.utility_bar",
+      "fonts.type_scale.category_pills"
+    ]
+  },
+  "metadata": {
+    "analysis_date": "2026-07-30",
+    "source_url": "https://www.belfasttelegraph.co.uk/news/courts/substantial-and-significant-new-evidence-uncovered-in-case-of-attempted-murder-of-john-caldwell/a/159006668.html",
+    "analysis_method": "Automated web crawling with Puppeteer computed style extraction",
+    "extraction_quality": {
+      "extracted_token_count": 13,
+      "fallback_token_count": 7,
+      "total_tokens": 20,
+      "extraction_ratio": 0.65,
+      "fallback_tokens": [
+        "colors.backgrounds.section",
+        "fonts.type_scale.article_title_hero",
+        "fonts.type_scale.article_title_card",
+        "fonts.type_scale.article_lead",
+        "fonts.type_scale.article_body",
+        "fonts.type_scale.utility_bar",
+        "fonts.type_scale.category_pills"
+      ]
+    }
+  }
+}
