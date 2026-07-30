@@ -1,0 +1,342 @@
+{
+  "$schema_name": "publisher-brand-kit.base",
+  "$schema_version": "1.0.0",
+  "$purpose": "Conflict-resolved brand kit: one field per feed/card mapping. Do not reintroduce usage[]-overloaded colors.primary or duplicate radius/hover/CTA fields.",
+  "brand": {
+    "name": "Example News",
+    "tagline": null,
+    "website": null,
+    "description": null,
+    "language": null
+  },
+  "logos": {
+    "masthead": {
+      "type": null,
+      "text": null,
+      "svg": null,
+      "image_url": null,
+      "color": null,
+      "background": null,
+      "treatment": null
+    },
+    "favicon_url": null,
+    "brand_mark": {
+      "description": null,
+      "foreground": null,
+      "background": null
+    }
+  },
+  "chrome": {
+    "header": {
+      "background": "#000000",
+      "is_dark": true,
+      "accent_rule": "#FF5A00",
+      "height_px": 56
+    },
+    "utility_bar": {
+      "background": null,
+      "is_dark": null,
+      "items": []
+    },
+    "nav_links": [],
+    "footer": {
+      "background": null,
+      "text_color": null,
+      "sections": []
+    },
+    "icon_style": null
+  },
+  "colors": {
+    "page_background": "#FFFFFF",
+    "feed_well": "#F7F7F7",
+    "card_surface": "#FFFFFF",
+    "border": "#EEEEEE",
+    "text_headline": "#111111",
+    "text_body": "#4D4D4D",
+    "text_meta": "#888888",
+    "link": "#FF5A00",
+    "feed_accent": "#FF5A00",
+    "nav_active": "#FF5A00"
+  },
+  "typography": {
+    "headline": {
+      "family": "Manrope",
+      "fallbacks": [
+        "sans-serif"
+      ],
+      "google_equivalent": "Manrope",
+      "weights": {
+        "bold": 700
+      }
+    },
+    "body": {
+      "family": "Inter",
+      "fallbacks": [
+        "sans-serif"
+      ],
+      "google_equivalent": "Inter",
+      "weights": {
+        "regular": 400
+      }
+    },
+    "article_hero_title": {
+      "size": null,
+      "weight": null,
+      "line_height": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "article_lead": {
+      "size": null,
+      "weight": null,
+      "line_height": null
+    },
+    "article_body": {
+      "size": null,
+      "weight": null,
+      "line_height": null
+    },
+    "card_title": {
+      "size": "16px",
+      "weight": 700,
+      "line_height": "1.25",
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "card_description": {
+      "size": null,
+      "weight": null,
+      "line_height": null
+    },
+    "feed_section_label": {
+      "size": "13px",
+      "weight": 700,
+      "line_height": "1.2",
+      "letter_spacing": "0.06em",
+      "text_transform": "uppercase"
+    },
+    "kicker": {
+      "size": null,
+      "weight": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "meta": {
+      "size": null,
+      "weight": null
+    },
+    "navigation": {
+      "size": null,
+      "weight": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "cta_label": {
+      "size": null,
+      "weight": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "headline_case": "sentence case"
+  },
+  "card": {
+    "border_radius": "0px",
+    "border": "1px solid #EEEEEE",
+    "shadow": "none",
+    "padding": "16px",
+    "gap": "20px",
+    "thumbnail": {
+      "aspect_ratio": "16:9",
+      "border_radius": "0px"
+    },
+    "video_play": {
+      "indicator": null,
+      "color": null
+    },
+    "hover": {
+      "surface_background": "#F7F7F7",
+      "headline_color": null,
+      "headline_underline_color": "#FF5A00",
+      "shadow": null,
+      "translate_y": null
+    }
+  },
+  "cta": {
+    "sponsored": {
+      "background": "#FF5A00",
+      "text_color": "#FFFFFF",
+      "hover_background": "#E65100",
+      "active_background": null,
+      "border": null,
+      "border_radius": "2px",
+      "padding": "10px 20px",
+      "font_weight": 700,
+      "font_size": "13px",
+      "text_transform": "uppercase",
+      "letter_spacing": null
+    },
+    "organic": {
+      "background": null,
+      "text_color": null,
+      "hover_background": null,
+      "border": null,
+      "border_radius": null,
+      "padding": null,
+      "font_weight": null,
+      "font_size": null,
+      "text_transform": null,
+      "letter_spacing": null
+    }
+  },
+  "feed": {
+    "composition": "stacked-full",
+    "section_padding": "32px",
+    "labels": {
+      "organic": "More From Example News",
+      "sponsored": "Sponsored Stories",
+      "trending": null
+    },
+    "taboola": {
+      "publisher_id": null,
+      "modes": []
+    }
+  },
+  "badges": {
+    "enabled": [
+      "sponsored",
+      "breaking"
+    ],
+    "styles": {
+      "breaking": {
+        "label": "BREAKING",
+        "background": "#E03625",
+        "text_color": "#FFFFFF"
+      },
+      "live": {
+        "label": "LIVE",
+        "background": null,
+        "text_color": null
+      },
+      "video": {
+        "label": "VIDEO",
+        "background": null,
+        "text_color": null
+      },
+      "opinion": {
+        "label": "OPINION",
+        "background": null,
+        "text_color": null
+      },
+      "analysis": {
+        "label": "ANALYSIS",
+        "background": null,
+        "text_color": null
+      },
+      "sponsored": {
+        "label": "Sponsored",
+        "background": "#FFFFFF",
+        "text_color": "#888888"
+      },
+      "exclusive": {
+        "label": "EXCLUSIVE",
+        "background": null,
+        "text_color": null
+      },
+      "premium": {
+        "label": "PREMIUM",
+        "background": null,
+        "text_color": null
+      },
+      "gallery": {
+        "label": "GALLERY",
+        "background": null,
+        "text_color": null
+      },
+      "severe": {
+        "label": "SEVERE",
+        "background": null,
+        "text_color": null
+      },
+      "forecast": {
+        "label": "FORECAST",
+        "background": null,
+        "text_color": null
+      }
+    }
+  },
+  "card_variants": {
+    "news": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": null
+    },
+    "opinion": {
+      "title_font": "body",
+      "title_style": "italic",
+      "kicker_badge": "opinion",
+      "accent_rail_color": null
+    },
+    "video": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "video",
+      "show_play_overlay": true
+    },
+    "gallery": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "gallery",
+      "count_badge": true
+    },
+    "live": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "live",
+      "pulse": true
+    },
+    "premium": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "premium",
+      "lock_icon": true
+    },
+    "sponsored": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "sponsored",
+      "cta": "sponsored"
+    }
+  },
+  "article": {
+    "headline": null,
+    "deck": null,
+    "byline": null,
+    "date": null,
+    "category": null,
+    "url": null,
+    "hero_image": null,
+    "hero_caption": null,
+    "paragraphs": [],
+    "author_avatar": {
+      "shape": null,
+      "size": null
+    }
+  },
+  "related_articles": [],
+  "metadata": {
+    "analysis_date": null,
+    "source_url": null,
+    "homepage_url": null,
+    "extraction_method": null,
+    "extraction_quality": {
+      "extracted_token_count": null,
+      "fallback_token_count": null,
+      "total_tokens": null,
+      "extraction_ratio": null,
+      "fallback_tokens": []
+    },
+    "schema": "publisher-brand-kit.base@1.0.0",
+    "migrated_from": null,
+    "provenance_notes": []
+  }
+}
