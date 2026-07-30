@@ -9,7 +9,8 @@
  * Taboola feed visually matches the BI editorial design system — black masthead,
  * BI Orange accents, Brother-1816-style sans-serif, sharp corners.
  *
- * Brand Kit Source: business-insider/brand-kit.json (2026-06-08)
+ * Brand Kit Source: business-insider/brand-kit.json (LIVE crawl)
+ * LIVE BASELINE: publisher businessinsider · mode thumbs-1r · placement below-main-column
  * NOTE: Confirm `publisherName` slug with BI AdOps before pushing to production.
  */
 
@@ -19,25 +20,24 @@
   // ─── Brand Kit Tokens ──────────────────────────────────────────────
   var BRAND = {
     // Colors
-    biOrange:         "#FF5A00",
-    biOrangeDark:     "#E65100",
+    biOrange:         "#002aff",
+    biOrangeDark:     "#02c",
     biRed:            "#E03625",
     biYellow:         "#FFC700",
-    nearBlack:        "#111111",
+    nearBlack:        "#0a0a0a",
     biBlack:          "#000000",
     darkGray:         "#4D4D4D",
-    mediumGray:       "#888888",
+    mediumGray:       "#71717a",
     white:            "#FFFFFF",
     offWhite:         "#F7F7F7",
     lightGray:        "#EEEEEE",
     positiveGreen:    "#1A8F4C",
     linkBlue:         "#0F69FF",
 
-    // Typography (Brother 1816 is BI's proprietary face — Manrope is the closest
-    // Google Fonts equivalent for visual parity in feed cards rendered against
-    // the publisher domain without the licensed font available.)
-    fontPrimary:      "'Brother 1816', 'Manrope', 'Helvetica Neue', Arial, sans-serif",
-    fontFallback:     "'Manrope', 'Helvetica Neue', Arial, sans-serif",
+    // Typography — live site uses Garnett (see captures/css-vars.json).
+    // Fall back to Helvetica Neue/Arial when Garnett is not licensed on the feed origin.
+    fontPrimary:      "'Garnett', 'Helvetica Neue', Arial, sans-serif",
+    fontFallback:     "'Garnett', 'Helvetica Neue', Arial, sans-serif",
 
     // Sizes from type scale
     sectionHeadSize:  "20px",
@@ -57,7 +57,7 @@
     buttonRadius:     "2px",
 
     // Publisher (confirm with BI AdOps — Axel Springer-managed)
-    publisherName:    "axelspringer-businessinsider"
+    publisherName:    "businessinsider"
   };
 
   // ─── Initialize Taboola globals ────────────────────────────────────
@@ -96,8 +96,7 @@
   // styles with Business Insider brand tokens.
   var brandCSS = [
 
-    // ── Google Fonts import (Manrope = Brother 1816 visual equivalent) ──
-    "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;700&display=swap');",
+    // Garnett is BI's live face; no public @import. Rely on publisher-hosted font or fallbacks.
 
     // ── Feed container ──
     ".tbl-feed-card {",

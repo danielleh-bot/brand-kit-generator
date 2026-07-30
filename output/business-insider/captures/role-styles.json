@@ -1,0 +1,30 @@
+{
+  "h1": {
+    "selector": "h1",
+    "fontFamily": "garnett, helvetica, arial, sans-serif",
+    "fontSize": "36px",
+    "fontWeight": "500",
+    "color": "rgb(10, 10, 10)",
+    "lineHeight": "48.6px",
+    "text": "'Please turn it off.' Amazon's push to automate warehouse staffing runs into hum"
+  },
+  "subscribe": null,
+  "navLink": {
+    "selector": "nav a, header a",
+    "fontFamily": "garnett, -apple-system, blinkmacsystemfont, \"segoe ui\", roboto, \"helvetica neue\", arial, \"noto sans\", \"liberation sans\", sans-serif, \"apple color emoji\", \"segoe ui emoji\", \"segoe ui symbol\", \"noto color emoji\"",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "color": "rgb(10, 10, 10)",
+    "lineHeight": "24px",
+    "text": "Business Insider"
+  },
+  "body": {
+    "selector": "article p, [class*=\"content\"] p",
+    "fontFamily": "tiempos, georgia, times, serif",
+    "fontSize": "18px",
+    "fontWeight": "400",
+    "color": "rgb(10, 10, 10)",
+    "lineHeight": "28.8px",
+    "text": "Amazon is testing software to decide where warehouse workers should go. Some man"
+  }
+}

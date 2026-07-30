@@ -396,6 +396,22 @@
       "total_tokens": 17,
       "extraction_ratio": 1,
       "fallback_tokens": []
+    },
+    "enrichment": {
+      "status": "stubbed_not_wired",
+      "reason": "Live Gen AI enrichment is not on main. Soft brand_voice fields are hand-authored in ideal prototypes. See feat/deep-crawl-enrich-feed-mapping lib/enrich.js for the Claude pipeline.",
+      "soft_paths": [
+        "brand_voice.tone",
+        "brand_voice.personality_traits",
+        "brand_voice.headline_style.tone",
+        "brand_voice.headline_style.pattern",
+        "brand_voice.content_distinction",
+        "photo_style.food_photography.style",
+        "photo_style.aesthetic",
+        "logos.primary.description"
+      ],
+      "skipped": true,
+      "noEnrich": true
     }
   }
 }

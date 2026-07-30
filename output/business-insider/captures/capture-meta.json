@@ -1,0 +1,44 @@
+{
+  "capturedAt": "2026-07-16T14:16:27.572Z",
+  "articleUrl": "https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7",
+  "homeUrl": "https://www.businessinsider.com/",
+  "chrome": "/usr/bin/google-chrome",
+  "taboola": {
+    "publisherSlug": "businessinsider",
+    "loaderUrl": "https://cdn.taboola.com/libtrc/businessinsider/loader.js",
+    "mode": "thumbs-1r",
+    "placement": "below-main-column",
+    "container": "taboola-below-main-column",
+    "targetType": "mix",
+    "containers": [
+      {
+        "id": null,
+        "className": "post-bottom-taboola",
+        "childCount": 1
+      },
+      {
+        "id": null,
+        "className": "component taboola js-only-desktop",
+        "childCount": 1
+      },
+      {
+        "id": "taboola-below-main-column",
+        "className": "taboola-container targeted-recommended   only-desktop taboola-below-main-column",
+        "childCount": 0
+      }
+    ],
+    "hasWindowTaboola": false,
+    "bootstrapped": true
+  },
+  "feedReady": {
+    "ok": true,
+    "cardCount": 12
+  },
+  "feedCardCount": 12,
+  "networkHits": [
+    {
+      "url": "https://trc.taboola.com/sg/bombora/1/cm?redirect=https://ml314.com/csync.ashx%3Ffp=%3CTUID%3E%26person_id=3518430209373110326%26eid=50077",
+      "status": 200
+    }
+  ]
+}

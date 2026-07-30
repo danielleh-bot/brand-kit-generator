@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Insider — Visual Brand Kit (Designer mapping × live feed)</title>
+<style>
+  :root { --ink:#12141a; --muted:#5c6470; --line:#e4e7ec; --primary:#002aff; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Garnett,Helvetica Neue,Arial,sans-serif;background:#f3f4f6;color:var(--ink);line-height:1.45}
+  .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);border-bottom:1px solid var(--line);padding:14px 22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  h1{font-size:24px} h1 span{color:var(--primary)}
+  .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+  .intro{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:22px;font-size:14px;color:var(--muted)}
+  .intro a{color:var(--primary)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .filters button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#111;color:#fff}
+  .domain{margin:28px 0}
+  .domain h2{font-size:22px;margin-bottom:4px}
+  .domain .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .prop{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+  .prop.hidden{display:none}
+  .prop header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:8px}
+  .prop h3{font-size:16px}
+  .prop code{font-size:11px;color:var(--muted)}
+  .tier{font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px}
+  .value{background:#f8f9fb;border-radius:8px;padding:8px 10px;margin-bottom:12px;font-size:13px;display:flex;gap:8px;align-items:center}
+  .swatch{width:18px;height:18px;border-radius:4px;border:1px solid #ddd;display:inline-block}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:800px){.cols{grid-template-columns:1fr}}
+  .col-h{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .shot{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fafafa;max-height:220px}
+  .shot img{width:100%;height:220px;object-fit:cover;object-position:top;display:block}
+  footer{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:grid;gap:4px}
+  .mvp{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+  .mvp h2{font-size:16px;margin-bottom:10px}
+  .mvp-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:800px){.mvp-cols{grid-template-columns:1fr}}
+  .mvp li{margin:0 0 8px 18px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <h1><span>Business Insider</span> Visual Brand Kit</h1>
+      <div style="font-size:12px;color:var(--muted)">Designer mapping × live publisher × live Taboola thumbs-1r</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="pill">MVP 11</span>
+      <span class="pill">Partial 5</span>
+      <span class="pill">Unique 3</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="intro">
+      Built from the product designer’s <a href="../../docs/brand-kit-mapping-bi.pdf">Brand Kit mapping BI.pdf</a> and live captures of
+      <a href="https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7">the Amazon warehouse article</a> + homepage.
+      Live Taboola: publisher <code>businessinsider</code>, mode <code>thumbs-1r</code>,
+      placement <code>below-main-column</code>.
+      Each property shows a <strong>live source crop</strong> and the <strong>current feed capture</strong>, plus TRC selector and ship tier.
+      <div style="margin-top:10px"><a href="./feed-prototype.html">Before/After feed prototype</a> ·
+      <a href="./captures/current-feed.png">current-feed.png</a> ·
+      <a href="./brand-kit.json">brand-kit.json</a></div>
+      <div class="filters">
+        <button class="active" onclick="filterTier('all')">All</button>
+        <button onclick="filterTier('standard')">MVP</button>
+        <button onclick="filterTier('partial')">Partial</button>
+        <button onclick="filterTier('unique')">Unique</button>
+      </div>
+    </div>
+    <section class="domain" id="layout">
+        <h2>Layout &amp; Grid</h2>
+        <p class="sub">Column structure, gutters, container max width, dividers</p>
+        <article class="prop" data-tier="unique">
+            <header>
+              <div>
+                <h3>Grid / column structure (context)</h3>
+                <code>layout_patterns.grid</code>
+              </div>
+              <span class="tier" style="background:#fdecea;color:#b42318">Unique / needs platform</span>
+            </header>
+            <div class="value">Homepage multi-module grid (feature + list + section bands)</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> No thumbs-1r hook for homepage module composition</div>
+              <div><strong>Note</strong> Designer mapped BI homepage modules. Current article feed is linear thumbs-1r — composition is Unique.</div>
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div>
+                <h3>Card gutter / spacing</h3>
+                <code>spacing.card_gap</code>
+              </div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value">16–20px (designer annotated gutters)</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .tbl-feed-card margin/padding via loader CSS</div>
+              <div><strong>Note</strong> MVP can approximate card stacking gap; not a full grid gutter system.</div>
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div>
+                <h3>Container max width</h3>
+                <code>spacing.container_max_width</code>
+              </div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value">~720–1200px feed column</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/article-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Placement width owned by publisher page / mode</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Border / divider</h3>
+                <code>colors.css_variables.--border-color-2</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">#cecece</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .tbl-feed-card border-bottom-color</div>
+              
+            </footer>
+          </article>
+      </section>
+<section class="domain" id="type">
+        <h2>Typography</h2>
+        <p class="sub">Garnett per-role scale — titles, links, MIN READ labels</p>
+        <article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Font family</h3>
+                <code>fonts.primary.family</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Garnett</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/article-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .video-title, .branding { font-family }</div>
+              <div><strong>Note</strong> Live crawl + CSS var --bs-body-font-family</div>
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Section title</h3>
+                <code>fonts.type_scale.section_headings</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Garnett 700 / ~28px / #0a0a0a (designer: Markets)</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .tbl-feed-header-text</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Text link</h3>
+                <code>colors.primary.hex</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">#002aff · Garnett 600 ~14px (More Markets)</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> link color / hover on titles via loader</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Card title</h3>
+                <code>fonts.type_scale.article_title_card</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Garnett 500 · 18px / 15px (designer Title roles)</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .video-title</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="unique">
+            <header>
+              <div>
+                <h3>Label (N MIN READ)</h3>
+                <code>brand_voice / meta label</code>
+              </div>
+              <span class="tier" style="background:#fdecea;color:#b42318">Unique / needs platform</span>
+            </header>
+            <div class="value">Garnett 500 · 10px · #71717a · uppercase</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> No dedicated read-time field on thumbs-1r cards</div>
+              <div><strong>Note</strong> Designer mapped MIN READ on BI modules — Unique for current feed mode.</div>
+            </footer>
+          </article>
+      </section>
+<section class="domain" id="color">
+        <h2>Colors</h2>
+        <p class="sub">Live :root vars + swatches from designer mapping</p>
+        <article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Brand / link primary</h3>
+                <code>--base-a-color</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#002aff"></span>#002aff</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> title hover underline, CTA, pre-label</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Brand hover</h3>
+                <code>--base-a-hover-color</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#02c"></span>#02c</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> link/CTA hover</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Primary text</h3>
+                <code>--base-text-color</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#0a0a0a"></span>#0a0a0a</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/article-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .video-title color</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Secondary text</h3>
+                <code>secondary #71717a</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#71717a"></span>#71717a</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .branding / meta</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div>
+                <h3>Bg section</h3>
+                <code>colors.backgrounds.section</code>
+              </div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#faf7f5"></span>#faf7f5</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> No first-class section band on thumbs-1r</div>
+              <div><strong>Note</strong> Designer: Read next warm background — Partial/Unique for feed bands.</div>
+            </footer>
+          </article>
+      </section>
+<section class="domain" id="images">
+        <h2>Images</h2>
+        <p class="sub">No radius · 4:3 · 400×300 / 100×75</p>
+        <article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Thumbnail border radius</h3>
+                <code>photo_style.thumbnail_format.border_radius</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">0px (no border radius)</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .thumbBlock img / .trc_img</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div>
+                <h3>Aspect / sizes</h3>
+                <code>photo_style.thumbnail_format.sizes</code>
+              </div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value">4:3 · 400×300 large · 100×75 small</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Mode controls thumb geometry; CSS can force object-fit</div>
+              
+            </footer>
+          </article>
+      </section>
+<section class="domain" id="ui">
+        <h2>UI Elements</h2>
+        <p class="sub">Icons, tags, labels, buttons — radius/font not (!) color</p>
+        <article class="prop" data-tier="unique">
+            <header>
+              <div>
+                <h3>Article category icon + label</h3>
+                <code>graphics / brand_voice.content_labels</code>
+              </div>
+              <span class="tier" style="background:#fdecea;color:#b42318">Unique / needs platform</span>
+            </header>
+            <div class="value">POWER HOURS / ROBOTICS circular icon + uppercase label</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .trc-pre-label color only today — not icon system</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div>
+                <h3>Video icon + duration</h3>
+                <code>photo_style.video_thumbnails</code>
+              </div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value">Play icon + duration overlay</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .trc-video-play-icon color; duration not a free field</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div>
+                <h3>Button radius + font style</h3>
+                <code>buttons.primary</code>
+              </div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Map radius + Garnett weight — not necessarily blue fill</div>
+            <div class="cols">
+              <div>
+                <div class="col-h">1 · Source (live publisher)</div>
+                <div class="shot"><img src="./captures/homepage-chrome.png" alt="source"></div>
+              </div>
+              <div>
+                <div class="col-h">2 · Current feed / suggested application</div>
+                <div class="shot"><img src="./captures/current-feed.png" alt="feed"></div>
+              </div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .tbl-feed-more-btn</div>
+              <div><strong>Note</strong> Per designer callout: border radius and font style, not (!) color.</div>
+            </footer>
+          </article>
+      </section>
+    <div class="mvp">
+      <h2>A/B framing from this matrix</h2>
+      <div class="mvp-cols">
+        <div>
+          <h3>Variant A — loader MVP</h3>
+          <ul>
+            <li><strong>Card gutter / spacing</strong> — .tbl-feed-card margin/padding via loader CSS</li><li><strong>Container max width</strong> — Placement width owned by publisher page / mode</li><li><strong>Border / divider</strong> — .tbl-feed-card border-bottom-color</li><li><strong>Font family</strong> — .video-title, .branding { font-family }</li><li><strong>Section title</strong> — .tbl-feed-header-text</li><li><strong>Text link</strong> — link color / hover on titles via loader</li><li><strong>Card title</strong> — .video-title</li><li><strong>Brand / link primary</strong> — title hover underline, CTA, pre-label</li><li><strong>Brand hover</strong> — link/CTA hover</li><li><strong>Primary text</strong> — .video-title color</li><li><strong>Secondary text</strong> — .branding / meta</li><li><strong>Bg section</strong> — No first-class section band on thumbs-1r</li><li><strong>Thumbnail border radius</strong> — .thumbBlock img / .trc_img</li><li><strong>Aspect / sizes</strong> — Mode controls thumb geometry; CSS can force object-fit</li><li><strong>Video icon + duration</strong> — .trc-video-play-icon color; duration not a free field</li><li><strong>Button radius + font style</strong> — .tbl-feed-more-btn</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Variant B — unique / platform</h3>
+          <ul>
+            <li><strong>Grid / column structure (context)</strong> — Designer mapped BI homepage modules. Current article feed is linear thumbs-1r — composition is Unique.</li><li><strong>Label (N MIN READ)</strong> — Designer mapped MIN READ on BI modules — Unique for current feed mode.</li><li><strong>Article category icon + label</strong> — .trc-pre-label color only today — not icon system</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+function filterTier(tier){
+  document.querySelectorAll('.prop').forEach(el => {
+    el.classList.toggle('hidden', tier !== 'all' && el.dataset.tier !== tier);
+  });
+  document.querySelectorAll('.filters button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase().includes(tier === 'all' ? 'all' : tier === 'standard' ? 'mvp' : tier));
+  });
+}
+</script>
+</body>
+</html>

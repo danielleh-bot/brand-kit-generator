@@ -1,0 +1,194 @@
+{
+  "slug": "business-insider",
+  "brand": "Business Insider",
+  "baseline": "live",
+  "sourceArticle": "https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7",
+  "taboola": {
+    "publisher_id": "businessinsider",
+    "loader_url": "https://cdn.taboola.com/libtrc/businessinsider/loader.js",
+    "mode": "thumbs-1r",
+    "placement": "below-main-column",
+    "container": "taboola-below-main-column",
+    "target_type": "mix",
+    "feed_label": "You May Like",
+    "capture_note": "Feed DOM captured by bootstrapping loader.js in headed Chrome (xvfb)."
+  },
+  "designerMapping": "docs/brand-kit-mapping-bi.pdf",
+  "counts": {
+    "standard": 11,
+    "partial": 5,
+    "unique": 3,
+    "soft": 0
+  },
+  "domains": [
+    {
+      "id": "layout",
+      "title": "Layout & Grid",
+      "props": [
+        {
+          "name": "Grid / column structure (context)",
+          "token": "layout_patterns.grid",
+          "value": "Homepage multi-module grid (feature + list + section bands)",
+          "tier": "unique",
+          "trc": "No thumbs-1r hook for homepage module composition",
+          "note": "Designer mapped BI homepage modules. Current article feed is linear thumbs-1r — composition is Unique."
+        },
+        {
+          "name": "Card gutter / spacing",
+          "token": "spacing.card_gap",
+          "value": "16–20px (designer annotated gutters)",
+          "tier": "partial",
+          "trc": ".tbl-feed-card margin/padding via loader CSS",
+          "note": "MVP can approximate card stacking gap; not a full grid gutter system."
+        },
+        {
+          "name": "Container max width",
+          "token": "spacing.container_max_width",
+          "value": "~720–1200px feed column",
+          "tier": "partial",
+          "trc": "Placement width owned by publisher page / mode"
+        },
+        {
+          "name": "Border / divider",
+          "token": "colors.css_variables.--border-color-2",
+          "value": "#cecece",
+          "tier": "standard",
+          "trc": ".tbl-feed-card border-bottom-color"
+        }
+      ]
+    },
+    {
+      "id": "type",
+      "title": "Typography",
+      "props": [
+        {
+          "name": "Font family",
+          "token": "fonts.primary.family",
+          "value": "Garnett",
+          "tier": "standard",
+          "trc": ".video-title, .branding { font-family }",
+          "note": "Live crawl + CSS var --bs-body-font-family"
+        },
+        {
+          "name": "Section title",
+          "token": "fonts.type_scale.section_headings",
+          "value": "Garnett 700 / ~28px / #0a0a0a (designer: Markets)",
+          "tier": "standard",
+          "trc": ".tbl-feed-header-text"
+        },
+        {
+          "name": "Text link",
+          "token": "colors.primary.hex",
+          "value": "#002aff · Garnett 600 ~14px (More Markets)",
+          "tier": "standard",
+          "trc": "link color / hover on titles via loader"
+        },
+        {
+          "name": "Card title",
+          "token": "fonts.type_scale.article_title_card",
+          "value": "Garnett 500 · 18px / 15px (designer Title roles)",
+          "tier": "standard",
+          "trc": ".video-title"
+        },
+        {
+          "name": "Label (N MIN READ)",
+          "token": "brand_voice / meta label",
+          "value": "Garnett 500 · 10px · #71717a · uppercase",
+          "tier": "unique",
+          "trc": "No dedicated read-time field on thumbs-1r cards",
+          "note": "Designer mapped MIN READ on BI modules — Unique for current feed mode."
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "title": "Colors",
+      "props": [
+        {
+          "name": "Brand / link primary",
+          "token": "--base-a-color",
+          "value": "#002aff",
+          "tier": "standard",
+          "trc": "title hover underline, CTA, pre-label"
+        },
+        {
+          "name": "Brand hover",
+          "token": "--base-a-hover-color",
+          "value": "#02c",
+          "tier": "standard",
+          "trc": "link/CTA hover"
+        },
+        {
+          "name": "Primary text",
+          "token": "--base-text-color",
+          "value": "#0a0a0a",
+          "tier": "standard",
+          "trc": ".video-title color"
+        },
+        {
+          "name": "Secondary text",
+          "token": "secondary #71717a",
+          "value": "#71717a",
+          "tier": "standard",
+          "trc": ".branding / meta"
+        },
+        {
+          "name": "Bg section",
+          "token": "colors.backgrounds.section",
+          "value": "#faf7f5",
+          "tier": "partial",
+          "trc": "No first-class section band on thumbs-1r",
+          "note": "Designer: Read next warm background — Partial/Unique for feed bands."
+        }
+      ]
+    },
+    {
+      "id": "images",
+      "title": "Images",
+      "props": [
+        {
+          "name": "Thumbnail border radius",
+          "token": "photo_style.thumbnail_format.border_radius",
+          "value": "0px (no border radius)",
+          "tier": "standard",
+          "trc": ".thumbBlock img / .trc_img"
+        },
+        {
+          "name": "Aspect / sizes",
+          "token": "photo_style.thumbnail_format.sizes",
+          "value": "4:3 · 400×300 large · 100×75 small",
+          "tier": "partial",
+          "trc": "Mode controls thumb geometry; CSS can force object-fit"
+        }
+      ]
+    },
+    {
+      "id": "ui",
+      "title": "UI Elements",
+      "props": [
+        {
+          "name": "Article category icon + label",
+          "token": "graphics / brand_voice.content_labels",
+          "value": "POWER HOURS / ROBOTICS circular icon + uppercase label",
+          "tier": "unique",
+          "trc": ".trc-pre-label color only today — not icon system"
+        },
+        {
+          "name": "Video icon + duration",
+          "token": "photo_style.video_thumbnails",
+          "value": "Play icon + duration overlay",
+          "tier": "partial",
+          "trc": ".trc-video-play-icon color; duration not a free field"
+        },
+        {
+          "name": "Button radius + font style",
+          "token": "buttons.primary",
+          "value": "Map radius + Garnett weight — not necessarily blue fill",
+          "tier": "standard",
+          "trc": ".tbl-feed-more-btn",
+          "note": "Per designer callout: border radius and font style, not (!) color."
+        }
+      ]
+    }
+  ]
+}

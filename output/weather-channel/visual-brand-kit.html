@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weather Channel — Visual Brand Kit (live)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#12141a;--muted:#5c6470;--line:#e4e7ec;--primary:#3A61CC}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,Arial,sans-serif;background:#f3f4f6;color:var(--ink);line-height:1.45}
+  .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);border-bottom:1px solid var(--line);padding:14px 22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  h1{font-size:24px} h1 span{color:var(--primary)}
+  .pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px 64px}
+  .intro{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:22px;font-size:14px;color:var(--muted)}
+  .intro a{color:var(--primary)}
+  .filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .filters button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+  .filters button.active{background:#111;color:#fff}
+  .domain{margin:28px 0} .domain h2{font-size:22px;margin-bottom:4px} .domain .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .prop{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+  .prop.hidden{display:none}
+  .prop header{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:8px}
+  .prop h3{font-size:16px} .prop code{font-size:11px;color:var(--muted)}
+  .tier{font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px}
+  .value{background:#f8f9fb;border-radius:8px;padding:8px 10px;margin-bottom:12px;font-size:13px;display:flex;gap:8px;align-items:center}
+  .swatch{width:18px;height:18px;border-radius:4px;border:1px solid #ddd;display:inline-block}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:800px){.cols{grid-template-columns:1fr}}
+  .col-h{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .shot{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fafafa;max-height:220px}
+  .shot img{width:100%;height:220px;object-fit:cover;object-position:top;display:block}
+  footer{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:grid;gap:4px}
+  .mvp{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px}
+  .mvp-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:800px){.mvp-cols{grid-template-columns:1fr}}
+  .mvp li{margin:0 0 8px 18px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <h1><span>The Weather Channel</span> Visual Brand Kit</h1>
+      <div style="font-size:12px;color:var(--muted)">Live publisher × live Taboola organic-thumbs-feed-01-c-new</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="pill">MVP 11</span>
+      <span class="pill">Partial 4</span>
+      <span class="pill">Unique 2</span>
+      <span class="pill">Soft 1</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="intro">
+      Built from the live article
+      <a href="https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends">North Dakota Tornado Upgraded To EF5, Ending Over Decade-Long Drought</a>
+      and live Taboola capture. Publisher <code>theweatherchannel</code>,
+      container <code>taboola-below-content-thumbnails-article</code>,
+      modes <code>organic-thumbs-feed-01-c-new, above-the-feed-premium-card-fp-delta, thumbs-feed-01-b-new</code>.
+      <div style="margin-top:10px">
+        <a href="./feed-prototype.html">Before/After feed prototype</a> ·
+        <a href="./captures/current-feed.png">current-feed.png</a> ·
+        <a href="./mobile-prototype.html">TrueNative mobile (ideal unique)</a> ·
+        <a href="./brand-kit.json">brand-kit.json</a>
+      </div>
+      <div class="filters">
+        <button class="active" onclick="filterTier('all')">All</button>
+        <button onclick="filterTier('standard')">MVP</button>
+        <button onclick="filterTier('partial')">Partial</button>
+        <button onclick="filterTier('unique')">Unique</button>
+        <button onclick="filterTier('soft')">Soft</button>
+      </div>
+    </div>
+    <section class="domain" id="layout"><h2>Layout &amp; Grid</h2><p class="sub">Article column + below-content Taboola placement</p><article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Feed container / placement</h3><code>taboola.container</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">taboola-below-content-thumbnails-article</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> #taboola-below-content-thumbnails-article</div>
+              <div><strong>Note</strong> Live placement: Below Content Thumbnails on article pages</div>
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div><h3>Mode composition (organic + thumbs mix)</h3><code>taboola.modes_in_use</code></div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value">organic-thumbs-feed-01-c-new, above-the-feed-premium-card-fp-delta, thumbs-feed-01-b-new</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Mode-owned card geometry; CSS can paint within mode</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="unique">
+            <header>
+              <div><h3>TrueNative / mobile composition</h3><code>layout_patterns (mobile)</code></div>
+              <span class="tier" style="background:#fdecea;color:#b42318">Unique / needs platform</span>
+            </header>
+            <div class="value">TrueNative iPhone modules (existing mobile-prototype reference)</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/homepage-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Not expressible as paint on desktop thumbs modes alone</div>
+              <div><strong>Note</strong> Keep mobile-prototype.html as ideal Unique composition reference.</div>
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Divider / border</h3><code>colors.css_variables.--border / --dd-border-color</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">#e5e5e5</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .tbl-feed-card border-bottom</div>
+              
+            </footer>
+          </article></section>
+<section class="domain" id="type"><h2>Typography</h2><p class="sub">Inter — live article + feed titles</p><article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Font family</h3><code>fonts.primary.family</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Inter</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .video-title, .branding</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Article / section title</h3><code>fonts.type_scale / h1</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Inter 800 · ~40px · #252422</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .tbl-feed-header-text</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Card title</h3><code>fonts.type_scale.article_title_card</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Inter 700 · ~16px · #252422</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .video-title</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Meta / secondary label</h3><code>colors.text.secondary</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">#8c8c8c</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .branding</div>
+              
+            </footer>
+          </article></section>
+<section class="domain" id="color"><h2>Colors</h2><p class="sub">Live accents + navy chrome</p><article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Accent / link blue</h3><code>colors.primary.hex</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#3A61CC"></span>#3A61CC</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/homepage-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> title hover, CTA, pre-label</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div><h3>Masthead navy</h3><code>colors.masthead</code></div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#0C2340"></span>#0C2340</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/homepage-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Feed header dark variant / sponsored overlay</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Primary text</h3><code>colors.text.primary</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value"><span class="swatch" style="background:#252422"></span>#252422</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .video-title color</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="unique">
+            <header>
+              <div><h3>Alert / severe accents</h3><code>colors.accents / brand_voice.content_labels.severe_weather</code></div>
+              <span class="tier" style="background:#fdecea;color:#b42318">Unique / needs platform</span>
+            </header>
+            <div class="value">SEVERE / WATCH / FORECAST multi-badge system</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/homepage-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Single .trc-pre-label today — not multi-alert inventory</div>
+              <div><strong>Note</strong> Highest weather-vertical unique gap vs current thumbs modes.</div>
+            </footer>
+          </article></section>
+<section class="domain" id="images"><h2>Images</h2><p class="sub">Sharp thumbs · video play indicator</p><article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Thumbnail border radius</h3><code>photo_style.thumbnail_format.border_radius</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">0px</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .thumbBlock img / .trc_img</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div><h3>Aspect ratio</h3><code>photo_style.thumbnail_format.aspect_ratio</code></div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value">16:9</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Mode-controlled; CSS object-fit can approximate</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="partial">
+            <header>
+              <div><h3>Video play indicator</h3><code>photo_style.video_thumbnails</code></div>
+              <span class="tier" style="background:#fff6e0;color:#9a6b00">Partial</span>
+            </header>
+            <div class="value">Play button icon</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/homepage-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .trc-video-play-icon</div>
+              
+            </footer>
+          </article></section>
+<section class="domain" id="ui"><h2>UI Elements</h2><p class="sub">Labels, sponsored treatment, CTAs</p><article class="prop" data-tier="standard">
+            <header>
+              <div><h3>Sponsored label</h3><code>badges / sponsored</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">Sponsored overlay on mixed feed</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .trc_sponsored_overlay</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="standard">
+            <header>
+              <div><h3>See more / CTA button</h3><code>buttons.primary</code></div>
+              <span class="tier" style="background:#e8f7ef;color:#1a7f4b">Standard / MVP</span>
+            </header>
+            <div class="value">#3A61CC fill · Inter bold · modest radius</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/homepage-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> .tbl-feed-more-btn</div>
+              
+            </footer>
+          </article>
+<article class="prop" data-tier="soft">
+            <header>
+              <div><h3>Conversational forecast voice</h3><code>brand_voice.headline_style</code></div>
+              <span class="tier" style="background:#f3e8ff;color:#5b21b6">Soft / Gen AI</span>
+            </header>
+            <div class="value">Here’s / Why / How explainers + urgent severe headlines</div>
+            <div class="cols">
+              <div><div class="col-h">1 · Source (live publisher)</div><div class="shot"><img src="./captures/article-chrome.png" alt=""></div></div>
+              <div><div class="col-h">2 · Current feed / application</div><div class="shot"><img src="./captures/current-feed.png" alt=""></div></div>
+            </div>
+            <footer>
+              <div><strong>TRC</strong> Content rewrite — not loader CSS</div>
+              <div><strong>Note</strong> Soft/Gen AI tier — hand-authored in ideal copy; enrich stub on main.</div>
+            </footer>
+          </article></section>
+    <div class="mvp">
+      <h2>A/B framing</h2>
+      <div class="mvp-cols">
+        <div>
+          <h3>Variant A — loader MVP</h3>
+          <ul><li><strong>Feed container / placement</strong> — #taboola-below-content-thumbnails-article</li><li><strong>Mode composition (organic + thumbs mix)</strong> — Mode-owned card geometry; CSS can paint within mode</li><li><strong>Divider / border</strong> — .tbl-feed-card border-bottom</li><li><strong>Font family</strong> — .video-title, .branding</li><li><strong>Article / section title</strong> — .tbl-feed-header-text</li><li><strong>Card title</strong> — .video-title</li><li><strong>Meta / secondary label</strong> — .branding</li><li><strong>Accent / link blue</strong> — title hover, CTA, pre-label</li><li><strong>Masthead navy</strong> — Feed header dark variant / sponsored overlay</li><li><strong>Primary text</strong> — .video-title color</li><li><strong>Thumbnail border radius</strong> — .thumbBlock img / .trc_img</li><li><strong>Aspect ratio</strong> — Mode-controlled; CSS object-fit can approximate</li><li><strong>Video play indicator</strong> — .trc-video-play-icon</li><li><strong>Sponsored label</strong> — .trc_sponsored_overlay</li><li><strong>See more / CTA button</strong> — .tbl-feed-more-btn</li></ul>
+        </div>
+        <div>
+          <h3>Variant B — unique / soft</h3>
+          <ul><li><strong>TrueNative / mobile composition</strong> — Keep mobile-prototype.html as ideal Unique composition reference.</li><li><strong>Alert / severe accents</strong> — Highest weather-vertical unique gap vs current thumbs modes.</li><li><strong>Conversational forecast voice</strong> — Soft/Gen AI tier — hand-authored in ideal copy; enrich stub on main.</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+function filterTier(tier){
+  document.querySelectorAll('.prop').forEach(el=>{
+    el.classList.toggle('hidden', tier!=='all' && el.dataset.tier!==tier);
+  });
+  document.querySelectorAll('.filters button').forEach(btn=>{
+    const label=btn.textContent.trim().toLowerCase();
+    const active = tier==='all' ? label==='all' : label.includes(tier==='standard'?'mvp':tier);
+    btn.classList.toggle('active', active);
+  });
+}
+</script>
+</body>
+</html>

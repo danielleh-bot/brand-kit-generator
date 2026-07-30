@@ -1,0 +1,430 @@
+{
+  "brand": {
+    "name": "Leckerschmecker",
+    "tagline": "Einzigartige Rezepte für jeden Tag",
+    "tagline_en": "Unique recipes for every day",
+    "website": "https://www.leckerschmecker.me",
+    "owner": "FUNKE Mediengruppe",
+    "parent_brand": "FUNKE Digital GmbH",
+    "description": "Germany's popular food and recipe destination, offering creative everyday recipes, food art, and cooking inspiration since 2016."
+  },
+  "logos": {
+    "primary": {
+      "type": "wordmark",
+      "text": "Leckerschmecker",
+      "description": "Custom typographic wordmark in Jost font, rendered in forest green on white/transparent background. Clean, modern, rounded geometric letterforms. Purely typographic — no icon or symbol.",
+      "url": "https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/09/leckerschmecker-logo-main.png",
+      "text_color": "#0e4027",
+      "desktop_dimensions": "372px x 121px",
+      "mobile_dimensions": "175px x 57px",
+      "max_dimensions": "600px x 320px",
+      "font": "Jost"
+    },
+    "favicon": {
+      "url": "https://www.leckerschmecker.me/wp-content/uploads/sites/6/2025/10/leckerschecker-icon-gruen.png",
+      "color": "#0e4027"
+    },
+    "parent_brand": {
+      "name": "FUNKE Mediengruppe",
+      "corporate_color": "#FF0000",
+      "relationship": "Umbrella brand with group anchor identifier"
+    }
+  },
+  "colors": {
+    "primary": {
+      "name": "Forest Green",
+      "hex": "#0e4027",
+      "rgb": "rgb(14, 64, 39)",
+      "usage": [
+        "Logo",
+        "Header/navigation background",
+        "CTA buttons",
+        "Recipe card accents",
+        "Section headings",
+        "Primary text on light backgrounds"
+      ]
+    },
+    "primary_variants": {
+      "darken_5": {
+        "name": "Deep Forest",
+        "hex": "#093b22",
+        "usage": "Hover states"
+      },
+      "darken_10": {
+        "name": "Darkest Green",
+        "hex": "#04361d",
+        "usage": "Top header bar background"
+      },
+      "variation": {
+        "name": "Near Black Green",
+        "hex": "#002209",
+        "usage": "Deepest green variant"
+      }
+    },
+    "secondary": {
+      "name": "Bright Yellow",
+      "hex": "#faeb5b",
+      "rgb": "rgb(250, 235, 91)",
+      "usage": [
+        "Accent highlights",
+        "Call-to-action accents",
+        "Visual emphasis elements"
+      ]
+    },
+    "secondary_variant": {
+      "name": "Muted Gold",
+      "hex": "#d2c333",
+      "usage": "Secondary hover states"
+    },
+    "accent": {
+      "sage_green": {
+        "name": "Sage Green",
+        "hex": "#6a8c73",
+        "rgb": "rgb(106, 140, 115)",
+        "usage": "Recipe list borders, subtle accents"
+      },
+      "soft_mint": {
+        "name": "Soft Mint",
+        "hex": "#b2dcc0",
+        "rgb": "rgb(178, 220, 192)",
+        "usage": "Newsletter buttons, sponsor label flags, soft CTAs"
+      }
+    },
+    "text": {
+      "primary": {
+        "name": "Black",
+        "hex": "#000000",
+        "usage": "Maximum contrast headlines"
+      },
+      "heading_alt": {
+        "name": "Near Black",
+        "hex": "#111111",
+        "usage": "Heading text alternate"
+      },
+      "dark": {
+        "name": "Very Dark Gray",
+        "hex": "#313131",
+        "usage": "Dark text elements"
+      },
+      "body": {
+        "name": "Body Dark Gray",
+        "hex": "#444444",
+        "usage": "Body text, article content"
+      },
+      "secondary": {
+        "name": "Medium Gray",
+        "hex": "#767676",
+        "usage": "Secondary text, captions, meta info"
+      },
+      "caption": {
+        "name": "Caption Gray",
+        "hex": "#555555",
+        "usage": "Image captions"
+      }
+    },
+    "backgrounds": {
+      "base": {
+        "name": "White",
+        "hex": "#FFFFFF",
+        "usage": "Main page background, card backgrounds, footer"
+      },
+      "cream": {
+        "name": "Off-White Cream",
+        "hex": "#f9f9ed",
+        "usage": "Newsletter popup background, recipe popup background"
+      },
+      "near_white": {
+        "name": "Near White",
+        "hex": "#fafafa",
+        "usage": "Recipe template background"
+      },
+      "light_gray": {
+        "name": "Light Gray",
+        "hex": "#EEEEEE",
+        "usage": "Preset light gray areas"
+      }
+    },
+    "borders": {
+      "divider": {
+        "name": "Border Gray",
+        "hex": "#ebebeb",
+        "usage": "Footer borders, section dividers"
+      }
+    },
+    "gradients": {
+      "green": {
+        "value": "linear-gradient(135deg, #0e4027 0%, #001800 100%)",
+        "usage": "Premium CTA backgrounds"
+      },
+      "yellow": {
+        "value": "linear-gradient(135deg, #faeb5b 0%, #d2c333 100%)",
+        "usage": "Accent highlight backgrounds"
+      }
+    }
+  },
+  "fonts": {
+    "primary": {
+      "family": "Jost",
+      "fallbacks": [
+        "Helvetica",
+        "sans-serif"
+      ],
+      "weights": {
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700,
+        "extrabold": 800
+      },
+      "variable": true,
+      "weight_range": "100-900",
+      "font_display": "swap",
+      "usage": "All UI text: headlines, navigation, body copy, buttons, recipe cards — single typeface system"
+    },
+    "system_fallback": {
+      "stack": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+      "usage": "System fallback when Jost is unavailable"
+    },
+    "type_scale": {
+      "h1": {
+        "size": "2.2em",
+        "pixels": "35.2px",
+        "weight": 700,
+        "line_height": "1.1em",
+        "family": "Jost"
+      },
+      "h2": {
+        "size": "1.8em–2.2em",
+        "weight": 700,
+        "line_height": "1.1em",
+        "family": "Jost",
+        "note": "Context-dependent sizing"
+      },
+      "h3": {
+        "size": "1.2em–1.8em",
+        "weight": 600,
+        "line_height": "1.2em",
+        "family": "Jost"
+      },
+      "body": {
+        "size": "16px",
+        "weight": 400,
+        "line_height": "1.2em",
+        "family": "Jost",
+        "color": "#444444"
+      },
+      "large": {
+        "size": "2.25em",
+        "pixels": "36px",
+        "weight": 700
+      },
+      "small": {
+        "size": "0.875em",
+        "pixels": "14px",
+        "weight": 400
+      },
+      "buttons": {
+        "size": "1.125em",
+        "pixels": "18px",
+        "weight": 600,
+        "text_transform": "none"
+      },
+      "navigation": {
+        "size": "16px",
+        "weight": 500,
+        "family": "Jost"
+      },
+      "wp_presets": {
+        "small": "16px",
+        "medium": "20px",
+        "large": "36px",
+        "x-large": "42px",
+        "huge": "44px"
+      }
+    }
+  },
+  "brand_voice": {
+    "language": "German (de-DE)",
+    "personality_traits": [
+      "Approachable",
+      "Creative",
+      "Everyday-friendly",
+      "Visually-driven",
+      "Playful"
+    ],
+    "tone": "Warm, enthusiastic food inspiration — accessible to home cooks of all skill levels",
+    "content_categories": [
+      "Rezepte (Recipes)",
+      "Schnelle Rezepte (Quick Recipes)",
+      "Magazin (Magazine)",
+      "Frühstück (Breakfast)",
+      "Aufläufe (Casseroles)",
+      "Pizza",
+      "Salate (Salads)",
+      "Suppen (Soups)",
+      "Vegetarisch & Vegan"
+    ],
+    "headline_style": {
+      "format": "Descriptive, appetizing, sentence case",
+      "tone": "Enthusiastic and inviting",
+      "case": "Sentence case"
+    },
+    "sponsored_label": "Anzeige"
+  },
+  "photo_style": {
+    "food_photography": {
+      "style": "High-quality editorial food photography",
+      "characteristics": [
+        "Natural lighting dominates",
+        "Both preparation-process shots and finished-dish presentations",
+        "Warm, appetizing color grading",
+        "Overhead and 45-degree angle shots",
+        "Clean backgrounds with minimal props"
+      ],
+      "standard_width": "1024px"
+    },
+    "thumbnail_format": {
+      "aspect_ratio": "16:9 and 4:3",
+      "border_radius": "0px (sharp corners on images)",
+      "hover_effect": "Subtle opacity or scale transition"
+    },
+    "social_style": {
+      "instagram_followers": "656K",
+      "tiktok_followers": "584.6K",
+      "emphasis": "Quick, visually appealing recipe videos and daily food content"
+    }
+  },
+  "layout_patterns": {
+    "max_widths": {
+      "site_container": "1600px",
+      "recipe_card_wide": "950px",
+      "recipe_card_narrow": "650px",
+      "recipe_header_meta": "800px"
+    },
+    "breakpoints": {
+      "mobile": "768px",
+      "tablet": "781px",
+      "desktop": "1199px"
+    },
+    "header": {
+      "layers": [
+        "Top bar (darkest green #04361d)",
+        "Main header (primary green #0e4027 with logo, search, newsletter CTA)",
+        "Navigation bar (Rezepte, Schnelle Rezepte, Magazin, Über uns)"
+      ],
+      "style": "Sticky, dark green, white text"
+    },
+    "content_cards": {
+      "recipe": "Image top + title + prep time badge + ingredient count below",
+      "grid": "Multi-column responsive grid with consistent spacing",
+      "gap": "2em column gap"
+    },
+    "spacing": {
+      "base": "1rem (16px)",
+      "small": "0.44rem (~7px)",
+      "medium": "1.5rem (24px)",
+      "large": "2.25rem (36px)",
+      "xl": "3.38rem (54px)",
+      "xxl": "5.06rem (81px)",
+      "flex_gap": "0.5em",
+      "column_gap": "2em"
+    },
+    "footer": {
+      "background": "#FFFFFF",
+      "text_color": "#000000",
+      "border_top": "#ebebeb",
+      "section_dividers": "#ebebeb"
+    }
+  },
+  "buttons": {
+    "primary": {
+      "background": "#0e4027",
+      "text_color": "#FFFFFF",
+      "border_radius": "9999px",
+      "padding": "calc(.667em + 2px) calc(1.333em + 2px)",
+      "font_size": "1.125em",
+      "hover_background": "#093b22"
+    },
+    "outline": {
+      "background": "transparent",
+      "border": "2px solid currentColor",
+      "border_radius": "9999px",
+      "padding": ".667em 1.333em"
+    },
+    "soft_cta": {
+      "background": "#b2dcc0",
+      "text_color": "#000000",
+      "border_radius": "9999px",
+      "usage": "Newsletter signups, secondary actions"
+    }
+  },
+  "shadows": {
+    "natural": "6px 6px 9px rgba(0,0,0,0.2)",
+    "deep": "12px 12px 50px rgba(0,0,0,0.4)",
+    "sharp": "6px 6px 0px rgba(0,0,0,0.2)"
+  },
+  "border_radius": {
+    "buttons": "9999px (pill)",
+    "recipe_boxes": "5px",
+    "overlays": "4px",
+    "images": "0px (sharp corners)"
+  },
+  "recipe_card": {
+    "container": {
+      "background": "#FFFFFF",
+      "color": "#0e4027",
+      "border_top": "1px solid #0e4027",
+      "max_width": "1600px",
+      "margin": "20px auto",
+      "font_family": "Jost",
+      "font_size": "16px",
+      "line_height": "1.2em"
+    },
+    "css_variables": {
+      "accent_color": "#0e4027",
+      "main_background": "#FFFFFF",
+      "list_border_color": "#6a8c73",
+      "popup_background": "#f9f9ed",
+      "popup_button_background": "#b2dcc0"
+    },
+    "sponsor_label": {
+      "background": "#b2dcc0",
+      "text_color": "#000000"
+    }
+  },
+  "taboola_integration": {
+    "widget_id": "thumbs-feed-01-b",
+    "products": [
+      "Taboola Feed",
+      "Explore More",
+      "Header Bidding",
+      "Backfill"
+    ],
+    "revenue_share": "35% of total revenue from Explore More",
+    "organic_ctr_lift": "~20%",
+    "partnership": "4-year exclusive contract (May 2023)"
+  },
+  "metadata": {
+    "analysis_date": "2026-04-14",
+    "source_url": "https://www.leckerschmecker.me",
+    "analysis_method": "Automated web crawling with CSS extraction, computed style analysis, and web research",
+    "parent_brand_source": "FUNKE Mediengruppe corporate identity by CRENEO",
+    "enrichment": {
+      "status": "stubbed_not_wired",
+      "reason": "Live Gen AI enrichment is not on main. Soft brand_voice fields are hand-authored in ideal prototypes. See feat/deep-crawl-enrich-feed-mapping lib/enrich.js for the Claude pipeline.",
+      "soft_paths": [
+        "brand_voice.tone",
+        "brand_voice.personality_traits",
+        "brand_voice.headline_style.tone",
+        "brand_voice.headline_style.pattern",
+        "brand_voice.content_distinction",
+        "photo_style.food_photography.style",
+        "photo_style.aesthetic",
+        "logos.primary.description"
+      ],
+      "skipped": true,
+      "noEnrich": true
+    }
+  }
+}

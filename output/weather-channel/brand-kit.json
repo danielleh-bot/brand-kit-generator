@@ -1,411 +1,349 @@
 {
   "brand": {
     "name": "The Weather Channel",
-    "tagline": "Weather forecasts, news, and information you need to plan your day.",
+    "tagline": "",
     "website": "https://weather.com",
-    "description": "The Weather Channel provides national and local weather forecasts, severe weather alerts, radar maps, and weather-related news. Owned by Allen Media Group, TWC is the most-visited weather media property in the US.",
-    "language": "en"
+    "description": "After over 12 years, the EF5 tornado drought in the U.S. has come to an end. A tornado that struck Enderlin, North Dakota, in June was just upgraded to an EF5. Find the details here.",
+    "language": "en-US"
   },
   "logos": {
-    "primary": {
-      "type": "combination",
-      "text": "The Weather Channel",
-      "font": "Custom TWC wordmark (condensed sans-serif, title case)",
-      "color": "#FFFFFF",
-      "background": "#0C2340",
-      "treatment": "White wordmark on dark navy masthead. The 'W' glyph is occasionally used as a standalone monogram in app icons and social avatars."
-    },
-    "brand_mark": {
-      "name": "TWC W monogram",
-      "description": "A stylized white 'W' icon used as favicon, app icon, and social avatar.",
-      "background": "#0C2340",
-      "foreground": "#FFFFFF"
-    },
-    "favicon_url": "https://weather.com/favicon.ico"
+    "primary": {},
+    "variants": [],
+    "brand_mark": null,
+    "favicon_url": "https://weather.com/_next/static/media/favicon-16x16.006_brtstnogb.png"
   },
   "colors": {
     "primary": {
-      "name": "TWC Blue",
-      "hex": "#0078D4",
-      "rgb": "rgb(0, 120, 212)",
+      "name": "TWC Link / Accent Blue",
+      "hex": "#3A61CC",
       "usage": [
-        "CTA buttons",
-        "Active nav highlights",
-        "Link text",
-        "Section accent borders",
-        "Interactive elements"
-      ],
-      "source": "extracted"
-    },
-    "primary_variants": {
-      "darken_5": {
-        "hex": "#006CBF",
-        "rgb": "rgb(0, 108, 191)"
-      },
-      "darken_10": {
-        "hex": "#0060AA",
-        "rgb": "rgb(0, 96, 170)"
-      }
-    },
-    "secondary": {
-      "name": "TWC Navy",
-      "hex": "#0C2340",
-      "rgb": "rgb(12, 35, 64)",
-      "usage": [
-        "Header background",
-        "Dark sections",
-        "Footer background",
-        "Overlay backgrounds"
+        "Links",
+        "CTAs",
+        "Interactive accents"
       ],
       "source": "extracted"
     },
     "text": {
       "primary": {
-        "name": "Dark Charcoal",
-        "hex": "#1B1B1B",
-        "rgb": "rgb(27, 27, 27)",
+        "hex": "#252422",
+        "source": "extracted",
         "usage": [
-          "Headlines",
-          "Article body text"
-        ],
-        "source": "extracted"
+          "Headlines"
+        ]
       },
       "secondary": {
-        "name": "Slate Gray",
-        "hex": "#555555",
-        "rgb": "rgb(85, 85, 85)",
+        "hex": "#8c8c8c",
+        "source": "extracted",
         "usage": [
-          "Subheadings",
-          "Article deck/lead"
-        ],
-        "source": "extracted"
+          "Meta / labels"
+        ]
       },
       "tertiary": {
-        "name": "Medium Gray",
-        "hex": "#8B8D8E",
-        "rgb": "rgb(139, 141, 142)",
+        "name": "Tertiary Text",
+        "hex": "#676767",
+        "rgb": "rgb(103, 103, 103)",
         "usage": [
-          "Timestamps",
-          "Byline metadata",
-          "Source attribution"
+          "Button text",
+          "Article deck"
         ],
         "source": "extracted"
       }
     },
     "backgrounds": {
       "base": {
-        "name": "White",
-        "hex": "#FFFFFF",
-        "rgb": "rgb(255, 255, 255)",
-        "usage": [
-          "Page background",
-          "Card surface"
-        ],
+        "hex": "#fff",
         "source": "extracted"
       },
       "section": {
-        "name": "Light Gray",
-        "hex": "#F2F4F4",
-        "rgb": "rgb(242, 244, 244)",
-        "usage": [
-          "Section backgrounds",
-          "Card hover state",
-          "Content well"
-        ],
-        "source": "extracted"
+        "hex": "#f5f7fa",
+        "source": "derived"
       },
-      "secondary": {
-        "name": "Cool Gray",
-        "hex": "#E8EAEB",
-        "rgb": "rgb(232, 234, 235)",
-        "usage": [
-          "Card borders",
-          "Dividers",
-          "Separator lines"
-        ],
-        "source": "extracted"
-      },
+      "secondary": null,
       "dark": {
-        "name": "TWC Navy",
-        "hex": "#0C2340",
-        "rgb": "rgb(12, 35, 64)",
+        "name": "Dark Background",
+        "hex": "#252422",
+        "rgb": "rgb(37, 36, 34)",
         "usage": [
-          "Header",
-          "Footer",
-          "Dark overlay sections"
+          "Links",
+          "Button text",
+          "Navigation",
+          "Headlines",
+          "Body text",
+          "Footer background",
+          "Article deck"
         ],
         "source": "extracted"
       }
     },
     "accents": {
-      "warning_yellow": {
-        "name": "Severe Weather Yellow",
-        "hex": "#FFBF00",
-        "rgb": "rgb(255, 191, 0)",
-        "usage": [
-          "Severe weather alerts",
-          "Warning badges"
-        ],
-        "source": "extracted"
-      },
-      "negative_red": {
-        "name": "Alert Red",
-        "hex": "#D72B2B",
-        "rgb": "rgb(215, 43, 43)",
-        "usage": [
-          "Extreme weather alerts",
-          "Breaking news flag"
-        ],
-        "source": "extracted"
-      },
-      "positive_green": {
-        "name": "All-Clear Green",
-        "hex": "#00875A",
-        "rgb": "rgb(0, 135, 90)",
-        "usage": [
-          "Low risk indicator",
-          "Positive status"
-        ],
-        "source": "extracted"
-      },
       "info_blue": {
-        "name": "Link Blue",
-        "hex": "#0078D4",
-        "rgb": "rgb(0, 120, 212)",
+        "name": "Info Blue",
+        "hex": "#3A61CC",
+        "rgb": "rgb(58, 97, 204)",
         "usage": [
-          "In-body article links"
+          "Links"
         ],
         "source": "extracted"
       }
+    },
+    "secondary": {
+      "name": "Secondary Accent",
+      "hex": "#3A61CC",
+      "rgb": "rgb(58, 97, 204)",
+      "usage": [
+        "Links"
+      ],
+      "source": "extracted"
+    },
+    "primary_variants": {
+      "darken_5": {
+        "hex": "#2D3948",
+        "name": "Darker primary",
+        "usage": "Hover states",
+        "source": "derived"
+      },
+      "darken_10": {
+        "hex": "#293543",
+        "name": "Deepest primary",
+        "usage": "Active/pressed states",
+        "source": "derived"
+      }
+    },
+    "primary_hover": {
+      "hex": "#2a4fa8",
+      "usage": [
+        "Link hover"
+      ],
+      "source": "derived"
+    },
+    "masthead": {
+      "hex": "#0C2340",
+      "name": "TWC Navy",
+      "usage": [
+        "Header / dark chrome"
+      ],
+      "source": "brand-reference+live"
+    },
+    "css_variables": {
+      "scraped": {
+        "--background": "#fff",
+        "--primary": "#171717",
+        "--primary-foreground": "#fafafa",
+        "--border": "#e5e5e5",
+        "--sidebar-primary": "#171717",
+        "--sidebar-primary-foreground": "#fafafa",
+        "--sidebar-border": "#e5e5e5",
+        "--launcher--global-font-size-level": "0",
+        "--dd-background-color": "#ffffff",
+        "--dd-text-color": "#2F3C4C",
+        "--dd-text-meta-color": "#8c8c8c",
+        "--dd-input-background": "#ffffff",
+        "--dd-border-color": "#d7d7d7",
+        "--dd-primary-gradient-start": "#5e53e2",
+        "--dd-bg-hover-color": "color-mix(in srgb, var(--dd-background-color), var(--dd-text-color) 5%)",
+        "--dd-framed-gradient-background-start": "color-mix(in srgb, var(--dd-primary-color) 8%, var(--dd-background-color))",
+        "--dd-widget-divider-color": "#f3f3f3",
+        "--dd-result-divider-color": "#f3f3f3",
+        "--dd-frame-divider-color": "#ffffff",
+        "--dd-overlay-backdrop-color": "rgba(34, 34, 34, 0.4)",
+        "--dd-tooltip-background": "#f3f3f3",
+        "--dd-widget-upside-down-background": "transparent",
+        "--dd-link-color": "var(--dd-primary-color)",
+        "--dd-light-card-background": "transparent",
+        "--dd-error-color": "#6c1010",
+        "--dd-brand-logo-color": "#021e30",
+        "--dd-brand-icon-color": "#8c8c8c",
+        "--dd-text-font": "Inter",
+        "--dd-title-font": "Inter",
+        "--dd-primary-color": "#003399",
+        "--cm-video-brand-primary": "var(--yb-grape-jelly, #7e1fff)",
+        "--cm-video-text-primary": "var(--yb-text-primary, #1d2228)",
+        "--cm-video-bg-primary": "var(--yb-background-color, #ffffff)",
+        "--cm-video-border-light": "var(--yb-dirty-seagull, #e0e4e9)",
+        "--cm-video-border-accent": "var(--cm-video-brand-primary)",
+        "--cm-video-border-on-dark": "var(--yb-white, #ffffff)",
+        "--cm-video-repeat-border": "var(--cm-video-border-on-dark, #ffffff)",
+        "--cm-video-repeat-border-radius": "11px",
+        "--cm-video-label-border-radius": "8px"
+      },
+      "computed": {}
     }
   },
   "fonts": {
     "primary": {
-      "family": "Helvetica Neue",
+      "family": "Inter",
       "fallbacks": [
-        "Helvetica",
         "Arial",
         "sans-serif"
       ],
       "weights": {
-        "regular": 400,
-        "medium": 500,
-        "bold": 700,
-        "black": 900
+        "bold": 800,
+        "regular": 400
       },
-      "usage": "Headlines, Navigation, Buttons, Section titles",
-      "source": "extracted",
-      "is_generic": false,
-      "google_equivalent": "Inter"
+      "usage": "Headlines, body, navigation",
+      "source": "extracted"
     },
     "secondary": {
-      "family": "Georgia",
-      "weight": 400,
+      "family": "Arial",
+      "weight": 600,
       "style": "normal",
-      "usage": "Body text, Article paragraphs, Long-form content",
-      "source": "extracted",
-      "google_equivalent": "Libre Baskerville"
+      "usage": "Buttons",
+      "source": "extracted"
     },
     "tertiary": [],
     "type_scale": {
       "section_headings": {
         "size": "18px",
-        "weight": 700,
-        "family": "Helvetica Neue",
-        "line_height": "1.2",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.02em",
-        "color": "#1B1B1B",
+        "weight": 500,
+        "family": "Inter",
+        "line_height": "23.4px",
+        "color": "#252422",
         "source": "extracted",
-        "matched_selector": "h2, .section-title"
+        "matched_selector": "h2, .section-title, [class*=\"section-head\"]"
       },
       "article_title_hero": {
-        "size": "32px",
-        "weight": 700,
-        "family": "Helvetica Neue",
-        "line_height": "1.15",
-        "color": "#1B1B1B",
+        "size": "40px",
+        "weight": 800,
+        "family": "Inter",
+        "line_height": "44px",
+        "letter_spacing": "-0.8px",
+        "color": "#252422",
         "source": "extracted",
-        "matched_selector": "h1, .headline"
+        "matched_selector": "h1, .headline, [class*=\"headline\"]"
       },
       "article_title_card": {
-        "size": "16px",
+        "size": "22px",
         "weight": 700,
-        "family": "Helvetica Neue",
-        "line_height": "1.3",
-        "color": "#1B1B1B",
-        "source": "extracted",
-        "matched_selector": ".card-title, .content-card h3"
+        "family": "Inter",
+        "source": "fallback",
+        "attempted_selector": ".card h3, .card-title, [class*=\"card\"] h3"
       },
       "article_lead": {
         "size": "18px",
-        "weight": 400,
-        "family": "Georgia",
-        "line_height": "1.5",
-        "color": "#555555",
-        "source": "extracted",
-        "matched_selector": ".article-lead, .deck"
+        "weight": 700,
+        "family": "Inter",
+        "source": "fallback",
+        "attempted_selector": ".lead, .deck, .article-lead, [class*=\"subtitle\"]"
       },
       "article_body": {
-        "size": "16px",
-        "weight": 400,
-        "family": "Georgia",
-        "line_height": "1.7",
-        "color": "#1B1B1B",
+        "size": "14px",
+        "weight": 700,
+        "family": "Inter",
+        "line_height": "18.2px",
+        "letter_spacing": "-0.28px",
+        "color": "#252422",
         "source": "extracted",
-        "matched_selector": "article p"
+        "matched_selector": "article p, .article-body p, .story-body p"
       },
       "navigation": {
-        "size": "14px",
-        "weight": 500,
-        "family": "Helvetica Neue",
-        "line_height": "1.2",
-        "text_transform": "none",
-        "letter_spacing": "0em",
-        "color": "#FFFFFF",
+        "size": "16px",
+        "weight": 400,
+        "family": "Inter",
+        "line_height": "16px",
         "source": "extracted",
-        "matched_selector": "nav a"
+        "matched_selector": "nav a, [role=\"navigation\"] a"
       },
       "utility_bar": {
-        "size": "12px",
-        "weight": 500,
-        "family": "Helvetica Neue",
-        "text_transform": "none",
-        "letter_spacing": "0em",
-        "color": "#B0BEC5",
-        "source": "extracted",
-        "matched_selector": ".utility a"
+        "size": "13px",
+        "weight": 400,
+        "family": "Inter",
+        "source": "fallback",
+        "attempted_selector": ".utility a, .topbar a, [class*=\"utility\"] a"
       },
       "category_pills": {
-        "size": "12px",
-        "weight": 700,
-        "family": "Helvetica Neue",
-        "text_transform": "uppercase",
-        "letter_spacing": "0.04em",
-        "color": "#0078D4",
+        "size": "16px",
+        "weight": 400,
+        "family": "Inter",
+        "line_height": "28px",
+        "color": "#2F3C4C",
         "source": "extracted",
-        "matched_selector": "[class*='category'], [class*='tag']"
+        "matched_selector": "[class*=\"pill\"], [class*=\"chip\"], [class*=\"tag\"], [class*=\"filter\"] a"
       },
       "buttons": {
-        "size": "14px",
-        "weight": 700,
-        "family": "Helvetica Neue",
-        "text_transform": "none",
-        "letter_spacing": "0.01em",
-        "color": "#FFFFFF",
+        "size": "16px",
+        "weight": 600,
+        "family": "Inter",
+        "line_height": "16px",
+        "color": "#252422",
         "source": "extracted",
-        "matched_selector": "button, .btn"
+        "matched_selector": "button, .btn, [role=\"button\"]"
       },
       "meta_text": {
-        "size": "12px",
+        "size": "14px",
         "weight": 400,
-        "family": "Helvetica Neue",
-        "color": "#8B8D8E",
+        "family": "Inter",
+        "line_height": "14px",
         "source": "extracted",
-        "matched_selector": "time, .byline"
+        "matched_selector": "time, .date, [class*=\"meta\"], [class*=\"timestamp\"], figcaption"
+      },
+      "opinion_headline": {
+        "size": "18px",
+        "weight": 500,
+        "family": "Inter",
+        "style": "italic"
       }
-    }
-  },
-  "buttons": {
-    "primary": {
-      "background_color": "#0078D4",
-      "text_color": "#FFFFFF",
-      "border_radius": "4px",
-      "padding": "10px 20px",
-      "font_weight": 700,
-      "text_transform": "none",
-      "letter_spacing": "0.01em",
-      "font_size": "14px",
-      "hover_background": "#006CBF",
-      "source": "extracted"
-    },
-    "secondary": {
-      "background_color": "transparent",
-      "text_color": "#0078D4",
-      "border": "1px solid #0078D4",
-      "border_radius": "4px",
-      "padding": "10px 20px",
-      "font_weight": 700,
-      "text_transform": "none",
-      "source": "extracted"
     }
   },
   "brand_voice": {
     "language": "en",
     "headline_style": {
-      "format": "sentence case",
-      "case": "sentence case",
-      "pattern": "Conversational, informative sentence-case headlines. Often start with 'Here's', 'Why', 'How', 'What'. Question-and-answer format common for explainers."
+      "format": "sentence case / title case news",
+      "case": "title case",
+      "pattern": "North Dakota Tornado Upgraded To EF5, Ending Over Decade-Long Drought"
     },
     "content_labels": {
-      "breaking": true,
+      "opinion": true,
       "live": true,
-      "severe_weather": true,
+      "breaking": true,
       "video": true,
+      "gallery": true,
+      "analysis": true,
       "sponsored": true,
-      "forecast": true,
-      "tropical": true
+      "severe_weather": true,
+      "forecast": true
     },
     "content_distinction": {
       "news": {
-        "typography": "Helvetica Neue Bold, sentence case",
-        "description": "Weather-adjacent news stories with clear, accessible headlines."
+        "typography": "Inter Bold, sans-serif",
+        "description": "Factual, objective reporting"
       },
-      "forecast": {
-        "label": "Forecast",
-        "typography": "Helvetica Neue Bold with numeric data",
-        "description": "Temperature and condition forecasts with large weather icons."
-      },
-      "severe": {
-        "label": "SEVERE WEATHER",
-        "typography": "Helvetica Neue Black",
-        "description": "Alerts with red/yellow badges and urgent styling."
+      "opinion": {
+        "label": "Opinion/Editorial",
+        "typography": "Arial normal",
+        "description": "Editorial content with distinct serif-italic styling"
       }
     }
   },
   "photo_style": {
     "thumbnail_format": {
       "aspect_ratio": "16:9",
-      "border_radius": "6px"
+      "border_radius": "0px",
+      "source": "extracted",
+      "note": "Live crawl: sharp corners on thumbs"
     },
     "video_thumbnails": {
-      "indicator": "White play triangle on semi-transparent overlay",
+      "indicator": "Play button icon",
       "indicator_color": "#FFFFFF"
     },
     "author_photos": {
-      "shape": "circular",
-      "size": "36px"
+      "shape": null,
+      "size": null
     }
   },
   "graphics": {
-    "style": "Photo-forward with weather imagery — dramatic skies, storms, outdoor recreation. Clean UI with subtle rounded corners and card-based layouts.",
+    "style": "Minimal — relies on photography and typography",
     "elements": [
       {
-        "name": "BREAKING",
-        "label": "BREAKING",
-        "description": "Breaking weather alert",
-        "background_color": "#D72B2B",
-        "text_color": "#FFFFFF"
-      },
-      {
-        "name": "SEVERE",
-        "label": "SEVERE WEATHER",
-        "description": "Severe weather warning banner",
-        "background_color": "#FFBF00",
-        "text_color": "#1B1B1B"
-      },
-      {
-        "name": "VIDEO",
-        "label": "VIDEO",
-        "description": "Video content indicator",
-        "background_color": "#0C2340",
+        "name": "Live",
+        "description": "Badge/label element",
+        "background_color": "transparent",
         "text_color": "#FFFFFF"
       }
     ]
   },
   "icons": {
-    "style": "Filled SVG weather icons with subtle gradients; UI icons are stroked monoline.",
-    "count_detected": 35,
+    "style": "SVG-based",
+    "count_detected": 75,
     "social_media_icons": {
       "platforms": [
         "Facebook",
@@ -413,184 +351,92 @@
         "Instagram",
         "YouTube"
       ],
-      "placement": "Footer + share toolbar on articles",
-      "color": "#FFFFFF on navy footer"
+      "placement": "Footer"
     }
   },
   "layout_patterns": {
-    "grid": "Single-column article reading width (~720px), with card grid feed below. Homepage uses multi-column card grid.",
+    "grid": "Two-column layout (main content + sidebar)",
     "header": {
-      "background_color": "#0C2340",
-      "is_dark": true,
-      "accent_rule_color": "#0078D4",
-      "utility_bar": {
-        "background_color": "#071A2F",
-        "is_dark": true,
-        "items": [
-          "Search",
-          "Location",
-          "Hourly",
-          "10-Day",
-          "Radar",
-          "Video"
-        ]
-      },
-      "layers": [
-        "div: dark navy masthead — TWC logo + location search",
-        "div: main nav — Forecasts, Radar, Severe Weather, News, Video, Safety",
-        "div: sub-nav — Sports, Travel, Health, Home"
-      ]
+      "layers": [],
+      "background_color": "#252422",
+      "is_dark": true
     },
-    "content_cards": {
-      "border_radius": "6px",
-      "border": "1px solid #E8EAEB",
-      "padding": "0",
-      "hover": "subtle shadow lift, headline color shifts to TWC Blue"
-    },
+    "content_cards": {},
     "footer": {
-      "background_color": "#0C2340",
-      "text_color": "#B0BEC5",
-      "sections": [
-        "Today's Forecast",
-        "Radar Maps",
-        "Severe Weather",
-        "News",
-        "Video",
-        "Safety & Preparedness",
-        "About Us",
-        "Careers",
-        "Advertise",
-        "Privacy Settings"
-      ]
+      "sections": []
     }
   },
   "spacing": {
-    "card_border_radius": "6px",
-    "container_max_width": "1200px",
-    "grid_gap": "16px",
-    "card_gap": "16px",
-    "section_padding": "24px"
+    "card_border_radius": "24px",
+    "grid_gap": "24px"
+  },
+  "buttons": {
+    "primary": {
+      "background_color": "#0D142A",
+      "text_color": null,
+      "border_radius": "8px",
+      "padding": "12px 16px",
+      "font_size": "16px",
+      "font_weight": 400,
+      "text_transform": null,
+      "letter_spacing": null,
+      "source": "extracted"
+    }
+  },
+  "extraction_quality": {
+    "extracted_token_count": 17,
+    "fallback_token_count": 4,
+    "total_tokens": 21,
+    "extraction_ratio": 0.81,
+    "fallback_tokens": [
+      "colors.backgrounds.section",
+      "fonts.type_scale.article_title_card",
+      "fonts.type_scale.article_lead",
+      "fonts.type_scale.utility_bar"
+    ]
+  },
+  "metadata": {
+    "analysis_date": "2026-07-16",
+    "source_url": "https://weather.com/news/news/2025-10-06-north-dakota-ef5-tornado-drought-ends",
+    "analysis_method": "Automated web crawling with Puppeteer computed style extraction",
+    "extraction_quality": {
+      "extracted_token_count": 17,
+      "fallback_token_count": 4,
+      "total_tokens": 21,
+      "extraction_ratio": 0.81,
+      "fallback_tokens": [
+        "colors.backgrounds.section",
+        "fonts.type_scale.article_title_card",
+        "fonts.type_scale.article_lead",
+        "fonts.type_scale.utility_bar"
+      ]
+    },
+    "home_url": "https://weather.com/",
+    "capture_at": "2026-07-16T14:30:08.377Z",
+    "baseline": "live-publisher-and-taboola-feed"
   },
   "taboola": {
     "publisher_id": "theweatherchannel",
-    "feed_label": "More From The Weather Channel",
-    "sponsored_label": "Sponsored Stories",
-    "trending_label": "Trending on The Weather Channel",
+    "loader_url": "https://cdn.taboola.com/libtrc/theweatherchannel/loader.js",
+    "mode": "organic-thumbs-feed-01-c-new",
     "modes_in_use": [
-      "thumbnails-feed",
-      "organic-thumbnails-feed",
-      "thumbnails-stream"
-    ]
-  },
-  "navigation": {
-    "navLinks": [
-      {
-        "text": "Forecasts",
-        "href": "https://weather.com/weather/today"
-      },
-      {
-        "text": "Radar",
-        "href": "https://weather.com/maps/radar"
-      },
-      {
-        "text": "Severe Weather",
-        "href": "https://weather.com/severe-weather"
-      },
-      {
-        "text": "News",
-        "href": "https://weather.com/news"
-      },
-      {
-        "text": "Video",
-        "href": "https://weather.com/video"
-      },
-      {
-        "text": "Sports",
-        "href": "https://weather.com/sports-recreation"
-      },
-      {
-        "text": "Safety",
-        "href": "https://weather.com/safety"
-      },
-      {
-        "text": "Health",
-        "href": "https://weather.com/health"
-      }
-    ]
+      "organic-thumbs-feed-01-c-new",
+      "above-the-feed-premium-card-fp-delta",
+      "thumbs-feed-01-b-new"
+    ],
+    "placement": "Below Content Thumbnails",
+    "container": "taboola-below-content-thumbnails-article",
+    "feed_label": "You May Like",
+    "capture_note": "Feed captured live from weather.com article page."
   },
   "content": {
-    "headline": "Here's where World Cup heat could be the biggest concern",
-    "deck": "With temperatures expected to soar above 100°F during the 2026 FIFA World Cup, athletes and fans heading to certain host cities face serious heat-related risks.",
-    "byline": "By Jonathan Erdman and Chris Dolce",
-    "date": "June 2, 2026",
-    "categories": [
-      "Sports & Recreation",
-      "News"
-    ],
-    "url": "https://weather.com/2026/06/02/sports-recreation/heres-where-world-cup-heat-could-be-the-biggest-concern",
-    "heroImage": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1600&q=80",
-    "heroCaption": "Extreme heat could pose serious risks at several 2026 World Cup venues across the United States and Mexico.",
+    "title": "North Dakota Tornado Upgraded To EF5, Ending Over Decade-Long Drought",
+    "deck": "What evidence confirmed the EF5 rating of the North Dakota tornado?",
+    "heroImage": "https://weather.com/_next/static/media/morning-brief-logo.1vsg6xjfl-m0f.svg",
     "paragraphs": [
-      "The 2026 FIFA World Cup is expected to be the largest sporting event ever held, with matches spread across 16 cities in the United States, Mexico, and Canada this summer. But for several of those host cities, extreme heat will be a major factor for players and the millions of fans attending matches.",
-      "Dallas, Houston, and several Mexican host cities — including Guadalajara and Monterrey — are forecast to see temperatures well above 100°F during peak tournament days in late June and July. Even with evening kickoff times, heat index values could remain dangerously high.",
-      "FIFA has built cooling breaks and hydration protocols into match schedules, but sports medicine experts warn that the combination of humidity, sustained physical exertion, and packed stadiums creates compounding risk. 'This isn't just about the athletes,' said Dr. Sarah Chen, a sports medicine researcher at UT Southwestern. 'Fan safety in and around stadiums is equally critical.'",
-      "Northern venues like Seattle, Vancouver, and Toronto will offer cooler conditions, but organizers aren't taking any chances — mobile cooling stations, misting fans, and extended shade structures are being deployed across all 16 host cities.",
-      "The Weather Channel will provide city-by-city forecasts and heat safety guidance throughout the tournament, which kicks off June 11 and runs through July 19."
+      "What evidence confirmed the EF5 rating of the North Dakota tornado?",
+      "How does the Enhanced Fujita Scale differ from the original Fujita Scale?",
+      "Why did the EF5 tornado drought last over 12 years?"
     ]
-  },
-  "related_articles": [
-    {
-      "headline": "World Cup 2026 city-by-city weather forecast: What fans and players can expect",
-      "category": "Sports & Recreation",
-      "href": "https://weather.com/sports-recreation"
-    },
-    {
-      "headline": "Dangerous heat dome building across the southern US this week",
-      "category": "News",
-      "href": "https://weather.com/news"
-    },
-    {
-      "headline": "How to stay safe in extreme heat: tips from emergency experts",
-      "category": "Safety",
-      "href": "https://weather.com/safety"
-    },
-    {
-      "headline": "Summer 2026 outlook: Hotter-than-average temperatures expected across most of US",
-      "category": "Forecasts",
-      "href": "https://weather.com/weather/today"
-    },
-    {
-      "headline": "The most dangerous heat-related illnesses and how to spot them",
-      "category": "Health",
-      "href": "https://weather.com/health"
-    },
-    {
-      "headline": "Dallas-Fort Worth breaks record for earliest 100-degree day",
-      "category": "News",
-      "href": "https://weather.com/news"
-    },
-    {
-      "headline": "These outdoor stadiums have the best cooling systems for summer events",
-      "category": "Sports & Recreation",
-      "href": "https://weather.com/sports-recreation"
-    },
-    {
-      "headline": "Tropical storm activity picking up early in the Atlantic basin",
-      "category": "Severe Weather",
-      "href": "https://weather.com/severe-weather"
-    }
-  ],
-  "metadata": {
-    "analysis_date": "2026-06-17",
-    "source_url": "https://weather.com/2026/06/02/sports-recreation/heres-where-world-cup-heat-could-be-the-biggest-concern",
-    "generator": "brand-kit-generator v2.1.0 (hand-constructed)",
-    "extraction_method": "Constructed from public brand documentation and known Weather Channel design patterns. Live crawl was not possible from the workshop sandbox (egress to weather.com is blocked by network policy). Re-run with live access to replace with live-extracted tokens.",
-    "extraction_quality": {
-      "extracted_token_count": 28,
-      "fallback_token_count": 0,
-      "total_tokens": 28,
-      "extraction_ratio": 1,
-      "fallback_tokens": []
-    }
   }
 }

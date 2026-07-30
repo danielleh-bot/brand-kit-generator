@@ -99,3 +99,38 @@ and the CSS tokens from the new `brand-kit.json` into `loader.js`'s
 - **No black-box.** Every CSS rule in `loader.js` is human-readable and
   references a token from `brand-kit.json` — BI engineers can audit,
   diff, and modify in version control.
+
+## Visual brand kit (Unique vs Standard)
+
+| File | Purpose |
+|---|---|
+| `visual-brand-kit.html` | Source → suggested feed → tier cards |
+| `feed-prototype.html` | Ideal Before / Split / After native feed |
+| `property-matrix.json` | Machine-readable tiers |
+| `mvp-checklist.md` | Variant A (loader MVP) vs Variant B (ideal) |
+
+Regenerate with `npm run build:visual-kits`.
+
+
+## Live baseline (2026-07-16)
+
+Rebuilt from the **live publisher** and **live Taboola feed**, using the designer mapping in [`docs/brand-kit-mapping-bi.pdf`](../../docs/brand-kit-mapping-bi.pdf).
+
+| Item | Value |
+|---|---|
+| Article | https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7 |
+| Publisher slug | `businessinsider` |
+| Mode | `thumbs-1r` |
+| Placement / container | `below-main-column` / `taboola-below-main-column` |
+| Font | Garnett (live) |
+| Link blue | #002aff |
+
+Open first: [`visual-brand-kit.html`](./visual-brand-kit.html) and [`feed-prototype.html`](./feed-prototype.html) (Before = live feed PNG).
+
+Regenerate:
+```bash
+node generate.js --url "https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7" --slug business-insider
+xvfb-run -a node scripts/capture-live-baseline.js --url "https://www.businessinsider.com/amazon-managers-challenge-automated-staffing-decisions-warehouse-2026-7" --slug business-insider
+# then bootstrap feed extraction + node scripts/build-bi-live-kit.js
+node scripts/build-bi-live-kit.js
+```
