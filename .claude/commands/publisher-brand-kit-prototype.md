@@ -47,3 +47,5 @@ python3 "$SKILL_ROOT/scripts/qa-prototype.py" \
 - Apply **all** kit entities (CSS, hover, JS, labels, photo, layout) — not palette-only.
 - Prototype must look like **this** publisher's site: nav, logo, short article + hero, then a native feed designed for their UX.
 - No hallucinations: prefer kit + live URL observation; patch kit with provenance when live CSS contradicts it.
+- **Sponsored mix:** Taboola / Recommended feeds must interleave sponsored + organic cards (never organic-only).
+- **iPhone fidelity:** default mobile deliverable is a realistic iPhone mockup. Prefer Claude Design MCP when connected; else high-fidelity HTML/CSS device chrome.

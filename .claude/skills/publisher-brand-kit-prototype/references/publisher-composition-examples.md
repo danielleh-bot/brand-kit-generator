@@ -49,6 +49,20 @@ Use these as proof that compositions must diverge. Do **not** copy markup.
   sharp ~2px radii — full design language, not palette-only
 - **Would be wrong:** Dark navy sports header, Premium reels row
 
+## OK! Magazine — celebrity TrueNative on iPhone
+
+- **Shell:** High-fidelity iPhone 15 Pro frame (Dynamic Island, status bar, home
+  indicator). Prefer Claude Design MCP when connected.
+- **Chrome:** Red `#BE1F24` masthead, white OK! wordmark, uppercase primary nav
+  that fits fully in-frame, Love Island / TV topic chips
+- **Feed:** Taboola `thumbnails-feed` / `tmg-network` — **interleaved** sponsored
+  + organic (compact Sponsored rows with advertiser brand, full pill-CTA
+  sponsored card, sponsored tile in 2-up), never organic-only
+- **Tokens that force this shape:** Signika Negative headlines, Open Sans body,
+  0px photo radius, 32px pill CTAs, headline hover → `#9A191D` (no card lift)
+- **Would be wrong:** Fox Premium 1×1/2×1/4×1, organic-only Recommended stack,
+  bare 414 without device chrome (unless briefed)
+
 ## Lekker (gold-standard reference when present)
 
 - Before / Split / After feed prototype pattern

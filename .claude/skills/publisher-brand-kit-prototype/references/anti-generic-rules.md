@@ -60,6 +60,26 @@ If absent from kit **and** not observable on the live URL, omit the feature.
 If present on the live URL but missing from kit, add it to the kit with
 `source: "live-observed"` and a metadata note — then use it.
 
+## Ban: organic-only Taboola feeds
+
+Stakeholders rejected "Recommended for you" prototypes that showed only
+publisher organic cards. Real Taboola / partner feeds mix **sponsored +
+organic** in the same stack.
+
+**Forbidden:** featured + compact organic list with a single sponsored block
+tacked on (or none).
+
+**Required:** interleaved sponsored cards (compact Sponsored + advertiser
+brand, and/or full CTA card, and/or sponsored tile) among organic cards.
+
+## Ban: low-fidelity mobile shell when a device mockup is expected
+
+For mobile publisher prototypes, prefer a **realistic iPhone high-fidelity
+mockup** (frame, Dynamic Island, status bar, home indicator). When
+**Claude Design MCP** is available, use it for the device presentation;
+otherwise match that fidelity in HTML/CSS. Bare 414px is only for briefs
+that explicitly want Fox-style unframed mobile.
+
 ## Ban: fabricated provenance
 
 - Do not claim `extraction_method: puppeteer` if you hand-built tokens.

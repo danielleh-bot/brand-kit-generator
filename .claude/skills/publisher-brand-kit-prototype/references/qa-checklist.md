@@ -32,7 +32,9 @@ agent's working notes / PR test plan.
 - [ ] Feed below article (not a detached widget page)
 - [ ] Card type inventory matches Composition Spec
 - [ ] Sponsored vs organic distinction is clear
+- [ ] Feed **interleaves** sponsored + organic (not organic-only; not all-organic-then-one-sponsored)
 - [ ] Feed composition is **not** isomorphic to another `output/*/mobile-prototype.html`
+- [ ] Mobile shell is high-fidelity iPhone mockup unless brief says bare/desktop
 
 ## D. Interaction / JS
 

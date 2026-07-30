@@ -27,6 +27,7 @@ Canonical prior deliverables in this repo (study for fidelity, never clone):
 | FOX Sports | `output/fox-sports/mobile-prototype.html` | 414px viewport + Premium Feed (1×1 / 2×1 / 4×1, reels, display) |
 | AZ Central | `output/azcentral/mobile-prototype.html` (if present) | iPhone 17 + Gannett card inventory (premium lock, opinion, live pulse…) |
 | Business Insider | `output/business-insider/index.html` | Desktop article + masthead + feed (not mobile-frame) |
+| OK! Magazine | `output/ok-magazine/mobile-prototype.html` | iPhone 15 Pro + interleaved sponsored/organic TrueNative feed |
 
 Supporting references (load on demand):
 
@@ -141,11 +142,16 @@ wrong kit token.
 Before writing HTML, write a short **Composition Spec** (keep it in a comment
 at the top of the prototype `<style>` or a sibling `README` note):
 
-1. **Viewport shell:** choose ONE based on the brief / prior convention for
-   this vertical — do not default to the last publisher's shell.
-   - iPhone 15 Pro frame (~393×800, Dynamic Island) — TWC-style
+1. **Viewport shell:** default to a **high-fidelity iPhone mockup** for mobile
+   briefs (realistic device chrome: Dynamic Island / notch, status bar, home
+   indicator, side buttons, studio backdrop). Prefer **Claude Design MCP**
+   (`claude-design` → `https://api.anthropic.com/v1/design/mcp`, then
+   `/design-login`) when available and authenticated; otherwise hand-author
+   HTML/CSS device chrome at this fidelity. Only use bare 414px or desktop
+   when the brief explicitly asks (Fox bare / BI desktop exceptions). Choose ONE:
+   - iPhone 15 Pro frame (~393×800, Dynamic Island) — default mobile / TWC-style
    - iPhone 17 frame (402×874, 54px radius) — AZ-style
-   - Bare mobile max-width 414px (no device chrome) — Fox-style
+   - Bare mobile max-width 414px (no device chrome) — Fox-style only when briefed
    - Desktop article layout — BI-style
 2. **Feed product intent:** TrueNative (preserve publisher's existing card
    geometry) vs Premium Feed (rounded cards, footer CTAs, rich formats) vs
@@ -154,6 +160,10 @@ at the top of the prototype `<style>` or a sibling `README` note):
 3. **Card type inventory:** list every card type you will implement, sourced
    from `brand_voice.content_labels`, `graphics.elements`, live feed, and
    kit suggestions. Each type needs a distinct visual treatment.
+   **Hard rule:** Taboola-style feeds must **interleave sponsored + organic**
+   cards (same stack / geometries where TrueNative). Organic-only
+   "Recommended for you" stacks are rejected as unrealistic. Do not dump all
+   organic first and one sponsored at the end.
 4. **Interaction model:** copy `layout_patterns.content_cards.hover` and
    `buttons.*.hover_*` literally. If the kit says "headline shifts to primary
    blue", implement that — **not** a generic `translateY(-2px)` card lift
@@ -237,8 +247,12 @@ it is a **native feed experience** designed for this publisher.
 
 1. Section divider / header using `taboola.feed_label` or
    `taboola.sponsored_label` (exact strings from kit when present).
-2. Alternate sponsored blocks and organic/native blocks as appropriate for
-   the feed product intent.
+2. **Interleave** sponsored and organic/native cards throughout the feed
+   (e.g. organic → sponsored → organic → sponsored CTA → organic). Do **not**
+   dump all organic first and one sponsored at the end. Sponsored rows should
+   often share TrueNative geometry with organic (badge + advertiser brand
+   instead of publisher brand), plus at least one richer sponsored treatment
+   with CTA when the kit/modes support it.
 3. Taboola attribution footer.
 
 ### 6.2 Cards
