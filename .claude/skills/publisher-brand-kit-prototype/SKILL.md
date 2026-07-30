@@ -30,12 +30,15 @@ Canonical prior deliverables in this repo (study for fidelity, never clone):
 
 Supporting references (load on demand):
 
-- [`references/feed-field-mapping.md`](references/feed-field-mapping.md) — **common kit fields → feed/card use** across `output/*` **and** `brand-kit-extractions/*` (9 publishers)
+- [`assets/brand-kit.base.template.json`](assets/brand-kit.base.template.json) — **canonical base kit** (one field per feed/card mapping)
+- [`references/brand-kit-base-resolutions.md`](references/brand-kit-base-resolutions.md) — conflict resolutions / migration from legacy kits
+- [`references/feed-field-mapping.md`](references/feed-field-mapping.md) — legacy corpus analysis (9 publishers)
 - [`references/token-application-matrix.md`](references/token-application-matrix.md) — every JSON field → CSS/HTML mapping
 - [`references/anti-generic-rules.md`](references/anti-generic-rules.md) — hard bans against reskinning
 - [`references/qa-checklist.md`](references/qa-checklist.md) — mandatory QA before ship
 - [`references/publisher-composition-examples.md`](references/publisher-composition-examples.md) — why TWC ≠ Fox ≠ AZ ≠ BI
 - [`scripts/qa-prototype.py`](scripts/qa-prototype.py) — automated structural/token QA harness
+- [`scripts/validate-base-kit.py`](scripts/validate-base-kit.py) — validate a filled base-kit JSON
 
 ---
 
@@ -43,10 +46,13 @@ Supporting references (load on demand):
 
 The user supplies **both**:
 
-1. **Brand kit JSON** — crawled/analyzed kit with tokens **and** feed-application
-   suggestions (colors, fonts, type_scale, buttons, photo_style, layout_patterns,
-   brand_voice, graphics, icons, spacing, navigation, content, related_articles,
-   taboola, hover/interaction notes, etc.). May be pasted inline, attached, or at
+1. **Brand kit JSON** — prefer a filled
+   [`assets/brand-kit.base.template.json`](assets/brand-kit.base.template.json)
+   (`publisher-brand-kit.base@1.0.0`) where **each feed/card mapping has exactly
+   one field**. If given a legacy crawl kit (`colors.primary.usage[]`, dual
+   header paths, duplicate radii, etc.), **migrate it first** using
+   [`references/brand-kit-base-resolutions.md`](references/brand-kit-base-resolutions.md)
+   before designing HTML. May be pasted inline, attached, or at
    `output/<slug>/brand-kit.json`.
 2. **Publisher article URL** — a live page that shows their current site chrome
    **and** (ideally) their current below-article feed / related module.
@@ -55,6 +61,13 @@ Optional but useful: homepage URL, feed product intent (TrueNative vs Premium),
 device frame preference (iPhone 15 Pro / 17 / bare 414px).
 
 If either required input is missing, stop and ask. Do not invent a brand kit.
+
+After intake of a legacy kit, write the migrated base kit to
+`output/<slug>/brand-kit.base.json` and validate:
+
+```bash
+python3 "$SKILL_ROOT/scripts/validate-base-kit.py" output/<slug>/brand-kit.base.json
+```
 
 ---
 

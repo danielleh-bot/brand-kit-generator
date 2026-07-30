@@ -197,3 +197,15 @@ Do **not** clone BelTel HTML onto Crime World — accents, fonts, and badge inve
 5. Run §7 QA on suspicious tokens before painting the feed.
 
 See also: `token-application-matrix.md`, `anti-generic-rules.md`, `publisher-composition-examples.md`.
+
+---
+
+## Canonical base template (conflict-free)
+
+Legacy kits overload the same mapping onto multiple fields (`colors.primary`
+for header+CTA+accent, dual card radii, dual headers, etc.). Use the resolved
+schema instead:
+
+- Template: [`../assets/brand-kit.base.template.json`](../assets/brand-kit.base.template.json)
+- Resolutions: [`brand-kit-base-resolutions.md`](brand-kit-base-resolutions.md)
+- Validator: `scripts/validate-base-kit.py`
