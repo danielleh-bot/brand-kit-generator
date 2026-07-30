@@ -7,7 +7,7 @@
 
 ## Composition one-liner
 
-**Bare 414px OK! red masthead + Love Island topic chips + Recommended TrueNative mix (featured, compact stack, sponsored pill CTA, 2-up grid).**
+**iPhone 15 Pro high-fidelity frame + OK! red masthead + Love Island topic chips + Recommended TrueNative mix with interleaved sponsored + organic cards (featured, compact stack, full sponsored CTA, 2-up grid).**
 
 ## How to open
 
@@ -28,3 +28,7 @@ python3 -m http.server 8765 --directory output/ok-magazine
 ## Regenerate notes
 
 Hand-authored per `publisher-brand-kit-prototype` skill. Do not reskin another publisher prototype.
+
+## Feed realism
+
+Recommended feed **must** interleave sponsored cards with organic OK! cards (compact Sponsored rows + full CTA card + sponsored tile). Organic-only stacks look fake for Taboola `thumbnails-feed`.

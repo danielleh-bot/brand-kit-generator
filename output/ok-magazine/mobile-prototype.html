@@ -13,17 +13,21 @@
 /*
   Composition Spec — OK! Magazine (ok-magazine)
   ---------------------------------------------
-  Viewport: bare mobile max-width 414px (UK celeb magazine web, not device chrome).
-  Feed intent: TrueNative thumbnails-feed (tmg-network) below article.
+  Viewport: high-fidelity iPhone 15 Pro frame (393 CSS px, Dynamic Island, status bar,
+    home indicator). Claude Design MCP was unavailable here; HTML/CSS device chrome used.
+    Prefer Claude Design MCP when connected for future prototypes.
+  Feed intent: TrueNative thumbnails-feed (tmg-network) with interleaved sponsored +
+    organic cards (never organic-only; Taboola mixes both in the same stack).
   Card inventory:
     1) Featured full-bleed organic teaser
-    2) Compact thumb-left stack with hairline dividers
-    3) Sponsored card + pill CTA
-    4) Two-up picture grid
+    2) Compact thumb-left organic rows
+    3) Compact sponsored rows (same geometry, Sponsored badge + advertiser brand)
+    4) Full sponsored card + pill CTA
+    5) Two-up grid mixing organic + sponsored tiles
   Interaction: headline → #9A191D on hover; CTA bg → #9A191D; NO card translateY lift.
   Anti-clone vs Fox/TWC/BI:
     - Red OK! masthead + white wordmark SVG (not navy sports / weather / BI white)
-    - Recommended mix (featured + compact + 2-up), not Premium 1x1/2x1/4x1
+    - Interleaved Recommended mix, not Premium 1x1/2x1/4x1
     - Pill 32px CTAs + 0px photo radius + section kickers (TV magenta / Celebrity red / Royals purple)
 */
 
@@ -61,19 +65,121 @@ html, body { margin: 0; padding: 0; }
 body {
   font-family: var(--ok-font);
   color: var(--ok-text);
-  background: #2a2a2a;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #4a1a1c 0%, transparent 55%),
+    linear-gradient(165deg, #1a1516 0%, #0d0d0f 45%, #1c1214 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 36px 16px 56px;
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 button { font: inherit; border: 0; background: none; cursor: pointer; }
 
-.ok-page {
-  max-width: var(--ok-shell);
-  margin: 0 auto;
-  background: var(--ok-bg);
-  min-height: 100vh;
+/* High-fidelity iPhone 15 Pro chrome */
+.iphone-frame {
+  width: 393px;
   position: relative;
+  background: linear-gradient(160deg, #3a3a3c 0%, #1c1c1e 40%, #0a0a0a 100%);
+  border-radius: 54px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 0 0 3px #2c2c2e,
+    0 0 0 4px #111,
+    0 30px 60px rgba(0,0,0,0.55),
+    0 8px 24px rgba(190,31,36,0.18);
+}
+.iphone-frame__btn {
+  position: absolute;
+  background: #2a2a2c;
+  border-radius: 2px;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.15);
+}
+.iphone-frame__btn--silent { left: -3px; top: 118px; width: 3px; height: 28px; }
+.iphone-frame__btn--vol-up { left: -3px; top: 168px; width: 3px; height: 52px; }
+.iphone-frame__btn--vol-down { left: -3px; top: 230px; width: 3px; height: 52px; }
+.iphone-frame__btn--power { right: -3px; top: 200px; width: 3px; height: 84px; }
+.iphone-island {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 34px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 120;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+.iphone-island::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #1a3a55, #0a0a12 60%, #000);
+  box-shadow: 0 0 0 1.5px #111;
+}
+.iphone-screen {
+  width: 369px;
+  height: 800px;
+  background: var(--ok-bg);
+  border-radius: 42px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  scrollbar-width: none;
+}
+.iphone-screen::-webkit-scrollbar { display: none; }
+
+.status-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px 6px;
+  background: var(--ok-dark);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.status-bar__icons { display: flex; align-items: center; gap: 6px; }
+.status-bar__icons svg { display: block; }
+
+.home-indicator {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 10px;
+  background: linear-gradient(to top, rgba(255,255,255,0.96), rgba(255,255,255,0.7));
+  pointer-events: none;
+}
+.home-indicator__bar {
+  width: 128px;
+  height: 5px;
+  border-radius: 3px;
+  background: #111211;
+  opacity: 0.9;
+}
+
+.ok-page {
+  width: 100%;
+  background: var(--ok-bg);
+  position: relative;
+  padding-bottom: 4px;
 }
 
 /* ----- Header ----- */
@@ -92,7 +198,7 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
 
 .ok-masthead {
   position: sticky;
-  top: 0;
+  top: 36px;
   z-index: 40;
   background: var(--ok-primary);
   display: flex;
@@ -466,6 +572,29 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
 }
 .ok-tile:hover .ok-tile__title { color: var(--ok-primary-hover); }
 
+
+.ok-compact.is-sponsored .ok-compact__brand {
+  color: var(--ok-text-subdue);
+}
+.ok-badge-sponsored {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ok-primary);
+  border: 1px solid var(--ok-primary);
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-bottom: 4px;
+}
+.ok-tile.is-sponsored .ok-tile__title { font-size: 14px; }
+.ok-tile__sponsor {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--ok-text-subdue);
+}
+
 .ok-more-label {
   margin: 18px var(--ok-pad) 4px;
   font-size: 16px;
@@ -496,6 +625,21 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
 </style>
 </head>
 <body>
+<div class="iphone-frame" aria-label="iPhone 15 Pro mockup">
+  <span class="iphone-frame__btn iphone-frame__btn--silent" aria-hidden="true"></span>
+  <span class="iphone-frame__btn iphone-frame__btn--vol-up" aria-hidden="true"></span>
+  <span class="iphone-frame__btn iphone-frame__btn--vol-down" aria-hidden="true"></span>
+  <span class="iphone-frame__btn iphone-frame__btn--power" aria-hidden="true"></span>
+  <div class="iphone-island" aria-hidden="true"></div>
+  <div class="iphone-screen">
+    <div class="status-bar">
+      <span>9:41</span>
+      <div class="status-bar__icons">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="#fff" aria-hidden="true"><rect x="0" y="7" width="3" height="5" rx="0.5"/><rect x="4.5" y="5" width="3" height="7" rx="0.5"/><rect x="9" y="2.5" width="3" height="9.5" rx="0.5"/><rect x="13.5" y="0" width="3" height="12" rx="0.5"/></svg>
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="#fff" aria-hidden="true"><path d="M8 3.6c1.7 0 3.2.7 4.3 1.7l1.2-1.2A7.4 7.4 0 008 1.5 7.4 7.4 0 002.5 4.1l1.2 1.2A5.8 5.8 0 018 3.6zm0 3c.9 0 1.7.3 2.4.9l1.2-1.2A5 5 0 008 4.8a5 5 0 00-3.6 1.5l1.2 1.2c.7-.6 1.5-.9 2.4-.9zM8 11l2-2a2.8 2.8 0 00-4 0l2 2z"/></svg>
+        <svg width="27" height="13" viewBox="0 0 27 13" aria-hidden="true"><rect x="0.5" y="0.5" width="22" height="12" rx="2.5" stroke="#fff" fill="none" opacity="0.4"/><rect x="2" y="2" width="17" height="9" rx="1.5" fill="#fff"/><path d="M24 4.5v4a2 2 0 000-4z" fill="#fff" opacity="0.4"/></svg>
+      </div>
+    </div>
 <div class="ok-page">
 
   <div class="ok-utility">
@@ -603,6 +747,17 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
         </div>
       </a>
 
+      <a class="ok-compact is-sponsored" href="#">
+        <div class="ok-compact__media">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-badge-sponsored">Sponsored</div>
+          <h3 class="ok-compact__title">Summer glow edits the villa girls actually wear</h3>
+          <div class="ok-compact__brand">Boots Beauty</div>
+        </div>
+      </a>
+
       <a class="ok-compact" href="https://www.ok.co.uk/royal/princess-kate-grateful-here-strong-37361131">
         <div class="ok-compact__media">
           <img src="https://i2-prod.ok.co.uk/article37359527.ece/ALTERNATES/s1200d/3_KATE.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
@@ -614,6 +769,17 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
         </div>
       </a>
 
+      <a class="ok-compact is-sponsored" href="#">
+        <div class="ok-compact__media">
+          <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-badge-sponsored">Sponsored</div>
+          <h3 class="ok-compact__title">Stream every episode on the go without buffering</h3>
+          <div class="ok-compact__brand">Sky Mobile</div>
+        </div>
+      </a>
+
       <a class="ok-compact" href="https://www.ok.co.uk/celebrity-news/victoria-beckham-humiliated-over-secret-37447646">
         <div class="ok-compact__media">
           <img src="https://i2-prod.ok.co.uk/article37447630.ece/ALTERNATES/s1200d/2_JS412823142.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
@@ -621,17 +787,6 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
         <div>
           <div class="ok-sec ok-sec--celebrity">Celebrity</div>
           <h3 class="ok-compact__title">Victoria Beckham 'humiliated' over 'cry for help' to son Brooklyn</h3>
-          <div class="ok-compact__brand">OK! Magazine</div>
-        </div>
-      </a>
-
-      <a class="ok-compact" href="https://www.ok.co.uk/tv/emmerdale-ross-actors-love-life-37492609">
-        <div class="ok-compact__media">
-          <img src="https://i2-prod.mirror.co.uk/incoming/article35693197.ece/ALTERNATES/s1200/1_DSC04239a.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
-        </div>
-        <div>
-          <div class="ok-sec ok-sec--tv">TV</div>
-          <h3 class="ok-compact__title">Emmerdale Ross actor's love life including heartbreaking split from soap co-star</h3>
           <div class="ok-compact__brand">OK! Magazine</div>
         </div>
       </a>
@@ -651,6 +806,30 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
       </div>
     </aside>
 
+    <div class="ok-stack">
+      <a class="ok-compact" href="https://www.ok.co.uk/tv/emmerdale-ross-actors-love-life-37492609">
+        <div class="ok-compact__media">
+          <img src="https://i2-prod.mirror.co.uk/incoming/article35693197.ece/ALTERNATES/s1200/1_DSC04239a.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-sec ok-sec--tv">TV</div>
+          <h3 class="ok-compact__title">Emmerdale Ross actor's love life including heartbreaking split from soap co-star</h3>
+          <div class="ok-compact__brand">OK! Magazine</div>
+        </div>
+      </a>
+
+      <a class="ok-compact is-sponsored" href="#">
+        <div class="ok-compact__media">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div>
+          <div class="ok-badge-sponsored">Sponsored</div>
+          <h3 class="ok-compact__title">Holiday outfits under £40 for your next girls' trip</h3>
+          <div class="ok-compact__brand">Very</div>
+        </div>
+      </a>
+    </div>
+
     <div class="ok-more-label">More from OK!</div>
     <div class="ok-grid2">
       <a class="ok-tile" href="https://www.ok.co.uk/celebrity-news/cher-lloyd-sparks-marriage-split-37457603">
@@ -659,6 +838,14 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
         </div>
         <div class="ok-sec ok-sec--celebrity">Celebrity</div>
         <h3 class="ok-tile__title">Cher Lloyd sparks marriage split speculation saying wedding ring is 'in the bin'</h3>
+      </a>
+      <a class="ok-tile is-sponsored" href="#">
+        <div class="ok-tile__media">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=267&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="ok-badge-sponsored">Sponsored</div>
+        <h3 class="ok-tile__title">New season trainers that go with every villa look</h3>
+        <div class="ok-tile__sponsor">JD Sports</div>
       </a>
       <a class="ok-tile" href="https://www.ok.co.uk/tv/eastenders-fans-slam-unrealistic-detail-37492433">
         <div class="ok-tile__media">
@@ -674,13 +861,6 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
         <div class="ok-sec ok-sec--celebrity">Celebrity</div>
         <h3 class="ok-tile__title">Amanda Holden shares passionate kiss with husband Chris Hughes at Wimbledon</h3>
       </a>
-      <a class="ok-tile" href="https://www.ok.co.uk/celebrity-news/inside-supermodel-eva-herzigovas-romantic-37447402">
-        <div class="ok-tile__media">
-          <img src="https://i2-prod.ok.co.uk/article37447314.ece/ALTERNATES/s1200d/1_JS412818571.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
-        </div>
-        <div class="ok-sec ok-sec--celebrity">Celebrity</div>
-        <h3 class="ok-tile__title">Inside supermodel Eva Herzigova's romantic Italian wedding to partner of 25 yrs</h3>
-      </a>
     </div>
 
     <div class="ok-feed-foot">Recommended content powered by Taboola · tmg-network · thumbnails-feed</div>
@@ -691,6 +871,11 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
     Celebrity news, royals, TV and lifestyle from OK! Magazine.
     <div style="margin-top:10px"><a href="https://www.ok.co.uk/">ok.co.uk</a></div>
   </footer>
+</div>
+    <div class="home-indicator" aria-hidden="true">
+      <div class="home-indicator__bar"></div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
