@@ -16,6 +16,7 @@ You are running the **publisher-brand-kit-prototype** Claude skill / workflow.
 
 1. **Load and follow every phase** in `.claude/skills/publisher-brand-kit-prototype/SKILL.md` without skipping.
 2. Load supporting refs as needed:
+   - `.claude/skills/publisher-brand-kit-prototype/references/feed-field-mapping.md`
    - `.claude/skills/publisher-brand-kit-prototype/references/token-application-matrix.md`
    - `.claude/skills/publisher-brand-kit-prototype/references/anti-generic-rules.md`
    - `.claude/skills/publisher-brand-kit-prototype/references/qa-checklist.md`
