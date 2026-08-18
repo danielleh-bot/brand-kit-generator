@@ -405,6 +405,12 @@ svg.art { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ---- stage furniture (outside the device; not part of the mock) ---- */
 .stage { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+/* Embedded in the gallery page: the surrounding page already names the mock,
+   so drop this file's own caption, controls and legend. CSS-only, so it holds
+   even where a host CSP blocks inline script. */
+.embedded body { padding: 10px 0 0; }
+.embedded .stage-head, .embedded .stage-controls, .embedded .legend { display: none; }
 .stage-head { text-align: center; max-width: 560px; }
 .stage-head h1 {
   font-family: var(--ui); font-size: 15px; font-weight: 600;
