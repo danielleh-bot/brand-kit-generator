@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="crime-world" data-mode="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Crime World — True Native prototype (Dark mode)</title>
+<meta name="description" content="Taboola True Native feed shown in the current Crime World article template, dark mode." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/*
+  Crime World — Taboola True Native prototype (Dark mode)
+  Publisher ID 1641788 · crimeworld.com · Mediahuis
+  Modelled on: https://www.crimeworld.com/courts/teens-charged-over-alex-coughlans-death-in-blanchardstown-set-for-murder-trial/a/160124238.html
+
+  Built from the current Mediahuis article template so the feed is judged in the
+  page it will actually live in. All imagery is inline SVG: the file is fully
+  self-contained and renders identically offline.
+*/
+
+:root {
+  --bg: #0A0B0D; --surface: #121417; --band: #141619;
+  --line: #24272C; --line-soft: #1C1F23;
+  --text: #F2F4F6; --muted: #9AA1A9; --faint: #7A828B;
+  --accent: #FF2D3F; --accent-text: #0A0B0D; --accent-soft: #2A1013;
+  --header: #000000; --header-text: #FFFFFF; --header-line: #22262B;
+  --chip: #191C20;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --ui: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --logo: Oswald, "Arial Narrow", Impact, sans-serif;
+  --pad: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--ui);
+  background: #000000;
+  color: #EDEFF2;
+  min-height: 100vh;
+  padding: 32px 16px 64px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; border: 0; background: none; cursor: pointer; color: inherit; }
+svg.art { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- stage furniture (outside the device; not part of the mock) ---- */
+.stage { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+/* Embedded in the gallery page: the surrounding page already names the mock,
+   so drop this file's own caption, controls and legend. CSS-only, so it holds
+   even where a host CSP blocks inline script. */
+.embedded body { padding: 10px 0 0; }
+.embedded .stage-head, .embedded .stage-controls, .embedded .legend { display: none; }
+.stage-head { text-align: center; max-width: 560px; }
+.stage-head h1 {
+  font-family: var(--ui); font-size: 15px; font-weight: 600;
+  letter-spacing: 0.02em; margin: 0 0 4px;
+}
+.stage-head p { margin: 0; font-size: 12.5px; opacity: 0.72; line-height: 1.5; }
+.stage-controls { display: flex; gap: 8px; align-items: center; }
+.ctl {
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 7px 13px; border-radius: 999px;
+  border: 1px solid currentColor; opacity: 0.62;
+}
+.ctl:hover { opacity: 1; }
+.legend {
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  font-size: 11.5px; opacity: 0.7;
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+/* ---- device ---- */
+.phone {
+  width: 393px; padding: 12px; border-radius: 54px;
+  background: linear-gradient(160deg, #3a3a3c 0%, #1c1c1e 42%, #0a0a0a 100%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.07), 0 28px 60px rgba(0,0,0,0.42);
+  position: relative;
+}
+.screen {
+  width: 369px; height: 800px; border-radius: 42px; overflow: hidden;
+  background: var(--bg); position: relative;
+}
+.fullpage .screen { height: auto; }
+.fullpage .scroll { overflow: visible; }
+.scroll { height: 100%; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+.island {
+  position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+  width: 108px; height: 30px; border-radius: 18px; background: #000; z-index: 60;
+}
+.fullpage .island { display: none; }
+.home-bar {
+  height: 22px; display: flex; align-items: center; justify-content: center;
+  background: var(--header);
+}
+.home-bar::after {
+  content: ''; width: 122px; height: 4px; border-radius: 4px;
+  background: var(--header-text); opacity: 0.45;
+}
+
+/* ---- status bar ---- */
+.status {
+  height: 46px; padding: 14px 26px 0; display: flex; align-items: center;
+  justify-content: space-between; background: var(--header); color: var(--header-text);
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em;
+  position: sticky; top: 0; z-index: 50;
+}
+.fullpage .status { position: static; }
+.status .glyphs { display: flex; gap: 5px; align-items: center; opacity: 0.95; }
+.status .bars { display: flex; gap: 1.5px; align-items: flex-end; }
+.status .bars i { width: 3px; background: currentColor; border-radius: 1px; display: block; }
+.status .batt {
+  width: 22px; height: 11px; border: 1.2px solid currentColor; border-radius: 3px;
+  padding: 1.5px; opacity: 0.9;
+}
+.status .batt span { display: block; height: 100%; width: 72%; background: currentColor; border-radius: 1px; }
+
+/* ---- masthead ---- */
+.masthead {
+  position: sticky; top: 46px; z-index: 45;
+  background: var(--header); color: var(--header-text);
+  border-bottom: 1px solid var(--header-line);
+}
+.fullpage .masthead { position: static; }
+.masthead-row {
+  height: 52px; padding: 0 var(--pad);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;
+}
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; }
+.icon-btn svg { width: 19px; height: 19px; }
+.masthead-left, .masthead-right { display: flex; align-items: center; gap: 10px; }
+.masthead-right { justify-content: flex-end; }
+.subscribe {
+  background: var(--accent); color: var(--accent-text);
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em;
+  padding: 7px 13px; border-radius: 3px; white-space: nowrap;
+}
+
+.wordmark-serif {
+  font-family: var(--display); font-weight: 700; font-size: 19px;
+  letter-spacing: -0.015em; white-space: nowrap;
+}
+.wordmark-block {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--logo); font-weight: 700; font-size: 17px;
+  letter-spacing: 0.06em; white-space: nowrap; text-transform: uppercase;
+}
+.wordmark-block .b1 { background: var(--accent); color: #fff; padding: 3px 6px 2px; border-radius: 2px; }
+.wordmark-block .b2 { color: var(--header-text); }
+
+/* ---- section rail ---- */
+.rail {
+  display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none;
+  padding: 0 var(--pad); background: var(--header); color: var(--header-text);
+  border-bottom: 1px solid var(--header-line);
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail a {
+  flex: 0 0 auto; font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em;
+  padding: 11px 0 9px; opacity: 0.72; border-bottom: 2.5px solid transparent;
+  white-space: nowrap;
+}
+.rail a.on { opacity: 1; border-bottom-color: var(--accent); }
+
+/* ---- article ---- */
+.article { padding: 18px var(--pad) 0; background: var(--bg); }
+.crumb {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 7px; margin-bottom: 10px;
+}
+.crumb .sep { color: var(--faint); font-weight: 400; letter-spacing: 0; }
+.lock {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--accent); color: var(--accent-text);
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.08em;
+  padding: 3px 6px; border-radius: 2px;
+}
+h1.headline {
+  font-family: var(--display); font-size: 25.5px; line-height: 1.16; font-weight: 700;
+  letter-spacing: -0.016em; color: var(--text); margin: 0 0 12px;
+}
+.standfirst {
+  font-family: var(--display); font-size: 16.5px; line-height: 1.48;
+  color: var(--muted); margin: 0 0 16px; font-weight: 400;
+}
+.byline {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+}
+.avatar {
+  width: 32px; height: 32px; border-radius: 50%; flex: 0 0 auto;
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11.5px; font-weight: 800; letter-spacing: 0.02em;
+}
+.byline .who { flex: 1; min-width: 0; }
+.byline .name { font-size: 12.5px; font-weight: 700; color: var(--text); }
+.byline .when { font-size: 11.5px; color: var(--faint); margin-top: 2px; }
+.byline .share { display: flex; gap: 12px; color: var(--muted); }
+.byline .share svg { width: 16px; height: 16px; }
+
+figure.hero { margin: 16px calc(var(--pad) * -1) 0; }
+figure.hero .frame { aspect-ratio: 3 / 2; overflow: hidden; background: var(--band); }
+figure.hero figcaption {
+  font-size: 11.5px; line-height: 1.45; color: var(--faint);
+  padding: 8px var(--pad) 0; border-bottom: 1px solid var(--line-soft); padding-bottom: 12px;
+}
+.body { padding-top: 16px; }
+.body p {
+  font-family: var(--display); font-size: 17px; line-height: 1.62; color: var(--text);
+  margin: 0 0 16px;
+}
+.pull {
+  margin: 20px 0; padding: 2px 0 2px 16px; border-left: 3px solid var(--accent);
+}
+.pull q {
+  font-family: var(--display); font-style: italic; font-size: 18.5px; line-height: 1.42;
+  color: var(--text); quotes: none;
+}
+.pull .attr {
+  display: block; margin-top: 8px; font-family: var(--ui);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.readmore {
+  margin: 20px 0; padding: 12px 14px; background: var(--band);
+  border-left: 3px solid var(--accent);
+}
+.readmore .lbl {
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); display: block; margin-bottom: 5px;
+}
+.readmore .t { font-family: var(--display); font-size: 15px; line-height: 1.35; font-weight: 600; color: var(--text); }
+.podstrip {
+  display: flex; align-items: center; gap: 12px; margin: 20px 0;
+  padding: 12px; background: var(--band); border: 1px solid var(--line-soft);
+}
+.podstrip .cover { width: 54px; height: 54px; flex: 0 0 auto; overflow: hidden; border-radius: 3px; }
+.podstrip .lbl {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+}
+.podstrip .t { font-size: 13px; font-weight: 600; line-height: 1.32; color: var(--text); margin-top: 3px; }
+.podstrip .m { font-size: 11px; color: var(--faint); margin-top: 3px; }
+.podstrip .play {
+  width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto;
+  background: var(--accent); color: var(--accent-text);
+  display: flex; align-items: center; justify-content: center;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 4px 0 20px; }
+.tags a {
+  font-size: 11.5px; font-weight: 600; color: var(--muted);
+  background: var(--chip); border: 1px solid var(--line-soft);
+  padding: 6px 10px; border-radius: 3px;
+}
+
+
+.tn { border-top: 7px solid var(--band); margin-top: 4px; padding: 20px var(--pad) 4px; background: var(--bg); }
+.tn-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.tn-head h2 {
+  font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: -0.012em;
+  color: var(--text); margin: 0; position: relative; padding-left: 11px;
+}
+.tn-head h2::before {
+  content: ''; position: absolute; left: 0; top: 3px; bottom: 3px; width: 3px; background: var(--accent);
+}
+.tn-attr { font-size: 10px; color: var(--faint); letter-spacing: 0.03em; white-space: nowrap; }
+
+.card { display: block; padding: 15px 0; border-bottom: 1px solid var(--line-soft); }
+.card:last-child { border-bottom: 0; }
+.kick {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 2px 6px; margin-bottom: 6px;
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--accent);
+}
+.kick.spon { color: var(--faint); font-weight: 700; font-size: 10px; letter-spacing: 0.06em; }
+.kick.spon b { white-space: nowrap; }
+.kick.spon b { color: var(--muted); font-weight: 700; }
+.kick .i {
+  width: 12px; height: 12px; border-radius: 50%; border: 1px solid currentColor;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700; letter-spacing: 0; opacity: 0.8;
+}
+.ct { font-family: var(--display); font-weight: 600; color: var(--text); line-height: 1.28; letter-spacing: -0.006em; }
+.cm { font-size: 11px; color: var(--faint); margin-top: 6px; }
+
+.c-lead .shot { aspect-ratio: 3 / 2; overflow: hidden; margin: 0 calc(var(--pad) * -1) 11px; background: var(--band); }
+.c-lead .ct { font-size: 19.5px; }
+
+.c-row { display: grid; grid-template-columns: 1fr 108px; gap: 12px; align-items: start; }
+.c-row .shot { aspect-ratio: 4 / 3; overflow: hidden; background: var(--band); border-radius: 2px; }
+.c-row .ct { font-size: 15px; }
+
+.c-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.c-grid .shot { aspect-ratio: 4 / 3; overflow: hidden; margin-bottom: 8px; background: var(--band); border-radius: 2px; }
+.c-grid .ct { font-size: 14px; }
+
+.c-cta .shot { aspect-ratio: 16 / 9; overflow: hidden; margin: 0 calc(var(--pad) * -1) 11px; background: var(--band); }
+.c-cta .ct { font-size: 17px; }
+.c-cta .pill {
+  display: inline-block; margin-top: 11px; padding: 9px 18px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-text);
+  font-family: var(--ui); font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em;
+}
+.tn-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0 18px; font-size: 10.5px; color: var(--faint);
+}
+.tn-foot .more { font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+
+footer.site {
+  background: var(--header); color: var(--header-text); padding: 22px var(--pad) 18px; margin-top: 4px;
+}
+footer.site .fm { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 12px; opacity: 0.95; }
+footer.site .links { display: flex; flex-wrap: wrap; gap: 10px 16px; font-size: 11.5px; opacity: 0.72; }
+footer.site .legal { margin-top: 14px; font-size: 10.5px; opacity: 0.5; line-height: 1.5; }
+
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="stage-head">
+    <h1>Crime World · True Native · Dark mode</h1>
+    <p>Publisher ID 1641788. The feed below the article is Taboola-served and rendered with Crime World’s own type, colour and card rules.</p>
+  </div>
+  <div class="stage-controls">
+    <button class="ctl" id="toggle">Show full page</button>
+  </div>
+
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="scroll">
+        <div class="status">
+  <span>09:41</span>
+  <span class="glyphs">
+    <span class="bars"><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i><i style="height:11px"></i></span>
+    <svg viewBox="0 0 20 16" width="16" height="13" fill="currentColor"><path d="M10 13.4l2.2 2.2a.6.6 0 01-.85.85L10 15.1l-1.35 1.35a.6.6 0 01-.85-.85L10 13.4z"/><path d="M10 9.2c1.6 0 3.1.6 4.2 1.7l-1.2 1.2A4.3 4.3 0 0010 10.9a4.3 4.3 0 00-3 1.2l-1.2-1.2A6 6 0 0110 9.2z"/><path d="M10 4.8c2.8 0 5.4 1.1 7.3 2.9l-1.2 1.2A8.7 8.7 0 0010 6.5a8.7 8.7 0 00-6.1 2.4L2.7 7.7A10.4 10.4 0 0110 4.8z"/></svg>
+    <span class="batt"><span></span></span>
+  </span>
+</div>
+        <header class="masthead">
+  <div class="masthead-row">
+    <div class="masthead-left">
+      <button class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+    </div>
+    <span class="wordmark-block"><span class="b1">Crime</span><span class="b2">World</span></span>
+    <div class="masthead-right">
+      <button class="icon-btn" aria-label="My account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.6-3.6 4.4-5.4 8-5.4s6.4 1.8 8 5.4"/></svg></button>
+      <a class="subscribe" href="#">Subscribe</a>
+    </div>
+  </div>
+  <nav class="rail">
+    <a href="#" class="">Latest</a>
+    <a href="#" class="">Ireland</a>
+    <a href="#" class="on">Courts</a>
+    <a href="#" class="">Gangland</a>
+    <a href="#" class="">Investigations</a>
+    <a href="#" class="">UK &amp; World</a>
+    <a href="#" class="">Podcasts</a>
+    <a href="#" class="">Video</a>
+  </nav>
+</header>
+        <article class="article">
+  <div class="crumb"><span>Courts</span><span class="lock">SUBSCRIBER</span></div>
+  <h1 class="headline">Teens charged over Alex Coughlan’s death in Blanchardstown set for murder trial</h1>
+  <p class="standfirst">The two boys, aged 16 and 17, cannot be named because they are juveniles and remain in custody at Oberstown having been refused bail.</p>
+  <div class="byline">
+    <span class="avatar">CW</span>
+    <span class="who">
+      <span class="name">Crime World Court Reporter</span>
+      <span class="when">Today at 11:12 · 3 min read</span>
+    </span>
+    <span class="share">
+      <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/></svg></span>
+      <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+      <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span>
+    </span>
+  </div>
+  <figure class="hero">
+    <div class="frame"><svg class="art" viewBox="0 0 480 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga9q9jmm" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2A2622"/><stop offset="100%" stop-color="#8C8378"/>
+</linearGradient>
+<radialGradient id="va9q9jmm" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na9q9jmm"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="480" height="320" fill="url(#ga9q9jmm)"/>
+<rect x="37.714285714285715" y="83.2" width="36" height="128" fill="rgba(255,255,255,0.16)"/><rect x="111.42857142857144" y="83.2" width="36" height="128" fill="rgba(255,255,255,0.16)"/><rect x="185.14285714285717" y="83.2" width="36" height="128" fill="rgba(255,255,255,0.16)"/><rect x="258.8571428571429" y="83.2" width="36" height="128" fill="rgba(255,255,255,0.16)"/><rect x="332.5714285714286" y="83.2" width="36" height="128" fill="rgba(255,255,255,0.16)"/><rect x="406.28571428571433" y="83.2" width="36" height="128" fill="rgba(255,255,255,0.16)"/><rect x="24" y="64" width="432" height="17.6" fill="rgba(255,255,255,0.22)"/><rect x="9.6" y="209.60000000000002" width="460.79999999999995" height="16" fill="rgba(255,255,255,0.2)"/><rect x="0" y="198.4" width="480" height="121.6" fill="rgba(0,0,0,0.28)"/>
+<rect width="480" height="320" fill="url(#va9q9jmm)"/>
+<rect width="480" height="320" filter="url(#na9q9jmm)" opacity="0.07"/>
+</svg></div>
+    <figcaption>The case was listed before the Dublin District Court. Photo: Stock image</figcaption>
+  </figure>
+  <div class="body">
+    <p>Two teenage boys accused of attacking a man who died after being seriously injured in Blanchardstown, west Dublin, are to be tried for murder.</p>
+    <p>Alex Coughlan (37) suffered serious injuries after he was assaulted on Mill Road at around 4.20pm on May 17 and was found unconscious. He was taken to hospital in a critical condition and was pronounced dead on May 20.</p>
+    <p>A post-mortem examination established that Mr Coughlan had suffered “traumatic” head and neck injuries.</p>
+    <blockquote class="pull"><q>The case falls under the juvenile protocol, setting a strict 12-month limit to complete the trial process.</q><span class="attr">Court reporting note</span></blockquote>
+    <p>Shortly after he died, gardaí charged two boys, aged 17 and 16, in connection with the incident. The pair, who cannot be named because they are juveniles, have been remanded to the Oberstown Children Detention Campus, having been refused bail.</p>
+    <p>They were originally accused of causing serious harm to Mr Coughlan at Mill Road, contrary to section 4 of the Non-Fatal Offences Against the Person Act. They were also charged with robbing him of his bank cards and a €300 gold ring.</p>
+    <div class="podstrip">
+      <div class="cover"><svg class="art" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gadc0kci" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2A1F2C"/><stop offset="100%" stop-color="#907E93"/>
+</linearGradient>
+<radialGradient id="vadc0kci" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="nadc0kci"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="120" height="120" fill="url(#gadc0kci)"/>
+<rect x="2" y="55.2" width="1.4545454545454541" height="9.6" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="7.454545454545454" y="39.22013104359934" width="1.4545454545454541" height="41.55973791280133" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="12.909090909090908" y="35.33350833008482" width="1.4545454545454541" height="49.33298333983036" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="18.363636363636363" y="46.481450443229875" width="1.4545454545454541" height="27.037099113540254" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="23.818181818181817" y="46.17258295678501" width="1.4545454545454541" height="27.654834086429982" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="29.27272727272727" y="35.25838559963202" width="1.4545454545454541" height="49.483228800735965" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="34.72727272727273" y="39.43560445385786" width="1.4545454545454541" height="41.12879109228428" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="40.18181818181818" y="54.85699643011927" width="1.4545454545454541" height="10.286007139761468" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="45.63636363636363" y="39.00917557747727" width="1.4545454545454541" height="41.981648845045456" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="51.090909090909086" y="35.414247858760234" width="1.4545454545454541" height="49.171504282479525" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="56.54545454545454" y="46.792782901068165" width="1.4545454545454541" height="26.41443419786367" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="61.99999999999999" y="45.86626776698344" width="1.4545454545454541" height="28.26746446603311" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="67.45454545454545" y="35.18890090664357" width="1.4545454545454541" height="49.62219818671286" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="72.9090909090909" y="39.65553488805175" width="1.4545454545454541" height="40.68893022389651" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="78.36363636363636" y="54.51408983668881" width="1.4545454545454541" height="10.971820326622378" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="83.81818181818181" y="38.80279769834693" width="1.4545454545454541" height="42.39440460330614" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="89.27272727272727" y="35.50058135839474" width="1.4545454545454541" height="48.99883728321052" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="94.72727272727272" y="47.106492308135515" width="1.4545454545454541" height="25.787015383728974" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="100.18181818181817" y="45.56259147747129" width="1.4545454545454541" height="28.874817045057423" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="105.63636363636363" y="35.12507389633447" width="1.4545454545454541" height="49.74985220733105" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="111.09090909090908" y="39.87986016585781" width="1.4545454545454541" height="40.24027966828439" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="116.54545454545453" y="54.171377168740975" width="1.4545454545454541" height="11.657245662518044" rx="2" fill="rgba(255,255,255,0.26)"/><circle cx="60" cy="60" r="36" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+<rect width="120" height="120" fill="url(#vadc0kci)"/>
+<rect width="120" height="120" filter="url(#nadc0kci)" opacity="0.07"/>
+</svg></div>
+      <div style="flex:1;min-width:0">
+        <span class="lbl">Crime World Podcast</span>
+        <div class="t">Nicola Tallant on the cases before the courts this week</div>
+        <div class="m">New episode · 38 min</div>
+      </div>
+      <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+    </div>
+    <div class="readmore">
+      <span class="lbl">Read more</span>
+      <span class="t">Judge warns social media users identifying teens charged over west Dublin attack</span>
+    </div>
+  </div>
+  <div class="tags"><a href="#">Courts</a><a href="#">Dublin</a><a href="#">Oberstown</a></div>
+</article>
+        <section class="tn">
+  <div class="tn-head">
+    <h2>More from Crime World</h2>
+    <span class="tn-attr">Recommended by Taboola</span>
+  </div>
+  <a class="card c-lead" href="#">
+    <div class="shot"><svg class="art" viewBox="0 0 480 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga5kp4zq" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#15181F"/><stop offset="100%" stop-color="#4E5666"/>
+</linearGradient>
+<radialGradient id="va5kp4zq" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na5kp4zq"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="480" height="320" fill="url(#ga5kp4zq)"/>
+<rect x="-24" y="54.940597406029724" width="44.08525492738188" height="143.45940259397028" fill="rgba(0,0,0,0.34)"/><rect x="23.918755355849868" y="56.64910276830196" width="53.152551702842125" height="141.75089723169805" fill="rgba(0,0,0,0.34)"/><rect x="81.69326807633044" y="61.45187529474495" width="66.07340809057654" height="136.94812470525505" fill="rgba(0,0,0,0.34)"/><rect x="153.51218991391363" y="146.2104339197278" width="38.304586709305646" height="52.1895660802722" fill="rgba(0,0,0,0.34)"/><rect x="195.1476102501154" y="136.60321525931357" width="53.16163450209796" height="61.79678474068642" fill="rgba(0,0,0,0.34)"/><rect x="252.93199557848277" y="40.977978405356424" width="65.95716075249017" height="157.42202159464358" fill="rgba(0,0,0,0.34)"/><rect x="324.62456161379816" y="68.11714660823347" width="59.181476437971" height="130.28285339176654" fill="rgba(0,0,0,0.34)"/><rect x="388.9522533942014" y="83.68153333067895" width="57.20935672929884" height="114.71846666932106" fill="rgba(0,0,0,0.34)"/><rect x="451.1363367956132" y="119.09800232350827" width="53.086935635894534" height="79.30199767649174" fill="rgba(0,0,0,0.34)"/><circle cx="374.40000000000003" cy="76.8" r="32" fill="rgba(255,255,255,0.32)"/><polygon points="48,0 96,0 19.200000000000003,320 -28.799999999999997,320" fill="rgba(255,255,255,0.06)"/><polygon points="163.2,0 211.2,0 134.39999999999998,320 86.39999999999999,320" fill="rgba(255,255,255,0.06)"/><polygon points="278.4,0 326.4,0 249.59999999999997,320 201.59999999999997,320" fill="rgba(255,255,255,0.06)"/><polygon points="393.59999999999997,0 441.59999999999997,0 364.79999999999995,320 316.79999999999995,320" fill="rgba(255,255,255,0.06)"/>
+<rect width="480" height="320" fill="url(#va5kp4zq)"/>
+<rect width="480" height="320" filter="url(#na5kp4zq)" opacity="0.07"/>
+</svg></div>
+    <div class="kick">Investigations</div>
+    <div class="ct">Inside the feud that split one of Dublin’s biggest crime gangs — and what comes next</div>
+    <div class="cm">Subscriber</div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick">Gangland</div>
+      <div class="ct">Gardaí seize €1.2m of cocaine in Dublin Port container search</div>
+      <div class="cm">3 min read</div>
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga2k0j8h" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#1B2A33"/><stop offset="100%" stop-color="#6F8A99"/>
+</linearGradient>
+<radialGradient id="va2k0j8h" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na2k0j8h"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga2k0j8h)"/>
+<rect x="9.6" y="90.89999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="55.2" y="90.89999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="100.8" y="90.89999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="146.4" y="90.89999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="192" y="90.89999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="9.6" y="70.19999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="55.2" y="70.19999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="100.8" y="70.19999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="146.4" y="70.19999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="192" y="70.19999999999999" width="40.800000000000004" height="18" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="9.6" y="49.5" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="55.2" y="49.5" width="40.800000000000004" height="18" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="100.8" y="49.5" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="146.4" y="49.5" width="40.800000000000004" height="18" rx="1.5" fill="rgba(255,255,255,0.16)"/><rect x="192" y="49.5" width="40.800000000000004" height="18" rx="1.5" fill="rgba(0,0,0,0.28)"/><rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/>
+<rect width="240" height="180" fill="url(#va2k0j8h)"/>
+<rect width="240" height="180" filter="url(#na2k0j8h)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick spon"><span>Sponsored</span><span>·</span><b>Vantage Secure</b><span class="i">i</span></div>
+      <div class="ct">The home security cameras Irish homeowners are installing this year</div>
+      
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga2it78s" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#232A33"/><stop offset="100%" stop-color="#7C8A9B"/>
+</linearGradient>
+<radialGradient id="va2it78s" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na2it78s"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga2it78s)"/>
+<line x1="30" y1="0" x2="30" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="60" y1="0" x2="60" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="90" y1="0" x2="90" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="120" y1="0" x2="120" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="150" y1="0" x2="150" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="180" y1="0" x2="180" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="210" y1="0" x2="210" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="30" x2="240" y2="30" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="60" x2="240" y2="60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="90" x2="240" y2="90" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="120" x2="240" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="150" x2="240" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><circle cx="120" cy="82.8" r="36" fill="none" stroke="rgba(255,255,255,0.34)" stroke-width="3"/><circle cx="120" cy="82.8" r="14.4" fill="rgba(255,255,255,0.26)"/>
+<rect width="240" height="180" fill="url(#va2it78s)"/>
+<rect width="240" height="180" filter="url(#na2it78s)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick">Courts</div>
+      <div class="ct">Convicted armed robber loses appeal over 12-year sentence</div>
+      <div class="cm">2 min read</div>
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gaes9iz0" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2A2622"/><stop offset="100%" stop-color="#8C8378"/>
+</linearGradient>
+<radialGradient id="vaes9iz0" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="naes9iz0"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#gaes9iz0)"/>
+<rect x="18.857142857142858" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="55.71428571428572" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="92.57142857142858" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="129.42857142857144" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="166.2857142857143" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="203.14285714285717" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="12" y="36" width="216" height="9.9" fill="rgba(255,255,255,0.22)"/><rect x="4.8" y="117.9" width="230.39999999999998" height="9" fill="rgba(255,255,255,0.2)"/><rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/>
+<rect width="240" height="180" fill="url(#vaes9iz0)"/>
+<rect width="240" height="180" filter="url(#naes9iz0)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <div class="card c-grid">
+    <a href="#">
+      <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gaunsbg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2A1F2C"/><stop offset="100%" stop-color="#907E93"/>
+</linearGradient>
+<radialGradient id="vaunsbg" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="naunsbg"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#gaunsbg)"/>
+<rect x="2" y="82.8" width="6.909090909090908" height="14.4" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="12.909090909090908" y="58.83019656539901" width="6.909090909090908" height="62.339606869201994" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="23.818181818181817" y="53.000262495127224" width="6.909090909090908" height="73.99947500974555" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="34.72727272727273" y="69.72217566484481" width="6.909090909090908" height="40.55564867031038" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="45.63636363636363" y="69.25887443517752" width="6.909090909090908" height="41.48225112964497" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="56.54545454545454" y="52.887578399448024" width="6.909090909090908" height="74.22484320110395" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="67.45454545454545" y="59.15340668078679" width="6.909090909090908" height="61.69318663842642" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="78.36363636363636" y="82.2854946451789" width="6.909090909090908" height="15.429010709642203" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="89.27272727272727" y="58.513763366215905" width="6.909090909090908" height="62.97247326756819" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="100.18181818181817" y="53.12137178814035" width="6.909090909090908" height="73.7572564237193" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="111.09090909090908" y="70.18917435160225" width="6.909090909090908" height="39.621651296795505" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="121.99999999999999" y="68.79940165047516" width="6.909090909090908" height="42.40119669904967" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="132.9090909090909" y="52.78335135996536" width="6.909090909090908" height="74.43329728006928" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="143.8181818181818" y="59.48330233207761" width="6.909090909090908" height="61.03339533584477" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="154.72727272727272" y="81.77113475503322" width="6.909090909090908" height="16.457730489933567" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="165.63636363636363" y="58.2041965475204" width="6.909090909090908" height="63.59160690495921" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="176.54545454545453" y="53.25087203759211" width="6.909090909090908" height="73.49825592481578" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="187.45454545454544" y="70.65973846220326" width="6.909090909090908" height="38.68052307559346" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="198.36363636363635" y="68.34388721620694" width="6.909090909090908" height="43.31222556758613" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="209.27272727272725" y="52.68761084450171" width="6.909090909090908" height="74.62477831099658" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="220.18181818181816" y="59.81979024878671" width="6.909090909090908" height="60.36041950242658" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="231.09090909090907" y="81.25706575311146" width="6.909090909090908" height="17.485868493777065" rx="2" fill="rgba(255,255,255,0.26)"/><circle cx="120" cy="90" r="54" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+<rect width="240" height="180" fill="url(#vaunsbg)"/>
+<rect width="240" height="180" filter="url(#naunsbg)" opacity="0.07"/>
+</svg></div>
+      <div class="kick">Podcast</div>
+      <div class="ct">The disappearance that still haunts a Cork town</div>
+    </a>
+    <a href="#">
+      <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga6jfb7o" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#15181F"/><stop offset="100%" stop-color="#4E5666"/>
+</linearGradient>
+<radialGradient id="va6jfb7o" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na6jfb7o"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga6jfb7o)"/>
+<rect x="-12" y="39.262720095366234" width="25.605440216459336" height="72.33727990463376" fill="rgba(0,0,0,0.34)"/><rect x="15.832000235281885" y="57.899238651338955" width="21.56669410814345" height="53.70076134866104" fill="rgba(0,0,0,0.34)"/><rect x="39.27405904848129" y="52.96082542715593" width="26.73809482584894" height="58.63917457284406" fill="rgba(0,0,0,0.34)"/><rect x="68.3372055983171" y="24.06925061373039" width="32.42136305563152" height="87.5307493862696" fill="rgba(0,0,0,0.34)"/><rect x="103.57781761530788" y="40.1934024643153" width="16.57968903037906" height="71.4065975356847" fill="rgba(0,0,0,0.34)"/><rect x="121.59921873528512" y="58.21248381072654" width="32.076831600911916" height="53.387516189273455" fill="rgba(0,0,0,0.34)"/><rect x="156.46534004062414" y="49.41185655668378" width="29.00222133006156" height="62.188143443316214" fill="rgba(0,0,0,0.34)"/><rect x="187.98949366025627" y="42.172589541412876" width="24.280766431532804" height="69.42741045858712" fill="rgba(0,0,0,0.34)"/><rect x="214.3816310858354" y="38.721756708249444" width="31.095259308636184" height="72.87824329175055" fill="rgba(0,0,0,0.34)"/><circle cx="187.20000000000002" cy="43.199999999999996" r="18" fill="rgba(255,255,255,0.32)"/><polygon points="24,0 48,0 9.600000000000001,180 -14.399999999999999,180" fill="rgba(255,255,255,0.06)"/><polygon points="81.6,0 105.6,0 67.19999999999999,180 43.199999999999996,180" fill="rgba(255,255,255,0.06)"/><polygon points="139.2,0 163.2,0 124.79999999999998,180 100.79999999999998,180" fill="rgba(255,255,255,0.06)"/><polygon points="196.79999999999998,0 220.79999999999998,0 182.39999999999998,180 158.39999999999998,180" fill="rgba(255,255,255,0.06)"/>
+<rect width="240" height="180" fill="url(#va6jfb7o)"/>
+<rect width="240" height="180" filter="url(#na6jfb7o)" opacity="0.07"/>
+</svg></div>
+      <div class="kick">UK &amp; World</div>
+      <div class="ct">How an encrypted phone network brought down a cartel</div>
+    </a>
+  </div>
+  <a class="card c-cta" href="#">
+    <div class="shot"><svg class="art" viewBox="0 0 480 270" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gadzhh1u" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#1C2530"/><stop offset="100%" stop-color="#6E8296"/>
+</linearGradient>
+<radialGradient id="vadzhh1u" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="nadzhh1u"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="480" height="270" fill="url(#gadzhh1u)"/>
+<line x1="60" y1="0" x2="60" y2="270" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="120" y1="0" x2="120" y2="270" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="180" y1="0" x2="180" y2="270" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="240" y1="0" x2="240" y2="270" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="300" y1="0" x2="300" y2="270" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="360" y1="0" x2="360" y2="270" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="420" y1="0" x2="420" y2="270" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="45" x2="480" y2="45" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="90" x2="480" y2="90" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="135" x2="480" y2="135" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="180" x2="480" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="225" x2="480" y2="225" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><polygon points="48,0 96,0 19.200000000000003,270 -28.799999999999997,270" fill="rgba(255,255,255,0.06)"/><polygon points="163.2,0 211.2,0 134.39999999999998,270 86.39999999999999,270" fill="rgba(255,255,255,0.06)"/><polygon points="278.4,0 326.4,0 249.59999999999997,270 201.59999999999997,270" fill="rgba(255,255,255,0.06)"/><polygon points="393.59999999999997,0 441.59999999999997,0 364.79999999999995,270 316.79999999999995,270" fill="rgba(255,255,255,0.06)"/>
+<rect width="480" height="270" fill="url(#vadzhh1u)"/>
+<rect width="480" height="270" filter="url(#nadzhh1u)" opacity="0.07"/>
+</svg></div>
+    <div class="kick spon"><span>Sponsored</span><span>·</span><b>Sentinel ID</b><span class="i">i</span></div>
+    <div class="ct">The €9 subscription that tells you when your data has leaked</div>
+    <span class="pill">Check my data</span>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick">True Crime</div>
+      <div class="ct">Twelve new true crime series worth your time this month</div>
+      <div class="cm">5 min read</div>
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga4sh4kv" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2A1F2C"/><stop offset="100%" stop-color="#907E93"/>
+</linearGradient>
+<radialGradient id="va4sh4kv" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na4sh4kv"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga4sh4kv)"/>
+<rect x="2" y="82.8" width="6.909090909090908" height="14.4" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="12.909090909090908" y="58.83019656539901" width="6.909090909090908" height="62.339606869201994" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="23.818181818181817" y="53.000262495127224" width="6.909090909090908" height="73.99947500974555" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="34.72727272727273" y="69.72217566484481" width="6.909090909090908" height="40.55564867031038" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="45.63636363636363" y="69.25887443517752" width="6.909090909090908" height="41.48225112964497" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="56.54545454545454" y="52.887578399448024" width="6.909090909090908" height="74.22484320110395" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="67.45454545454545" y="59.15340668078679" width="6.909090909090908" height="61.69318663842642" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="78.36363636363636" y="82.2854946451789" width="6.909090909090908" height="15.429010709642203" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="89.27272727272727" y="58.513763366215905" width="6.909090909090908" height="62.97247326756819" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="100.18181818181817" y="53.12137178814035" width="6.909090909090908" height="73.7572564237193" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="111.09090909090908" y="70.18917435160225" width="6.909090909090908" height="39.621651296795505" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="121.99999999999999" y="68.79940165047516" width="6.909090909090908" height="42.40119669904967" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="132.9090909090909" y="52.78335135996536" width="6.909090909090908" height="74.43329728006928" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="143.8181818181818" y="59.48330233207761" width="6.909090909090908" height="61.03339533584477" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="154.72727272727272" y="81.77113475503322" width="6.909090909090908" height="16.457730489933567" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="165.63636363636363" y="58.2041965475204" width="6.909090909090908" height="63.59160690495921" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="176.54545454545453" y="53.25087203759211" width="6.909090909090908" height="73.49825592481578" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="187.45454545454544" y="70.65973846220326" width="6.909090909090908" height="38.68052307559346" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="198.36363636363635" y="68.34388721620694" width="6.909090909090908" height="43.31222556758613" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="209.27272727272725" y="52.68761084450171" width="6.909090909090908" height="74.62477831099658" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="220.18181818181816" y="59.81979024878671" width="6.909090909090908" height="60.36041950242658" rx="2" fill="rgba(255,255,255,0.26)"/><rect x="231.09090909090907" y="81.25706575311146" width="6.909090909090908" height="17.485868493777065" rx="2" fill="rgba(255,255,255,0.26)"/><circle cx="120" cy="90" r="54" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+<rect width="240" height="180" fill="url(#va4sh4kv)"/>
+<rect width="240" height="180" filter="url(#na4sh4kv)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick spon"><span>Sponsored</span><span>·</span><b>StreamList IE</b><span class="i">i</span></div>
+      <div class="ct">True crime fans are binging these box sets before they leave streaming</div>
+      
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga7a6wqx" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#1C2530"/><stop offset="100%" stop-color="#6E8296"/>
+</linearGradient>
+<radialGradient id="va7a6wqx" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na7a6wqx"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga7a6wqx)"/>
+<line x1="30" y1="0" x2="30" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="60" y1="0" x2="60" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="90" y1="0" x2="90" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="120" y1="0" x2="120" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="150" y1="0" x2="150" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="180" y1="0" x2="180" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="210" y1="0" x2="210" y2="180" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="30" x2="240" y2="30" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="60" x2="240" y2="60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="90" x2="240" y2="90" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="120" x2="240" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="0" y1="150" x2="240" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><polygon points="24,0 48,0 9.600000000000001,180 -14.399999999999999,180" fill="rgba(255,255,255,0.06)"/><polygon points="81.6,0 105.6,0 67.19999999999999,180 43.199999999999996,180" fill="rgba(255,255,255,0.06)"/><polygon points="139.2,0 163.2,0 124.79999999999998,180 100.79999999999998,180" fill="rgba(255,255,255,0.06)"/><polygon points="196.79999999999998,0 220.79999999999998,0 182.39999999999998,180 158.39999999999998,180" fill="rgba(255,255,255,0.06)"/>
+<rect width="240" height="180" fill="url(#va7a6wqx)"/>
+<rect width="240" height="180" filter="url(#na7a6wqx)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <div class="tn-foot">
+    <span class="more">Load more stories</span>
+    <span>Ads by Taboola · Sponsored links are marked</span>
+  </div>
+</section>
+        <footer class="site">
+  <div class="fm">Crime World</div>
+  <div class="links"><a href="#">About us</a><a href="#">Contact</a><a href="#">Cookie policy</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Subscribe</a><a href="#">Newsletters</a></div>
+  <div class="legal">A Mediahuis website · © 2026 Crime World. Prototype for demonstration purposes.</div>
+</footer>
+        <div class="home-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#FF2D3F"></i>Publisher accent #FF2D3F</span>
+    <span><i style="background:#0A0B0D;border:1px solid #24272C"></i>Page #0A0B0D</span>
+    <span>Organic and sponsored cards share identical geometry — only the label slot differs</span>
+  </div>
+</div>
+<script>
+  // Device view clips to an 800px screen like the real phone; full-page view
+  // expands it so the whole article + feed can be captured in one screenshot.
+  var stage = document.getElementById('stage');
+  var btn = document.getElementById('toggle');
+  // Open with #full to land straight in full-page view (handy for screenshots).
+  if (location.hash === '#full') {
+    stage.classList.add('fullpage');
+    btn.textContent = 'Show device view';
+  }
+  btn.addEventListener('click', function () {
+    var full = stage.classList.toggle('fullpage');
+    btn.textContent = full ? 'Show device view' : 'Show full page';
+  });
+</script>
+</body>
+</html>
