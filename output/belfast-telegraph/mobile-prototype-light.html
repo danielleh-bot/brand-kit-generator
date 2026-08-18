@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" data-brand="belfast-telegraph" data-mode="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Belfast Telegraph — True Native prototype (Light mode)</title>
+<meta name="description" content="Taboola True Native feed shown in the current Belfast Telegraph article template, light mode." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/*
+  Belfast Telegraph — Taboola True Native prototype (Light mode)
+  Publisher ID 1284555 · belfasttelegraph.co.uk · Mediahuis
+  Modelled on: https://www.belfasttelegraph.co.uk/area/derry-londonderry/news/a-real-sense-of-shock-and-sadness-woman-50s-dies-after-one-vehicle-crash-in-limavady/a/160113143.html
+
+  Built from the current Mediahuis article template so the feed is judged in the
+  page it will actually live in. All imagery is inline SVG: the file is fully
+  self-contained and renders identically offline.
+*/
+
+:root {
+  --bg: #FFFFFF; --surface: #FFFFFF; --band: #F3F4F6;
+  --line: #E1E4E8; --line-soft: #EDEFF2;
+  --text: #14171A; --muted: #5A626B; --faint: #79818A;
+  --accent: #CE0E2D; --accent-text: #FFFFFF; --accent-soft: #FCE9EC;
+  --header: #FFFFFF; --header-text: #14171A; --header-line: #DFE3E8;
+  --chip: #F3F4F6;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --ui: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --logo: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --pad: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--ui);
+  background: #DFE3E8;
+  color: #1D2126;
+  min-height: 100vh;
+  padding: 32px 16px 64px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; border: 0; background: none; cursor: pointer; color: inherit; }
+svg.art { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- stage furniture (outside the device; not part of the mock) ---- */
+.stage { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.stage-head { text-align: center; max-width: 560px; }
+.stage-head h1 {
+  font-family: var(--ui); font-size: 15px; font-weight: 600;
+  letter-spacing: 0.02em; margin: 0 0 4px;
+}
+.stage-head p { margin: 0; font-size: 12.5px; opacity: 0.72; line-height: 1.5; }
+.stage-controls { display: flex; gap: 8px; align-items: center; }
+.ctl {
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 7px 13px; border-radius: 999px;
+  border: 1px solid currentColor; opacity: 0.62;
+}
+.ctl:hover { opacity: 1; }
+.legend {
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  font-size: 11.5px; opacity: 0.7;
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+/* ---- device ---- */
+.phone {
+  width: 393px; padding: 12px; border-radius: 54px;
+  background: linear-gradient(160deg, #3a3a3c 0%, #1c1c1e 42%, #0a0a0a 100%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.07), 0 28px 60px rgba(0,0,0,0.42);
+  position: relative;
+}
+.screen {
+  width: 369px; height: 800px; border-radius: 42px; overflow: hidden;
+  background: var(--bg); position: relative;
+}
+.fullpage .screen { height: auto; }
+.fullpage .scroll { overflow: visible; }
+.scroll { height: 100%; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+.island {
+  position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+  width: 108px; height: 30px; border-radius: 18px; background: #000; z-index: 60;
+}
+.fullpage .island { display: none; }
+.home-bar {
+  height: 22px; display: flex; align-items: center; justify-content: center;
+  background: var(--header);
+}
+.home-bar::after {
+  content: ''; width: 122px; height: 4px; border-radius: 4px;
+  background: var(--header-text); opacity: 0.45;
+}
+
+/* ---- status bar ---- */
+.status {
+  height: 46px; padding: 14px 26px 0; display: flex; align-items: center;
+  justify-content: space-between; background: var(--header); color: var(--header-text);
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em;
+  position: sticky; top: 0; z-index: 50;
+}
+.fullpage .status { position: static; }
+.status .glyphs { display: flex; gap: 5px; align-items: center; opacity: 0.95; }
+.status .bars { display: flex; gap: 1.5px; align-items: flex-end; }
+.status .bars i { width: 3px; background: currentColor; border-radius: 1px; display: block; }
+.status .batt {
+  width: 22px; height: 11px; border: 1.2px solid currentColor; border-radius: 3px;
+  padding: 1.5px; opacity: 0.9;
+}
+.status .batt span { display: block; height: 100%; width: 72%; background: currentColor; border-radius: 1px; }
+
+/* ---- masthead ---- */
+.masthead {
+  position: sticky; top: 46px; z-index: 45;
+  background: var(--header); color: var(--header-text);
+  border-bottom: 1px solid var(--header-line);
+}
+.fullpage .masthead { position: static; }
+.masthead-row {
+  height: 52px; padding: 0 var(--pad);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;
+}
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; }
+.icon-btn svg { width: 19px; height: 19px; }
+.masthead-left, .masthead-right { display: flex; align-items: center; gap: 10px; }
+.masthead-right { justify-content: flex-end; }
+.subscribe {
+  background: var(--accent); color: var(--accent-text);
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em;
+  padding: 7px 13px; border-radius: 3px; white-space: nowrap;
+}
+
+.wordmark-serif {
+  font-family: var(--display); font-weight: 700; font-size: 19px;
+  letter-spacing: -0.015em; white-space: nowrap;
+}
+.wordmark-block {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--logo); font-weight: 700; font-size: 17px;
+  letter-spacing: 0.06em; white-space: nowrap; text-transform: uppercase;
+}
+.wordmark-block .b1 { background: var(--accent); color: #fff; padding: 3px 6px 2px; border-radius: 2px; }
+.wordmark-block .b2 { color: var(--header-text); }
+
+/* ---- section rail ---- */
+.rail {
+  display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none;
+  padding: 0 var(--pad); background: var(--header); color: var(--header-text);
+  border-bottom: 1px solid var(--header-line);
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail a {
+  flex: 0 0 auto; font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em;
+  padding: 11px 0 9px; opacity: 0.72; border-bottom: 2.5px solid transparent;
+  white-space: nowrap;
+}
+.rail a.on { opacity: 1; border-bottom-color: var(--accent); }
+
+/* ---- article ---- */
+.article { padding: 18px var(--pad) 0; background: var(--bg); }
+.crumb {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 7px; margin-bottom: 10px;
+}
+.crumb .sep { color: var(--faint); font-weight: 400; letter-spacing: 0; }
+.lock {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--accent); color: var(--accent-text);
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.08em;
+  padding: 3px 6px; border-radius: 2px;
+}
+h1.headline {
+  font-family: var(--display); font-size: 25.5px; line-height: 1.16; font-weight: 700;
+  letter-spacing: -0.016em; color: var(--text); margin: 0 0 12px;
+}
+.standfirst {
+  font-family: var(--display); font-size: 16.5px; line-height: 1.48;
+  color: var(--muted); margin: 0 0 16px; font-weight: 400;
+}
+.byline {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+}
+.avatar {
+  width: 32px; height: 32px; border-radius: 50%; flex: 0 0 auto;
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11.5px; font-weight: 800; letter-spacing: 0.02em;
+}
+.byline .who { flex: 1; min-width: 0; }
+.byline .name { font-size: 12.5px; font-weight: 700; color: var(--text); }
+.byline .when { font-size: 11.5px; color: var(--faint); margin-top: 2px; }
+.byline .share { display: flex; gap: 12px; color: var(--muted); }
+.byline .share svg { width: 16px; height: 16px; }
+
+figure.hero { margin: 16px calc(var(--pad) * -1) 0; }
+figure.hero .frame { aspect-ratio: 3 / 2; overflow: hidden; background: var(--band); }
+figure.hero figcaption {
+  font-size: 11.5px; line-height: 1.45; color: var(--faint);
+  padding: 8px var(--pad) 0; border-bottom: 1px solid var(--line-soft); padding-bottom: 12px;
+}
+.body { padding-top: 16px; }
+.body p {
+  font-family: var(--display); font-size: 17px; line-height: 1.62; color: var(--text);
+  margin: 0 0 16px;
+}
+.pull {
+  margin: 20px 0; padding: 2px 0 2px 16px; border-left: 3px solid var(--accent);
+}
+.pull q {
+  font-family: var(--display); font-style: italic; font-size: 18.5px; line-height: 1.42;
+  color: var(--text); quotes: none;
+}
+.pull .attr {
+  display: block; margin-top: 8px; font-family: var(--ui);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.readmore {
+  margin: 20px 0; padding: 12px 14px; background: var(--band);
+  border-left: 3px solid var(--accent);
+}
+.readmore .lbl {
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); display: block; margin-bottom: 5px;
+}
+.readmore .t { font-family: var(--display); font-size: 15px; line-height: 1.35; font-weight: 600; color: var(--text); }
+.podstrip {
+  display: flex; align-items: center; gap: 12px; margin: 20px 0;
+  padding: 12px; background: var(--band); border: 1px solid var(--line-soft);
+}
+.podstrip .cover { width: 54px; height: 54px; flex: 0 0 auto; overflow: hidden; border-radius: 3px; }
+.podstrip .lbl {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+}
+.podstrip .t { font-size: 13px; font-weight: 600; line-height: 1.32; color: var(--text); margin-top: 3px; }
+.podstrip .m { font-size: 11px; color: var(--faint); margin-top: 3px; }
+.podstrip .play {
+  width: 30px; height: 30px; border-radius: 50%; flex: 0 0 auto;
+  background: var(--accent); color: var(--accent-text);
+  display: flex; align-items: center; justify-content: center;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 4px 0 20px; }
+.tags a {
+  font-size: 11.5px; font-weight: 600; color: var(--muted);
+  background: var(--chip); border: 1px solid var(--line-soft);
+  padding: 6px 10px; border-radius: 3px;
+}
+
+
+.tn { border-top: 7px solid var(--band); margin-top: 4px; padding: 20px var(--pad) 4px; background: var(--bg); }
+.tn-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+.tn-head h2 {
+  font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: -0.012em;
+  color: var(--text); margin: 0; position: relative; padding-left: 11px;
+}
+.tn-head h2::before {
+  content: ''; position: absolute; left: 0; top: 3px; bottom: 3px; width: 3px; background: var(--accent);
+}
+.tn-attr { font-size: 10px; color: var(--faint); letter-spacing: 0.03em; white-space: nowrap; }
+
+.card { display: block; padding: 15px 0; border-bottom: 1px solid var(--line-soft); }
+.card:last-child { border-bottom: 0; }
+.kick {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 2px 6px; margin-bottom: 6px;
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--accent);
+}
+.kick.spon { color: var(--faint); font-weight: 700; font-size: 10px; letter-spacing: 0.06em; }
+.kick.spon b { white-space: nowrap; }
+.kick.spon b { color: var(--muted); font-weight: 700; }
+.kick .i {
+  width: 12px; height: 12px; border-radius: 50%; border: 1px solid currentColor;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700; letter-spacing: 0; opacity: 0.8;
+}
+.ct { font-family: var(--display); font-weight: 600; color: var(--text); line-height: 1.28; letter-spacing: -0.006em; }
+.cm { font-size: 11px; color: var(--faint); margin-top: 6px; }
+
+.c-lead .shot { aspect-ratio: 3 / 2; overflow: hidden; margin: 0 calc(var(--pad) * -1) 11px; background: var(--band); }
+.c-lead .ct { font-size: 19.5px; }
+
+.c-row { display: grid; grid-template-columns: 1fr 108px; gap: 12px; align-items: start; }
+.c-row .shot { aspect-ratio: 4 / 3; overflow: hidden; background: var(--band); border-radius: 2px; }
+.c-row .ct { font-size: 15px; }
+
+.c-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.c-grid .shot { aspect-ratio: 4 / 3; overflow: hidden; margin-bottom: 8px; background: var(--band); border-radius: 2px; }
+.c-grid .ct { font-size: 14px; }
+
+.c-cta .shot { aspect-ratio: 16 / 9; overflow: hidden; margin: 0 calc(var(--pad) * -1) 11px; background: var(--band); }
+.c-cta .ct { font-size: 17px; }
+.c-cta .pill {
+  display: inline-block; margin-top: 11px; padding: 9px 18px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-text);
+  font-family: var(--ui); font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em;
+}
+.tn-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0 18px; font-size: 10.5px; color: var(--faint);
+}
+.tn-foot .more { font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+
+footer.site {
+  background: var(--header); color: var(--header-text); padding: 22px var(--pad) 18px; margin-top: 4px;
+}
+footer.site .fm { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 12px; opacity: 0.95; }
+footer.site .links { display: flex; flex-wrap: wrap; gap: 10px 16px; font-size: 11.5px; opacity: 0.72; }
+footer.site .legal { margin-top: 14px; font-size: 10.5px; opacity: 0.5; line-height: 1.5; }
+
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="stage-head">
+    <h1>Belfast Telegraph · True Native · Light mode</h1>
+    <p>Publisher ID 1284555. The feed below the article is Taboola-served and rendered with Belfast Telegraph’s own type, colour and card rules.</p>
+  </div>
+  <div class="stage-controls">
+    <button class="ctl" id="toggle">Show full page</button>
+  </div>
+
+  <div class="phone">
+    <div class="island"></div>
+    <div class="screen">
+      <div class="scroll">
+        <div class="status">
+  <span>09:41</span>
+  <span class="glyphs">
+    <span class="bars"><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i><i style="height:11px"></i></span>
+    <svg viewBox="0 0 20 16" width="16" height="13" fill="currentColor"><path d="M10 13.4l2.2 2.2a.6.6 0 01-.85.85L10 15.1l-1.35 1.35a.6.6 0 01-.85-.85L10 13.4z"/><path d="M10 9.2c1.6 0 3.1.6 4.2 1.7l-1.2 1.2A4.3 4.3 0 0010 10.9a4.3 4.3 0 00-3 1.2l-1.2-1.2A6 6 0 0110 9.2z"/><path d="M10 4.8c2.8 0 5.4 1.1 7.3 2.9l-1.2 1.2A8.7 8.7 0 0010 6.5a8.7 8.7 0 00-6.1 2.4L2.7 7.7A10.4 10.4 0 0110 4.8z"/></svg>
+    <span class="batt"><span></span></span>
+  </span>
+</div>
+        <header class="masthead">
+  <div class="masthead-row">
+    <div class="masthead-left">
+      <button class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+    </div>
+    <span class="wordmark-serif">Belfast Telegraph</span>
+    <div class="masthead-right">
+      <button class="icon-btn" aria-label="My account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.6-3.6 4.4-5.4 8-5.4s6.4 1.8 8 5.4"/></svg></button>
+      <a class="subscribe" href="#">Subscribe</a>
+    </div>
+  </div>
+  <nav class="rail">
+    <a href="#" class="on">News</a>
+    <a href="#" class="">Northern Ireland</a>
+    <a href="#" class="">Politics</a>
+    <a href="#" class="">Business</a>
+    <a href="#" class="">Sport</a>
+    <a href="#" class="">Life</a>
+    <a href="#" class="">Opinion</a>
+    <a href="#" class="">Podcasts</a>
+    <a href="#" class="">Puzzles</a>
+  </nav>
+</header>
+        <article class="article">
+  <div class="crumb"><span>News</span><span class="sep">›</span><span>Derry / Londonderry</span></div>
+  <h1 class="headline">‘A real sense of shock and sadness’: Woman (50s) dies after one-vehicle crash in Limavady</h1>
+  <p class="standfirst">Police have appealed for witnesses and dashcam footage after the collision on the Drumrane Road on Sunday afternoon.</p>
+  <div class="byline">
+    <span class="avatar">BT</span>
+    <span class="who">
+      <span class="name">Belfast Telegraph Reporter</span>
+      <span class="when">Today at 08:41 · 2 min read</span>
+    </span>
+    <span class="share">
+      <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/></svg></span>
+      <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+      <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4.5L6 21z"/></svg></span>
+    </span>
+  </div>
+  <figure class="hero">
+    <div class="frame"><svg class="art" viewBox="0 0 480 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gab4txp5" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2B3A4A"/><stop offset="100%" stop-color="#7C8A99"/>
+</linearGradient>
+<radialGradient id="vab4txp5" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="nab4txp5"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="480" height="320" fill="url(#gab4txp5)"/>
+<rect x="0" y="198.4" width="480" height="121.6" fill="rgba(0,0,0,0.28)"/><rect x="225.6" y="217.60000000000002" width="28.799999999999997" height="7.039999999999999" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="218.4" y="240" width="43.199999999999996" height="7.039999999999999" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="211.2" y="262.40000000000003" width="57.599999999999994" height="7.039999999999999" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="204" y="284.80000000000007" width="72" height="7.039999999999999" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="196.8" y="307.20000000000005" width="86.39999999999999" height="7.039999999999999" rx="2" fill="rgba(255,255,255,0.5)"/><polygon points="48,0 96,0 19.200000000000003,320 -28.799999999999997,320" fill="rgba(255,255,255,0.06)"/><polygon points="163.2,0 211.2,0 134.39999999999998,320 86.39999999999999,320" fill="rgba(255,255,255,0.06)"/><polygon points="278.4,0 326.4,0 249.59999999999997,320 201.59999999999997,320" fill="rgba(255,255,255,0.06)"/><polygon points="393.59999999999997,0 441.59999999999997,0 364.79999999999995,320 316.79999999999995,320" fill="rgba(255,255,255,0.06)"/>
+<rect width="480" height="320" fill="url(#vab4txp5)"/>
+<rect width="480" height="320" filter="url(#nab4txp5)" opacity="0.07"/>
+</svg></div>
+    <figcaption>The road was closed for several hours while collision investigators examined the scene. Photo: Stock image</figcaption>
+  </figure>
+  <div class="body">
+    <p>A woman in her 50s has died following a one-vehicle collision in Limavady, Co Derry, police have confirmed.</p>
+    <p>Emergency services were called to the Drumrane Road area at around 2.50pm on Sunday following reports of a serious road traffic collision.</p>
+    <p>Officers from the PSNI attended alongside colleagues from the Northern Ireland Ambulance Service, who provided medical treatment at the scene. The woman died from her injuries a short time later.</p>
+    <blockquote class="pull"><q>Limavady is a close-knit place, and news like this touches every single family in the town.</q><span class="attr">Local councillor</span></blockquote>
+    <p>The road was closed for a number of hours while collision investigators carried out an examination of the scene. It has since reopened.</p>
+    <p>Police have appealed for anyone who witnessed the collision, or who was travelling in the area at the time and may have dashcam footage, to contact them.</p>
+    
+    <div class="readmore">
+      <span class="lbl">Read more</span>
+      <span class="t">PSNI renews appeal for dashcam footage after fatal Co Derry collision</span>
+    </div>
+  </div>
+  <div class="tags"><a href="#">Limavady</a><a href="#">PSNI</a><a href="#">Road safety</a></div>
+</article>
+        <section class="tn">
+  <div class="tn-head">
+    <h2>More from Belfast Telegraph</h2>
+    <span class="tn-attr">Recommended by Taboola</span>
+  </div>
+  <a class="card c-lead" href="#">
+    <div class="shot"><svg class="art" viewBox="0 0 480 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gag4ivr" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#243040"/><stop offset="100%" stop-color="#8494A6"/>
+</linearGradient>
+<radialGradient id="vag4ivr" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="nag4ivr"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="480" height="320" fill="url(#gag4ivr)"/>
+<rect x="-24" y="38.597052258253086" width="33.724242097288375" height="159.80294774174692" fill="rgba(0,0,0,0.34)"/><rect x="12.656784888356931" y="49.86470366716384" width="35.75416986174882" height="148.53529633283617" fill="rgba(0,0,0,0.34)"/><rect x="51.520012998953476" y="64.0182615607977" width="42.91803000640869" height="134.3817384392023" fill="rgba(0,0,0,0.34)"/><rect x="98.1700456146151" y="144.96706053465607" width="56.365522278338666" height="53.43293946534395" fill="rgba(0,0,0,0.34)"/><rect x="159.43691765628756" y="105.01447148025036" width="55.73713214220107" height="93.38552851974964" fill="rgba(0,0,0,0.34)"/><rect x="220.0207569412887" y="128.08453847616912" width="34.38791888169944" height="70.31546152383089" fill="rgba(0,0,0,0.34)"/><rect x="257.3989296387881" y="105.98156827688219" width="70.50361649420859" height="92.41843172311782" fill="rgba(0,0,0,0.34)"/><rect x="334.03329539336266" y="75.39450972378253" width="63.62701311331988" height="123.00549027621747" fill="rgba(0,0,0,0.34)"/><rect x="403.1930922556669" y="91.24841679334641" width="63.16088919299842" height="107.1515832066536" fill="rgba(0,0,0,0.34)"/><rect x="471.84623268283906" y="135.3294652149081" width="41.377733302518735" height="63.07053478509188" fill="rgba(0,0,0,0.34)"/><rect x="0" y="198.4" width="480" height="121.6" fill="rgba(0,0,0,0.28)"/><circle cx="364.8" cy="86.4" r="41.6" fill="rgba(255,255,255,0.3)"/>
+<rect width="480" height="320" fill="url(#vag4ivr)"/>
+<rect width="480" height="320" filter="url(#nag4ivr)" opacity="0.07"/>
+</svg></div>
+    <div class="kick">Northern Ireland</div>
+    <div class="ct">What the £310m Belfast city centre regeneration plan means for shoppers and traders</div>
+    <div class="cm">Business</div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick">Motoring</div>
+      <div class="ct">Warning for NI drivers as new average-speed enforcement goes live this month</div>
+      <div class="cm">4 min read</div>
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga4ziicc" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2B3A4A"/><stop offset="100%" stop-color="#7C8A99"/>
+</linearGradient>
+<radialGradient id="va4ziicc" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na4ziicc"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga4ziicc)"/>
+<rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/><rect x="112.8" y="122.4" width="14.399999999999999" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="109.2" y="135" width="21.599999999999998" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="105.6" y="147.60000000000002" width="28.799999999999997" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="102" y="160.20000000000002" width="36" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="98.4" y="172.8" width="43.199999999999996" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><polygon points="24,0 48,0 9.600000000000001,180 -14.399999999999999,180" fill="rgba(255,255,255,0.06)"/><polygon points="81.6,0 105.6,0 67.19999999999999,180 43.199999999999996,180" fill="rgba(255,255,255,0.06)"/><polygon points="139.2,0 163.2,0 124.79999999999998,180 100.79999999999998,180" fill="rgba(255,255,255,0.06)"/><polygon points="196.79999999999998,0 220.79999999999998,0 182.39999999999998,180 158.39999999999998,180" fill="rgba(255,255,255,0.06)"/>
+<rect width="240" height="180" fill="url(#va4ziicc)"/>
+<rect width="240" height="180" filter="url(#na4ziicc)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick spon"><span>Sponsored</span><span>·</span><b>Aurora Energy</b><span class="i">i</span></div>
+      <div class="ct">Homeowners in Northern Ireland are switching to heat pumps — here’s what it costs in 2026</div>
+      
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gafa3eki" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#3A3128"/><stop offset="100%" stop-color="#A2937F"/>
+</linearGradient>
+<radialGradient id="vafa3eki" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="nafa3eki"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#gafa3eki)"/>
+<polygon points="120,43.199999999999996 196.79999999999998,86.39999999999999 43.199999999999996,86.39999999999999" fill="rgba(0,0,0,0.3)"/><rect x="57.599999999999994" y="82.8" width="124.80000000000001" height="36" fill="rgba(0,0,0,0.34)"/><rect x="105.6" y="99.00000000000001" width="28.799999999999997" height="19.8" fill="rgba(255,255,255,0.28)"/><rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/><circle cx="182.4" cy="48.6" r="23.400000000000002" fill="rgba(255,255,255,0.3)"/>
+<rect width="240" height="180" fill="url(#vafa3eki)"/>
+<rect width="240" height="180" filter="url(#nafa3eki)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick">Weather</div>
+      <div class="ct">Yellow warning issued as heavy rain and gusts sweep across Northern Ireland</div>
+      <div class="cm">2 min read</div>
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga20555s" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#33414F"/><stop offset="100%" stop-color="#93A3B3"/>
+</linearGradient>
+<radialGradient id="va20555s" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na20555s"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga20555s)"/>
+<line x1="183.41128265485168" y1="89.18247894560919" x2="178.51099213359876" y2="105.51678068311887" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="234.78889156132936" y1="59.64680645903573" x2="231.8670854552742" y2="69.38616014588625" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="17.009205613285303" y1="39.27012110715732" x2="13.361553555652499" y2="51.42896129926667" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="15.983911659568548" y1="9.613966690097005" x2="11.88103902968578" y2="23.29020878970623" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="95.11097928509116" y1="23.221149462182076" x2="90.39098797121085" y2="38.954453841783106" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="188.0490192398429" y1="94.4959277654998" x2="185.1709098379081" y2="104.08962577194907" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="147.8225926682353" y1="24.736145564820617" x2="141.66785530615132" y2="45.25193677176722" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="47.11893601343036" y1="41.259158432576804" x2="43.578660553526134" y2="53.06007663225755" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="116.40907717868686" y1="40.130436735972765" x2="112.10823986757082" y2="54.46656110635959" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="194.42581314593554" y1="66.86318559804931" x2="190.04223707569298" y2="81.47510583219119" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="212.87607388570905" y1="101.25595974186436" x2="206.58020313001703" y2="122.24219559417106" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="211.24422647058964" y1="84.4198118923232" x2="204.79291911306325" y2="105.92416975074448" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="186.34202336892486" y1="34.12443692246452" x2="181.3595813941257" y2="50.73257683846168" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="62.939298916608095" y1="5.104730318114162" x2="58.52729426728561" y2="19.811412482522428" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="190.9838990494609" y1="7.1092977846041325" x2="186.38321801883168" y2="22.444901220034808" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="8.652442339807749" y1="88.35450393799692" x2="5.595264077503234" y2="98.54509814567864" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="94.99112896621227" y1="25.514067911915483" x2="88.98319702817592" y2="45.54050770536996" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="235.51671160385013" y1="48.302796381711964" x2="231.77502813900355" y2="60.77507459786721" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="23.5972305200994" y1="25.997688360046595" x2="17.35121017584577" y2="46.817756174225366" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="102.81369052827358" y1="52.37194181447849" x2="97.03351106177084" y2="71.63920670282096" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="205.40742091834545" y1="18.844506931956857" x2="202.48006689000874" y2="28.602353693079202" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="79.00667427107692" y1="32.043531064968555" x2="75.26360263268464" y2="44.52043652627617" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="78.04460121318698" y1="43.046886421926324" x2="72.8891803159425" y2="60.23162274607458" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="23.561508357524872" y1="54.647864155936986" x2="19.16715991725214" y2="69.29569229017943" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="84.74516255781054" y1="106.13300985507668" x2="78.30651631384157" y2="127.59516400163994" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><line x1="30.60264403000474" y1="71.79617774337531" x2="26.446945222411305" y2="85.64850710202009" stroke="rgba(255,255,255,0.3)" stroke-width="1.6" stroke-linecap="round"/><rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/><circle cx="182.4" cy="48.6" r="23.400000000000002" fill="rgba(255,255,255,0.3)"/>
+<rect width="240" height="180" fill="url(#va20555s)"/>
+<rect width="240" height="180" filter="url(#na20555s)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <div class="card c-grid">
+    <a href="#">
+      <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gacqrmjq" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2A2622"/><stop offset="100%" stop-color="#8C8378"/>
+</linearGradient>
+<radialGradient id="vacqrmjq" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="nacqrmjq"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#gacqrmjq)"/>
+<rect x="18.857142857142858" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="55.71428571428572" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="92.57142857142858" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="129.42857142857144" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="166.2857142857143" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="203.14285714285717" y="46.800000000000004" width="18" height="72" fill="rgba(255,255,255,0.16)"/><rect x="12" y="36" width="216" height="9.9" fill="rgba(255,255,255,0.22)"/><rect x="4.8" y="117.9" width="230.39999999999998" height="9" fill="rgba(255,255,255,0.2)"/><rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/>
+<rect width="240" height="180" fill="url(#vacqrmjq)"/>
+<rect width="240" height="180" filter="url(#nacqrmjq)" opacity="0.07"/>
+</svg></div>
+      <div class="kick">Courts</div>
+      <div class="ct">Derry man awarded six-figure sum over workplace injury</div>
+    </a>
+    <a href="#">
+      <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gacjrs3p" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#1F3A2C"/><stop offset="100%" stop-color="#7FA38C"/>
+</linearGradient>
+<radialGradient id="vacjrs3p" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="nacjrs3p"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#gacjrs3p)"/>
+<circle cx="120" cy="171" r="54" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/><circle cx="120" cy="171" r="82.8" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/><circle cx="120" cy="171" r="111.6" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/><rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/>
+<rect width="240" height="180" fill="url(#vacjrs3p)"/>
+<rect width="240" height="180" filter="url(#nacjrs3p)" opacity="0.07"/>
+</svg></div>
+      <div class="kick">Sport</div>
+      <div class="ct">Ulster hit by injury blow days out from URC opener</div>
+    </a>
+  </div>
+  <a class="card c-cta" href="#">
+    <div class="shot"><svg class="art" viewBox="0 0 480 270" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga2vez82" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#1F3A4A"/><stop offset="100%" stop-color="#86AFC2"/>
+</linearGradient>
+<radialGradient id="va2vez82" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na2vez82"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="480" height="270" fill="url(#ga2vez82)"/>
+<rect x="0" y="167.4" width="480" height="102.6" fill="rgba(0,0,0,0.28)"/><circle cx="364.8" cy="72.9" r="35.1" fill="rgba(255,255,255,0.3)"/><circle cx="240" cy="256.5" r="81" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/><circle cx="240" cy="256.5" r="124.19999999999999" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/><circle cx="240" cy="256.5" r="167.4" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+<rect width="480" height="270" fill="url(#va2vez82)"/>
+<rect width="480" height="270" filter="url(#na2vez82)" opacity="0.07"/>
+</svg></div>
+    <div class="kick spon"><span>Sponsored</span><span>·</span><b>Kestrel Money</b><span class="i">i</span></div>
+    <div class="ct">The travel money card Irish holidaymakers are quietly switching to</div>
+    <span class="pill">Learn more</span>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick">Life</div>
+      <div class="ct">The Co Down village that has quietly become NI’s best weekend escape</div>
+      <div class="cm">6 min read</div>
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga5yoiw4" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#243040"/><stop offset="100%" stop-color="#8494A6"/>
+</linearGradient>
+<radialGradient id="va5yoiw4" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na5yoiw4"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga5yoiw4)"/>
+<rect x="-12" y="38.01373008443042" width="22.68097544000298" height="73.58626991556957" fill="rgba(0,0,0,0.34)"/><rect x="12.653234173916282" y="28.2836574660614" width="21.128767525926232" height="83.3163425339386" fill="rgba(0,0,0,0.34)"/><rect x="35.61928583253175" y="37.99790915837511" width="15.95839530193806" height="73.60209084162489" fill="rgba(0,0,0,0.34)"/><rect x="52.965367682464425" y="25.20262638973071" width="33.50264330034703" height="86.39737361026928" fill="rgba(0,0,0,0.34)"/><rect x="89.38128431327641" y="38.027802016586065" width="28.728373003117742" height="73.57219798341393" fill="rgba(0,0,0,0.34)"/><rect x="120.6077767079696" y="64.90340810185299" width="34.66844096593559" height="46.69659189814701" fill="rgba(0,0,0,0.34)"/><rect x="158.29086471442133" y="79.90763843273743" width="30.176580769769853" height="31.692361567262562" fill="rgba(0,0,0,0.34)"/><rect x="191.09149598591029" y="56.11459914939477" width="25.812930271267895" height="55.485400850605224" fill="rgba(0,0,0,0.34)"/><rect x="219.14902888946233" y="59.45391286388038" width="28.81570112811774" height="52.14608713611961" fill="rgba(0,0,0,0.34)"/><rect x="0" y="111.6" width="240" height="68.4" fill="rgba(0,0,0,0.28)"/><circle cx="182.4" cy="48.6" r="23.400000000000002" fill="rgba(255,255,255,0.3)"/>
+<rect width="240" height="180" fill="url(#va5yoiw4)"/>
+<rect width="240" height="180" filter="url(#na5yoiw4)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <a class="card c-row" href="#">
+    <div>
+      <div class="kick spon"><span>Sponsored</span><span>·</span><b>Northline Auto</b><span class="i">i</span></div>
+      <div class="ct">Five signs your tyres won’t make it through another NI winter</div>
+      
+    </div>
+    <div class="shot"><svg class="art" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustrative image" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="ga3udspc" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#2C2F36"/><stop offset="100%" stop-color="#8A8F99"/>
+</linearGradient>
+<radialGradient id="va3udspc" cx="0.5" cy="0.42" r="0.75">
+<stop offset="55%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.42)"/>
+</radialGradient>
+<filter id="na3udspc"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter>
+</defs>
+<rect width="240" height="180" fill="url(#ga3udspc)"/>
+<rect x="112.8" y="122.4" width="14.399999999999999" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="109.2" y="135" width="21.599999999999998" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="105.6" y="147.60000000000002" width="28.799999999999997" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="102" y="160.20000000000002" width="36" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><rect x="98.4" y="172.8" width="43.199999999999996" height="3.96" rx="2" fill="rgba(255,255,255,0.5)"/><circle cx="120" cy="171" r="54" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/><circle cx="120" cy="171" r="82.8" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/><circle cx="120" cy="171" r="111.6" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+<rect width="240" height="180" fill="url(#va3udspc)"/>
+<rect width="240" height="180" filter="url(#na3udspc)" opacity="0.07"/>
+</svg></div>
+  </a>
+  <div class="tn-foot">
+    <span class="more">Load more stories</span>
+    <span>Ads by Taboola · Sponsored links are marked</span>
+  </div>
+</section>
+        <footer class="site">
+  <div class="fm">Belfast Telegraph</div>
+  <div class="links"><a href="#">About us</a><a href="#">Contact</a><a href="#">Cookie policy</a><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Subscribe</a><a href="#">Newsletters</a></div>
+  <div class="legal">A Mediahuis website · © 2026 Belfast Telegraph. Prototype for demonstration purposes.</div>
+</footer>
+        <div class="home-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#CE0E2D"></i>Publisher accent #CE0E2D</span>
+    <span><i style="background:#FFFFFF;border:1px solid #E1E4E8"></i>Page #FFFFFF</span>
+    <span>Organic and sponsored cards share identical geometry — only the label slot differs</span>
+  </div>
+</div>
+<script>
+  // Device view clips to an 800px screen like the real phone; full-page view
+  // expands it so the whole article + feed can be captured in one screenshot.
+  var stage = document.getElementById('stage');
+  var btn = document.getElementById('toggle');
+  // Open with #full to land straight in full-page view (handy for screenshots).
+  if (location.hash === '#full') {
+    stage.classList.add('fullpage');
+    btn.textContent = 'Show device view';
+  }
+  btn.addEventListener('click', function () {
+    var full = stage.classList.toggle('fullpage');
+    btn.textContent = full ? 'Show device view' : 'Show full page';
+  });
+</script>
+</body>
+</html>
