@@ -6,8 +6,10 @@
  * This loader integrates the Business Insider brand kit (colors, typography,
  * spacing) into the Taboola feed widget styling. It applies brand-consistent
  * CSS overrides to all feed card modes (organic, sponsored, alternating) so the
- * Taboola feed visually matches the BI editorial design system — black masthead,
- * BI Orange accents, Brother-1816-style sans-serif, sharp corners.
+ * Taboola feed visually matches the BI editorial design system — black wordmark
+ * on white, 'Thunderbird' red editorial accents, black ('Subscribe') CTAs, the
+ * yellow 'Bright Sun' reserved for premium, Brother-1816-style sans-serif, and
+ * sharp 0px corners.
  *
  * Brand Kit Source: business-insider/brand-kit.json (2026-06-08)
  * NOTE: Confirm `publisherName` slug with BI AdOps before pushing to production.
@@ -18,17 +20,21 @@
 
   // ─── Brand Kit Tokens ──────────────────────────────────────────────
   var BRAND = {
-    // Colors
-    biOrange:         "#FF5A00",
-    biOrangeDark:     "#E65100",
-    biRed:            "#E03625",
-    biYellow:         "#FFC700",
+    // Colors — documented BI palette (BrandColorCode / Brandfetch). The
+    // editorial accent is the 'Thunderbird' red; the primary action (CTA) is
+    // black; the 'Bright Sun' yellow is held back for premium/brand moments.
+    accent:           "#C71A1E",   // editorial red — kickers, hovers, rules, play icon
+    accentDark:       "#A01419",
+    action:           "#0A0A0A",   // primary CTA fill (matches Subscribe)
+    actionDark:       "#333333",
+    biRed:            "#C71A1E",
+    biYellow:         "#FECF41",
     nearBlack:        "#111111",
-    biBlack:          "#000000",
+    biBlack:          "#0A0A0A",
     darkGray:         "#4D4D4D",
     mediumGray:       "#888888",
     white:            "#FFFFFF",
-    offWhite:         "#F7F7F7",
+    offWhite:         "#FAFAFA",
     lightGray:        "#EEEEEE",
     positiveGreen:    "#1A8F4C",
     linkBlue:         "#0F69FF",
@@ -123,7 +129,7 @@
     "  background: transparent;",
     "  display: block;",
     "  text-align: left;",
-    "  border-top: 3px solid " + BRAND.biOrange + ";",
+    "  border-top: 3px solid " + BRAND.accent + ";",
     "}",
 
     ".tbl-feed-header-text {",
@@ -136,14 +142,14 @@
     "  letter-spacing: 0.04em;",
     "}",
 
-    // Orange accent dot before header (BI signature — mirrors the section dot)
+    // Red accent dot before header (BI signature — mirrors the section dot)
     ".tbl-feed-header-text::before {",
     "  content: '';",
     "  display: inline-block;",
     "  width: 8px;",
     "  height: 8px;",
     "  border-radius: 50%;",
-    "  background: " + BRAND.biOrange + ";",
+    "  background: " + BRAND.accent + ";",
     "  margin-right: 10px;",
     "  vertical-align: middle;",
     "  transform: translateY(-2px);",
@@ -174,12 +180,12 @@
     "  font-weight: 800 !important;",
     "}",
 
-    // Title hover — BI Orange underline
+    // Title hover — BI red underline
     ".tbl-feed-card:hover .video-title,",
     ".videoCube:hover .video-title {",
     "  color: " + BRAND.nearBlack + " !important;",
     "  text-decoration: underline !important;",
-    "  text-decoration-color: " + BRAND.biOrange + " !important;",
+    "  text-decoration-color: " + BRAND.accent + " !important;",
     "  text-decoration-thickness: 2px !important;",
     "  text-underline-offset: 3px;",
     "}",
@@ -243,7 +249,7 @@
     "  letter-spacing: 0.06em !important;",
     "}",
 
-    // ── "See more" / Load more button — BI Orange CTA ──
+    // ── "See more" / Load more button — BI's primary action: solid black ──
     ".tbl-feed-more-btn,",
     ".tbl-feed-footer-overlay .tbl-feed-more-btn {",
     "  font-family: " + BRAND.fontPrimary + " !important;",
@@ -252,7 +258,7 @@
     "  text-transform: uppercase !important;",
     "  letter-spacing: 0.06em !important;",
     "  color: " + BRAND.white + " !important;",
-    "  background-color: " + BRAND.biOrange + " !important;",
+    "  background-color: " + BRAND.action + " !important;",
     "  border: none !important;",
     "  border-radius: " + BRAND.buttonRadius + " !important;",
     "  padding: 12px 24px !important;",
@@ -261,14 +267,14 @@
     "}",
 
     ".tbl-feed-more-btn:hover {",
-    "  background-color: " + BRAND.biOrangeDark + " !important;",
+    "  background-color: " + BRAND.actionDark + " !important;",
     "  transform: translateY(-1px);",
     "}",
 
-    // ── Video play icon — BI Orange ──
+    // ── Video play icon — BI editorial red ──
     ".trc_rbox_div .videoCube .trc-video-play-icon,",
     ".tbl-feed-card .trc-video-play-icon {",
-    "  color: " + BRAND.biOrange + " !important;",
+    "  color: " + BRAND.accent + " !important;",
     "}",
 
     // ── Category / section pills (organic content kicker) ──
@@ -277,7 +283,7 @@
     "  font-family: " + BRAND.fontPrimary + " !important;",
     "  font-size: 11px !important;",
     "  font-weight: 700 !important;",
-    "  color: " + BRAND.biOrange + " !important;",
+    "  color: " + BRAND.accent + " !important;",
     "  text-transform: uppercase !important;",
     "  letter-spacing: 0.08em !important;",
     "}",
@@ -348,7 +354,7 @@
     "  color: " + BRAND.mediumGray + " !important;",
     "}",
     ".trc_dark_section .tbl-feed-card:hover .video-title {",
-    "  text-decoration-color: " + BRAND.biOrange + " !important;",
+    "  text-decoration-color: " + BRAND.accent + " !important;",
     "}"
 
   ].join("\n");
@@ -442,7 +448,7 @@
 
     ".videoCube:hover .video-label-box .video-title":
       "text-decoration:underline;" +
-      "text-decoration-color:" + BRAND.biOrange + ";" +
+      "text-decoration-color:" + BRAND.accent + ";" +
       "text-decoration-thickness:2px;"
   };
 
