@@ -154,6 +154,7 @@ async function main() {
         '--disable-gpu',
         '--ignore-certificate-errors',
         '--window-size=1440,900',
+        '--ignore-certificate-errors',
       ],
     });
 
