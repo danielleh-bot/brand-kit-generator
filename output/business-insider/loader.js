@@ -1,71 +1,74 @@
 /**
- * Business Insider Taboola Feed Loader — Brand Kit Integration
+ * Business Insider — Taboola TrueNative Feed Loader (brand-kit generated)
  * =============================================================
- * Publisher: axelspringer-businessinsider  (Axel Springer / Business Insider)
+ * Publisher: CONFIRM-WITH-ADOPS
  *
- * This loader integrates the Business Insider brand kit (colors, typography,
- * spacing) into the Taboola feed widget styling. It applies brand-consistent
- * CSS overrides to all feed card modes (organic, sponsored, alternating) so the
- * Taboola feed visually matches the BI editorial design system — black masthead,
- * BI Orange accents, Brother-1816-style sans-serif, sharp corners.
+ * GENERATED FILE — do not hand-edit. Emitted by generate.js from
+ * Business Insider's brand-kit.json so the feed styling can never drift from the
+ * kit. Re-crawl the publisher and regenerate to update.
  *
- * Brand Kit Source: business-insider/brand-kit.json (2026-06-08)
- * NOTE: Confirm `publisherName` slug with BI AdOps before pushing to production.
+ * Applies the brand identity (accent #002AFF, Garnett type,
+ * real button CTA, 0px card corners) to every feed card mode so
+ * paid + recommended placements read as native Business Insider cards.
+ *
+ * Brand kit: Business Insider/brand-kit.json (2026-06-16)
+ * NOTE: Confirm the publisher slug with AdOps before pushing to production.
  */
 
 (function () {
   "use strict";
 
-  // ─── Brand Kit Tokens ──────────────────────────────────────────────
+  // ─── Brand Kit Tokens (from brand-kit.json) ────────────────────────
   var BRAND = {
-    // Colors
-    biOrange:         "#FF5A00",
-    biOrangeDark:     "#E65100",
-    biRed:            "#E03625",
-    biYellow:         "#FFC700",
-    nearBlack:        "#111111",
-    biBlack:          "#000000",
-    darkGray:         "#4D4D4D",
-    mediumGray:       "#888888",
-    white:            "#FFFFFF",
-    offWhite:         "#F7F7F7",
-    lightGray:        "#EEEEEE",
-    positiveGreen:    "#1A8F4C",
-    linkBlue:         "#0F69FF",
+    accent:        '#002AFF',
+    accentHover:   '#0028F2',
+    textMain:      '#0A0A0A',
+    deck:          '#31313B',
+    meta:          '#0A0A0A',
+    white:         '#FFFFFF',
+    offWhite:      '#D9FFD9',
+    dark:          '#0A0A0A',
+    cardBorder:    '1px solid #D9FFD9',
 
-    // Typography (Brother 1816 is BI's proprietary face — Manrope is the closest
-    // Google Fonts equivalent for visual parity in feed cards rendered against
-    // the publisher domain without the licensed font available.)
-    fontPrimary:      "'Brother 1816', 'Manrope', 'Helvetica Neue', Arial, sans-serif",
-    fontFallback:     "'Manrope', 'Helvetica Neue', Arial, sans-serif",
+    // Typography — licensed face first, Google-Fonts equivalent as fallback
+    fontPrimary:   "'Garnett', 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif",
+    fontSerif:     "'tiempos', 'Source Serif 4', Georgia, serif",
 
-    // Sizes from type scale
-    sectionHeadSize:  "20px",
-    titleHeroSize:    "40px",
-    titleCardSize:    "20px",
-    titleCardLineH:   "25px",
-    bodySize:         "18px",
-    bodyLineH:        "28.8px",
-    metaSize:         "12px",
-    buttonSize:       "13px",
+    // Sizes (from type_scale)
+    sectionSize:   '24px',
+    cardSize:      '24.5px',
+    cardLineH:     '34.3px',
+    deckSize:      '14px',
+    metaSize:      '12px',
 
-    // Spacing
-    cardGap:          "20px",
-    cardPadding:      "16px",
-    cardRadius:       "0px",       // BI uses sharp corners on cards
-    imageRadius:      "0px",
-    buttonRadius:     "2px",
+    // Button (real CTA — buttons.primary)
+    btnBg:         '#0A0A0A',
+    btnText:       '#FFFFFF',
+    btnRadius:     '4px',
+    btnWeight:     '600',
+    btnSize:       '20px',
+    btnTracking:   '0.28px',
+    btnTransform:  'none',
+    btnHover:      '#0028F2',
 
-    // Publisher (confirm with BI AdOps — Axel Springer-managed)
-    publisherName:    "axelspringer-businessinsider"
+    // Cards / photo
+    cardRadius:    '0px',
+    imageRadius:   '0px',
+    cardPadding:   '16px',
+    cardGap:       '20px',
+    playColor:     '#0A0A0A',
+
+    // Publisher (confirm with AdOps before production)
+    publisherName: 'CONFIRM-WITH-ADOPS'
   };
 
   // ─── Initialize Taboola globals ────────────────────────────────────
   window._taboola = window._taboola || [];
   window.TRC = window.TRC || {};
 
-  // Performance configuration — standard yielding profile (matches the
-  // current t-online loader; BI runs the same TRC engine version).
+  // Performance configuration — standard yielding profile.
+  // NOTE: experimentID / loaderType below are carried from a prior
+  // integration and are UNCONFIRMED for Business Insider; confirm with AdOps.
   TRC.perfConfOverride = {
     logTimer: 50000,
     logLength: 5,
@@ -92,96 +95,72 @@
   });
 
   // ─── Brand Kit CSS Override ────────────────────────────────────────
-  // This CSS is injected into the page to override default Taboola widget
-  // styles with Business Insider brand tokens.
   var brandCSS = [
+    // ── Web-font fallbacks for the licensed faces (the publisher serves the
+    //    real font on its own pages; these render parity in the feed origin) ──
+    "@import url('https://fonts.googleapis.com/css2?family=Hanken%20Grotesk:wght@400;500;600;700;800&display=swap');",
 
-    // ── Google Fonts import (Manrope = Brother 1816 visual equivalent) ──
-    "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;700&display=swap');",
-
-    // ── Feed container ──
+    // ── Feed card container ──
     ".tbl-feed-card {",
     "  background-color: " + BRAND.white + ";",
-    "  border: 1px solid " + BRAND.lightGray + ";",
+    "  border: " + BRAND.cardBorder + ";",
     "  border-radius: " + BRAND.cardRadius + ";",
     "  margin-bottom: " + BRAND.cardGap + ";",
     "  padding: " + BRAND.cardPadding + ";",
     "  font-family: " + BRAND.fontPrimary + ";",
-    "  transition: background-color 0.15s ease, border-color 0.15s ease;",
+    "  transition: none;",
     "}",
 
-    ".tbl-feed-card:hover {",
-    "  background-color: " + BRAND.offWhite + ";",
-    "  border-color: " + BRAND.nearBlack + ";",
+    // Hover = headline picks up the accent ONLY. No background or border
+    // change (this publisher does not lift/pop cards on hover).
+    ".tbl-feed-card:hover .video-title {",
+    "  color: " + BRAND.accent + " !important;",
     "}",
 
-    // ── Feed header / "More From Business Insider" section ──
+    // ── Feed header ("More From Business Insider") ──
     ".tbl-feed-header {",
     "  margin-top: 32px;",
     "  margin-bottom: 16px;",
     "  padding: 16px 0 0;",
     "  background: transparent;",
-    "  display: block;",
     "  text-align: left;",
-    "  border-top: 3px solid " + BRAND.biOrange + ";",
+    "  border-top: 3px solid " + BRAND.accent + ";",
     "}",
 
     ".tbl-feed-header-text {",
     "  font-family: " + BRAND.fontPrimary + ";",
-    "  font-size: " + BRAND.sectionHeadSize + ";",
-    "  font-weight: 800;",
-    "  color: " + BRAND.nearBlack + ";",
+    "  font-size: " + BRAND.sectionSize + ";",
+    "  font-weight: 700;",
+    "  color: " + BRAND.textMain + ";",
     "  line-height: 1.2;",
-    "  text-transform: uppercase;",
-    "  letter-spacing: 0.04em;",
     "}",
 
-    // Orange accent dot before header (BI signature — mirrors the section dot)
+    // Accent dot before the header (mirrors the publisher's section dot)
     ".tbl-feed-header-text::before {",
     "  content: '';",
     "  display: inline-block;",
-    "  width: 8px;",
-    "  height: 8px;",
+    "  width: 8px; height: 8px;",
     "  border-radius: 50%;",
-    "  background: " + BRAND.biOrange + ";",
+    "  background: " + BRAND.accent + ";",
     "  margin-right: 10px;",
     "  vertical-align: middle;",
     "  transform: translateY(-2px);",
     "}",
 
-    // Hide default Taboola logo — BI uses its own branding throughout
-    ".tbl-feed-header-logo {",
-    "  display: none !important;",
-    "}",
+    // Hide the default Taboola logo — the publisher brands the unit itself
+    ".tbl-feed-header-logo { display: none !important; }",
 
     // ── Card titles ──
     ".trc_rbox_div .video-title,",
     ".tbl-feed-card .video-title,",
     ".videoCube .video-title {",
     "  font-family: " + BRAND.fontPrimary + " !important;",
-    "  font-size: " + BRAND.titleCardSize + " !important;",
-    "  line-height: " + BRAND.titleCardLineH + " !important;",
+    "  font-size: " + BRAND.cardSize + " !important;",
+    "  line-height: " + BRAND.cardLineH + " !important;",
     "  font-weight: 700 !important;",
-    "  color: " + BRAND.nearBlack + " !important;",
+    "  color: " + BRAND.textMain + " !important;",
     "  text-decoration: none !important;",
     "  margin: 0 0 6px 0 !important;",
-    "}",
-
-    // Hero card title (larger)
-    ".tbl-feed-card:first-child .video-title {",
-    "  font-size: 28px !important;",
-    "  line-height: 1.15 !important;",
-    "  font-weight: 800 !important;",
-    "}",
-
-    // Title hover — BI Orange underline
-    ".tbl-feed-card:hover .video-title,",
-    ".videoCube:hover .video-title {",
-    "  color: " + BRAND.nearBlack + " !important;",
-    "  text-decoration: underline !important;",
-    "  text-decoration-color: " + BRAND.biOrange + " !important;",
-    "  text-decoration-thickness: 2px !important;",
-    "  text-underline-offset: 3px;",
     "}",
 
     // ── Card descriptions / decks ──
@@ -189,10 +168,9 @@
     ".tbl-feed-card .video-description,",
     ".videoCube .video-description {",
     "  font-family: " + BRAND.fontPrimary + " !important;",
-    "  font-size: 15px !important;",
-    "  line-height: 22px !important;",
+    "  font-size: " + BRAND.deckSize + " !important;",
     "  font-weight: 400 !important;",
-    "  color: " + BRAND.darkGray + " !important;",
+    "  color: " + BRAND.deck + " !important;",
     "  text-decoration: none !important;",
     "  margin: 4px 0 10px 0 !important;",
     "}",
@@ -202,11 +180,9 @@
     ".tbl-feed-card .branding,",
     ".logoDiv a span {",
     "  font-family: " + BRAND.fontPrimary + " !important;",
-    "  font-size: 11px !important;",
-    "  color: " + BRAND.mediumGray + " !important;",
+    "  font-size: " + BRAND.metaSize + " !important;",
+    "  color: " + BRAND.meta + " !important;",
     "  font-weight: 600 !important;",
-    "  text-transform: uppercase !important;",
-    "  letter-spacing: 0.06em !important;",
     "}",
 
     // Sponsored label — sits on a dark scrim
@@ -215,15 +191,15 @@
     "  font-family: " + BRAND.fontPrimary + " !important;",
     "  font-size: 10px !important;",
     "  font-weight: 700 !important;",
-    "  text-transform: uppercase !important;",
+    "  text-transform: uppercase !important;",   // editorial label convention, not a token
     "  letter-spacing: 0.08em !important;",
     "  border-radius: 0 !important;",
-    "  background-color: " + BRAND.biBlack + " !important;",
+    "  background-color: " + BRAND.dark + " !important;",
     "  color: " + BRAND.white + " !important;",
     "  padding: 4px 8px !important;",
     "}",
 
-    // ── Thumbnail images — BI uses sharp corners throughout ──
+    // ── Thumbnails ──
     ".trc_rbox_div .thumbBlock,",
     ".tbl-feed-card .thumbBlock,",
     ".videoCube .trc_img {",
@@ -231,225 +207,106 @@
     "  overflow: hidden;",
     "}",
 
-    // ── Widget header (e.g., section kicker) ──
-    ".trc_rbox_header {",
-    "  font-family: " + BRAND.fontPrimary + " !important;",
-    "  font-size: " + BRAND.metaSize + " !important;",
-    "  font-weight: 700 !important;",
-    "  color: " + BRAND.mediumGray + " !important;",
-    "  border: none !important;",
-    "  padding: 8px 0 !important;",
-    "  text-transform: uppercase !important;",
-    "  letter-spacing: 0.06em !important;",
-    "}",
-
-    // ── "See more" / Load more button — BI Orange CTA ──
-    ".tbl-feed-more-btn,",
-    ".tbl-feed-footer-overlay .tbl-feed-more-btn {",
-    "  font-family: " + BRAND.fontPrimary + " !important;",
-    "  font-size: " + BRAND.buttonSize + " !important;",
-    "  font-weight: 700 !important;",
-    "  text-transform: uppercase !important;",
-    "  letter-spacing: 0.06em !important;",
-    "  color: " + BRAND.white + " !important;",
-    "  background-color: " + BRAND.biOrange + " !important;",
-    "  border: none !important;",
-    "  border-radius: " + BRAND.buttonRadius + " !important;",
-    "  padding: 12px 24px !important;",
-    "  cursor: pointer;",
-    "  transition: background-color 0.2s ease, transform 0.2s ease;",
-    "}",
-
-    ".tbl-feed-more-btn:hover {",
-    "  background-color: " + BRAND.biOrangeDark + " !important;",
-    "  transform: translateY(-1px);",
-    "}",
-
-    // ── Video play icon — BI Orange ──
-    ".trc_rbox_div .videoCube .trc-video-play-icon,",
-    ".tbl-feed-card .trc-video-play-icon {",
-    "  color: " + BRAND.biOrange + " !important;",
-    "}",
-
-    // ── Category / section pills (organic content kicker) ──
+    // ── Category / section kicker (organic pre-label) ──
+    // Uses the brand ACCENT as an eyebrow. The page-level category-pill token
+    // is a different role (larger / dark / non-caps), so it is not copied here.
     ".tbl-feed-card .trc-pre-label,",
     ".trc-content-sponsored .trc-pre-label {",
     "  font-family: " + BRAND.fontPrimary + " !important;",
     "  font-size: 11px !important;",
     "  font-weight: 700 !important;",
-    "  color: " + BRAND.biOrange + " !important;",
+    "  color: " + BRAND.accent + " !important;",
     "  text-transform: uppercase !important;",
     "  letter-spacing: 0.08em !important;",
     "}",
 
-    // ── Disclosure / "Sponsored" label at bottom ──
-    ".trc_rbox_div .trc-disclosure-label,",
-    ".tbl-feed-card .trc-disclosure-label {",
+    // ── Video play icon ──
+    ".trc_rbox_div .videoCube .trc-video-play-icon,",
+    ".tbl-feed-card .trc-video-play-icon {",
+    "  color: " + BRAND.playColor + " !important;",
+    "}",
+
+    // ── "See more" / Load more button — the publisher's real CTA ──
+    ".tbl-feed-more-btn,",
+    ".tbl-feed-footer-overlay .tbl-feed-more-btn {",
     "  font-family: " + BRAND.fontPrimary + " !important;",
-    "  font-size: 10px !important;",
-    "  color: " + BRAND.mediumGray + " !important;",
-    "  text-transform: uppercase !important;",
-    "  letter-spacing: 0.06em !important;",
+    "  font-size: " + BRAND.btnSize + " !important;",
+    "  font-weight: " + BRAND.btnWeight + " !important;",
+    "  letter-spacing: " + BRAND.btnTracking + " !important;",
+    "  text-transform: " + BRAND.btnTransform + " !important;",
+    "  color: " + BRAND.btnText + " !important;",
+    "  background-color: " + BRAND.btnBg + " !important;",
+    "  border: none !important;",
+    "  border-radius: " + BRAND.btnRadius + " !important;",
+    "  padding: 12px 24px !important;",
+    "  cursor: pointer;",
+    "  transition: background-color 0.2s ease;",
+    "}",
+    ".tbl-feed-more-btn:hover {",
+    "  background-color: " + BRAND.btnHover + " !important;",
     "}",
 
-    // ── Exclude / dismiss button ──
-    ".trc_user_exclude_btn {",
-    "  opacity: 0.5 !important;",
-    "  transition: opacity 0.2s ease;",
-    "}",
-    ".trc_user_exclude_btn:hover {",
-    "  opacity: 1 !important;",
-    "}",
+    // ── Loading placeholders — match the publisher surfaces ──
+    ".tbl-loading-cards-placeholder { background: " + BRAND.offWhite + " !important; }",
+    ".tbl-masker { background-color: " + BRAND.white + " !important; border-color: " + BRAND.white + " !important; }",
 
-    // ── Loading placeholder — match BI section bg ──
-    ".tbl-loading-cards-placeholder {",
-    "  background: " + BRAND.offWhite + " !important;",
-    "}",
-    ".tbl-placeholder-card {",
-    "  background: " + BRAND.lightGray + " !important;",
-    "}",
-    ".tbl-masker {",
-    "  background-color: " + BRAND.white + " !important;",
-    "  border-color: " + BRAND.white + " !important;",
-    "}",
-
-    // ── Responsive: mobile adjustments ──
+    // ── Responsive: mobile ──
     "@media (max-width: 768px) {",
-    "  .tbl-feed-header-text {",
-    "    font-size: 18px;",
-    "  }",
-    "  .tbl-feed-card:first-child .video-title {",
-    "    font-size: 22px !important;",
-    "    line-height: 1.2 !important;",
-    "  }",
-    "  .tbl-feed-card .video-title {",
-    "    font-size: 17px !important;",
-    "    line-height: 21px !important;",
-    "  }",
-    "  .tbl-feed-card .video-description {",
-    "    font-size: 14px !important;",
-    "    line-height: 20px !important;",
-    "  }",
-    "  .tbl-feed-card {",
-    "    padding: 12px;",
-    "    margin-bottom: 16px;",
-    "  }",
-    "}",
-
-    // ── Dark section variant (BI black footer placement) ──
-    ".trc_dark_section .tbl-feed-card {",
-    "  background-color: " + BRAND.biBlack + ";",
-    "  border-color: " + BRAND.darkGray + ";",
-    "}",
-    ".trc_dark_section .video-title {",
-    "  color: " + BRAND.white + " !important;",
-    "}",
-    ".trc_dark_section .video-description {",
-    "  color: " + BRAND.mediumGray + " !important;",
-    "}",
-    ".trc_dark_section .tbl-feed-card:hover .video-title {",
-    "  text-decoration-color: " + BRAND.biOrange + " !important;",
+    "  .tbl-feed-header-text { font-size: 16px; }",
+    "  .tbl-feed-card .video-title { font-size: 17px !important; line-height: 21px !important; }",
+    "  .tbl-feed-card .video-description { font-size: 14px !important; line-height: 20px !important; }",
+    "  .tbl-feed-card { padding: 12px; margin-bottom: 16px; }",
     "}"
-
   ].join("\n");
 
-
-  // ─── Inject brand CSS into page ────────────────────────────────────
   function injectBrandCSS() {
     var styleEl = document.createElement("style");
-    styleEl.id = "taboola-businessinsider-brand-override";
+    styleEl.id = "taboola-brand-override";
     styleEl.type = "text/css";
     styleEl.textContent = brandCSS;
     (document.head || document.documentElement).appendChild(styleEl);
   }
 
-  // Inject immediately if DOM is ready, otherwise wait
   if (document.readyState !== "loading") {
     injectBrandCSS();
   } else {
     document.addEventListener("DOMContentLoaded", injectBrandCSS);
   }
 
-
-  // ─── Mode Style Overrides (injected into TRC mode configs) ────────
-  // These override the __style__ objects within each mode to use BI fonts/colors.
-
+  // ─── Mode Style Overrides (injected into TRC mode configs) ─────────
   var modeStyleOverrides = {
     ".video-title":
       "font-family:" + BRAND.fontPrimary + ";" +
-      "font-size:" + BRAND.titleCardSize + ";" +
-      "line-height:" + BRAND.titleCardLineH + ";" +
+      "font-size:" + BRAND.cardSize + ";" +
+      "line-height:" + BRAND.cardLineH + ";" +
       "font-weight:bold;" +
-      "color:" + BRAND.nearBlack + ";" +
+      "color:" + BRAND.textMain + ";" +
       "text-decoration:none;" +
       "margin:0 0 6px 0;",
 
     ".video-description":
       "font-family:" + BRAND.fontPrimary + ";" +
-      "font-size:15px;" +
-      "line-height:22px;" +
+      "font-size:" + BRAND.deckSize + ";" +
       "font-weight:normal;" +
-      "color:" + BRAND.darkGray + ";" +
+      "color:" + BRAND.deck + ";" +
       "text-decoration:none;",
-
-    ".syndicatedItem .video-title":
-      "font-family:" + BRAND.fontPrimary + ";" +
-      "font-size:" + BRAND.titleCardSize + ";" +
-      "line-height:" + BRAND.titleCardLineH + ";" +
-      "font-weight:bold;" +
-      "color:" + BRAND.nearBlack + ";" +
-      "text-decoration:none;" +
-      "padding:0;",
-
-    ".syndicatedItem .video-description":
-      "font-family:" + BRAND.fontPrimary + ";" +
-      "font-size:15px;" +
-      "line-height:22px;" +
-      "font-weight:normal;" +
-      "color:" + BRAND.darkGray + ";" +
-      "text-decoration:none;",
-
-    ".video-label-box":
-      "text-align:left;" +
-      "margin:10px 0 0 0;",
 
     ".video-label-box .branding":
       "display:block;" +
       "font-family:" + BRAND.fontPrimary + ";" +
-      "font-size:11px;" +
-      "color:" + BRAND.mediumGray + ";" +
-      "text-transform:uppercase;" +
-      "letter-spacing:0.06em;",
+      "font-size:" + BRAND.metaSize + ";" +
+      "color:" + BRAND.meta + ";",
 
     ".logoDiv a span":
       "font-family:" + BRAND.fontPrimary + ";" +
-      "font-size:11px;" +
-      "color:" + BRAND.mediumGray + ";" +
+      "font-size:" + BRAND.metaSize + ";" +
+      "color:" + BRAND.meta + ";" +
       "display:inline;" +
-      "font-weight:600;" +
-      "text-transform:uppercase;" +
-      "letter-spacing:0.06em;",
-
-    ".trc_rbox_header .trc_header_ext":
-      "position:relative;top:auto;right:auto;",
-
-    ".trc_header_left_column":
-      "height:auto;" +
-      "background-color:transparent;",
-
-    ".videoCube .video-label-box .video-title":
-      "text-decoration:none;",
+      "font-weight:600;",
 
     ".videoCube:hover .video-label-box .video-title":
-      "text-decoration:underline;" +
-      "text-decoration-color:" + BRAND.biOrange + ";" +
-      "text-decoration-thickness:2px;"
+      "color:" + BRAND.accent + ";"
   };
-
-
-  // ─── Push mode overrides to _taboola ──────────────────────────────
-  // Applies BI styling to all relevant modes. The TRC engine merges these
-  // __style__ properties with the mode defaults.
 
   var targetModes = [
     "alternating-thumbnails-a",
@@ -472,50 +329,21 @@
     "organic-rec-reel-01-x-delta",
     "organic-thumbnails-feed-stream",
     "organic-thumbnails-feed-mobile",
-    "organic-thumbnails-feed-mobile-wt",
-    "organic-thumbnails-feed-mobile-cat",
-    "organic-thumbnails-feed-carousel",
-    "organic-thumbnails-feed-carousel-editorial",
-    "organic-thumbnails-feed-carousel-editorial-wt",
-    "organic-thumbnails-feed-carousel-video",
-    "organic-thumbnails-feed-carousel-video-wt",
-    "organic-thumbnails-feed-carousel-no-header",
     "organic-thumbnails-feed-3x1-new",
-    "organic-thumbnails-feed-3x1-video",
-    "organic-thumbnails-feed-3x1-video-wt",
     "organic-thumbnails-feed-3x1-with-header-editorial",
-    "organic-thumbnails-feed-3x1-cat-native",
-    "organic-thumbnails-feed-3x1-test-a",
     "organic-thumbnails-feed-2x1-header",
-    "organic-thumbnails-feed-2x1-header-wt",
-    "organic-thumbnails-feed-2x1-header-cat",
     "organic-thumbnails-feed-2x1",
-    "organic-thumbnails-feed-4-hero-cat",
-    "organic-thumbs-feed-mobile-no-header",
-    "organic-thumbs-feed-mobile-no-header-wt",
-    "organic-thumbs-feed-3x1-recent",
-    "organic-thumbs-feed-3x1-header-editorial-wt",
-    "organic-thumbs-feed-3x1-cat",
-    "organic-thumbs-feed-carousel-no-header-wt",
-    "organic-thumbs-feed-carousel-header-editorial-cat",
     "exchange-thumbnails-feed-with-header",
-    "exchange-thumbnails-feed-with-header-wt",
     "exchange-thumbnails-feed-carousel",
-    "exchange-thumbnails-feed-2x1-stream",
     "native-thumbnails-feed-mobile"
   ];
 
   var modeOverrideConfig = {};
   targetModes.forEach(function (modeName) {
-    modeOverrideConfig[modeName] = {
-      "__style__": modeStyleOverrides
-    };
+    modeOverrideConfig[modeName] = { "__style__": modeStyleOverrides };
   });
 
-  _taboola.push({
-    overrideConfig: modeOverrideConfig
-  });
-
+  _taboola.push({ overrideConfig: modeOverrideConfig });
 
   // ─── Pixel tracking ────────────────────────────────────────────────
   try {
@@ -524,11 +352,7 @@
       BRAND.publisherName;
   } catch (e) { /* silent */ }
 
-
   // ─── Load the TRC engine bundle ────────────────────────────────────
-  // In production, the minified TRC webpack bundle follows here. For this
-  // branded loader, we reference it externally:
-
   (function loadTRC() {
     var script = document.createElement("script");
     script.type = "text/javascript";

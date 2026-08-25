@@ -3,30 +3,30 @@
   {{#if content.categories}}
     <div style="margin-bottom: 12px;">
       {{#each content.categories}}
-        <span class="brand-accent" style="font-size: var(--size-meta); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{{this}}</span>
+        <span class="brand-accent" style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{{this}}</span>
         {{#unless @last}} <span style="color: var(--brand-text-tertiary); margin: 0 6px;">|</span> {{/unless}}
       {{/each}}
     </div>
   {{/if}}
 
-  <h1 class="headline-font" style="font-size: var(--size-hero); font-weight: var(--weight-hero); line-height: 1.15; margin: 0 0 16px; color: var(--brand-text);">
+  <h1 class="headline-font" style="font-size: var(--size-hero); font-weight: var(--weight-hero); line-height: {{default brandKit.fonts.type_scale.article_title_hero.line_height '1.15'}}; margin: 0 0 16px; color: {{default brandKit.fonts.type_scale.article_title_hero.color 'var(--brand-text)'}};">
     {{default content.headline 'Sample Article Headline for Prototype'}}
   </h1>
 
   {{#if content.deck}}
-    <p style="font-size: calc(var(--size-body) + 2px); color: var(--brand-text-secondary); line-height: 1.5; margin: 0 0 20px; font-weight: 500;">{{content.deck}}</p>
+    <p style="font-size: 18px; color: var(--brand-text-secondary); line-height: 1.5; margin: 0 0 20px; font-weight: 400;">{{content.deck}}</p>
   {{/if}}
 
   <div style="display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--brand-bg-section); border-bottom: 1px solid var(--brand-bg-section); margin-bottom: 24px; font-size: var(--size-meta);">
     {{#if content.byline}}
-      <span style="font-weight: 700;">{{content.byline}}</span>
+      <span style="font-weight: {{default brandKit.fonts.type_scale.meta_text.weight 600}};">{{content.byline}}</span>
     {{/if}}
     {{#if content.date}}
       <span style="color: var(--brand-text-tertiary);">{{content.date}}</span>
     {{/if}}
   </div>
 
-  <div class="body-font" style="font-size: var(--size-body); line-height: var(--leading-body); color: var(--brand-text);">
+  <div class="body-font" style="font-size: var(--size-body); line-height: var(--leading-body); color: {{default brandKit.fonts.type_scale.article_body.color 'var(--brand-text)'}};">
     {{#each content.paragraphs}}
       {{#if (lt @index 5)}}
         <p style="margin: 0 0 20px;">{{this}}</p>

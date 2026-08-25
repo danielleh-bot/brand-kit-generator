@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="{{default brandKit.brand.language 'en'}}" dir="{{textDirection brandKit.brand.language}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{brandKit.brand.name}} — Brand Kit Report</title>
+  {{#if brandKit.logos.favicon_url}}
+  <link rel="icon" href="{{brandKit.logos.favicon_url}}" referrerpolicy="no-referrer">
+  {{/if}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="{{googleFontsUrl}}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-primary: {{default brandKit.colors.primary.hex '#FF5A00'}};
+      --brand-secondary: {{default brandKit.colors.secondary.hex (default brandKit.colors.primary.hex '#FF5A00')}};
+      --brand-text: {{default brandKit.colors.text.primary.hex '#111111'}};
+      --brand-text-secondary: {{default brandKit.colors.text.secondary.hex '#4D4D4D'}};
+      --brand-text-tertiary: {{default brandKit.colors.text.tertiary.hex '#888888'}};
+      --brand-bg: {{default brandKit.colors.backgrounds.base.hex '#ffffff'}};
+      --brand-bg-section: {{default brandKit.colors.backgrounds.section.hex '#F7F7F7'}};
+      --brand-bg-dark: {{default brandKit.colors.backgrounds.dark.hex '#000000'}};
+      --brand-accent-warning:  {{default brandKit.colors.accents.warning_yellow.hex '#FFC700'}};
+      --brand-accent-negative: {{default brandKit.colors.accents.negative_red.hex '#E03625'}};
+      --brand-accent-positive: {{default brandKit.colors.accents.positive_green.hex '#1A8F4C'}};
+      --font-headline: '{{resolveFont brandKit.fonts.primary.family}}', system-ui, sans-serif;
+      --font-body: '{{resolveFont brandKit.fonts.secondary.family}}', system-ui, sans-serif;
+
+      --btn-radius: {{default brandKit.buttons.primary.border_radius '2px'}};
+      --btn-padding: {{default brandKit.buttons.primary.padding '8px 16px'}};
+      --btn-weight: {{default brandKit.buttons.primary.font_weight 700}};
+      --btn-transform: {{default brandKit.buttons.primary.text_transform 'uppercase'}};
+      --btn-tracking: {{default brandKit.buttons.primary.letter_spacing '0.06em'}};
+      --btn-primary-hover: {{default brandKit.colors.primary_variants.darken_5.hex (default brandKit.colors.primary.hex '#1a73e8')}};
+
+      /* Content-card tokens from the brand kit */
+      --card-border: {{default brandKit.layout_patterns.content_cards.border '1px solid transparent'}};
+      --card-padding: {{default brandKit.layout_patterns.content_cards.padding '12px'}};
+      --card-gap: {{default brandKit.spacing.card_gap '16px'}};
+
+      --ink: #0f172a;
+      --ink-soft: #475569;
+      --ink-faint: #94a3b8;
+      --line: #e2e8f0;
+      --paper: #f1f5f9;
+      --card-radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .report-headline-font { font-family: var(--font-headline); }
+    a { color: inherit; }
+
+    /* ---- Branded masthead (mirrors the publisher's real header) ---- */
+    .masthead { background: {{default brandKit.layout_patterns.header.background_color 'var(--brand-bg-dark)'}}; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}var(--brand-text){{/if}}; }
+    .masthead-bar {
+      max-width: 1080px; margin: 0 auto; padding: 18px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .masthead-wordmark {
+      font-family: var(--font-headline);
+      font-weight: 800; font-size: 22px; letter-spacing: 0.02em;
+      text-transform: uppercase; color: {{#if brandKit.layout_patterns.header.is_dark}}#fff{{else}}var(--brand-text){{/if}}; white-space: nowrap;
+    }
+    .masthead-tag {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--brand-primary); font-weight: 700;
+    }
+    .masthead-rule { height: 3px; background: {{default brandKit.layout_patterns.header.accent_rule_color 'var(--brand-primary)'}}; }
+
+    /* ---- Layout ---- */
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .hero { padding: 56px 0 40px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--brand-primary); margin-bottom: 18px;
+    }
+    .eyebrow::before { content: ''; width: 22px; height: 3px; background: var(--brand-primary); }
+    h1.title {
+      font-family: var(--font-headline); font-weight: 800;
+      font-size: clamp(30px, 5vw, 46px); line-height: 1.08; letter-spacing: -0.01em;
+      margin: 0 0 18px; color: var(--ink);
+    }
+    .lede { font-size: 18px; color: var(--ink-soft); max-width: 720px; margin: 0 0 28px; }
+    .source-line {
+      display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
+      padding: 16px 20px; background: #fff; border: 1px solid var(--line);
+      border-radius: var(--card-radius); font-size: 13px;
+    }
+    .source-line .k { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; font-weight: 600; }
+    .source-line a { color: var(--brand-secondary); font-weight: 600; word-break: break-all; }
+
+    section.block { padding: 30px 0; }
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+    .sec-num {
+      font-family: var(--font-headline); font-weight: 800; font-size: 14px;
+      color: #fff; background: var(--brand-primary); border-radius: 999px;
+      width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; flex: none;
+    }
+    h2.sec-title { font-family: var(--font-headline); font-weight: 800; font-size: 24px; margin: 0; letter-spacing: -0.01em; }
+    .sec-sub { color: var(--ink-soft); margin: 4px 0 24px 44px; max-width: 760px; }
+
+    .card { background: #fff; border: 1px solid var(--line); border-radius: var(--card-radius); }
+    .pad { padding: 22px; }
+    .grid { display: grid; gap: 16px; }
+    .g2 { grid-template-columns: repeat(2, 1fr); }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* ---- Color swatches ---- */
+    .swatch { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #fff; }
+    .swatch .chip { height: 92px; display: flex; align-items: flex-end; padding: 10px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.07); }
+    .swatch .chip .hex { font-family: 'Inter'; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.85); color: #111; }
+    .swatch .meta { padding: 12px 14px; }
+    .swatch .meta .nm { font-weight: 700; font-size: 14px; }
+    .swatch .meta .role { color: var(--ink-faint); font-size: 12px; margin-top: 2px; }
+
+    /* ---- Type specimens ---- */
+    .type-row { display: grid; grid-template-columns: 200px 1fr; gap: 18px; align-items: center; padding: 18px 0; border-top: 1px solid var(--line); }
+    .type-row:first-child { border-top: none; }
+    .type-meta .role { font-weight: 700; font-size: 14px; }
+    .type-meta .spec { font-family: 'Inter'; font-size: 12px; color: var(--ink-faint); margin-top: 3px; }
+    .type-sample { overflow: hidden; }
+
+    .pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--paper); color: var(--ink-soft); }
+
+    /* ---- Badges / content labels ---- */
+    .badge-demo { font-family: var(--font-headline); display: inline-flex; align-items: center; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 10px; border-radius: 3px; }
+
+    /* ---- Buttons demo ---- */
+    .demo-btn-primary {
+      font-family: var(--font-headline);
+      background: var(--brand-primary); color: #fff; border: none;
+      border-radius: var(--btn-radius); font-weight: var(--btn-weight);
+      letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform);
+      padding: 11px 22px; font-size: 13px; cursor: pointer;
+    }
+    .demo-btn-secondary {
+      font-family: var(--font-headline);
+      background: transparent; color: var(--brand-text); border: 1px solid var(--brand-text);
+      border-radius: var(--btn-radius); font-weight: var(--btn-weight);
+      letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform);
+      padding: 11px 22px; font-size: 13px; cursor: pointer;
+    }
+
+    .kv { font-size: 13px; }
+    .kv .k { color: var(--ink-faint); }
+    .kv .v { font-weight: 600; }
+    .stack > * + * { margin-top: 10px; }
+
+    /* ---- "Screenshot" frame for in-feed mockups ---- */
+    .shot { border-radius: 14px; overflow: hidden; border: 1px solid #cbd5e1; box-shadow: 0 18px 40px -20px rgba(15,23,42,0.45); background: #fff; }
+    .shot-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #e2e8f0; border-bottom: 1px solid #cbd5e1; }
+    .shot-dots { display: flex; gap: 6px; }
+    .shot-dots i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+    .shot-url { flex: 1; background: #fff; border-radius: 6px; padding: 5px 12px; font-size: 11px; color: var(--ink-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .shot-cap { font-size: 13px; color: var(--ink-soft); margin: 12px 2px 0; }
+    .shot-cap b { color: var(--ink); }
+
+    /* surface inside the screenshot = the publisher's real page background */
+    .shot-surface { background: var(--brand-bg); padding: 22px; }
+    .shot-surface.dark { background: var(--brand-bg-dark); }
+
+    .device { max-width: 340px; margin: 0 auto; border: 10px solid #0f172a; border-radius: 34px; overflow: hidden; box-shadow: 0 20px 45px -18px rgba(15,23,42,0.5); }
+    .device .shot-surface { padding: 16px; }
+
+    /* mimic an article body so feed placement reads in-context */
+    .ctx-kicker { font-family: var(--font-headline); color: var(--brand-primary); font-weight: 800; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .ctx-head { font-family: var(--font-headline); color: var(--brand-text); font-weight: 800; font-size: 22px; line-height: 1.2; margin: 6px 0 10px; }
+    .ctx-p { color: var(--brand-text-secondary); font-size: 14px; line-height: 1.6; margin: 0 0 10px; }
+    .ctx-p.faded { color: var(--brand-text-tertiary); -webkit-mask-image: linear-gradient(#000, transparent); mask-image: linear-gradient(#000, transparent); }
+
+    /* ====== feed-card styles (consumed by components-feed-card partial) ======
+       Token-driven so the mocked cards match the publisher's real article
+       cards: aspect ratio, card-title type, meta type, kicker, solid CTA, and
+       the real "headline picks up the accent" hover (no card lift). */
+    .feed-card { background: var(--brand-bg); border: var(--card-border); }
+    .feed-card-kicker { font-family: var(--font-headline); color: var(--brand-primary); font-weight: 700; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+    .feed-card-headline { font-family: var(--font-headline); font-weight: {{default brandKit.fonts.type_scale.article_title_card.weight 700}}; color: {{default brandKit.fonts.type_scale.article_title_card.color 'var(--brand-text)'}}; line-height: {{default brandKit.fonts.type_scale.article_title_card.line_height '1.25'}}; font-size: 15px; transition: color .15s ease; }
+    .feed-card-headline.is-large { font-size: {{clampSize brandKit.fonts.type_scale.article_title_card.size '16px' '22px' '20px'}}; }
+    .feed-card-headline.is-tiny { font-size: 13px; }
+    .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
+    .feed-card-source { font-size: var(--size-meta, 12px); color: var(--brand-text-tertiary); font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .feed-card-cta-link { font-size: 12px; color: var(--brand-primary); font-weight: 700; white-space: nowrap; }
+    .feed-card-cta-pill { display: inline-flex; align-items: center; padding: 6px 14px; background: {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; color: {{default brandKit.buttons.primary.text_color 'var(--brand-bg)'}}; border: 1px solid {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}}; border-radius: var(--btn-radius); font-size: 12px; font-weight: var(--btn-weight); letter-spacing: var(--btn-tracking); text-transform: var(--btn-transform); white-space: nowrap; transition: background .16s ease; }
+    .feed-card:hover .feed-card-cta-pill { background: var(--btn-primary-hover); }
+    .feed-card-image-wrap { background: var(--brand-bg-section); overflow: hidden; }
+    .feed-card-image-wrap.feed-card-image-fallback { background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-bg-dark) 100%); }
+    .feed-card-image-wrap.feed-card-image-fallback::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 8px, transparent 8px, transparent 16px); }
+    .feed-card-image-wrap.feed-card-image-fallback::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 999px; background: rgba(255,255,255,0.18); }
+    .badge-sponsored { font-size: 10px; padding: 3px 7px; border-radius: 3px; background: rgba(0,0,0,0.65); color: #fff; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+    .feed-label {
+      font-family: var(--font-headline); font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--brand-text-secondary);
+      padding-bottom: 8px; margin: 0 0 16px; border-bottom: 3px solid var(--brand-primary);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .feed-label .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-primary); display: inline-block; }
+    .taboola-attr { text-align: center; padding: 14px 0 2px; font-size: 11px; color: var(--brand-text-tertiary); }
+
+    .note { background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--card-radius); padding: 18px 20px; font-size: 14px; color: #78350f; }
+    .note b { color: #92400e; }
+
+    footer.foot { background: var(--brand-bg-dark); color: rgba(255,255,255,0.75); margin-top: 50px; }
+    footer.foot .wrap { padding-top: 30px; padding-bottom: 30px; font-size: 13px; }
+    footer.foot .fm { color: #fff; font-family: var(--font-headline); font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    @media (max-width: 820px) {
+      .g4 { grid-template-columns: repeat(2, 1fr); }
+      .g3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .g2, .g3, .g4 { grid-template-columns: 1fr; }
+      .type-row { grid-template-columns: 1fr; gap: 8px; }
+      [data-feed-grid] { grid-template-columns: 1fr 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ Branded masthead ============ -->
+  <header class="masthead">
+    <div class="masthead-bar">
+      <span class="masthead-wordmark">{{default brandKit.logos.primary.text brandKit.brand.name}}</span>
+      <span class="masthead-tag">Brand Kit Report</span>
+    </div>
+  </header>
+  <div class="masthead-rule"></div>
+
+  <div class="wrap">
+    <!-- ============ Hero ============ -->
+    <div class="hero">
+      <span class="eyebrow">Taboola × {{brandKit.brand.name}}</span>
+      <h1 class="title">Your brand, applied to the feed</h1>
+      <p class="lede">
+        We analyzed the live design language of <strong>{{brandKit.brand.name}}</strong> and packaged it into a
+        portable brand kit. Below is every property we captured — with visual examples — followed by mocked
+        screenshots of how your sponsored and recommended content will render inside the {{brandKit.brand.name}} feed.
+      </p>
+      <div class="source-line">
+        <span><span class="k">Source article</span><br><a href="{{default brandKit.content.url brandKit.metadata.source_url}}" target="_blank" rel="noopener">{{default brandKit.content.url brandKit.metadata.source_url}}</a></span>
+        <span><span class="k">Analyzed</span><br><span class="v">{{brandKit.metadata.analysis_date}}</span></span>
+        <span><span class="k">Properties captured</span><br><span class="v">{{brandKit.metadata.extraction_quality.extracted_token_count}} brand tokens</span></span>
+      </div>
+    </div>
+
+    <!-- ============ At a glance ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">✦</span><h2 class="sec-title">At a glance</h2></div>
+      <p class="sec-sub">The signature elements that make a placement unmistakably {{brandKit.brand.name}}.</p>
+      <div class="grid g4">
+        <div class="card pad">
+          <div class="kv"><div class="k">Primary color</div></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
+            <span style="width:34px;height:34px;border-radius:8px;background:{{brandKit.colors.primary.hex}};border:1px solid rgba(0,0,0,.1);flex:none;"></span>
+            <div><div style="font-weight:700;">{{brandKit.colors.primary.name}}</div><div style="font-size:12px;color:var(--ink-faint);">{{brandKit.colors.primary.hex}}</div></div>
+          </div>
+        </div>
+        <div class="card pad">
+          <div class="kv"><div class="k">Headline type</div></div>
+          <div style="margin-top:10px;"><span style="font-family:var(--font-headline);font-weight:800;font-size:22px;">{{brandKit.fonts.primary.family}}</span></div>
+          <div style="font-size:12px;color:var(--ink-faint);margin-top:2px;">renders as {{resolveFont brandKit.fonts.primary.family}}</div>
+        </div>
+        <div class="card pad">
+          <div class="kv"><div class="k">Card corners</div></div>
+          <div style="margin-top:10px;font-weight:700;font-size:18px;">{{default brandKit.photo_style.thumbnail_format.border_radius '0px'}} radius</div>
+          <div style="font-size:12px;color:var(--ink-faint);margin-top:2px;">image ratio {{default brandKit.photo_style.thumbnail_format.aspect_ratio '16:9'}}</div>
+        </div>
+        <div class="card pad">
+          <div class="kv"><div class="k">Masthead</div></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
+            <span style="width:34px;height:34px;border-radius:8px;background:{{default brandKit.layout_patterns.header.background_color '#000'}};border:1px solid rgba(0,0,0,.1);flex:none;"></span>
+            <div><div style="font-weight:700;">{{#if brandKit.layout_patterns.header.is_dark}}Dark{{else}}Light{{/if}} header</div><div style="font-size:12px;color:var(--ink-faint);">{{default brandKit.layout_patterns.header.background_color '#000000'}}</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 1. Logo ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">1</span><h2 class="sec-title">Logo &amp; wordmark</h2></div>
+      <p class="sec-sub">{{brandKit.logos.primary.treatment}}</p>
+      <div class="grid g2">
+        <div class="card" style="overflow:hidden;">
+          <div style="background:{{default brandKit.logos.primary.background '#000'}};padding:40px 22px;display:flex;align-items:center;justify-content:center;">
+            <span style="font-family:var(--font-headline);font-weight:800;font-size:30px;letter-spacing:0.02em;text-transform:uppercase;color:{{default brandKit.logos.primary.color '#fff'}};">{{default brandKit.logos.primary.text brandKit.brand.name}}</span>
+          </div>
+          <div class="pad"><div class="kv"><span class="k">Primary wordmark</span> — <span class="v">{{default brandKit.logos.primary.font brandKit.fonts.primary.family}}</span></div></div>
+        </div>
+        {{#if brandKit.logos.brand_mark}}
+        <div class="card" style="overflow:hidden;">
+          <div style="background:var(--paper);padding:30px 22px;display:flex;align-items:center;justify-content:center;">
+            <span style="width:72px;height:72px;background:{{default brandKit.logos.brand_mark.background '#000'}};color:{{default brandKit.logos.brand_mark.foreground '#fff'}};font-family:var(--font-headline);font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center;letter-spacing:-0.02em;">{{initials brandKit.brand.name}}</span>
+          </div>
+          <div class="pad"><div class="kv"><span class="k">{{brandKit.logos.brand_mark.name}}</span> — <span class="v">brand badge / favicon</span></div></div>
+        </div>
+        {{/if}}
+      </div>
+    </section>
+
+    <!-- ============ 2. Colors ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">2</span><h2 class="sec-title">Color system</h2></div>
+      <p class="sec-sub">Brand, text, surface, and accent colors captured from the live page and applied to every feed element.</p>
+
+      <h3 class="report-headline-font" style="font-size:15px;margin:0 0 12px;">Brand &amp; accents</h3>
+      <div class="grid g4" style="margin-bottom:22px;">
+        {{> customer-swatch color=brandKit.colors.primary role="Primary"}}
+        {{#if brandKit.colors.secondary}}{{> customer-swatch color=brandKit.colors.secondary role="Secondary"}}{{/if}}
+        {{#if brandKit.colors.accents.warning_yellow}}{{> customer-swatch color=brandKit.colors.accents.warning_yellow role="Accent"}}{{/if}}
+        {{#if brandKit.colors.accents.info_blue}}{{> customer-swatch color=brandKit.colors.accents.info_blue role="Links"}}{{/if}}
+      </div>
+
+      <h3 class="report-headline-font" style="font-size:15px;margin:0 0 12px;">Text</h3>
+      <div class="grid g3" style="margin-bottom:22px;">
+        {{> customer-swatch color=brandKit.colors.text.primary role="Headlines / body"}}
+        {{> customer-swatch color=brandKit.colors.text.secondary role="Deck / standfirst"}}
+        {{> customer-swatch color=brandKit.colors.text.tertiary role="Meta / timestamps"}}
+      </div>
+
+      <h3 class="report-headline-font" style="font-size:15px;margin:0 0 12px;">Surfaces</h3>
+      <div class="grid g4">
+        {{#if brandKit.colors.backgrounds.base}}{{> customer-swatch color=brandKit.colors.backgrounds.base role="Page / cards"}}{{/if}}
+        {{#if brandKit.colors.backgrounds.section}}{{> customer-swatch color=brandKit.colors.backgrounds.section role="Sections / hover"}}{{/if}}
+        {{#if brandKit.colors.backgrounds.secondary}}{{> customer-swatch color=brandKit.colors.backgrounds.secondary role="Borders / rules"}}{{/if}}
+        {{#if brandKit.colors.backgrounds.dark}}{{> customer-swatch color=brandKit.colors.backgrounds.dark role="Masthead / footer"}}{{/if}}
+      </div>
+    </section>
+
+    <!-- ============ 3. Typography ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">3</span><h2 class="sec-title">Typography</h2></div>
+      <p class="sec-sub">
+        Headlines &amp; UI use <strong>{{brandKit.fonts.primary.family}}</strong> (rendered with the Google Fonts
+        equivalent <strong>{{resolveFont brandKit.fonts.primary.family}}</strong>). Below is the live type scale —
+        each line shown at its real size, weight, and treatment.
+      </p>
+      <div class="card pad">
+        {{#each brandKit.fonts.type_scale}}
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="role">{{titleize @key}}</div>
+            <div class="spec">{{this.size}} · {{default this.weight 400}}{{#if this.text_transform}} · {{this.text_transform}}{{/if}}</div>
+          </div>
+          <div class="type-sample" style="font-family:'{{resolveFont this.family}}', sans-serif; font-size:{{clampSize this.size '11px' '46px' '18px'}}; font-weight:{{default this.weight 400}}; line-height:{{default this.line_height '1.3'}}; color:{{default this.color 'var(--brand-text)'}};{{#if this.text_transform}} text-transform:{{this.text_transform}};{{/if}}{{#if this.letter_spacing}} letter-spacing:{{this.letter_spacing}};{{/if}}">
+            {{titleize @key}} — {{brandKit.brand.name}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </section>
+
+    <!-- ============ 4. Buttons & CTAs ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">4</span><h2 class="sec-title">Buttons &amp; calls to action</h2></div>
+      <p class="sec-sub">Button shape, weight, and casing carry straight onto sponsored-card CTAs so paid placements look native.</p>
+      <div class="card pad" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+        <button class="demo-btn-primary">{{default brandKit.buttons.primary.text 'Subscribe'}}</button>
+        <button class="demo-btn-secondary">Learn more</button>
+        <span class="feed-card-cta-pill" style="margin-left:8px;">CTA on a feed card</span>
+        <div style="margin-left:auto;font-size:12px;color:var(--ink-faint);">
+          radius {{default brandKit.buttons.primary.border_radius '2px'}} · weight {{default brandKit.buttons.primary.font_weight 700}} · {{default brandKit.buttons.primary.text_transform 'uppercase'}}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. Content labels ============ -->
+    {{#if brandKit.graphics.elements}}
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">5</span><h2 class="sec-title">Content labels &amp; badges</h2></div>
+      <p class="sec-sub">{{brandKit.graphics.style}}</p>
+      <div class="card pad" style="display:flex;flex-wrap:wrap;gap:14px;">
+        {{#each brandKit.graphics.elements}}
+        <span class="badge-demo" style="background:{{default this.background_color 'transparent'}};color:{{default this.text_color '#111'}};{{#if (eq this.background_color 'transparent')}}border:1px solid {{default this.text_color '#111'}};{{/if}}">{{this.label}}</span>
+        {{/each}}
+      </div>
+    </section>
+    {{/if}}
+
+    <!-- ============ 6. Photography & layout ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">6</span><h2 class="sec-title">Photography &amp; layout</h2></div>
+      <p class="sec-sub">Thumbnail crop, corner radius, and header anatomy that the feed inherits.</p>
+      <div class="grid g2">
+        <div class="card pad stack">
+          <div class="kv"><span class="k">Thumbnail ratio</span> &nbsp; <span class="v">{{default brandKit.photo_style.thumbnail_format.aspect_ratio '16:9'}}</span></div>
+          <div class="kv"><span class="k">Corner radius</span> &nbsp; <span class="v">{{default brandKit.photo_style.thumbnail_format.border_radius '0px'}}</span></div>
+          {{#if brandKit.photo_style.video_thumbnails}}<div class="kv"><span class="k">Video indicator</span> &nbsp; <span class="v">{{brandKit.photo_style.video_thumbnails.indicator}}</span></div>{{/if}}
+          <div style="display:flex;gap:10px;margin-top:6px;">
+            <div style="flex:1;aspect-ratio:16/9;background:linear-gradient(135deg,var(--brand-primary),var(--brand-bg-dark));border-radius:{{default brandKit.photo_style.thumbnail_format.border_radius '0px'}};"></div>
+            <div style="flex:1;aspect-ratio:16/9;background:var(--brand-bg-section);border:1px solid #e2e8f0;border-radius:{{default brandKit.photo_style.thumbnail_format.border_radius '0px'}};"></div>
+          </div>
+        </div>
+        <div class="card pad stack">
+          <div class="kv"><span class="k">Grid</span> &nbsp; <span class="v">{{default brandKit.layout_patterns.grid 'Two-column'}}</span></div>
+          {{#if brandKit.layout_patterns.header.layers}}
+          <div style="margin-top:4px;">
+            {{#each brandKit.layout_patterns.header.layers}}
+            <div style="font-size:12px;color:var(--ink-soft);padding:6px 10px;background:var(--paper);border-radius:8px;margin-bottom:6px;">{{this}}</div>
+            {{/each}}
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. Brand voice ============ -->
+    {{#if brandKit.brand_voice}}
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">7</span><h2 class="sec-title">Brand voice</h2></div>
+      <p class="sec-sub">Headline conventions and editorial signals the recommendation engine should respect.</p>
+      <div class="card pad stack">
+        {{#if brandKit.brand_voice.headline_style}}
+        <div class="kv"><span class="k">Headline case</span> &nbsp; <span class="v">{{default brandKit.brand_voice.headline_style.case brandKit.brand_voice.headline_style.format}}</span></div>
+        <div style="color:var(--ink-soft);font-size:14px;">{{brandKit.brand_voice.headline_style.pattern}}</div>
+        {{/if}}
+      </div>
+    </section>
+    {{/if}}
+
+    <!-- ============ 8. In-feed mockups ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">8</span><h2 class="sec-title">How it looks in your feed</h2></div>
+      <p class="sec-sub">
+        Mocked screenshots of Taboola placements rendered with the {{brandKit.brand.name}} brand kit, shown in the
+        context of the analyzed article. Same colors, type, corners, and CTAs you saw above — now on live feed cards.
+      </p>
+
+      <!-- Desktop: in-article sponsored + native -->
+      <div class="shot" style="margin-bottom:14px;">
+        <div class="shot-bar">
+          <span class="shot-dots"><i style="background:#f87171;"></i><i style="background:#fbbf24;"></i><i style="background:#34d399;"></i></span>
+          <span class="shot-url">{{default brandKit.content.url brandKit.brand.website}}</span>
+        </div>
+        <div class="shot-surface">
+          <div style="max-width:680px;margin:0 auto;">
+            {{#if brandKit.content.categories}}<div class="ctx-kicker">{{#each brandKit.content.categories}}{{this}}{{#unless @last}} · {{/unless}}{{/each}}</div>{{/if}}
+            <div class="ctx-head">{{brandKit.content.headline}}</div>
+            {{#if brandKit.content.paragraphs}}<p class="ctx-p">{{truncate (default (lookup brandKit.content.paragraphs 0) '') 220}}</p>{{/if}}
+            <p class="ctx-p faded">{{truncate (default (lookup brandKit.content.paragraphs 1) '') 160}}</p>
+
+            <div style="margin-top:22px;">
+              <div class="feed-label"><span class="dot"></span>{{default brandKit.taboola.sponsored_label 'Sponsored Stories'}}</div>
+              <div data-feed-grid="2-up" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap);margin-bottom:26px;">
+                {{#each feedContent.sponsoredLarge}}{{> components-feed-card this size="large"}}{{/each}}
+              </div>
+
+              <div class="feed-label"><span class="dot"></span>{{default brandKit.taboola.feed_label 'More From'}}{{#unless brandKit.taboola.feed_label}} {{brandKit.brand.name}}{{/unless}}</div>
+              <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--card-gap);">
+                {{#each feedContent.nativeSection}}{{> components-feed-card this size="small"}}{{/each}}
+              </div>
+
+              <div class="taboola-attr">by <strong>Taboola</strong> | Sponsored Links</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="shot-cap"><b>Desktop, in-article.</b> Sponsored cards (top) sit above editorial recommendations. The first “{{default brandKit.taboola.feed_label 'More From'}}” card is the source article itself — your real content, restyled.</p>
+
+      <!-- Two more screenshots side by side -->
+      <div class="grid g2" style="margin-top:30px;align-items:start;">
+
+        <!-- Dense sponsored row -->
+        <div>
+          <div class="shot">
+            <div class="shot-bar">
+              <span class="shot-dots"><i style="background:#f87171;"></i><i style="background:#fbbf24;"></i><i style="background:#34d399;"></i></span>
+              <span class="shot-url">{{brandKit.brand.website}}</span>
+            </div>
+            <div class="shot-surface">
+              <div class="feed-label"><span class="dot"></span>{{default brandKit.taboola.sponsored_label 'Sponsored Stories'}}</div>
+              <div data-feed-grid="3-up" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--card-gap);">
+                {{#each feedContent.sponsoredDense}}{{> components-feed-card this size="small"}}{{/each}}
+              </div>
+              <div class="taboola-attr">by <strong>Taboola</strong> | Sponsored Links</div>
+            </div>
+          </div>
+          <p class="shot-cap"><b>3-up sponsored row.</b> A denser monetization unit — sharp {{default brandKit.photo_style.thumbnail_format.border_radius '0px'}} corners and {{brandKit.colors.primary.name}} CTAs on hover.</p>
+        </div>
+
+        <!-- Mobile device -->
+        <div>
+          <div class="device">
+            <div style="background:{{default brandKit.layout_patterns.header.background_color brandKit.colors.backgrounds.base.hex}};border-bottom:1px solid rgba(0,0,0,0.08);"><div style="padding:12px 14px;text-align:center;"><span class="masthead-wordmark" style="font-size:15px;color:{{contrastColor (default brandKit.layout_patterns.header.background_color brandKit.colors.backgrounds.base.hex)}};">{{default brandKit.logos.primary.text brandKit.brand.name}}</span></div></div>
+            <div style="height:3px;background:{{default brandKit.layout_patterns.header.accent_rule_color 'var(--brand-primary)'}};"></div>
+            <div class="shot-surface">
+              <div class="feed-label" style="font-size:12px;"><span class="dot"></span>{{default brandKit.taboola.trending_label 'Trending'}}</div>
+              <div style="display:grid;grid-template-columns:1fr;gap:14px;">
+                {{#each feedContent.trendingNative}}{{#if (lt @index 3)}}{{> components-feed-card this size="large"}}{{/if}}{{/each}}
+              </div>
+              <div class="taboola-attr" style="font-size:10px;">by <strong>Taboola</strong></div>
+            </div>
+          </div>
+          <p class="shot-cap"><b>Mobile, single column.</b> The same kit reflows to a phone — wordmark on the {{#if brandKit.layout_patterns.header.is_dark}}black{{else}}brand{{/if}} masthead, full-width cards below.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Methodology ============ -->
+    <section class="block">
+      <div class="sec-head"><span class="sec-num">✓</span><h2 class="sec-title">How this was produced</h2></div>
+      <div class="note">
+        <p style="margin:0 0 8px;"><b>Brand tokens:</b> the colors, typography, logo, buttons, and layout above are {{brandKit.brand.name}}'s documented visual identity, packaged as a reusable kit.</p>
+        <p style="margin:0;">{{brandKit.metadata.extraction_method}}</p>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="fm">{{default brandKit.logos.primary.text brandKit.brand.name}} × Taboola</div>
+      <div style="margin-top:6px;">Brand Kit Report · generated {{brandKit.metadata.analysis_date}} · {{brandKit.metadata.generator}}</div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -45,6 +45,11 @@
       --btn-transform: {{default brandKit.buttons.primary.text_transform 'none'}};
       --btn-tracking: {{default brandKit.buttons.primary.letter_spacing '0.04em'}};
       --btn-primary-hover: {{default brandKit.colors.primary_variants.darken_5.hex (default brandKit.colors.primary.hex '#1a73e8')}};
+
+      /* Content-card tokens from the brand kit */
+      --card-border: {{default brandKit.layout_patterns.content_cards.border '1px solid transparent'}};
+      --card-padding: {{default brandKit.layout_patterns.content_cards.padding '12px'}};
+      --card-gap: {{default brandKit.spacing.card_gap '16px'}};
     }
     * { box-sizing: border-box; }
     body {
@@ -61,31 +66,46 @@
     .body-font { font-family: var(--font-body); }
     a { color: var(--brand-primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    nav a:hover, .feed-card a:hover { text-decoration: none; }
     img { max-width: 100%; }
 
-    /* Feed card styles */
+    /* Feed card styles — type & behaviour driven by the extracted tokens so
+       cards read as native publisher cards. BI (and most editorial sites)
+       don't lift cards on hover; the real behaviour is "headline picks up the
+       accent" (layout_patterns.content_cards.hover), so that's what we do. */
     .feed-card {
-      transition: box-shadow 0.2s, transform 0.2s;
       background: var(--brand-bg);
-      border: 1px solid var(--brand-bg-section);
+      border: var(--card-border);
     }
-    .feed-card:hover {
-      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-      transform: translateY(-2px);
+    /* Kicker / category — a coloured text eyebrow above the headline (BI uses
+       a coloured kicker, not a filled badge over the image). */
+    .feed-card-kicker {
+      font-family: var(--font-headline);
+      color: var(--brand-primary);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
+    /* Card headline — weight / leading / colour from the publisher's real
+       card-title token (type_scale.article_title_card). */
     .feed-card-headline {
       font-family: var(--font-headline);
-      font-weight: 700;
-      color: var(--brand-text);
-      line-height: 1.3;
+      font-weight: {{default brandKit.fonts.type_scale.article_title_card.weight 700}};
+      color: {{default brandKit.fonts.type_scale.article_title_card.color 'var(--brand-text)'}};
+      line-height: {{default brandKit.fonts.type_scale.article_title_card.line_height '1.25'}};
+      font-size: 15px;
+      transition: color 0.15s ease;
     }
-    .feed-card-headline:hover { color: var(--brand-primary); }
+    .feed-card-headline.is-large { font-size: {{clampSize brandKit.fonts.type_scale.article_title_card.size '16px' '22px' '20px'}}; }
+    .feed-card-headline.is-tiny { font-size: 13px; }
+    .feed-card:hover .feed-card-headline { color: var(--brand-primary); }
+    /* Source / attribution — from the publisher's real meta-text token. */
     .feed-card-source {
-      font-size: 11px;
+      font-size: var(--size-meta);
       color: var(--brand-text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      font-weight: 600;
+      font-weight: 400;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -97,29 +117,26 @@
       font-weight: 700;
       white-space: nowrap;
     }
-    /* Sponsored cards: outline button that fills on hover. Shape comes
-       from the publisher's real button — border-radius, padding,
-       text-transform, weight all extracted at crawl time. */
+    /* Sponsored cards: a SOLID button matching the publisher's real CTA
+       (buttons.primary) — background, text colour, radius, weight, tracking
+       and casing all extracted at crawl time. This is the biggest "native"
+       win: the paid CTA now looks like the site's own button. */
     .feed-card-cta-pill {
       display: inline-flex;
       align-items: center;
       padding: 6px 14px;
-      background: transparent;
-      color: var(--brand-primary);
-      border: 1px solid var(--brand-primary);
+      background: {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}};
+      color: {{default brandKit.buttons.primary.text_color 'var(--brand-bg)'}};
+      border: 1px solid {{default brandKit.buttons.primary.background_color 'var(--brand-primary)'}};
       border-radius: var(--btn-radius);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: var(--btn-weight);
       letter-spacing: var(--btn-tracking);
       text-transform: var(--btn-transform);
       white-space: nowrap;
-      transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+      transition: background 160ms ease;
     }
-    .feed-card:hover .feed-card-cta-pill {
-      background: var(--brand-primary);
-      color: var(--brand-bg);
-      transform: translateY(-1px);
-    }
+    .feed-card:hover .feed-card-cta-pill { background: var(--btn-primary-hover); }
 
     /* Image wrap background lives in a class so the fallback class can
        override it cleanly. Inline styles would have higher specificity
@@ -184,17 +201,19 @@
        brand owner flagged as "looks weird". Now reads as a real action. */
     .brand-cta-button {
       display: inline-block;
-      padding: 10px 18px;
+      padding: 10px 20px;
       background: var(--brand-primary);
       color: var(--brand-bg);
       font-family: var(--font-headline);
-      font-weight: 700;
+      font-weight: var(--btn-weight);
       font-size: 14px;
-      border-radius: 4px;
+      border-radius: var(--btn-radius);
+      letter-spacing: var(--btn-tracking);
+      text-transform: var(--btn-transform);
       text-decoration: none;
-      transition: filter 160ms ease, transform 160ms ease;
+      transition: background 160ms ease;
     }
-    .brand-cta-button:hover { filter: brightness(0.92); transform: translateY(-1px); text-decoration: none; }
+    .brand-cta-button:hover { background: var(--btn-primary-hover); text-decoration: none; }
 
     /* Logo sizing — the inline SVG comes from a publisher page where it
        might declare its own width/height attributes (often >38px). Force it
@@ -220,7 +239,7 @@
        specificity, so we override with !important inside the breakpoint. */
     @media (max-width: 720px) {
       [data-feed-grid="3-up"],
-      [data-feed-grid="2-up"] { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+      [data-feed-grid="2-up"] { grid-template-columns: 1fr 1fr !important; gap: var(--card-gap) !important; }
       [data-footer-grid] { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
     }
     @media (max-width: 480px) {

@@ -7,9 +7,13 @@
 
   {{#if brandKit.layout_patterns.header.utility_bar}}
     <div style="background: {{brandKit.layout_patterns.header.utility_bar.background_color}}; padding: 6px 0; font-size: 12px;">
-      <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: space-between; align-items: center; color: {{#if brandKit.layout_patterns.header.utility_bar.is_dark}}rgba(255,255,255,0.85){{else}}{{default brandKit.colors.text.secondary.hex '#555555'}}{{/if}};">
-        <span>{{brandKit.brand.website}}</span>
-        <span>{{brandKit.brand_voice.language}}</span>
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 16px; display: flex; justify-content: flex-end; align-items: center; gap: 18px; color: {{#if brandKit.layout_patterns.header.utility_bar.is_dark}}rgba(255,255,255,0.85){{else}}{{default brandKit.colors.text.secondary.hex '#555555'}}{{/if}};">
+        {{#each brandKit.layout_patterns.header.utility_bar.items}}
+          <a href="#" style="color: inherit; text-decoration: none; font-weight: 500;">{{this}}</a>
+        {{/each}}
+        {{#unless brandKit.layout_patterns.header.utility_bar.items}}
+          <span>{{brandKit.brand.website}}</span>
+        {{/unless}}
       </div>
     </div>
   {{/if}}
@@ -39,9 +43,9 @@
         {{/if}}
       {{/each}}
       {{#unless navigation.navLinks}}
-        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}#1a1a1a{{/if}}; font-size: 14px;">News</a>
-        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}#1a1a1a{{/if}}; font-size: 14px;">Sports</a>
-        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}#1a1a1a{{/if}}; font-size: 14px;">Business</a>
+        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}}; font-size: 14px; font-weight: 500;">News</a>
+        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}}; font-size: 14px; font-weight: 500;">Sports</a>
+        <a href="#" style="color: {{#if brandKit.layout_patterns.header.is_dark}}rgba(255,255,255,0.85){{else}}{{default brandKit.colors.text.primary.hex '#1a1a1a'}}{{/if}}; font-size: 14px; font-weight: 500;">Business</a>
       {{/unless}}
     </div>
   </div>
