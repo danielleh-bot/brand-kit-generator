@@ -1,6 +1,6 @@
 {
   "name": "brand-kit-generator",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Taboola Brand Kit Generator — extract publisher design tokens via Puppeteer, then preview, export and prototype through a guided wizard.",
   "main": "generate.js",
   "bin": {
