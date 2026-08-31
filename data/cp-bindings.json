@@ -1,0 +1,932 @@
+[
+  {
+    "kit_path": "colors.text_headline",
+    "feed_role": "Card title colour",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-title",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".syndicatedItem .video-title",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not take colors.primary / brand_accent. Do not use article h1 colour.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.headline.family",
+    "feed_role": "Card title font family",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-title",
+        "property": "font-family",
+        "type": "cssattr",
+        "default": "Arial, Helvetica, sans-serif",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".syndicatedItem .video-title",
+        "property": "font-family",
+        "type": "cssattr",
+        "default": "Arial, Helvetica, sans-serif",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Never fall back to article_hero_title.family (the generator's bug).",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.card_title.size",
+    "feed_role": "Card title size",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-title",
+        "property": "font-size",
+        "type": "csssize",
+        "default": "14px",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".videoCube .video-label-box .video-title",
+        "property": "font-size",
+        "type": "csssize",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "GraphQL FONT_SIZE is feed HEADER only. This is CP, not the editor form.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.card_title.weight",
+    "feed_role": "Card title weight",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-title",
+        "property": "font-weight",
+        "type": "cssattr",
+        "default": "bold",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.card_title.line_height",
+    "feed_role": "Card title leading",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-title",
+        "property": "line-height",
+        "type": "csssize",
+        "default": "17.5px",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".video-title",
+        "property": "max-height",
+        "type": "cssattr",
+        "default": "2.58em",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not hardcode max-height beside a new size.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.card_title.letter_spacing",
+    "feed_role": "Card title tracking",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube .video-label-box .video-title",
+        "property": "letter-spacing",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Bare .video-title has no letter-spacing pair.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.card_title.text_transform",
+    "feed_role": "Card title case",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".syndicatedItem .video-title",
+        "property": "text-transform",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not set organic title to uppercase because the section header is.",
+    "proposed": null
+  },
+  {
+    "kit_path": "colors.text_body",
+    "feed_role": "Card description colour",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-description",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".syndicatedItem .video-description",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "If editorial_grammar.card_description.present is false, use HIDE_ORGANIC_DESCRIPTION rather than painting a colour.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.body.family",
+    "feed_role": "Description font family",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-description",
+        "property": "font-family",
+        "type": "cssattr",
+        "default": "Arial, Helvetica, sans-serif",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.card_description.size",
+    "feed_role": "Description size",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-description",
+        "property": "font-size",
+        "type": "csssize",
+        "default": "10px",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "colors.text_meta",
+    "feed_role": "Branding / disclosure colour",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".branding",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".syndicatedItem .branding",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "This is not byline/author. Publisher byline has no feed role.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.meta.size",
+    "feed_role": "Branding size",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".branding",
+        "property": "font-size",
+        "type": "csssize",
+        "default": "10px",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "colors.card_surface",
+    "feed_role": "Card face",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube",
+        "property": "background-color",
+        "type": "csscolor",
+        "default": "transparent",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not reuse page_background if the well is tinted (Bizportal #f6f7f9).",
+    "proposed": null
+  },
+  {
+    "kit_path": "colors.border",
+    "feed_role": "Card hairline",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube",
+        "property": "border-color",
+        "type": "csscolor",
+        "default": "#D6D5D3",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "card.border_radius",
+    "feed_role": "Card corner radius",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube",
+        "property": "border-radius",
+        "type": "csssize",
+        "default": "0px",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".videoCube.syndicatedItem",
+        "property": "border-radius",
+        "type": "csssize",
+        "default": "0px",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "card.thumbnail.border_radius",
+    "feed_role": "Thumbnail corner radius",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube .thumbBlock",
+        "property": "border-radius",
+        "type": "csssize",
+        "default": "",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".videoCube.syndicatedItem .thumbBlock",
+        "property": "border-radius",
+        "type": "csssize",
+        "default": "",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Widget Config may hide this; Delta/CP can still write it.",
+    "proposed": null
+  },
+  {
+    "kit_path": "card.shadow",
+    "feed_role": "Resting card shadow",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube",
+        "property": "box-shadow",
+        "type": "csscolor",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Hover lift is NOT this key — there is no :hover box-shadow pair.",
+    "proposed": null
+  },
+  {
+    "kit_path": "card.padding",
+    "feed_role": "Space inside the cube",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube",
+        "property": "padding",
+        "type": "csssize",
+        "default": "3px",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "card.hover.surface_background",
+    "feed_role": "Hover wash on the cube",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": "div.videoCube:hover, div.videoCube_hover",
+        "property": "background-color",
+        "type": "csscolor",
+        "default": "transparent",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": "div.syndicatedItem:hover, div.syndicatedItem.videoCube_hover",
+        "property": "background-color",
+        "type": "csscolor",
+        "default": "transparent",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not target a.item-label-href — that class is not in the CP registry. Do not mirror .videoCube_hover with new emphasis rules (pinned on touch).",
+    "proposed": null
+  },
+  {
+    "kit_path": "card.hover.headline_color",
+    "feed_role": "Title colour on hover",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube:hover .video-label-box .video-title",
+        "property": "color",
+        "type": "csscolor",
+        "default": "",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not introduce this key on modes that opted out.",
+    "proposed": null
+  },
+  {
+    "kit_path": "card.hover.headline_underline_color",
+    "feed_role": "Title underline on hover",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube:hover .video-label-box .video-title",
+        "property": "text-decoration",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "underline vs none is a mode decision, not a brand-kit default of underline (the generator hardcodes underline — wrong).",
+    "proposed": null
+  },
+  {
+    "kit_path": "card.hover.shadow",
+    "feed_role": "Hover elevation",
+    "status": "NEEDS_NEW_CP",
+    "cp_writes": [],
+    "do_not": "Do not overload resting box-shadow as a hover stand-in.",
+    "proposed": {
+      "id": "hover-elevation",
+      "selector": "div.videoCube:hover, div.videoCube_hover",
+      "properties": [
+        "box-shadow"
+      ],
+      "why_ps_cannot": "PS can hack light-DOM with !important; shadow-DOM feeds ignore document CSS. No first-class key, so every pub is a one-off override."
+    }
+  },
+  {
+    "kit_path": "card.hover.translate_y",
+    "feed_role": "Hover lift",
+    "status": "NEEDS_NEW_CP",
+    "cp_writes": [],
+    "do_not": "Leave null unless crawled.",
+    "proposed": {
+      "id": "hover-lift",
+      "selector": "div.videoCube:hover",
+      "properties": [
+        "transform"
+      ],
+      "why_ps_cannot": "Same shadow-DOM hole. Only add if ≥1 publisher actually lifts cards — do not default it."
+    }
+  },
+  {
+    "kit_path": "typography.kicker.size",
+    "feed_role": "Category kicker type",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".video-category",
+        "property": "font-size",
+        "type": "csssize",
+        "default": "10px",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".video-category",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".video-category",
+        "property": "font-weight",
+        "type": "cssattr",
+        "default": "normal",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".video-category",
+        "property": "text-transform",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".video-category",
+        "property": "letter-spacing",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".video-category",
+        "property": "font-family",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "E! has no per-card kicker — do not invent one. Section membership is the header motif.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.feed_section_label.size",
+    "feed_role": "Feed module header type",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".trc_rbox_header",
+        "property": "font-size",
+        "type": "csssize",
+        "default": "16px",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "font-family",
+        "type": "cssattr",
+        "default": "Arial, Helvetica, sans-serif",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "font-weight",
+        "type": "cssattr",
+        "default": "bold",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "text-transform",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "letter-spacing",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "font-style",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Header size is the only FONT_SIZE on the GraphQL form. Don't confuse it with title size.",
+    "proposed": null
+  },
+  {
+    "kit_path": "chrome.header.accent_rule",
+    "feed_role": "Section header brand-mark (trailing rule / bar)",
+    "status": "NEEDS_RENDERER",
+    "cp_writes": [
+      {
+        "selector": ".trc_rbox_header",
+        "property": "border-color",
+        "type": "csscolor",
+        "default": "#D6D5D3",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "border-style",
+        "type": "csssize",
+        "default": "none none solid none",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".trc_rbox_header",
+        "property": "border-width",
+        "type": "csssize",
+        "default": "0",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not copy E!'s italic+rule onto Belfast or Bizportal.",
+    "proposed": {
+      "id": "header-brand-mark",
+      "selector": ".trc_rbox_header",
+      "properties": [
+        "--bk-header-rule-color",
+        "display:flex trailing ::after"
+      ],
+      "why_ps_cannot": "A border-bottom is the wrong geometry. The motif is a sibling rule that grows. CSS override cannot add the flex sibling inside shadow DOM."
+    }
+  },
+  {
+    "kit_path": "cta.sponsored.background",
+    "feed_role": "Sponsored CTA fill",
+    "status": "DEAD_SELECTOR",
+    "cp_writes": [
+      {
+        "selector": ".tbl-cta-style .cta-button",
+        "property": "background-color",
+        "type": "csscolor",
+        "default": "transparent",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not map kit CTA to .tbl-cta-style .cta-button. Enable via ctaWidget + item cta-text first.",
+    "proposed": {
+      "id": "live-cta-chrome",
+      "selector": "button.video-cta-button",
+      "properties": [
+        "color",
+        "background-color",
+        "border-color",
+        "border-radius",
+        "font-family",
+        "font-size",
+        "font-weight",
+        "padding"
+      ],
+      "why_ps_cannot": "Writing the registered CTA keys bakes CSS that matches no node. PS CSS override on .video-cta-button works only in light DOM. NewCta also strips the button when layout fails (video-cta-style-removed) — no CSS brings it back."
+    }
+  },
+  {
+    "kit_path": "cta.sponsored.text_color",
+    "feed_role": "Sponsored CTA label colour",
+    "status": "PUBCONFIG",
+    "cp_writes": [
+      {
+        "selector": ".tbl-cta-style .cta-button",
+        "property": "color",
+        "type": "csscolor",
+        "default": "#333333",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Pub config keys: title-color, inherit-title-color, border-color, cta-font-size, font-weight. Plus ctaWidget boolean.",
+    "proposed": null
+  },
+  {
+    "kit_path": "cta.sponsored.border_radius",
+    "feed_role": "CTA pill radius",
+    "status": "NEEDS_NEW_CP",
+    "cp_writes": [],
+    "do_not": null,
+    "proposed": {
+      "id": "live-cta-radius",
+      "selector": "button.video-cta-button",
+      "properties": [
+        "border-radius"
+      ],
+      "why_ps_cannot": "Same as live-cta-chrome. Fold into that one new selector rather than a separate ticket."
+    }
+  },
+  {
+    "kit_path": "cta.sponsored.hover_background",
+    "feed_role": "CTA hover fill",
+    "status": "DEAD_SELECTOR",
+    "cp_writes": [
+      {
+        "selector": ".tbl-cta-style .cta-button:hover",
+        "property": "color",
+        "type": "csscolor",
+        "default": "inherit",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": {
+      "id": "live-cta-hover",
+      "selector": "button.video-cta-button:hover",
+      "properties": [
+        "background-color",
+        "color",
+        "border-color"
+      ],
+      "why_ps_cannot": "Dead selector + inherit-only SCSS. Brand-coloured fill-on-hover cannot be expressed."
+    }
+  },
+  {
+    "kit_path": "cta.organic.background",
+    "feed_role": "Organic ghost CTA",
+    "status": "NEEDS_RENDERER",
+    "cp_writes": [
+      {
+        "selector": "ctaWidget",
+        "property": "",
+        "type": "boolean",
+        "default": "true",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not show a sponsored CTA on organic cards.",
+    "proposed": {
+      "id": "organic-cta",
+      "selector": "button.video-cta-button[data-cta-kind=organic]",
+      "properties": [
+        "background-color",
+        "color",
+        "border-color"
+      ],
+      "why_ps_cannot": "No DOM to restyle. Needs item or mode flag to mount an organic CTA."
+    }
+  },
+  {
+    "kit_path": "feed.labels.organic",
+    "feed_role": "Organic module title copy",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [],
+    "do_not": "Do not invent from brand.name.",
+    "proposed": null
+  },
+  {
+    "kit_path": "feed.labels.sponsored",
+    "feed_role": "Sponsored module title / disclosure overlay copy",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": "",
+        "property": "syndicated-static-text",
+        "type": "html",
+        "default": "Sponsored",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".videoCube.syndicatedItem .thumbBlock .static-text",
+        "property": "color",
+        "type": "csscolor",
+        "default": "white",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Overlay and header are not the same string on every pub.",
+    "proposed": null
+  },
+  {
+    "kit_path": "badges.styles.sponsored.background",
+    "feed_role": "Sponsored overlay chip",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".videoCube.syndicatedItem .thumbBlock .static-text",
+        "property": "background-color",
+        "type": "csscolor",
+        "default": "black",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": ".videoCube.syndicatedItem .thumbBlock .static-text",
+        "property": "color",
+        "type": "csscolor",
+        "default": "white",
+        "disable_wc_edit": false,
+        "in_registry": true
+      },
+      {
+        "selector": "",
+        "property": "syndicated-static-text-position",
+        "type": "list",
+        "default": "top-right",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "organic-static-text is a second ONE slot (MOST POPULAR), not a badge taxonomy.",
+    "proposed": null
+  },
+  {
+    "kit_path": "badges.enabled",
+    "feed_role": "Multi-type content labels (LIVE / OPINION / EXCLUSIVE / market chips)",
+    "status": "NEEDS_RENDERER",
+    "cp_writes": [
+      {
+        "selector": "",
+        "property": "organic-show-static-text",
+        "type": "boolean",
+        "default": "false",
+        "disable_wc_edit": true,
+        "in_registry": true
+      },
+      {
+        "selector": "",
+        "property": "organic-static-text",
+        "type": "html",
+        "default": "MOST POPULAR",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Do not overload MOST POPULAR as EXCLUSIVE.",
+    "proposed": {
+      "id": "typed-badges",
+      "selector": "[data-badge-kind]",
+      "properties": [
+        "background-color",
+        "color",
+        "border-radius",
+        "text-transform"
+      ],
+      "why_ps_cannot": "One overlay slot cannot be LIVE and OPINION and EXCLUSIVE. Needs item metadata + DOM. CSS cannot mint nodes."
+    }
+  },
+  {
+    "kit_path": "colors.page_background",
+    "feed_role": "Page / article well behind the feed",
+    "status": "DO_NOT_MAP",
+    "cp_writes": [],
+    "do_not": "Don't paint the cube with page_background.",
+    "proposed": null
+  },
+  {
+    "kit_path": "colors.feed_well",
+    "feed_role": "Strip behind the cards",
+    "status": "HACKABLE_CSS",
+    "cp_writes": [
+      {
+        "selector": ".trc_rbox_div",
+        "property": "background-color",
+        "type": "csscolor",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "colors.feed_accent",
+    "feed_role": "Accent used as kicker/header/hover — pick ONE use per pub",
+    "status": "DO_NOT_MAP",
+    "cp_writes": [],
+    "do_not": "Never write feed_accent to three CP keys. Resolve to header color OR hover title OR CTA, then use that field.",
+    "proposed": null
+  },
+  {
+    "kit_path": "typography.headline_case",
+    "feed_role": "Sentence vs title case",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [
+      {
+        "selector": ".syndicatedItem .video-title",
+        "property": "text-transform",
+        "type": "cssattr",
+        "default": "",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Don't uppercase Hebrew.",
+    "proposed": null
+  },
+  {
+    "kit_path": "card.thumbnail.aspect_ratio",
+    "feed_role": "Thumb aspect",
+    "status": "MAPPED_LIVE",
+    "cp_writes": [],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "card.video_play.color",
+    "feed_role": "Play overlay",
+    "status": "HACKABLE_CSS",
+    "cp_writes": [
+      {
+        "selector": ".videoCube:hover .thumbnail-overlay, .videoCube_hover .thumbnail-overlay",
+        "property": "background-image",
+        "type": "cssattr",
+        "default": "null",
+        "disable_wc_edit": false,
+        "in_registry": true
+      }
+    ],
+    "do_not": null,
+    "proposed": null
+  },
+  {
+    "kit_path": "chrome.header.background",
+    "feed_role": "Publisher masthead — not the feed",
+    "status": "DO_NOT_MAP",
+    "cp_writes": [
+      {
+        "selector": ".trc_rbox_header",
+        "property": "background-color",
+        "type": "csscolor",
+        "default": "",
+        "disable_wc_edit": true,
+        "in_registry": true
+      }
+    ],
+    "do_not": "Painting the feed header BelTel teal is a magazine wrap, not a below-article feed.",
+    "proposed": null
+  }
+]
