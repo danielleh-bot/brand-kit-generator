@@ -1,0 +1,330 @@
+{
+  "$schema_name": "publisher-brand-kit.base",
+  "$schema_version": "1.1.0",
+  "$purpose": "Conflict-resolved brand kit: one field per feed/card mapping. Fill these fields from any crawl schema via aliases — do not invent unique top-level keys per publisher. Client-property bindings live in cp-bindings.json. Grammar that cannot land on a LIVE CP selector goes in requires_new_client_properties.",
+
+  "brand": {
+    "name": null,
+    "tagline": null,
+    "website": null,
+    "description": null,
+    "language": null
+  },
+
+  "logos": {
+    "masthead": {
+      "type": null,
+      "text": null,
+      "svg": null,
+      "image_url": null,
+      "color": null,
+      "background": null,
+      "treatment": null
+    },
+    "favicon_url": null,
+    "brand_mark": {
+      "description": null,
+      "foreground": null,
+      "background": null
+    }
+  },
+
+  "chrome": {
+    "header": {
+      "background": null,
+      "is_dark": null,
+      "accent_rule": null,
+      "height_px": null
+    },
+    "utility_bar": {
+      "background": null,
+      "is_dark": null,
+      "items": []
+    },
+    "nav_links": [],
+    "footer": {
+      "background": null,
+      "text_color": null,
+      "sections": []
+    },
+    "icon_style": null
+  },
+
+  "colors": {
+    "page_background": null,
+    "feed_well": null,
+    "card_surface": null,
+    "border": null,
+    "text_headline": null,
+    "text_body": null,
+    "text_meta": null,
+    "link": null,
+    "feed_accent": null,
+    "nav_active": null
+  },
+
+  "typography": {
+    "headline": {
+      "family": null,
+      "fallbacks": [],
+      "google_equivalent": null,
+      "weights": {}
+    },
+    "body": {
+      "family": null,
+      "fallbacks": [],
+      "google_equivalent": null,
+      "weights": {}
+    },
+    "article_hero_title": {
+      "size": null,
+      "weight": null,
+      "line_height": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "article_lead": {
+      "size": null,
+      "weight": null,
+      "line_height": null
+    },
+    "article_body": {
+      "size": null,
+      "weight": null,
+      "line_height": null
+    },
+    "card_title": {
+      "size": null,
+      "weight": null,
+      "line_height": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "card_description": {
+      "size": null,
+      "weight": null,
+      "line_height": null
+    },
+    "feed_section_label": {
+      "size": null,
+      "weight": null,
+      "line_height": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "kicker": {
+      "size": null,
+      "weight": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "meta": {
+      "size": null,
+      "weight": null
+    },
+    "navigation": {
+      "size": null,
+      "weight": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "cta_label": {
+      "size": null,
+      "weight": null,
+      "letter_spacing": null,
+      "text_transform": null
+    },
+    "headline_case": null
+  },
+
+  "card": {
+    "border_radius": null,
+    "border": null,
+    "shadow": null,
+    "padding": null,
+    "gap": null,
+    "thumbnail": {
+      "aspect_ratio": null,
+      "border_radius": null
+    },
+    "video_play": {
+      "indicator": null,
+      "color": null
+    },
+    "hover": {
+      "surface_background": null,
+      "headline_color": null,
+      "headline_underline_color": null,
+      "shadow": null,
+      "translate_y": null
+    }
+  },
+
+  "cta": {
+    "sponsored": {
+      "background": null,
+      "text_color": null,
+      "hover_background": null,
+      "active_background": null,
+      "border": null,
+      "border_radius": null,
+      "padding": null,
+      "font_weight": null,
+      "font_size": null,
+      "text_transform": null,
+      "letter_spacing": null
+    },
+    "organic": {
+      "background": null,
+      "text_color": null,
+      "hover_background": null,
+      "border": null,
+      "border_radius": null,
+      "padding": null,
+      "font_weight": null,
+      "font_size": null,
+      "text_transform": null,
+      "letter_spacing": null
+    }
+  },
+
+  "feed": {
+    "composition": null,
+    "section_padding": null,
+    "labels": {
+      "organic": null,
+      "sponsored": null,
+      "trending": null
+    },
+    "taboola": {
+      "publisher_id": null,
+      "modes": []
+    }
+  },
+
+  "badges": {
+    "enabled": [],
+    "styles": {
+      "breaking": { "label": "BREAKING", "background": null, "text_color": null },
+      "live": { "label": "LIVE", "background": null, "text_color": null },
+      "video": { "label": "VIDEO", "background": null, "text_color": null },
+      "opinion": { "label": "OPINION", "background": null, "text_color": null },
+      "analysis": { "label": "ANALYSIS", "background": null, "text_color": null },
+      "sponsored": { "label": "Sponsored", "background": null, "text_color": null },
+      "exclusive": { "label": "EXCLUSIVE", "background": null, "text_color": null },
+      "premium": { "label": "PREMIUM", "background": null, "text_color": null },
+      "gallery": { "label": "GALLERY", "background": null, "text_color": null },
+      "severe": { "label": "SEVERE", "background": null, "text_color": null },
+      "forecast": { "label": "FORECAST", "background": null, "text_color": null }
+    }
+  },
+
+  "card_variants": {
+    "news": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": null
+    },
+    "opinion": {
+      "title_font": "body",
+      "title_style": "italic",
+      "kicker_badge": "opinion",
+      "accent_rail_color": null
+    },
+    "video": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "video",
+      "show_play_overlay": true
+    },
+    "gallery": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "gallery",
+      "count_badge": true
+    },
+    "live": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "live",
+      "pulse": true
+    },
+    "premium": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "premium",
+      "lock_icon": true
+    },
+    "sponsored": {
+      "title_font": "headline",
+      "title_style": "normal",
+      "kicker_badge": "sponsored",
+      "cta": "sponsored"
+    }
+  },
+
+  "article": {
+    "headline": null,
+    "deck": null,
+    "byline": null,
+    "date": null,
+    "category": null,
+    "url": null,
+    "hero_image": null,
+    "hero_caption": null,
+    "paragraphs": [],
+    "author_avatar": {
+      "shape": null,
+      "size": null
+    }
+  },
+
+  "related_articles": [],
+
+  "editorial_grammar": {
+    "$purpose": "Verified homepage card grammar. present:false is a real mapping (hide/skip) — never invent the missing element.",
+    "section_header": {
+      "description": null,
+      "color": null,
+      "trailing_rule": null
+    },
+    "category_kicker": {
+      "present": null,
+      "_verified": null
+    },
+    "card_description": {
+      "present": null,
+      "_verified": null
+    },
+    "byline_meta": {
+      "on_homepage_cards": null
+    },
+    "content_labels": {
+      "labels_verbatim": [],
+      "_design": null
+    }
+  },
+
+  "requires_new_client_properties": {
+    "$label": "REQUIRES NEW CLIENT PROPERTIES — design review",
+    "$purpose": "Critical native grammar that no existing LIVE CP selector can express (and that manual PS CSS cannot account for on shadow-DOM feeds). Do not add unique publisher keys elsewhere. Each item is copied into the living catalogue artefact for product design review.",
+    "items": []
+  },
+
+  "metadata": {
+    "analysis_date": null,
+    "source_url": null,
+    "homepage_url": null,
+    "extraction_method": null,
+    "extraction_quality": {
+      "extracted_token_count": null,
+      "fallback_token_count": null,
+      "total_tokens": null,
+      "extraction_ratio": null,
+      "fallback_tokens": []
+    },
+    "schema": "publisher-brand-kit.base@1.1.0",
+    "migrated_from": null,
+    "provenance_notes": []
+  }
+}
