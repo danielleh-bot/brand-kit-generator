@@ -2,6 +2,15 @@
 
 Automatically extracts brand design tokens (colors, typography, spacing, layout, brand voice, icons, photos) from any publisher website and generates Taboola feed prototypes + analysis reports.
 
+
+## Base schema + live CP diff
+
+Crawls still write `brand-kit.json` in the current crawl shape (templates depend on it). They also write `publisher-brand-kit.base@1.1.0` as `brand-kit.base.json`. Analysis diffs that base kit against live CP selectors — not generic Arial defaults. Unique grammar belongs in `editorial_grammar` / `requires_new_client_properties`, never new top-level keys.
+
+```bash
+npm run verify
+```
+
 ## Two ways to run it
 
 ### 1. Wizard (recommended for humans)

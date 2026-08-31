@@ -12,6 +12,7 @@ const puppeteer = require('puppeteer-core');
 const { extractBrandKit, extractContent, extractNavigation, extractRelatedArticles } = require('./lib/crawler');
 const { buildGoogleFontsUrl, resolveAllFonts } = require('./lib/fonts');
 const { computeAnalysis } = require('./lib/analysis');
+const { ensureBaseKit } = require('./lib/base-schema');
 const { generateFeedContent } = require('./lib/feed-content');
 const { brandKitToCss } = require('./lib/css-export');
 const { normaliseHeaderForRender } = require('./lib/brand-kit-utils');
@@ -211,6 +212,12 @@ async function main() {
   fs.writeFileSync(brandKitPath, JSON.stringify(brandKit, null, 2));
   console.log(`📋 Brand kit saved: ${brandKitPath}`);
 
+  // Canonical base document (templates still consume the crawl-shaped kit above).
+  const baseKit = ensureBaseKit(brandKit, { migratedFrom: opts.brandKit || 'crawl' });
+  const baseKitPath = path.join(outputDir, 'brand-kit.base.json');
+  fs.writeFileSync(baseKitPath, JSON.stringify(baseKit, null, 2));
+  console.log(`📋 Base brand kit saved: ${baseKitPath}`);
+
   // Save brand kit CSS (drop-in `:root` tokens + utility classes).
   // Keeps the CLI in lockstep with the wizard's artifact set.
   const brandKitCssPath = path.join(outputDir, 'brand-kit.css');
@@ -227,7 +234,7 @@ async function main() {
   const feedContent = generateFeedContent(brandKit, navigation, { content, relatedArticles });
 
   // Compute analysis
-  const analysis = computeAnalysis(brandKit, defaults);
+  const analysis = computeAnalysis(baseKit, defaults);
 
   // Initialize template engine
   engine.init();

@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "generate": "node generate.js"
+    "generate": "node generate.js",
+    "verify": "node scripts/verify-fixes.js"
   },
   "keywords": [
     "brand-kit",
